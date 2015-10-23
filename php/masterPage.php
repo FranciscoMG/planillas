@@ -9,19 +9,25 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-	<header>
+	<header >
 		<div class="container">
 			<div class="row">
-				<div class="col-sx-12 col-sm-8 col-md-6 col-lg-4" style="background:gray;">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, unde.</p>
+				<div class="col-sx-12 col-sm-8 col-md-6 col-lg-4">
+					<img src="../img/logo-ucr.png" class="img-responsive" alt="">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="background:#3464B8;">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, unde.</p>
+		</div>
+		<div id="perfil-row" class="container-fluid">	
+			<div  class="row">
+			<div class="container">
+				<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="">
+					<strong>Perfil:</strong><a href="#">Administrativo</a>
 				</div>
 			</div>
-			<div class="row">
+			</div>
+		</div>
+		<div class="row ">
+			<div class="container">
 				<nav>
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
@@ -37,8 +43,8 @@
 	<main>
 		<div class="container">
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-				<div class="tabla">
-					<table class="table table-responsive table-striped table-hover table-bordered">
+				<div class="tabla table-responsive">
+					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
 								<th>Info</th>
@@ -171,7 +177,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<aside>
-					
+					<h2>Este es el titulo del aside</h2>
 				</aside>
 			</div>
 		</div>
