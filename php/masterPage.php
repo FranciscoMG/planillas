@@ -26,18 +26,20 @@
 				</div>
 			</div>
 		</div>
-		<div  class="row ">
-			<div id="perfil-nav" class="container-fluid">
-				<div class="container">
-				<nav>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-				</nav>
+		<div  id="perfil-nav" class="row ">
+			<div  class="container">
+			
+					<div class="col-sx-12">
+						<nav>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+						</nav>
+				
 				</div>
 			</div>
 		</div>

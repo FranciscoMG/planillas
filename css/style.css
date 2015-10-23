@@ -1,26 +1,35 @@
+html {
+	box-sizing: border-box;
+}
+.row {
+	margin-right: 0;
+}
 #perfil-row {
 	background-color: #3363B7;
 	padding: 1% 0;
 	color: white;
 	text-align: right;
+	margin-right: 0;
+}
+header #row-especial {
+
 }
 #perfil-row a {
 	color: white;
 }
 #logo-ucr {
 	display: block;
-	margin: 1% 0;
+	padding: 1% 0;
 }
 #perfil-nav {
 	background-color: #B4C7E8;
 	padding: 1% 0;
+	margin-right: 0;
 }
 footer {
 	background-color: black;
 	color: white;
-}
-footer img {
-	margin-right: 0.5%;
+	padding: 0.5%;
 }
 main {
 	padding: 3% 0;
