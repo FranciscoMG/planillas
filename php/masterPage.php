@@ -11,23 +11,24 @@
 <body>
 	<header >
 		<div class="container">
-			<div class="row">
-				<div class="col-sx-12 col-sm-8 col-md-6 col-lg-4">
-					<img src="../img/logo-ucr.png" class="img-responsive" alt="">
+			<div id="logo-ucr" class="row">
+				<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4">
+					<img id="logo-ucr" src="../img/logo-ucr.png" class="img-responsive" alt="">
 				</div>
 			</div>
 		</div>
 		<div id="perfil-row" class="container-fluid">	
 			<div  class="row">
-			<div class="container">
-				<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="">
-					<strong>Perfil:</strong><a href="#">Administrativo</a>
+				<div class="container">
+					<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="">
+						<strong>Perfil:     </strong><a href="#">Administrativo</a>
+					</div>
 				</div>
 			</div>
-			</div>
 		</div>
-		<div class="row ">
-			<div class="container">
+		<div  class="row ">
+			<div id="perfil-nav" class="container-fluid">
+				<div class="container">
 				<nav>
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
@@ -37,6 +38,7 @@
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
 					<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
 				</nav>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -184,14 +186,17 @@
 			<div class="clearfix"></div>
 	</main>
 	<footer>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sx-12 col-sm-6">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, odit.</p>
+				<div class="container">
+					<div class="col-sx-12 col-sm-6">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, odit.</p>
+					</div>
+					<div class="col-sx-12 col-sm-6">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, id.</p>
+					</div>
 				</div>
-				<div class="col-sx-12 col-sm-6">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, id.</p>
-				</div>
+			<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
 			</div>
 		</div>
 	</footer>

@@ -1,11 +1,27 @@
 #perfil-row {
 	background-color: #3363B7;
-
+	padding: 1% 0;
+	color: white;
+	text-align: right;
 }
-header {
-	background-color: #C6B1B1;
+#perfil-row a {
+	color: white;
+}
+#logo-ucr {
+	display: block;
+	margin: 1% 0;
+}
+#perfil-nav {
+	background-color: #B4C7E8;
+	padding: 1% 0;
 }
 footer {
 	background-color: black;
 	color: white;
+}
+footer img {
+	margin-right: 0.5%;
+}
+main {
+	padding: 3% 0;
 }
