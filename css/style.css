@@ -21,3 +21,15 @@ footer {
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'MyriadPro-Bold';
+  src: url('./fonts/MyriadPro-Bold.eot');
+  src: url('./fonts/MyriadPro-Bold.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/MyriadPro-Bold.woff2') format('woff2'),
+       url('./fonts/MyriadPro-Bold.woff') format('woff'),
+       url('./fonts/MyriadPro-Bold.ttf') format('truetype'),
+       url('./fonts/MyriadPro-Bold.svg#MyriadPro-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
