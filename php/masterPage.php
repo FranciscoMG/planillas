@@ -189,7 +189,7 @@
 	</main>
 	<footer>
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row row1">
 				<div class="container">
 					<div class="col-sx-12 col-sm-6">
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, odit.</p>
@@ -198,7 +198,9 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, id.</p>
 					</div>
 				</div>
-			<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
+			</div>
+			<div class="row row2">
+				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
 			</div>
 		</div>
 	</footer>
