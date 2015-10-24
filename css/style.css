@@ -23,7 +23,6 @@ header #row-especial {
 }
 #perfil-nav {
 	background-color: #B4C7E8;
-	padding: 1% 0;
 	margin-right: 0;
 }
 main {
@@ -31,7 +30,7 @@ main {
 	height: 65vh;
 }
 aside {
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
 }
 footer {
 	color: white;
@@ -76,7 +75,7 @@ p {
 }
 
 
-/* **************** Estilos de index *************/ 
+/* **************** Estilos de index *************/
 
 .index #perfil-nav {
 	background-color: #E9F1F9;
@@ -90,5 +89,13 @@ p {
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	background-size: 47vh 35vh;
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
+}
+
+.boton-menu {
+	border: 1px solid black;
+}
+
+.navbar {
+	margin-bottom: 0;
 }

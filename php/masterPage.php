@@ -29,19 +29,84 @@
 		<div  id="perfil-nav" class="row ">
 			<div  class="container">
 
-				<div class="dropdown">
-<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	Dropdown
-	<span class="caret"></span>
-</button>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-	<li><a href="#">Action</a></li>
-	<li><a href="#">Another action</a></li>
-	<li><a href="#">Something else here</a></li>
-	<li><a href="#">Separated link</a></li>
-</ul>
-</div>
-
+					<div class="col-sx-12">
+						<nav class="navbar container-fluid" role="navigation">
+			        <div class="navbar-header">
+			          <button type="button" class="boton-menu navbar-toggle collapsed" data-toggle="collapse" data-target="#menuPagina">
+			            <span class="boton-menu icon-bar"></span>
+			            <span class="boton-menu icon-bar"></span>
+			            <span class="boton-menu icon-bar"></span>
+			          </button>
+			        </div>
+			        <div class="collapse navbar-collapse" id="menuPagina">
+			          <ul class="nav navbar-nav">
+			            <li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Inicio<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup.<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+									<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes<span class="caret"></span></a>
+			              <ul class="dropdown-menu">
+			                <li><a href="#">Agregar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
+			              </ul>
+			            </li>
+			          </ul>
+			        </div>
+			      </nav>
 				</div>
 			</div>
 		</div>
@@ -187,7 +252,7 @@
 				</aside>
 			</div>
 		</div>
-			<div class="clearfix"></div>
+		<div class="clearfix"></div>
 	</main>
 	<footer class="navbar-fixed-bottom hidden-xs hidden-ms" >
 		<div class="container-fluid">
@@ -224,6 +289,6 @@
 		</div>
 	</footer>
 </body>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </html>
