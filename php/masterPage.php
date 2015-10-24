@@ -24,7 +24,7 @@
 						<div class="dropdown">
  							<button class="btn boton-perfil btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perfil: Administrativo<span class="caret"></span></button>
  							<ul class="dropdown-menu">
-	 							<li><a href="#">Fainix Mayorga Solorzano</a></li>
+	 							<li class="disabled"><a href="#">Fainix Mayorga Solorzano</a></li>
 	 							<li><a href="#">Cambiar usuario</a></li>
 	 							<li><a href="#">Salir</a></li>
  							</ul>
