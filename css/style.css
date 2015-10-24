@@ -14,8 +14,8 @@ html {
 header #row-especial {
 
 }
-#perfil-row a {
-	color: white;
+.boton-perfil {
+	background-color: transparent;
 }
 #logo-ucr {
 	display: block;

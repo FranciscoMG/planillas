@@ -20,8 +20,15 @@
 		<div id="perfil-row" class="container-fluid">
 			<div  class="row">
 				<div class="container">
-					<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="">
-						<strong>Perfil:     </strong><a href="#">Administrativo</a>
+					<div  class="pull-right" style="">
+						<div class="dropdown">
+ 							<button class="btn boton-perfil btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perfil: Administrativo<span class="caret"></span></button>
+ 							<ul class="dropdown-menu">
+	 							<li><a href="#">Fainix Mayorga Solorzano</a></li>
+	 							<li><a href="#">Cambiar usuario</a></li>
+	 							<li><a href="#">Salir</a></li>
+ 							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
