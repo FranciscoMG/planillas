@@ -31,13 +31,14 @@
 			
 					<div class="col-sx-12">
 						<nav>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Home</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Inicio</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Usuarios</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Proyectos</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Cursos</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Docentes</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Grupos</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Presup.</a></div>
+							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Reportes</a></div>
 						</nav>
 				
 				</div>
@@ -187,15 +188,32 @@
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer>
+	<footer class="navbar-fixed-bottom hidden-xs hidden-ms" >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
 					<div class="col-sx-12 col-sm-6">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, odit.</p>
+						<h6>Tel: 6666 66 66</h6>
 					</div>
 					<div class="col-sx-12 col-sm-6">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, id.</p>
+						<h6>Email: <a href="#">corre@my.com</a></h6>
+					</div>
+				</div>
+			</div>
+			<div class="row row2">
+				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
+			</div>
+		</div>
+	</footer>
+	<footer class="hidden-md hidden-lg" >
+		<div class="container-fluid">
+			<div class="row row1">
+				<div class="container">
+					<div class="col-sx-12 col-sm-6">
+						<h6>Tel: 6666 66 66</h6>
+					</div>
+					<div class="col-sx-12 col-sm-6">
+						<h6>Email: <a href="#">corre@my.com</a></h6>
 					</div>
 				</div>
 			</div>
@@ -206,4 +224,5 @@
 	</footer>
 </body>
 <script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 </html>
