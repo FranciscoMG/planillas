@@ -38,13 +38,14 @@
 						<div class="separador"></div>
 					 	<div class="form-group">
 					    	<label for="exampleInputEmail1">Usuario</label>
-					    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
+					    	<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="exampleInputPassword1">Contraseña</label>
 					    	<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
 					  	</div>
 					  	<a href="#">Registrar</a>
+					  	<div class="separador separador-absolute"></div>
 					  	<button type="submit" class="btn btn-default pull-right">Ingresar</button>
 					</form>
 				</div>

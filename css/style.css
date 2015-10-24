@@ -21,14 +21,13 @@ header #row-especial {
 }
 #perfil-nav {
 	background-color: #B4C7E8;
-	padding: 1% 0;
 	margin-right: 0;
 }
 main {
 	padding: 3% 0;
 }
 aside {
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
 }
 footer {
 	color: white;
@@ -73,11 +72,12 @@ p {
 }
 
 
-/* **************** Estilos de index *************/ 
+/* **************** Estilos de index *************/
 
 .index #perfil-nav {
 	background-color: #E9F1F9;
 	margin-right: 0;
+	padding:1% 0;
 }
 .index .contenedor-log {
 	
@@ -103,8 +103,21 @@ p {
 	background-color: #4394CA;
 	margin-bottom: 40px;
 } 
+.index .separador-absolute {
+	position: absolute;
+}
 .index .contenedor-log h3 {
 	color: #4394CA;
+}
+.index .contenedor-log label {
+	color: #8FB3C5;
+}
+.index .contenedor-log input {
+	padding-left:  20px;
+}
+.index .contenedor-log form button {
+	background-color: #2172B0;
+	color: white;
 }
 
 /* Sticky footer styles
@@ -124,4 +137,14 @@ body {
   /* Set the fixed height of the footer here */
   height: 131px;
   background-color: #f5f5f5;
+	background-size: 47vh 35vh;
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
+}
+
+/***************** Meus desplegables*************/
+.boton-menu {
+	border: 1px solid black;
+}
+.navbar {
+	margin-bottom: 0;
 }
