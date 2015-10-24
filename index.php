@@ -31,15 +31,26 @@
 	</header>
 	<main>
 		<div class="container fondo-log">
-			<div class="row ">
-				<div class="col-md-6 col-md-offset-3 col-lg-6  col-lg-offset-3 contenedor-log ">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla consectetur unde repudiandae praesentium assumenda reiciendis aut autem, animi dolorum sapiente saepe ab, at. Quia aliquid sint dolor quae. Aut, assumenda.</p>
+			<div class="row center-block">
+				<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6  col-lg-offset-3 contenedor-log ">
+					<form>
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">Usuario</label>
+					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
+					  </div>
+					  <div class="form-group">
+					    <label for="exampleInputPassword1">Contraseña</label>
+					    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+					  </div>
+					  <a href="#">Registrar</a>
+					  <button type="submit" class="btn btn-default pull-right">Ingresar</button>
+					</form>
 				</div>
 			</div>
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer class="navbar-fixed-bottom hidden-xs hidden-ms" >
+	<footer class="navbar-fixed-bottom hidden-xs hidden-sm" >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">

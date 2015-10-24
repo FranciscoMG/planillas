@@ -188,7 +188,7 @@
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer class="navbar-fixed-bottom hidden-xs hidden-ms" >
+	<footer class="navbar-fixed-bottom hidden-xs hidden-sm" >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
