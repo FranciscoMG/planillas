@@ -34,40 +34,26 @@
 			<div class="row center-block">
 				<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6  col-lg-offset-3 contenedor-log ">
 					<form>
-					  <div class="form-group">
-					    <label for="exampleInputEmail1">Usuario</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
-					  </div>
-					  <div class="form-group">
-					    <label for="exampleInputPassword1">Contraseña</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-					  </div>
-					  <a href="#">Registrar</a>
-					  <button type="submit" class="btn btn-default pull-right">Ingresar</button>
+						<h3>Ingreso</h3>
+						<div class="separador"></div>
+					 	<div class="form-group">
+					    	<label for="exampleInputEmail1">Usuario</label>
+					    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="exampleInputPassword1">Contraseña</label>
+					    	<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+					  	</div>
+					  	<a href="#">Registrar</a>
+					  	<button type="submit" class="btn btn-default pull-right">Ingresar</button>
 					</form>
 				</div>
 			</div>
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer class="navbar-fixed-bottom hidden-xs hidden-sm" >
-		<div class="container-fluid">
-			<div class="row row1">
-				<div class="container">
-					<div class="col-sx-12 col-sm-6">
-						<h6>Tel: 6666 66 66</h6>
-					</div>
-					<div class="col-sx-12 col-sm-6">
-						<h6>Email: <a href="#">corre@my.com</a></h6>
-					</div>
-				</div>
-			</div>
-			<div class="row row2">
-				<img src="img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
-			</div>
-		</div>
-	</footer>
-	<footer class="hidden-md hidden-lg" >
+
+	<footer class="footer " >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
@@ -85,4 +71,6 @@
 		</div>
 	</footer>
 </body>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 </html>"

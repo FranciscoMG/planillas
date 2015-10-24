@@ -189,24 +189,7 @@
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer class="navbar-fixed-bottom hidden-xs hidden-sm" >
-		<div class="container-fluid">
-			<div class="row row1">
-				<div class="container">
-					<div class="col-sx-12 col-sm-6">
-						<h6>Tel: 6666 66 66</h6>
-					</div>
-					<div class="col-sx-12 col-sm-6">
-						<h6>Email: <a href="#">corre@my.com</a></h6>
-					</div>
-				</div>
-			</div>
-			<div class="row row2">
-				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
-			</div>
-		</div>
-	</footer>
-	<footer class="hidden-md hidden-lg" >
+	<footer class="footer" >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">

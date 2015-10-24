@@ -1,6 +1,4 @@
-html {
-	box-sizing: border-box;
-}
+
 .row {
 	margin-right: 0;
 }
@@ -28,7 +26,6 @@ header #row-especial {
 }
 main {
 	padding: 3% 0;
-	height: 65vh;
 }
 aside {
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
@@ -83,19 +80,48 @@ p {
 	margin-right: 0;
 }
 .index .contenedor-log {
-	background-color: aqua;
+	
 	padding: 2%;
-	padding-bottom: 5%;
+	padding-bottom: 6vh;
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
 }
 .index .contenedor-log .row-formulario {
-
+	
 }
 .index main .fondo-log {
-	padding-top: 5%;
-	height: 100%;
+	padding-top: 11vh;
+	padding-bottom: 11vh;
 	background-image: url("../img/circulos.png");
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	background-size: 37vh 35vh;
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+}
+.index .separador {
+	width: 100px;
+	height: 2px;
+	background-color: #4394CA;
+	margin-bottom: 40px;
+} 
+.index .contenedor-log h3 {
+	color: #4394CA;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 131px;
+  background-color: #f5f5f5;
 }
