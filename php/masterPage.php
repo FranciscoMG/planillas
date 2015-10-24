@@ -17,7 +17,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="perfil-row" class="container-fluid">	
+		<div id="perfil-row" class="container-fluid">
 			<div  class="row">
 				<div class="container">
 					<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4 col-lg-offset-8 col-md-offset-6 col-sm-offset-4" style="">
@@ -28,19 +28,20 @@
 		</div>
 		<div  id="perfil-nav" class="row ">
 			<div  class="container">
-			
-					<div class="col-sx-12">
-						<nav>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Inicio</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Usuarios</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Proyectos</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Cursos</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Docentes</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Grupos</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Presup.</a></div>
-							<div class="col-sx-1 col-sm-1 col-md-1 col-lg-1"><a href="#">Reportes</a></div>
-						</nav>
-				
+
+				<div class="dropdown">
+<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	Dropdown
+	<span class="caret"></span>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	<li><a href="#">Action</a></li>
+	<li><a href="#">Another action</a></li>
+	<li><a href="#">Something else here</a></li>
+	<li><a href="#">Separated link</a></li>
+</ul>
+</div>
+
 				</div>
 			</div>
 		</div>
@@ -177,7 +178,7 @@
 					</table>
 				</div>
 				<div class="tabla-acciones">
-					
+
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -223,6 +224,6 @@
 		</div>
 	</footer>
 </body>
-<script src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../../trabajo/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.js"></script>
 </html>
