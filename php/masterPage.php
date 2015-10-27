@@ -47,64 +47,66 @@
 			        </div>
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
-			            <li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Inicio<span class="caret"></span></a>
+			            <li class="">
+			              <a class="" href="#">Inicio</a>
+			            </li>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup.<span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
-									<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes<span class="caret"></span></a>
+						
+						<li class="dropdown">
+			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -119,22 +121,23 @@
 		</div>
 	</header>
 	<main>
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+		<div class="container" id="contenedor-tabla">
+			<a onclick="cambiarTable()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla"class="glyphicon glyphicon-resize-full"  ></span></a>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="tabla table-responsive">
-					<table class="table table-striped table-hover table-bordered">
+					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
-								<th>Info</th>
+								<th>Sigla</th>
+								<th>Nombre</th>
+								<th>Jornada</th>
+								<th>Créditos</th>
+								<th>Grupo</th>
+								<th>Horario</th>
+								<th>Docente</th>
+								<th>PO 1050</th>
+								<th>PO 1052</th>
+								<th>Apoyo Vic Doc..</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -250,35 +253,32 @@
 					</table>
 				</div>
 				<div class="tabla-acciones">
-
+				
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<aside>
-					<h2>Este es el titulo del aside</h2>
-				</aside>
-			</div>
 		</div>
+
 		<div class="clearfix"></div>
 	</main>
 	<footer class="footer" >
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
-					<div class="col-sx-12 col-sm-6">
+					<div class="col-sx-12 col-sm-6 text-right">
 						<h6>Tel: 6666 66 66</h6>
 					</div>
-					<div class="col-sx-12 col-sm-6">
-						<h6>Email: <a href="#">corre@my.com</a></h6>
+					<div class="col-sx-12 col-sm-6 text-right">
+						<h6>Email: <a href="#">correo@my.com</a></h6>
 					</div>
 				</div>
 			</div>
 			<div class="row row2">
-				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
+				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="75 aniversario UCR">
 			</div>
 		</div>
 	</footer>
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/planillas.js"></script>
 </html>
