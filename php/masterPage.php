@@ -52,7 +52,7 @@
 			            <li class="">
 			              <a class="" href="#">Inicio</a>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -61,7 +61,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -70,7 +70,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -79,7 +79,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -88,7 +88,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -97,7 +97,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -106,7 +106,7 @@
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
-						
+
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -471,7 +471,6 @@
 	<!-- Modal -->
 <div id="modalRevision" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -485,7 +484,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 

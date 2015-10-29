@@ -133,13 +133,13 @@ p {
 	padding:1% 0;
 }
 .index .contenedor-log {
-	
+
 	padding: 2%;
 	padding-bottom: 6vh;
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
 }
 .index .contenedor-log .row-formulario {
-	
+
 }
 .index main .fondo-log {
 	padding-top: 11vh;
@@ -148,14 +148,14 @@ p {
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	background-size: 37vh 35vh;
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5); 
+	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
 }
 .index .separador {
 	width: 100px;
 	height: 2px;
 	background-color: #4394CA;
 	margin-bottom: 40px;
-} 
+}
 .index .separador-absolute {
 	position: absolute;
 }
@@ -196,11 +196,48 @@ body {
 /****************Fixed table header *********/
 
 
-/***************** Meus desplegables*************/
+/************* Menus desplegables *************/
 .boton-menu {
 	border: 1px solid black;
 }
 .navbar {
 	margin-bottom: 0;
 	color: #08359B;
+}
+
+/************* Modales *************/
+.modal-title {
+	color: #64cdf6;
+	text-align: center;
+}
+
+.modal-delete-border {
+	border-top: 0px;
+	border-bottom: 0px;
+}
+
+.input-border {
+	border: 0px;
+  border-bottom: 2px solid #5fc3ea;
+	border-radius: 0px;
+	box-shadow: 0px 0px 0px;
+}
+
+.espacio-botones-modal {
+	margin: 30px 0px 20px 0px;
+}
+
+/************* Texto intermitente *************/
+.texto-efectos1 {
+	 color: #00F;
+	 animation-name: texto-intermitente;
+	 animation-duration: 1500ms;
+	 animation-timing-function: cubic-bezier(1, 0, 0, 0);
+	 animation-iteration-count: infinite;
+}
+
+@keyframes texto-intermitente {
+	0% {opacity:1.0}
+	50% {opacity:0.0}
+	100%{opacity:1.0}
 }
