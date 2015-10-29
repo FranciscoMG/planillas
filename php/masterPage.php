@@ -26,7 +26,8 @@
 						<div class="dropdown">
  							<button class="btn boton-perfil btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perfil: Administrativo <span class="caret"></span></button>
  							<ul class="dropdown-menu">
-	 							<li class="disabled"><a href="#">Fainix Mayorga Solorzano</a></li>
+	 							<li class="dropdown-header"><a href="#">Fainix Mayorga Solorzano</a></li>
+	 							<li class="divider"></li>
 	 							<li><a href="#">Cambiar usuario</a></li>
 	 							<li><a href="#">Salir</a></li>
  							</ul>
@@ -124,13 +125,17 @@
 	</header>
 
 <!-- //////// Main /////////////////////////////////////////////////////////// -->
-	<main>
+	<main class="master">
 
 <!--************* Tabla principal ********************-->
 		<div class="container" id="contenedor-tabla">
-			<a onclick="cambiarTable()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla"class="glyphicon glyphicon-resize-full"  ></span></a>
+
+			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
+			
+			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-down"  ></span></a>
+			
 			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tabla table-responsive contenedor-tabla-1">
+				<div class="tabla table-responsive contenedor-tabla-0" id="tabla-planillas">
 					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
@@ -334,7 +339,7 @@
 						</div>
 						<div class="clearfix">
 							<a href="#" class="btn btn-info btn-sm">Aplicar</a>
-							<a href="#" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#modalRevision">Revisión</a>
+							<a href="#" class="btn btn-danger btn-sm pull-right btn-revision" data-toggle="modal" data-target="#modalRevision">Revisión</a>
 
 						</div>
 					</div>
@@ -342,7 +347,7 @@
 		</div>
 
 <!--************* Aside ********************-->
-		<div class="container">
+		<div class="container container-aside">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="aside col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-sx-12">
@@ -418,35 +423,13 @@
 									<tr>
 										<td>Datos</td>
 									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
 								</table>
 							</div>
 
 					</div>
 			</div>
 		</div>
-
-		<div class="clearfix"></div>
+		
 	</main>
 
 <!-- //////// Footer /////////////////////////////////////////////////////////// -->
@@ -454,11 +437,8 @@
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
-					<div class="col-sx-12 col-sm-6 text-right">
-						<h6>Tel: 6666 66 66</h6>
-					</div>
-					<div class="col-sx-12 col-sm-6 text-right">
-						<h6>Email: <a href="#">correo@my.com</a></h6>
+					<div class="col-sx-12 col-sm-6 text-right  pull-right">
+						<h6>Email: <a href="#">Tel: 6666 66 66 | correo@my.com</a></h6>
 					</div>
 				</div>
 			</div>
@@ -468,7 +448,7 @@
 		</div>
 	</footer>
 
-	<!-- Modal -->
+<!--////////////////////////////  Modal //////////////////////////-->
 <div id="modalRevision" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->

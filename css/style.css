@@ -7,7 +7,7 @@
 }
 .separador-horizontal {
 	width: 100%;
-	height: 2px;
+	height: 1px;
 	background-color: #02BBED;
 	border-radius: 5px;
 }
@@ -55,23 +55,57 @@ table thead {
 table thead th {
 	text-align: center;
 }
+.master #tabla-planillas {
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+}
 #contenedor-tabla {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 	padding-bottom: 2%;
-	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.2);
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+}
+.master .contenedor-tabla-fluid {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	padding: 0;
+}
+main #contenedor-tabla .contenedor-tabla-0 {
+	height: 33vh;
+	border: 2px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-1 {
-	height: 36vh;
+	height: 70vh;
+	border: 2px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-2 {
-	padding-bottom: 2%;
+	padding-bottom: 0.5%;
 	padding-top: 2%;
 	margin-bottom: 20px;
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.4);
 }
 #contenedor-tabla .clearfix a{
 	margin-top: 27px;
+	background-color: #008641;
+	border-color: transparent;
 	bottom:0;
+}
+#contenedor-tabla .clearfix a:hover {
+	background-color: #006E35;
+}
+#contenedor-tabla .clearfix .btn-revision {
+	background-color: #680000;
+}
+#contenedor-tabla .clearfix .btn-revision:hover {
+	background-color: #4F0000;
+}
+.container-aside {
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
 }
 .aside {
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.5);
@@ -174,6 +208,9 @@ p {
 	background-color: #2172B0;
 	color: white;
 }
+.index .modal-footer button {
+	background-color: #005DA4;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -237,6 +274,7 @@ body {
 	 animation-timing-function: cubic-bezier(1, 0, 0, 0);
 	 animation-iteration-count: infinite;
 }
+
 
 @keyframes texto-intermitente {
 	0% {opacity:1.0}

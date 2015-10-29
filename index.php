@@ -70,7 +70,7 @@
 			</div>
 		</div>
 	</footer>
-	<!-- Modales -->
+<!--*********************** Modales *******************-->
 	<div id="modalRegistro" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -106,7 +106,7 @@
     					<input type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
   					</div>
 					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+					<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
 						<p class="form-control-static texto-efectos1">¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!</p>
 					</div>
 					<div class="modal-footer modal-delete-border">
@@ -121,4 +121,4 @@
 </body>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-</html>"
+</html>
