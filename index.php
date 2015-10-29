@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="perfil-row" class="container-fluid">	
+		<div id="perfil-row" class="container-fluid">
 			<div  class="row">
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 					    	<label for="exampleInputPassword1">Contraseña</label>
 					    	<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
 					  	</div>
-					  	<a href="#">Registrar</a>
+					  	<a href="#" data-toggle="modal" data-target="#modalRegistro">Registrar</a>
 					  	<div class="separador separador-absolute"></div>
 					  	<button type="submit" class="btn btn-default pull-right">Ingresar</button>
 					</form>
@@ -53,7 +53,6 @@
 		</div>
 			<div class="clearfix"></div>
 	</main>
-
 	<footer class="footer " >
 		<div class="container-fluid">
 			<div class="row row1">
@@ -71,7 +70,55 @@
 			</div>
 		</div>
 	</footer>
+	<!-- Modales -->
+	<div id="modalRegistro" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+				<div class="modal-header modal-delete-border">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Registro Usuarios</h4>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+    					<label for="txtUsuario">Usuario:</label>
+    					<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario">
+  					</div>
+						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+    					<label for="txtNombre">Nombre:</label>
+    					<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
+  					</div>
+						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+    					<label for="cboTipoPerfil">Tipo de perfil:</label>
+							<select class="form-control">
+  							<option>Docencia</option>
+  							<option>Recursos humanos</option>
+  							<option>Administrativo</option>
+							</select>
+  					</div>
+						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+    					<label for="txtContrasena">Contraseña:</label>
+    					<input type="password" class="form-control input-border" name="txtContrasena" placeholder="Contraseña">
+  					</div>
+						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+    					<label for="txtConfirmar">Confirmar contraseña:</label>
+    					<input type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
+  					</div>
+					</div>
+					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+						<p class="form-control-static texto-efectos1">¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!</p>
+					</div>
+					<div class="modal-footer modal-delete-border">
+						<div class="col-xs-12 col-sm-12 col-lg-12">
+							<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/jquery.js"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </html>"
