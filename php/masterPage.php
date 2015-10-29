@@ -321,7 +321,7 @@
 				</div>
 				<br><br>
 					<div class="row">
-					<div class="col-xs-8 col-sm-6">
+					<div class="col-xs-6 col-sm-5">
 						<div class="form-group">
 							  <label for="sel1">Carrera:</label>
 							  <select class="form-control" id="sel1">
