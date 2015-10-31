@@ -63,9 +63,9 @@ table thead th {
 #contenedor-tabla {
 	margin-bottom: 0;
 	padding-bottom: 2%;
-	-webkit-transition: 1s;
-	-o-transition: 1s;
-	transition: 1s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
 }
 .master .contenedor-tabla-fluid {
 	margin-left: auto;

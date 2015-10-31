@@ -33,7 +33,7 @@
 		<div class="container fondo-log">
 			<div class="row center-block">
 				<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6  col-lg-offset-3 contenedor-log ">
-					<form>
+					<form action="php/masterPage.php">
 						<h3>Ingreso</h3>
 						<div class="separador"></div>
 					 	<div class="form-group">
@@ -94,7 +94,6 @@
 							<select class="form-control">
   							<option>Docencia</option>
   							<option>Recursos humanos</option>
-  							<option>Administrativo</option>
 							</select>
   					</div>
 						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
