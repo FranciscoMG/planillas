@@ -99,6 +99,12 @@ main #contenedor-tabla .contenedor-tabla-2 {
 #contenedor-tabla .clearfix .btn-revision {
 	background-color: #680000;
 }
+
+.btn-minus{
+	background-color: #680000;
+	color: white;
+}
+
 #contenedor-tabla .clearfix .btn-revision:hover {
 	background-color: #4F0000;
 }
@@ -280,4 +286,10 @@ body {
 	0% {opacity:1.0}
 	50% {opacity:0.0}
 	100%{opacity:1.0}
+}
+
+/********************Input********************/
+
+.inputColor{
+	color: #005da4;
 }
