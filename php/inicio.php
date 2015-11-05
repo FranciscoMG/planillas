@@ -124,10 +124,10 @@
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
 						<p class="form-control-static texto-efectos1">
 						<?php
-							if (empty($_SESSION['mensaje_modal'])) {
+							if (empty($_SESSION['mensaje-modal'])) {
 								echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
 							} else {
-								echo $_SESSION['mensaje_modal'];
+								echo $_SESSION['mensaje-modal'];
 							}
 						?></p>
 					</div>
@@ -143,4 +143,11 @@
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<?php
+	if (!empty($_SESSION['mensaje-modal'])) {
+		echo "<script>
+		$('#modalRegistro').modal('show');
+		</script>";
+	}
+?>
 </html>

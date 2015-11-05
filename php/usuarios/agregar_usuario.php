@@ -12,14 +12,8 @@
 
 
   if(empty($usuario) || empty($contrasena)) {
-    $_SESSION['mensaje']= "Se debe indicar el Usuario y/o contraseña";
+    $_SESSION['mensaje-modal']= "Se debe indicar el Usuario y/o contraseña";
     header("Location: ../inicio.php");
-    /*echo "<script type='text/javascript'>
-      document.getElementById('modalRegistro').style.display='none';
-      document.getElementById('modalRegistro').class='modal fade in';
-      document.getElementByTagName('body').style.padding-right='13px';
-      document.getElementByTagName('body').class='index modal-open';
-    </script>";*/
   } else {
     $sql="SELECT * FROM tb_Usuario";
 
@@ -27,7 +21,7 @@
 
     while ($fila= mysql_fetch_array($resultado)) {
       if ($fila['usuario']==$usuario) {
-        $_SESSION['mensaje']= "El usuario ya existe";
+        $_SESSION['mensaje-modal']= "El usuario ya existe";
         header("Location: ../inicio.php");
       }
     }
