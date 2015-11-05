@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if (!isset($_SESSION['usuario'])) {
+		$_SESSION['mensaje']="Debe iniciar sesión para ingresar";
+		header("Location: inicio.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,12 +32,25 @@
 				<div class="container">
 					<div  class="pull-right" style="">
 						<div class="dropdown">
- 							<button class="btn boton-perfil btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perfil: Administrativo <span class="caret"></span></button>
+ 							<button class="btn boton-perfil btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perfil: <?php
+						switch ($_SESSION['tipoPerfil']) {
+								case 0:
+									echo "<strong>Administrativo</strong>";
+									break;
+									case 1:
+										echo "<strong>Docencia</strong>";
+										break;
+										case 2:
+											echo "<strong>Recursos humanos</strong>";
+											break;
+
+							}
+							?> <span class="caret"></span></button>
  							<ul class="dropdown-menu">
-	 							<li class="dropdown-header"><a href="#">Fainix Mayorga Solorzano</a></li>
+	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
 	 							<li class="divider"></li>
 	 							<li><a href="#">Cambiar usuario</a></li>
-	 							<li><a href="#">Salir</a></li>
+	 							<li><a href="sesion/sesion.php">Salir</a></li>
  							</ul>
 						</div>
 					</div>
