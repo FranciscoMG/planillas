@@ -2,6 +2,12 @@
 
   session_start();
 
+  //
+  include_once("../conexionBD/constantes.php");
+  include_once("../conexionBD/usuariosBD.php");
+  $db = new usuariosBD(__HOST__, __USUARIODB__, __PASSDB__, __DATABASE__);
+  //
+
 if (isset($_POST['btnRegistrar'])) {
 
   $_SESSION['mensaje_modal'];
@@ -31,11 +37,15 @@ if (isset($_POST['btnRegistrar'])) {
     header("Location: ../inicio.php");
 
   } else {
-    $sql="SELECT * FROM tb_Usuario";
+    //$sql="SELECT * FROM tb_Usuario";
 
-    $resultado = mysql_query($sql) or die ("Sql error".mysql_error());
+    //$resultado = mysql_query($sql) or die ("Sql error".mysql_error());
 
-    while ($fila= mysql_fetch_array($resultado)) {
+    //
+    $resultado = $db->obtenerlistadoDeUsuarios();
+    //
+
+    while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['usuario']==$usuario) {
         $_SESSION['mensaje-modal']= "El usuario ya existe";
         header("Location: ../inicio.php");
