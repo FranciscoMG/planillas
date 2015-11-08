@@ -41,7 +41,7 @@
 					<form action="usuarios/verificar_usuarios.php" method="post">
 						<h3>Ingresar</h3>
 						<div class="separador"></div>
-						<h5><?php
+						<h5 class="form-control-static texto-efectos1"><?php
 						echo $_SESSION['mensaje']; ?></h5>
 					 	<div class="form-group">
 					    	<label for="exampleInputEmail1">Usuario</label>
@@ -78,73 +78,13 @@
 		</div>
 	</footer>
 <!--*********************** Modales *******************-->
-	<div id="modalRegistro" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-				<div class="modal-header modal-delete-border">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Registro Usuarios</h4>
-				</div>
-				<form action="usuarios/agregar_usuario.php" method="post">
-					<div class="modal-body">
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtUsuario">Usuario:</label>
-    					<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario">
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtNombre">Nombre:</label>
-    					<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtApellidos">Apellidos:</label>
-    					<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos">
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="cboTipoPerfil">Tipo de perfil:</label>
-							<select name="cboTipoPerfil" class="form-control">
-  							<option value="1">Docencia</option>
-  							<option value="2">Recursos humanos</option>
-  							<option value="0">Administrativo</option>
-							</select>
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtContrasena">Contraseña:</label>
-    					<input type="password" class="form-control input-border" name="txtContrasena" placeholder="Contraseña">
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtConfirmar">Confirmar contraseña:</label>
-    					<input type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
-  					</div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="txtCorreo">Correo electrónico</label>
-    					<input type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico">
-  					</div>
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
-						<p class="form-control-static texto-efectos1">
-						<?php
-							if (empty($_SESSION['mensaje-modal'])) {
-								echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
-							} else {
-								echo $_SESSION['mensaje-modal'];
-							}
-						?></p>
-					</div>
-					<div class="modal-footer modal-delete-border">
-						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	 <?php require("include/modalUsuarios.php"); ?>
+
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <?php
-	if (!empty($_SESSION['mensaje-modal'])) {
+	if ($_SESSION['registrando'] == 1) {
 		echo "<script>
 		$('#modalRegistro').modal('show');
 		</script>";

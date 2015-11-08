@@ -2,13 +2,14 @@
   include_once("../conexion_bd.php");
 
   session_start();
+
   $usuario= isset($_POST['txtUsuario'])?$_POST['txtUsuario']:"";
   $contrasena= isset($_POST['txtContrasena'])?$_POST['txtContrasena']:"";
 
 
 
   if(empty($usuario) || empty($contrasena)) {
-    $_SESSION['mensaje']= "Se debe indicar el Usuario y/o contraseña";
+    $_SESSION['mensaje']= "Se debe indicar el usuario y/o contraseña";
     header("Location: ../inicio.php");
   } else {
     $sql="SELECT * FROM tb_Usuario";
@@ -32,16 +33,19 @@ $_SESSION['mensaje']="";
         } else {
           $_SESSION['mensaje']= "El perfil no está habilitado";
           header("Location: ../inicio.php");
+          exit();
         }
         } else {
           $_SESSION['mensaje']="La contraseña no existe";
           header("Location: ../inicio.php");
+          exit();
         }
       } else {
         $_SESSION['mensaje']= "El usuario no existe";
-        header("Location: ../inicio.php");
       }
     }
   }
+  header("Location: ../inicio.php");
+
   echo "<script> alert('No hay información en la base de datos'); </script>";
 ?>

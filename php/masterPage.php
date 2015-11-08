@@ -4,6 +4,7 @@
 		$_SESSION['mensaje']="Debe iniciar sesión para ingresar";
 		header("Location: inicio.php");
 	}
+	$_SESSION['masterActivo']=1;
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +50,8 @@
  							<ul class="dropdown-menu">
 	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
 	 							<li class="divider"></li>
-	 							<li><a href="#">Cambiar usuario</a></li>
-	 							<li><a href="sesion/sesion.php">Salir</a></li>
+	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
+	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
  							</ul>
 						</div>
 					</div>
@@ -546,52 +547,11 @@
 </form>
 </form>
 
-<!--Modal de Usuarios-->
-<div id="modalRegistro" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-			<div class="modal-header modal-delete-border">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Registro Usuarios</h4>
-			</div>
-			<form>
-				<div class="modal-body">
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-						<label for="txtUsuario">Usuario:</label>
-						<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario">
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-						<label for="txtNombre">Nombre:</label>
-						<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-						<label for="cboTipoPerfil">Tipo de perfil:</label>
-						<select class="form-control">
-							<option>Docencia</option>
-							<option>Recursos humanos</option>
-							<option>Administrativo</option>
-						</select>
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-						<label for="txtContrasena">Contraseña:</label>
-						<input type="password" class="form-control input-border" name="txtContrasena" placeholder="Contraseña">
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-						<label for="txtConfirmar">Confirmar contraseña:</label>
-						<input type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
-					</div>
-				</div>
-				<div class="modal-footer modal-delete-border">
-					<div class="col-xs-12 col-sm-12 col-lg-12">
-						<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+<!--/////////////////////////////////  Modal de Usuarios/////////////////////////////////////-->
 
-<!--Modal de Proyectos-->
+	<?php require("include/modalUsuarios.php"); ?>
+
+<!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
 
 <form>
 	<div id="modalProyectos" class="modal fade" role="dialog">
