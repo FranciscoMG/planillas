@@ -133,9 +133,8 @@
 						<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
+			                <li><a href="#">Por carrera</a></li>
+			                <li><a href="#">Por profesor</a></li>
 			              </ul>
 			            </li>
 			          </ul>
@@ -863,4 +862,12 @@
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/planillas.js"></script>
+
+<?php
+	if ($_SESSION['registrando'] == 1) {
+		echo "<script>
+		$('#modalRegistro').modal('show');
+		</script>";
+	}
+?>
 </html>

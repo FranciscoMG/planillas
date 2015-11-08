@@ -1,11 +1,10 @@
 <?php
 include_once("conexionBD.php");
 //Nuestra clase solo para manejar a los usuarios hereda de la clase principal de conexión
-class usuariosBD extends conexionBD
-{
-	function __construct($host, $userdb, $passworddb, $dbname)
+class usuariosBD extends conexionBD {
+	function __construct()
     {
-    	parent::__construct($host, $userdb, $passworddb, $dbname);
+    	parent::__construct();
 	}
 
 	function autenticarUsuario($email, $password)
@@ -85,10 +84,10 @@ class usuariosBD extends conexionBD
 		return $stmt->execute();
 	}
 	function modificarUsuario($id)
-	{	
-		/*$sql = "UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'noonn\', `usuarioApellidos` = \'apee\', `usuarioEmail` = \'admin@.admin.co\', `usuarioPassword` = \'1234\', `usuarioTelefono` = \'112233445\' WHERE `usuario`.`idusuario` = 2;"; 
+	{
+		/*$sql = "UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'noonn\', `usuarioApellidos` = \'apee\', `usuarioEmail` = \'admin@.admin.co\', `usuarioPassword` = \'1234\', `usuarioTelefono` = \'112233445\' WHERE `usuario`.`idusuario` = 2;";
 
-		$stmt = $this->con->prepare("UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'?\', `usuarioApellidos` = \'?\', `usuarioEmail` = \'?\', `usuarioPassword` = \'?\', `usuarioTelefono` = \'?\' WHERE `usuario`.`idusuario` = ?;"); 
+		$stmt = $this->con->prepare("UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'?\', `usuarioApellidos` = \'?\', `usuarioEmail` = \'?\', `usuarioPassword` = \'?\', `usuarioTelefono` = \'?\' WHERE `usuario`.`idusuario` = ?;");
 
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' . $mysqli->error);
@@ -96,9 +95,9 @@ class usuariosBD extends conexionBD
 		$stmt->bind_param('i', $id);
 		return $stmt->execute();
 		*/
-		
+
 	}
-	
+
 }
 
 

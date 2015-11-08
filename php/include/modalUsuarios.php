@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
 
  ?>
@@ -17,34 +17,34 @@
 					<div class="modal-body">
 						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     					<label for="txtUsuario">Usuario:</label>
-    					<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario" value="<?php 
+    					<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario" value="<?php
     						if (!empty($_SESSION['usuario'])) {
     							echo $_SESSION['usuario'];
-    						} 
+    						}
     					 ?>">
   					</div>
 						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     					<label for="txtNombre">Nombre:</label>
-    					<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" value="<?php 
+    					<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" value="<?php
     						if (!empty($_SESSION['nombre_usuario'])) {
     							echo trim($_SESSION['nombre_usuario']);
-    						} 
+    						}
     					 ?>">
   					</div>
 						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     					<label for="txtApellidos">Apellidos:</label>
-    					<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" value="<?php 
+    					<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" value="<?php
     						if (!empty($_SESSION['apellidos'])) {
     							echo trim($_SESSION['apellidos']);
-    						} 
+    						}
     					 ?>">
   					</div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="txtCorreo">Correo electrónico</label>
-              <input type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php 
+              <input type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php
                 if (!empty($_SESSION['correo'])) {
                   echo trim($_SESSION['correo']);
-                } 
+                }
                ?>">
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
@@ -55,15 +55,19 @@
               <label for="txtConfirmar">Confirmar contraseña:</label>
               <input type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
             </div>
+            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+              <label for="cboTipoPerfil">Tipo de perfil:</label>
+              <select name="cboTipoPerfil" class="form-control">
+                <option value="1">Docencia</option>
+                <option value="2">Recursos humanos</option>
+                <?php
+                  if ($_SESSION[masterActivo] == 1 ) {
+                    echo "<option value='0'>Administrativo</option>";
+                  }
+                ?>
+              </select>
+            </div>
           </div>
-						<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    					<label for="cboTipoPerfil">Tipo de perfil:</label>
-							<select name="cboTipoPerfil" class="form-control">
-  							<option value="1">Docencia</option>
-  							<option value="2">Recursos humanos</option>
-  							<option value="0">Administrativo</option>
-							</select>
-  					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
 						<p class="form-control-static texto-efectos1">
 						<?php
@@ -80,7 +84,7 @@
 					</div>
 					<div class="modal-footer modal-delete-border">
 
-            <?php 
+            <?php
               if ($_SESSION[masterActivo] == 1) {
                 echo "
                 <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>

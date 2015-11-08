@@ -2,7 +2,6 @@
   include_once("../conexion_bd.php");
 
   //
-  include_once("../conexionBD/constantes.php");
   include_once("../conexionBD/usuariosBD.php");
   //
 
@@ -12,7 +11,7 @@
   $contrasena= isset($_POST['txtContrasena'])?$_POST['txtContrasena']:"";
 
   //
-  $db = new usuariosBD(__HOST__, __USUARIODB__, __PASSDB__, __DATABASE__);
+  $db = new usuariosBD();
   //
 
   if(empty($usuario) || empty($contrasena)) {
@@ -33,7 +32,7 @@
   $_SESSION['mensaje']="";
 
   //
-    
+
     while ($fila = mysqli_fetch_assoc($resultado)) {
   //
       if ($usuario == $fila['usuario']) {

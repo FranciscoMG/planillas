@@ -3,9 +3,8 @@
   session_start();
 
   //
-  include_once("../conexionBD/constantes.php");
   include_once("../conexionBD/usuariosBD.php");
-  $db = new usuariosBD(__HOST__, __USUARIODB__, __PASSDB__, __DATABASE__);
+  $db = new usuariosBD();
   //
 
 if (isset($_POST['btnRegistrar'])) {
@@ -48,43 +47,78 @@ if (isset($_POST['btnRegistrar'])) {
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['usuario']==$usuario) {
         $_SESSION['mensaje-modal']= "El usuario ya existe";
-        header("Location: ../inicio.php");
+        if ($_SESSION[masterActivo] == 1 ) {
+          header("Location: ../masterPage.php");
         exit();
+        } else {
+          header("Location: ../inicio.php");
+          exit();
+        }
       }
     }
 
     if (empty($nombre_usuario)) {
       $_SESSION['usuario'] = $usuario;
       $_SESSION['mensaje-modal']= "Debe ingresar el nombre";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
     if (empty($apellidos)) {
       $_SESSION['nombre_usuario'] = $nombre_usuario;
       $_SESSION['mensaje-modal']= "Debe ingresar los apellidos";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
     if (empty($contrasena)) {
       $_SESSION['mensaje-modal']= "Debe ingresar la contraseña";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
     if (empty($confirmarContrasena)) {
       $_SESSION['mensaje-modal']= "Debe confirmar la contraseña";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
     if (empty($correo)) {
       $_SESSION['mensaje-modal']= "Debe ingresar el correo electrónico";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
 
     if ($confirmarContrasena != $contrasena) {
       $_SESSION['mensaje-modal']= "Las contraseñas no coinciden";
-      header("Location: ../inicio.php");
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
       exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
     }
 
     $_SESSION['mensaje-modal']="";
@@ -93,13 +127,24 @@ if (isset($_POST['btnRegistrar'])) {
     $_SESSION['apellidos']="";
     $_SESSION['tipoPerfil']="";
     $_SESSION['correo']="";
-
-    $_SESSION['mensaje']="Usuario solicidato";
     $_SESSION['registrando'] = 0;
+
+    if ($_SESSION[masterActivo] == 1 ) {
+          $_SESSION['mensaje-modal']="Usuario creado con éxito";
+
+    } else {
+          $_SESSION['mensaje']="Usuario solicidato";
+    }
 
     $sql1= "INSERT INTO tb_Usuario VALUES('".$usuario."' , '".$contrasena."' ,'".$nombre_usuario."' ,'".$apellidos."' , ".$tipoPerfil." , '".$correo."', 0)";
     mysql_query($sql1) or die ('Error sql '.mysql_error());
-    header("Location: ../inicio.php");
+    if ($_SESSION[masterActivo] == 1 ) {
+      header("Location: ../masterPage.php");
+    exit();
+    } else {
+      header("Location: ../inicio.php");
+      exit();
+    }
 }
 } else {
   header("Location: ../masterPage.php");
@@ -107,4 +152,3 @@ if (isset($_POST['btnRegistrar'])) {
 }
 
   ?>
-  
