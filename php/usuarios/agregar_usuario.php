@@ -9,7 +9,7 @@
 
 if (isset($_POST['btnRegistrar'])) {
 
-  $_SESSION['mensaje_modal'];
+  $_SESSION['mensaje_modal']="";
 
   include_once("../conexion_bd.php");
 
@@ -47,7 +47,7 @@ if (isset($_POST['btnRegistrar'])) {
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['usuario']==$usuario) {
         $_SESSION['mensaje-modal']= "El usuario ya existe";
-        if ($_SESSION[masterActivo] == 1 ) {
+        if ($_SESSION['masterActivo'] == 1 ) {
           header("Location: ../masterPage.php");
         exit();
         } else {
@@ -60,7 +60,7 @@ if (isset($_POST['btnRegistrar'])) {
     if (empty($nombre_usuario)) {
       $_SESSION['usuario'] = $usuario;
       $_SESSION['mensaje-modal']= "Debe ingresar el nombre";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -71,7 +71,7 @@ if (isset($_POST['btnRegistrar'])) {
     if (empty($apellidos)) {
       $_SESSION['nombre_usuario'] = $nombre_usuario;
       $_SESSION['mensaje-modal']= "Debe ingresar los apellidos";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -81,7 +81,7 @@ if (isset($_POST['btnRegistrar'])) {
     }
     if (empty($correo)) {
       $_SESSION['mensaje-modal']= "Debe ingresar el correo electrónico";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -91,7 +91,7 @@ if (isset($_POST['btnRegistrar'])) {
     }
     if (empty($contrasena)) {
       $_SESSION['mensaje-modal']= "Debe ingresar la contraseña";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -101,7 +101,7 @@ if (isset($_POST['btnRegistrar'])) {
     }
     if (empty($confirmarContrasena)) {
       $_SESSION['mensaje-modal']= "Debe confirmar la contraseña";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -112,7 +112,7 @@ if (isset($_POST['btnRegistrar'])) {
 
     if ($confirmarContrasena != $contrasena) {
       $_SESSION['mensaje-modal']= "Las contraseñas no coinciden";
-      if ($_SESSION[masterActivo] == 1 ) {
+      if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
       } else {
@@ -129,9 +129,10 @@ if (isset($_POST['btnRegistrar'])) {
     $_SESSION['correo']="";
     $_SESSION['registrando'] = 0;
 
-    if ($_SESSION[masterActivo] == 1 ) {
+    if (isset($_SESSION['masterActivo'])) {
+      if ($_SESSION['masterActivo'] == 1 ) {
           $_SESSION['mensaje-modal']="Usuario creado con éxito";
-
+      }
     } else {
           $_SESSION['mensaje']="Usuario solicidato";
     }
