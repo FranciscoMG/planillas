@@ -80,8 +80,8 @@
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Eliminar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
 			              </ul>
 			            </li>
 
@@ -496,7 +496,6 @@
   	<div class="modal-dialog">
     	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
       	<div class="modal-header modal-delete-border">
-					<button type="submit" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         	<h4 class="modal-title">Registro de Cursos</h4>
       	</div>
       	<div class="modal-body">
@@ -558,7 +557,6 @@
   	<div class="modal-dialog">
     	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
       	<div class="modal-header modal-delete-border">
-					<button type="submit" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         	<h4 class="modal-title">Registro de Proyectos</h4>
       	</div>
       	<div class="modal-body">
@@ -639,7 +637,6 @@
   	<div class="modal-dialog">
     	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
       	<div class="modal-header modal-delete-border">
-					<button type="submit" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         	<h4 class="modal-title">Registro de Docentes</h4>
       	</div>
       	<div class="modal-body">
@@ -712,7 +709,6 @@
   	<div class="modal-dialog">
     	<div class="modal-content col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1">
       	<div class="modal-header modal-delete-border">
-					<button type="submit" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         	<h4 class="modal-title">Crear curso especifico</h4>
       	</div>
       	<div class="modal-body">

@@ -1,8 +1,6 @@
 <?php
   session_start();
 
-  $estado = 0;
-
  ?>
 
 <div id="modalRegistro" class="modal fade" role="dialog">
@@ -95,8 +93,8 @@
 					<div class="modal-footer modal-delete-border">
 
             <?php
-              if (isset($_SESSION['masterActivo'])) {
-                if ($_SESSION['masterActivo'] == 1) {
+              if (isset($_SESSION['masterActivo']) && isset($estadoModalUsuarios)) {
+                if ($_SESSION['masterActivo'] == 1 $$ $estadoModalUsuarios == 1) {
                   echo "
                   <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
                     <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
