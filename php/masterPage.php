@@ -52,7 +52,7 @@
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
-									echo "<li><a href='sesion/cerrarSesion.php'>Habilitar Opciones</a></li>";
+									echo "<li><a onclick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ban-circle' id='spam_h'></span></a></li>";
 								}
 									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
@@ -89,8 +89,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav" href="#">Proyectos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -98,8 +98,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav2">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav2" href="#">Cursos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -107,8 +107,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav3">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav3" href="#">Docentes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -116,8 +116,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav4">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav4" href="#">Grupos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -125,8 +125,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav5">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav5" href="#">Presup. <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
@@ -134,8 +134,8 @@
 			              </ul>
 			            </li>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav6">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Por carrera</a></li>
 			                <li><a href="#">Por profesor</a></li>
