@@ -84,8 +84,8 @@
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Eliminar</a></li>
 			              </ul>
 			            </li>
 

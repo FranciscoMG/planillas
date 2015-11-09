@@ -1,6 +1,8 @@
 <?php
   session_start();
 
+  $estado = 0;
+
  ?>
 
 <div id="modalRegistro" class="modal fade" role="dialog">
@@ -66,8 +68,10 @@
                 <option value="1">Docencia</option>
                 <option value="2">Recursos humanos</option>
                 <?php
-                  if ($_SESSION[masterActivo] == 1 ) {
-                    echo "<option value='0'>Administrativo</option>";
+                  if (isset($_SESSION['masterActivo'])) {
+                    if ($_SESSION['masterActivo'] == 1 ) {
+                      echo "<option value='0'>Administrativo</option>";
+                    }
                   }
                 ?>
               </select>
@@ -77,9 +81,10 @@
 						<p class="form-control-static texto-efectos1">
 						<?php
 							if (empty($_SESSION['mensaje-modal'])) {
-
-                if ($_SESSION['masterActivo'] != 1) {
-								  echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
+                if (isset($_SESSION['masterActivo'])) {
+                  if ($_SESSION['masterActivo'] != 1) {
+							     echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
+                  }
                 }
 							} else {
 								echo $_SESSION['mensaje-modal'];
@@ -90,6 +95,7 @@
 					<div class="modal-footer modal-delete-border">
 
             <?php
+
               if ($_SESSION['masterActivo'] == 1) {
                 echo "
                 <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
@@ -104,6 +110,23 @@
 						<div class="col-xs-12 col-sm-12 col-lg-12">
 							<button type="submit" class="btn btn-primary btn-block " <?php if ($_SESSION['masterActivo'] == 1 ) {
                 echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
+              <?php
+              if (isset($_SESSION['masterActivo'])) {
+                if ($_SESSION['masterActivo'] == 1) {
+                  echo "
+                  <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
+                    <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
+                  </div>
+                  <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
+                    <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnAgregar'>Eliminar</button>
+                  </div>
+                  <br/>";
+                }
+              }
+             ?>
+						<div class="col-xs-12 col-sm-12 col-lg-12">
+							<button type="submit" class="btn btn-primary btn-block " <?php if(isset($_SESSION['masterActivo'])) { if ($_SESSION['masterActivo'] == 1 ) {
+                echo 'disabled';}} ?> name="btnRegistrar">Registrar</button>
 						</div>
 					</div>
 				</form>
