@@ -137,7 +137,7 @@ if (isset($_POST['btnRegistrar'])) {
           $_SESSION['mensaje']="Usuario solicidato";
     }
 
-    $sql1= "INSERT INTO tb_Usuario VALUES('".$usuario."' , '".$contrasena."' ,'".$nombre_usuario."' ,'".$apellidos."' , ".$tipoPerfil." , '".$correo."', 0)";
+    $sql1= "INSERT INTO tb_Usuario VALUES('".$usuario."' , '".md5($contrasena)."' ,'".$nombre_usuario."' ,'".$apellidos."' , ".$tipoPerfil." , '".$correo."', 0)";
     mysql_query($sql1) or die ('Error sql '.mysql_error());
     if ($_SESSION[masterActivo] == 1 ) {
       header("Location: ../masterPage.php");

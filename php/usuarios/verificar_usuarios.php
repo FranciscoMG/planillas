@@ -37,7 +37,7 @@
   //
       if ($usuario == $fila['usuario']) {
 
-        if ($contrasena == $fila['contrasena']) {
+        if (md5($contrasena) == $fila['contrasena']) {
 
           if($fila['habilitado']== 1) {
             $_SESSION['usuario']=$usuario;
