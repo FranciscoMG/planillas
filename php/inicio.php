@@ -2,6 +2,7 @@
 	include_once("conexion_bd.php");
 
 	session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +41,11 @@
 					<form action="usuarios/verificar_usuarios.php" method="post">
 						<h3>Ingresar</h3>
 						<div class="separador"></div>
-						<h5 class="form-control-static texto-efectos1"><?php if(isset($_SESSION['mensaje'])) {
-						echo $_SESSION['mensaje']; } ?></h5>
+
+						<h5 class="form-control-static texto-efectos1"><?php
+						if (isset($_SESSION['mensaje'])) {
+						echo $_SESSION['mensaje'];} ?></h5>
+
 					 	<div class="form-group">
 					    	<label for="exampleInputEmail1">Usuario</label>
 					    	<input type="text" class="form-control"  name="txtUsuario" placeholder="Usuario">

@@ -29,7 +29,6 @@
 
   //$resultado = mysql_query($sql) or die ("Sql error".mysql_error());
 
-  $_SESSION['mensaje']="";
 
   //
 
@@ -52,7 +51,7 @@
           exit();
         }
         } else {
-          $_SESSION['mensaje']="La contraseña no existe";
+          $_SESSION['mensaje']="La contraseña es inválida";
           header("Location: ../inicio.php");
           exit();
         }

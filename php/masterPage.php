@@ -7,8 +7,8 @@
 	$_SESSION['masterActivo']=1;
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>master</title>
@@ -51,6 +51,10 @@
 	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
+								<?php if($_SESSION['tipoPerfil'] == 0){
+									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>";
+								}
+									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
  							</ul>
 						</div>
@@ -76,62 +80,68 @@
 			              <a class="" href="#">Inicio</a>
 			            </li>
 
-						<li class="dropdown">
+						<?php if($_SESSION['tipoPerfil'] == 0){
+						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
-			            </li>
+			            </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
+					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo '<li class="desabilitado_li disabled" id="li_nav">
+						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
+						              <ul class="dropdown-menu">
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
+						                <li><a href="#">Modificar</a></li>
+						                <li><a href="#">Eliminar</a></li>
+						              </ul>
+						            </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>
+				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo '<li class="desabilitado_li disabled" id="li_nav2">
+			              <a class="desabilitado_a disabled" data-toggle="dropdown" id="a_nav2" href="#">Cursos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
-			            </li>
+			            </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
+				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo'<li class="desabilitado_li disabled" id="li_nav3">
+						        <a class="desabilitado_a disabled" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
+						        <ul class="dropdown-menu">
+						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
+						          <li><a href="#">Modificar</a></li>
+						          <li><a href="#">Eliminar</a></li>
+					          </ul>
+						      </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
+			 <?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+					echo '<li class="desabilitado_li disabled" id="li_nav4">
+				        <a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
+				          <li><a href="#">Modificar</a></li>
+				          <li><a href="#">Eliminar</a></li>
+				        </ul>
+				      </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
+			<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2){
+				echo '<li class="desabilitado_li disabled" id="li_nav5">
+			          <a class="desabilitado_a disabled" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="#">Agregar</a></li>
+			            <li><a href="#">Modificar</a></li>
+			            <li><a href="#">Eliminar</a></li>
+			          </ul>
+			        </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav6">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Por carrera</a></li>
 			                <li><a href="#">Por profesor</a></li>
@@ -488,375 +498,24 @@
   </div>
 </div>
 
-<!--Modal de Cursos-->
-
-<form>
-<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-	<div id="modalCursos" class="modal fade" role="dialog">
-  	<div class="modal-dialog">
-    	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-      	<div class="modal-header modal-delete-border">
-        	<h4 class="modal-title">Registro de Cursos</h4>
-      	</div>
-      	<div class="modal-body">
-        	<label>Sigla del curso</label>
-					<form class="form-inline" role="form">
-						<div class="form-group row">
-							<div class="col-xs-8 col-sm-9 col-lg-9">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-							<div class="col-xs-4 col-sm-3 col-lg-3">
-								<button type="submit" class="form-control btn-primary btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-search"></span></button>
-							</div>
-					</div>
-					<label>Nombre del Curso</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-					</div>
-					<label>Cantidad de Creditos</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<select class="form-control">
-									<?php
-									for($i=0;$i<=12;$i++){
-										echo "<option>".$i."</option>";
-									}
-									?>
-								</select>
-							</div>
-					</div>
-				</div>
-      	<div class="modal-footer modal-delete-border">
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnModificar" disabled>Modificar</button>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnEliminar" disabled>Eliminar</button>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-						</div>
-      	</div>
-    	</div>
-  	</div>
-	</div>
-</div>
-</form>
-</form>
-
 <!--/////////////////////////////////  Modal de Usuarios/////////////////////////////////////-->
 
 	<?php require("include/modalUsuarios.php"); ?>
 
+<!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
+
+	<?php require("include/modalDocentes.php"); ?>
+
+<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
+
+	<?php require("include/modalCursos.php"); ?>
+
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
+	<?php require("include/modalProyectos.php"); ?>
 
-<form>
-	<div id="modalProyectos" class="modal fade" role="dialog">
-  	<div class="modal-dialog">
-    	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-      	<div class="modal-header modal-delete-border">
-        	<h4 class="modal-title">Registro de Proyectos</h4>
-      	</div>
-      	<div class="modal-body">
-        	<label>Nombre del proyecto</label>
-					<form class="form-inline" role="form">
-						<div class="form-group row">
-							<div class="col-xs-8 col-sm-9 col-lg-9">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-							<div class="col-xs-4 col-sm-3 col-lg-3">
-								<button type="submit" class="form-control btn-primary btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-search"></span></button>
-							</div>
-					</div>
-					<label>Tipo de Proyecto</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<select class="form-control">
-	  							<option>Accion Social</option>
-	  							<option>Investigacion</option>
-								</select>
-							</div>
-					</div>
-				<label>Cantidad de tiempos</label>
-					<div class="form-group row">
-						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<select class="form-control">
-								<option>3/4</option>
-								<option>2/4</option>
-								<option>1/4</option>
-								<option>1/2</option>
-								<option>1</option>
-							</select>
-						</div>
-				</div>
-			<label>Principal/Responsable</label>
-				<div class="form-group row">
-					<div class="col-xs-12 col-sm-12 col-lg-12">
-						<select class="form-control">
-							<option>Profesor1</option>
-							<option>Profesor2</option>
-							<option>Profesor3</option>
-						</select>
-					</div>
-			</div>
-		<label>Asociado/Colaborador</label>
-			<div class="form-group row">
-				<div class="col-xs-12 col-sm-12 col-lg-12">
-					<select class="form-control">
-						<option>Profesor1</option>
-						<option>Profesor2</option>
-						<option>Profesor3</option>
-					</select>
-				</div>
-		</div>
-		<div class="modal-footer modal-delete-border">
-			<div class="col-xs-6 col-sm-6 col-lg-6">
-				<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnModificar" disabled>Modificar</button>
-			</div>
-				<div class="col-xs-6 col-sm-6 col-lg-6">
-					<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnEliminar" disabled>Eliminar</button>
-					</div>
-				<div class="col-xs-12 col-sm-12 col-lg-12">
-					<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-				</div>
-				</div>
-    	</div>
-  	</div>
-	</div>
-</div>
-</form>
-</form>
+<!--////////////////////////////////////// Modal de Grupos ////////////////////////-->
+	<?php require("include/modalGrupos.php"); ?>
 
-<!--Modal Docentes-->
-
-<form>
-<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-	<div id="modalDocentes" class="modal fade" role="dialog">
-  	<div class="modal-dialog">
-    	<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-      	<div class="modal-header modal-delete-border">
-        	<h4 class="modal-title">Registro de Docentes</h4>
-      	</div>
-      	<div class="modal-body">
-        	<label>Numero de Cedula</label>
-					<form class="form-inline" role="form">
-						<div class="form-group row">
-							<div class="col-xs-8 col-sm-9 col-lg-9">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-							<div class="col-xs-4 col-sm-3 col-lg-3">
-								<button type="submit" class="form-control btn-primary btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-search"></span></button>
-							</div>
-					</div>
-					<label>Apellidos</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-					</div>
-					<label>Grado Academico</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<select class="form-control">
-	  							<option>Licenciado(a)</option>
-	  							<option>Master</option>
-	  							<option>Doctor(a)</option>
-								</select>
-							</div>
-					</div>
-					<label>Nombre</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-					</div>
-					<label>Tipo de Contrato</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<select class="form-control">
-									<option>Interino</option>
-									<option>En Propiedad</option>
-									<option>Sustituto</option>
-								</select>
-							</div>
-					</div>
-				</div>
-      	<div class="modal-footer modal-delete-border">
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnModificar" disabled>Modificar</button>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnEliminar" disabled>Eliminar</button>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-						</div>
-      	</div>
-    	</div>
-  	</div>
-	</div>
-</div>
-</form>
-</form>
-
-<!--Modal de Grupos-->
-
-<form>
-<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-	<div id="modalGrupos" class="modal fade" role="dialog">
-  	<div class="modal-dialog">
-    	<div class="modal-content col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1">
-      	<div class="modal-header modal-delete-border">
-        	<h4 class="modal-title">Crear curso especifico</h4>
-      	</div>
-      	<div class="modal-body">
-        	<label>Sigla del curso</label>
-					<form class="form-inline" role="form">
-						<div class="form-group row">
-								<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-									<select class="form-control">
-										<option>TM4500</option>
-										<option>TM4500</option>
-										<option>TM4500</option>
-									</select>
-								</div>
-							<div class="col-xs-4 col-sm-3 col-md-9 col-lg-3">
-								<button type="submit" class="form-control btn-primary btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-search"></span></button>
-							</div>
-					</div>
-					<label>Nombre del Curso</label>
-						<div class="form-group row">
-							<div class="col-xs-12 col-sm-12 col-lg-12">
-								<input type="text" class="form-control input-border inputColor">
-							</div>
-					</div>
-					<label>Grupo</label>
-					<div class="form-group row">
-							<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-								<select class="form-control">
-									<?php
-									for($i=0;$i<=8;$i++){
-										echo "<option>".$i."</option>";
-									}
-									?>
-								</select>
-							</div>
-						<div class="col-xs-4 col-sm-3 col-md-9 col-lg-3">
-							<button type="submit" class="form-control btn-primary btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-search"></span></button>
-						</div>
-				</div>
-				<label>Docente</label>
-				<div class="form-group row">
-						<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-							<select class="form-control">
-								<option>Profesor1</option>
-								<option>Profesor1</option>
-								<option>Profesor1</option>
-							</select>
-						</div>
-					<div class="col-xs-4 col-sm-3 col-md-9 col-lg-3">
-						<button type="submit" class="form-control btn-success btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span></button>
-					</div>
-			</div>
-			<label class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Tiempos individuales</label>
-			<div class="form-group row">
-					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-						<select class="form-control">
-							<option>3/8</option>
-							<option>3/4</option>
-							<option>2/4</option>
-							<option>1/4</option>
-							<option>1/2</option>
-							<option>1</option>
-						</select>
-					</div>
-					<div class="form-group row">
-						<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-							<input type="text" class="form-control input-border inputColor espacio-botones-modal">
-						</div>
-						<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 espacio-botones-modal">
-							<button type="submit" class="form-control btn-success btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-					</div>
-				</div>
-				<label>Horario:</label>
-				<div class="form-group row">
-						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<select class="form-control">
-								<?php
-								$semana = array("L","K","M","J","V","S","D");
-								for($i=0;$i<=7;$i++){
-									echo "<option>".$semana[$i]."</option>";
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<select class="form-control">
-								<?php
-								for($i=6;$i<=22;$i++){
-									for($j=0;$j<=50;$j+=10){
-										if($j==0){
-											echo "<option>".$i." : ".$j."0</option>";
-										}else{
-											echo "<option>".$i." : ".$j."</option>";
-										}
-									}
-								}
-								?>
-							</select>
-						</div>
-						<label class="col-xs-1 col-sm-1 col-md-1 col-lg-1">a:</label>
-						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<select class="form-control">
-								<?php
-								for($i=6;$i<=22;$i++){
-									for($j=0;$j<=50;$j+=10){
-										if($j==0){
-											echo "<option>".$i." : ".$j."0</option>";
-										}else{
-											echo "<option>".$i." : ".$j."</option>";
-										}
-									}
-								}
-								?>
-							</select>
-						</div>
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<button type="submit" class="btn btn-xs form-control btn-success btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span></button>
-					</div>
-			</div>
-			<label class="col-xs-12 col-sm-12 col-md-12 col-lg-12  espacio-botones-modal">Jornada</label>
-			<div class="form-group row">
-					<div class="col-xs-7 col-sm-7 col-md-8 col-lg-7 espacio-botones-modal">
-						<select class="form-control">
-							<option>3/8</option>
-							<option>3/4</option>
-							<option>2/4</option>
-							<option>1/4</option>
-							<option>1/2</option>
-							<option>1</option>
-						</select>
-					</div>
-      	<div class="modal-footer modal-delete-border">
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnModificar" disabled>Modificar</button>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<button type="submit" class="btn btn-default btn-block espacio-botones-modal" name="btnEliminar" disabled>Eliminar</button>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block" name="btnAgregar">Agregar</button>
-						</div>
-      	</div>
-    	</div>
-  	</div>
-	</div>
-</div>
-</form>
-</form>
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
