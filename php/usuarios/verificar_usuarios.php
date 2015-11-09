@@ -29,7 +29,6 @@
 
   //$resultado = mysql_query($sql) or die ("Sql error".mysql_error());
 
-  $_SESSION['mensaje']="";
 
   //
 
