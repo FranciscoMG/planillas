@@ -2,7 +2,7 @@
 	include_once("conexion_bd.php");
 
 	session_start();
-
+	$_SESSION['mensaje'] = '';
 ?>
 
 <!DOCTYPE html>

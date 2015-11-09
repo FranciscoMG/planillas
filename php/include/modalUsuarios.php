@@ -8,9 +8,14 @@
 			<!-- Modal content-->
 			<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 				<div class="modal-header modal-delete-border">
-					<a type="button" class="close" href="<?php if ($_SESSION['masterActivo'] != 1) {
+					<a type="button" class="close" href="<?php 
+          if (isset($_SESSION['masterActivo'])) {
+            if ($_SESSION['masterActivo'] == 1) {
+              $_SESSION['registrando'] = 0;
+            }
+          } else {
             echo "sesion/cerrarSesion.php";
-          } ?>">&times;</a>
+            } ?>">&times;</a>
 					<h4 class="modal-title">Registro Usuarios</h4>
 				</div>
 				<form action="usuarios/agregar_usuario.php" method="post">
@@ -97,8 +102,8 @@
               }
              ?>
 						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block <?php if ($_SESSION[masterActivo] == 1 ) {
-                echo 'disabled';} ?>"  name="btnRegistrar">Registrar</button>
+							<button type="submit" class="btn btn-primary btn-block " <?php if ($_SESSION[masterActivo] == 1 ) {
+                echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
 						</div>
 					</div>
 				</form>
