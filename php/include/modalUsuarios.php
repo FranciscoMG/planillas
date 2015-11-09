@@ -58,8 +58,10 @@
               <option value="1">Docencia</option>
               <option value="2">Recursos humanos</option>
                 <?php
-                  if ($_SESSION[masterActivo] == 1 ) {
-                    echo "<option value='0'>Administrativo</option>";
+                  if (isset($_SESSION['masterActivo'])) {
+                    if ($_SESSION['masterActivo'] == 1 ) {
+                      echo "<option value='0'>Administrativo</option>";
+                    }
                   }
                 ?>
             </select>

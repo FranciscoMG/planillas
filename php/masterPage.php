@@ -51,6 +51,10 @@
 	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
+								<?php if($_SESSION['tipoPerfil'] == 0){
+									echo "<li><a href='sesion/cerrarSesion.php'>Habilitar Opciones</a></li>";
+								}
+									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
  							</ul>
 						</div>
@@ -80,8 +84,8 @@
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Eliminar</a></li>
 			              </ul>
 			            </li>
 
