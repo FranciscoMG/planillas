@@ -3,6 +3,7 @@
 
 ?>
 
+
 <div id="modalRegistro" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
@@ -66,14 +67,18 @@
                 ?>
             </select>
           </div>
+
         </div>
 				<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
 					<p class="form-control-static texto-efectos1">
 					<?php
 						if (empty($_SESSION['mensaje-modal'])) {
+              if(isset($_SESSION['masterActivo'])){
               if ($_SESSION['masterActivo'] != 1) {
 							  echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
+
               }
+            }
 						} else {
 							echo $_SESSION['mensaje-modal'];
 						}
@@ -81,6 +86,7 @@
 				</div>
 				<div class="modal-footer modal-delete-border">
           <?php
+          if(isset($_SESSION['masterActivo'])){
             if ($_SESSION[masterActivo] == 1) {
               echo "
               <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
@@ -91,9 +97,10 @@
               </div>
               <br/>";
             }
+          }
           ?>
           <div class="col-xs-12 col-sm-12 col-lg-12">
-					  <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
+					  <button type="submit" class="btn btn-primary btn-block" <?php if(isset($_SESSION['masterActivo'])){if ($_SESSION['masterActivo'] == 1 ) {echo 'disabled';}} ?> name="btnRegistrar">Registrar</button>
 					</div>
 				</div>
 			</form>

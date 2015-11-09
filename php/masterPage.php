@@ -52,7 +52,7 @@
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
-									echo "<li><a href='sesion/cerrarSesion.php'>Habilitar Opciones</a></li>";
+									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>";
 								}
 									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
@@ -80,62 +80,68 @@
 			              <a class="" href="#">Inicio</a>
 			            </li>
 
-						<li class="dropdown">
+						<?php if($_SESSION['tipoPerfil'] == 0){
+						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Eliminar</a></li>
+			                <li><a href="#">Modificar</a></li>
+			                <li><a href="#">Eliminar</a></li>
 			              </ul>
-			            </li>
+			            </li>';}?>
 
-					<li class="dropdown">
-						              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
+					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo '<li class="desabilitado_li disabled" id="li_nav">
+						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
 						              <ul class="dropdown-menu">
 						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
 						                <li><a href="#">Modificar</a></li>
 						                <li><a href="#">Eliminar</a></li>
 						              </ul>
-						            </li>
+						            </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>
+				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo '<li class="desabilitado_li disabled" id="li_nav2">
+			              <a class="desabilitado_a disabled" data-toggle="dropdown" id="a_nav2" href="#">Cursos <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
 			              </ul>
-			            </li>
+			            </li>';}?>
 
-									<li class="dropdown">
-						              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
-						              <ul class="dropdown-menu">
-						                <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
-						                <li><a href="#">Modificar</a></li>
-						                <li><a href="#">Eliminar</a></li>
-						              </ul>
-						            </li>
+				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+						echo'<li class="desabilitado_li disabled" id="li_nav3">
+						        <a class="desabilitado_a disabled" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
+						        <ul class="dropdown-menu">
+						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
+						          <li><a href="#">Modificar</a></li>
+						          <li><a href="#">Eliminar</a></li>
+					          </ul>
+						      </li>';}?>
 
-									<li class="dropdown">
-						              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
-						              <ul class="dropdown-menu">
-						                <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
-						                <li><a href="#">Modificar</a></li>
-						                <li><a href="#">Eliminar</a></li>
-						              </ul>
-						            </li>
+			 <?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+					echo '<li class="desabilitado_li disabled" id="li_nav4">
+				        <a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
+				        <ul class="dropdown-menu">
+				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
+				          <li><a href="#">Modificar</a></li>
+				          <li><a href="#">Eliminar</a></li>
+				        </ul>
+				      </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
-			                <li><a href="#">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
-			              </ul>
-			            </li>
+			<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2){
+				echo '<li class="desabilitado_li disabled" id="li_nav5">
+			          <a class="desabilitado_a disabled" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="#">Agregar</a></li>
+			            <li><a href="#">Modificar</a></li>
+			            <li><a href="#">Eliminar</a></li>
+			          </ul>
+			        </li>';}?>
 
-						<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes <span class="caret"></span></a>
+						<li class="dropdown" id="li_nav6">
+			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#">Por carrera</a></li>
 			                <li><a href="#">Por profesor</a></li>
@@ -500,7 +506,7 @@
 
 	<?php require("include/modalDocentes.php"); ?>
 
-<!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
 
 	<?php require("include/modalCursos.php"); ?>
 

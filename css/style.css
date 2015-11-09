@@ -293,3 +293,33 @@ body {
 .inputColor{
 	color: #005da4;
 }
+
+/**********Opciones desabilitadas***********/
+
+.desabilitado_a{
+	color: grey!important;
+	background-color: none;
+	border: none;
+}
+
+.desabilitado_li{
+	color: grey!important;
+	background-color: none;
+	border: none;
+}
+
+.desabilitado_a:hover{
+	color: grey!important;
+	background-color: transparent!important;
+	border: transparent!important;
+}
+
+.desabilitado_li:hover{
+	color: grey!important;
+	background-color: transparent!important;
+	border: transparent!important;
+}
+
+.texto_cambiar:hover{
+	cursor: pointer!important;
+}
