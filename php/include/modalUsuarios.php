@@ -8,7 +8,7 @@
 			<!-- Modal content-->
 			<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 				<div class="modal-header modal-delete-border">
-					<a type="button" class="close" href="<?php 
+					<a type="button" class="close" href="<?php
           if (isset($_SESSION['masterActivo'])) {
             if ($_SESSION['masterActivo'] == 1) {
               $_SESSION['registrando'] = 0;
@@ -90,7 +90,7 @@
 					<div class="modal-footer modal-delete-border">
 
             <?php
-              if ($_SESSION[masterActivo] == 1) {
+              if ($_SESSION['masterActivo'] == 1) {
                 echo "
                 <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
                   <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
@@ -102,7 +102,7 @@
               }
              ?>
 						<div class="col-xs-12 col-sm-12 col-lg-12">
-							<button type="submit" class="btn btn-primary btn-block " <?php if ($_SESSION[masterActivo] == 1 ) {
+							<button type="submit" class="btn btn-primary btn-block " <?php if ($_SESSION['masterActivo'] == 1 ) {
                 echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
 						</div>
 					</div>

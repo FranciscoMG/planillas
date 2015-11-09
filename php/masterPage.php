@@ -51,6 +51,10 @@
 	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
+								<?php if($_SESSION['tipoPerfil'] == 0){
+									echo "<li><a href='sesion/cerrarSesion.php'>Habilitar Opciones</a></li>";
+								}
+									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
  							</ul>
 						</div>
