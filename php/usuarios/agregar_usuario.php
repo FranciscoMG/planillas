@@ -79,6 +79,16 @@ if (isset($_POST['btnRegistrar'])) {
         exit();
       }
     }
+    if (empty($correo)) {
+      $_SESSION['mensaje-modal']= "Debe ingresar el correo electrónico";
+      if ($_SESSION[masterActivo] == 1 ) {
+        header("Location: ../masterPage.php");
+      exit();
+      } else {
+        header("Location: ../inicio.php");
+        exit();
+      }
+    }
     if (empty($contrasena)) {
       $_SESSION['mensaje-modal']= "Debe ingresar la contraseña";
       if ($_SESSION[masterActivo] == 1 ) {
@@ -91,16 +101,6 @@ if (isset($_POST['btnRegistrar'])) {
     }
     if (empty($confirmarContrasena)) {
       $_SESSION['mensaje-modal']= "Debe confirmar la contraseña";
-      if ($_SESSION[masterActivo] == 1 ) {
-        header("Location: ../masterPage.php");
-      exit();
-      } else {
-        header("Location: ../inicio.php");
-        exit();
-      }
-    }
-    if (empty($correo)) {
-      $_SESSION['mensaje-modal']= "Debe ingresar el correo electrónico";
       if ($_SESSION[masterActivo] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
