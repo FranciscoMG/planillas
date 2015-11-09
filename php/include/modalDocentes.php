@@ -44,7 +44,7 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboContrato">Tipo contrato:</label>
             <select class="form-control" name="cboContrato">
-              <option value="0">Interino(a)</option>
+              <option value="0">Interino</option>
               <option value="1">Propiedad</option>
             </select>
           </div>

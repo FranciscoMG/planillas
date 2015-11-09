@@ -15,7 +15,7 @@
 			<form action="" method="post">
 				<div class="modal-body">
 					<div class="col-xs-12 col-sm-12 col-lg-12">
-  					<label for="txtNombre">Nombre:</label>
+  					<label for="txtNombre">Nombre del proyecto:</label>
           </div>
           <div class="col-xs-8 col-sm-8 col-lg-8">
             <input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
@@ -24,24 +24,35 @@
             <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
                 echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    				<label for="txtApellidos">Apellidos:</label>
-    				<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos">
-  				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboGrado">Grado Académico:</label>
-            <select class="form-control" name="cboGrado">
-              <option value="0">Bachillerato</option>
-              <option value="1">Licenciatura</option>
-              <option value="2">Maestría</option>
-              <option value="3">Doctorado</option>
+            <label for="cboTipo">Tipo de proyecto:</label>
+            <select class="form-control" name="cboTipo">
+              <option value="0">Acción Social</option>
+              <option value="1">Investigación</option>
             </select>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboContrato">Tipo contrato:</label>
-            <select class="form-control" name="cboContrato">
-              <option value="0">Interino(a)</option>
-              <option value="1">Propiedad</option>
+            <label for="cboTiempo">Cantidad de tiempos:</label>
+            <select class="form-control" name="cboTiempo">
+              <option>3/4</option>
+              <option>2/4</option>
+              <option>1/4</option>
+              <option>1/2</option>
+              <option>1</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+            <label for="cboPrimario">Principal/Responsable:</label>
+            <select class="form-control" name="cboPrimario">
+              <option>Profesor 1</option>
+              <option>Profesor 2</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+            <label for="cboSecundario">Asociado/Colaborador:</label>
+            <select class="form-control" name="cboSecundario">
+              <option>Profesor 1</option>
+              <option>Profesor 2</option>
             </select>
           </div>
         </div>

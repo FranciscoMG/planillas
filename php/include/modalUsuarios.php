@@ -37,7 +37,7 @@
   				 ?>">
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="txtCorreo">Correo electrónico</label>
+            <label for="txtCorreo">Correo electrónico:</label>
             <input type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php
               if (!empty($_SESSION['correo'])) {
                 echo trim($_SESSION['correo']);
