@@ -323,3 +323,8 @@ body {
 .texto_cambiar:hover{
 	cursor: pointer!important;
 }
+
+/**********Ocultar botones de modal***********/
+.ocultar_botones {
+	display: none;
+}

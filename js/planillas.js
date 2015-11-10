@@ -67,3 +67,19 @@ function desabilitar_habiltarOpciones(){
 		habilita.className= "glyphicon glyphicon-ban-circle";
 	}
 }
+
+function ocultar_mostrarAgregar(oculta) {
+	var btnModificar= document.getElementById("btn_Modificar");
+	var btnEliminar= document.getElementById("btn_Eliminar");
+	var btnAgregar= document.getElementById("btn_Agregar");
+
+	if (oculta) {
+		btnModificar.className="ocultar_botones";
+		btnEliminar.className="ocultar_botones";
+		btnAgregar.className="btn btn-primary btn-block";
+	} else {
+		btnModificar.className="col-xs-6 col-sm-6 col-md-6 col-lg-6";
+		btnEliminar.className="col-xs-6 col-sm-6 col-md-6 col-lg-6";
+		btnAgregar.className="ocultar_botones";
+	}
+}
