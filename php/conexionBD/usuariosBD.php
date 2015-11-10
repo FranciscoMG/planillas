@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+
+
 include_once("conexionBD.php");
 //Nuestra clase solo para manejar a los usuarios hereda de la clase principal de conexión
 class usuariosBD extends conexionBD {
@@ -63,10 +67,10 @@ class usuariosBD extends conexionBD {
 									 ?,
 									 ?)");
 		if ( $stmt === FALSE ) {
-		  die('prepare() failed: ' . $this->con->error);
+		  die('prepare() failed: '. $this->con->error);
 		}
-		$password = md5($password);
-		$stmt->bind_param('sssssisi', $usuario, $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado);
+		$contrasena = md5($contrasena);
+		$stmt->bind_param('ssssisi', $usuario, $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado);
 		$stmt->execute();
 		$newId = $stmt->insert_id;
 		$stmt->close();
@@ -76,28 +80,29 @@ class usuariosBD extends conexionBD {
 
 	function borrarUsuario($id)
 	{
-		$stmt = $this->con->prepare("DELETE FROM usuario where idusuario = ?");
+		$stmt = $this->con->prepare("DELETE FROM tb_Usuario where usuario = ?");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' . $mysqli->error);
 		}
-		$stmt->bind_param('i', $id);
+		$stmt->bind_param('s', $id);
 		return $stmt->execute();
 	}
+	/*
 	function modificarUsuario($id)
 	{
-		/*$sql = "UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'noonn\', `usuarioApellidos` = \'apee\', `usuarioEmail` = \'admin@.admin.co\', `usuarioPassword` = \'1234\', `usuarioTelefono` = \'112233445\' WHERE `usuario`.`idusuario` = 2;";
+		
 
-		$stmt = $this->con->prepare("UPDATE `udemodb`.`usuario` SET `usuarioNombre` = \'?\', `usuarioApellidos` = \'?\', `usuarioEmail` = \'?\', `usuarioPassword` = \'?\', `usuarioTelefono` = \'?\' WHERE `usuario`.`idusuario` = ?;");
+		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_Usuario` SET `contrasena` = \'124\', `nombre_usuario` = \'qw\', `apellido_usuario` = \'qw\', `perfil` = \'0\', `correo_usuario` = \'asd@asd.ase\', `habilitado` = \'1\' WHERE `tb_Usuario`.`usuario` = \'p4\';";);
 
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' . $mysqli->error);
 		}
 		$stmt->bind_param('i', $id);
 		return $stmt->execute();
-		*/
+		
 
 	}
-
+*/
 }
 
 

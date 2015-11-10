@@ -134,14 +134,27 @@ if (isset($_POST['btnRegistrar'])) {
           $_SESSION['mensaje-modal']="Usuario creado con éxito";
       }
     } else {
-          $_SESSION['mensaje']="Usuario solicidato";
+          $_SESSION['mensaje']="Usuario solicitato";
     }
 
+    //
+    if ($_SESSION['masterActivo'] == 1) {
+      $habilitado = 1;
+    } else {
+      $habilitado = 0;
+    }
+      $id = $db->agregarUsuario($usuario, $contrasena, $nombre_usuario, $apellidos, $tipoPerfil, $correo, $habilitado);
+
+    //
+
+    /*
     $sql1= "INSERT INTO tb_Usuario VALUES('".$usuario."' , '".md5($contrasena)."' ,'".$nombre_usuario."' ,'".$apellidos."' , ".$tipoPerfil." , '".$correo."', 0)";
     mysql_query($sql1) or die ('Error sql '.mysql_error());
+    */
+
     if ($_SESSION[masterActivo] == 1 ) {
       header("Location: ../masterPage.php");
-    exit();
+      exit();
     } else {
       header("Location: ../inicio.php");
       exit();
