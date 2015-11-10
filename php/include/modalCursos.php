@@ -15,7 +15,7 @@
 			<form action="" method="post">
 				<div class="modal-body">
 					<div class="col-xs-12 col-sm-12 col-lg-12">
-  					<label for="txtSigla">Sigla:</label>
+  					<label for="txtSigla">Sigla del curso:</label>
           </div>
           <div class="col-xs-8 col-sm-8 col-lg-8">
             <input type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
@@ -25,7 +25,7 @@
                 echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    				<label for="txtNombre">Nombre:</label>
+    				<label for="txtNombre">Nombre del curso:</label>
     				<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
@@ -39,7 +39,7 @@
             </select>
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboTiempo">Tiempo:</label>
+            <label for="cboTiempo">Cantidad de tiempos:</label>
             <select class="form-control" name="cboTiempo">
               <option>3/4</option>
               <option>2/4</option>

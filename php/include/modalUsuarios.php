@@ -46,7 +46,7 @@
   				 ?>">
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="txtCorreo">Correo electrónico</label>
+            <label for="txtCorreo">Correo electrónico:</label>
             <input type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php
               if (!empty($_SESSION['correo'])) {
                 echo trim($_SESSION['correo']);
@@ -97,18 +97,18 @@
           if(isset($_SESSION['masterActivo'])){
             if ($_SESSION[masterActivo] == 1) {
               echo "
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
+              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Modificar'>
+                <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
               </div>
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnAgregar'>Eliminar</button>
+              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Eliminar'>
+                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
               </div>
               <br/>";
             }
           }
           ?>
           <div class="col-xs-12 col-sm-12 col-lg-12">
-					  <button type="submit" class="btn btn-primary btn-block" <?php if(isset($_SESSION['masterActivo'])){if ($_SESSION['masterActivo'] == 1 ) {echo 'disabled';}} ?> name="btnRegistrar">Registrar</button>
+					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar" id="btn_Agregar">Registrar</button>
 					</div>
 				</div>
 			</form>

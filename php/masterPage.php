@@ -84,9 +84,9 @@
 						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(true);">Agregar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(false);">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(false);">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
 
@@ -515,7 +515,6 @@
 
 <!--////////////////////////////////////// Modal de Grupos ////////////////////////-->
 	<?php require("include/modalGrupos.php"); ?>
-
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>

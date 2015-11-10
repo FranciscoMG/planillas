@@ -26,7 +26,6 @@ if (isset($_POST['btnRegistrar'])) {
   $_SESSION['usuario']=$usuario;
   $_SESSION['nombre_usuario'] =$nombre_usuario;
   $_SESSION['apellidos']=$apellidos;
-  $_SESSION['tipoPerfil']=$tipoPerfil;
   $_SESSION['correo']=$correo;
 
   $_SESSION['registrando'] = 1;
@@ -125,7 +124,6 @@ if (isset($_POST['btnRegistrar'])) {
     $_SESSION['usuario']="";
     $_SESSION['nombre_usuario'] ="";
     $_SESSION['apellidos']="";
-    $_SESSION['tipoPerfil']="";
     $_SESSION['correo']="";
     $_SESSION['registrando'] = 0;
 
