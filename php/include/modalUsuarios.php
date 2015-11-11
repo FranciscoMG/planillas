@@ -9,13 +9,13 @@
 		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 			<div class="modal-header modal-delete-border">
 				<a type="button" class="close" href="
-          <?php 
+          <?php
             if ($_SESSION['masterActivo'] != 1) {
               echo 'sesion/cerrarSesion.php';
             } else {
-              $_SESSION['resgistrando'] = 0;
+              //$_SESSION['registrando'] = 0;
             }
-           ?> 
+           ?>
         ">&times;</a>
 				<h4 class="modal-title">Registro Usuarios</h4>
 			</div>
