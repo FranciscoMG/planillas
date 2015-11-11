@@ -63,6 +63,7 @@
 
 }
   header("Location: ../inicio.php");
+  $_SESSION['mensaje']="";
 
   echo "<script> alert('No hay información en la base de datos'); </script>";
 ?>

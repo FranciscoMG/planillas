@@ -31,9 +31,13 @@ if (isset($_POST['btnRegistrar'])) {
   $_SESSION['registrando'] = 1;
 
   if(empty($usuario)) {
+    if ($_SESSION['masterActivo'] == 1) {
+      header("Location: ../masterPage.php");
+      exit();
+    }
     $_SESSION['mensaje-modal']= "Se debe indicar el usuario";
     header("Location: ../inicio.php");
-
+    exit();
   } else {
     //$sql="SELECT * FROM tb_Usuario";
 
@@ -158,6 +162,7 @@ if (isset($_POST['btnRegistrar'])) {
       exit();
     }
 }
+
 } else {
   header("Location: ../masterPage.php");
   exit();

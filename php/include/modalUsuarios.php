@@ -10,10 +10,11 @@
 			<div class="modal-header modal-delete-border">
 				<a type="button" class="close" href="
           <?php 
-            if ($_SESSION['masterActivo'] != 1) {
-              echo 'sesion/cerrarSesion.php';
+            if ($_SESSION['masterActivo'] == 1) {
+              $_SESSION['registrando'] = 0;
+              echo 'sesion/cerrarModal.php';
             } else {
-              $_SESSION['resgistrando'] = 0;
+              echo 'sesion/cerrarSesion.php';
             }
            ?> 
         ">&times;</a>
