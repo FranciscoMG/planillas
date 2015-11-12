@@ -12,14 +12,14 @@
 		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 			<div class="modal-header modal-delete-border">
 				<a type="button" class="close" href="
-          <?php 
+          <?php
             if ($_SESSION['masterActivo'] == 1) {
               $_SESSION['registrando'] = 0;
               echo 'sesion/cerrarModal.php';
             } else {
               echo 'sesion/cerrarSesion.php';
             }
-           ?> 
+           ?>
         ">&times;</a>
 				<h4 class="modal-title">Registro Usuarios</h4>
 			</div>
@@ -27,7 +27,7 @@
 				<div class="modal-body">
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtUsuario">Usuario:</label>
-            <?php 
+            <?php
               if (isset($_SESSION['masterActivo'])) {
                 if ($_SESSION['masterActivo'] == 1) {
                   echo "<select name='cboUsuario' class='form-control'>";
@@ -45,7 +45,7 @@
                 echo 'required>';
               }
              ?>
-  					
+
   				</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre:</label>
@@ -120,7 +120,7 @@
           </div>';
           }
           ?>
-          
+
 				</div>
 			</form>
 		</div>

@@ -93,17 +93,14 @@
 			            </li>';}?>
 
 					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-						if ($_SESSION['tipoPerfil'] == 0) {
-							echo '<li class="desabilitado_li disabled" id="li_nav">';
-						    echo '<a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
-						} else {
-							echo '<li class="" id="li_nav">';
-						 	echo '<a class="" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
-						}
-						        echo '<ul class="dropdown-menu">
-						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
-						                <li><a href="#">Modificar</a></li>
-						                <li><a href="#">Eliminar</a></li>
+
+						echo '<li class="desabilitado_li disabled" id="li_nav">
+						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
+						              <ul class="dropdown-menu">
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(2)">Agregar</a></li>
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(0)">Modificar</a></li>
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(1)">Eliminar</a></li>
+
 						              </ul>
 						            </li>';}?>
 
