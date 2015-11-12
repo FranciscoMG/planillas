@@ -7,13 +7,42 @@
   $db = new usuariosBD();
   //
 
+//////////////////////// MODIFICAR //////////////////////////////
+if (isset($_POST['btnModificar'])) {
+  $contrasena= isset($_POST['txtContrasena'])?$_POST['txtContrasena']:"";
+  $nombre_usuario= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
+  $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
+  $confirmarContrasena= isset($_POST['txtConfirmar'])?$_POST['txtConfirmar']:"";
+  $tipoPerfil= isset($_POST['cboTipoPerfil'])?$_POST['cboTipoPerfil']:"";
+  $correo= isset($_POST['txtCorreo'])?$_POST['txtCorreo']:"";
+
+   if ($confirmarContrasena != $contrasena) {
+      $_SESSION['mensaje-modal']= "Las contraseñas no coinciden";
+      if ($_SESSION['masterActivo'] == 1 ) {
+        header("Location: ../masterPage.php");
+      exit();
+      } else {
+        $db->modificarUsuario($_POST['cboUsuario'], $contrasena, $nombre_usuario, $apellidos, $tipoPerfil, $correo, 0);
+        header("Location: ../inicio.php");
+        exit();
+      }
+    }
+}
+
+////////////////////// ELIMINAR //////////////////////////////////
+if (isset($_POST['btnEliminar'])) {
+  $db->borrarUsuario($_POST['cboUsuario']);
+  header('Location: ../masterPage.php');
+  exit();
+}
+
+//////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar'])) {
 
   $_SESSION['mensaje_modal']="";
 
   include_once("../conexion_bd.php");
 
-  session_start();
   $usuario= isset($_POST['txtUsuario'])?$_POST['txtUsuario']:"";
   $contrasena= isset($_POST['txtContrasena'])?$_POST['txtContrasena']:"";
   $nombre_usuario= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
@@ -31,9 +60,13 @@ if (isset($_POST['btnRegistrar'])) {
   $_SESSION['registrando'] = 1;
 
   if(empty($usuario)) {
+    if ($_SESSION['masterActivo'] == 1) {
+      header("Location: ../masterPage.php");
+      exit();
+    }
     $_SESSION['mensaje-modal']= "Se debe indicar el usuario";
     header("Location: ../inicio.php");
-
+    exit();
   } else {
     //$sql="SELECT * FROM tb_Usuario";
 
@@ -158,6 +191,7 @@ if (isset($_POST['btnRegistrar'])) {
       exit();
     }
 }
+
 } else {
   header("Location: ../masterPage.php");
   exit();

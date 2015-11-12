@@ -82,27 +82,27 @@ class usuariosBD extends conexionBD {
 	{
 		$stmt = $this->con->prepare("DELETE FROM tb_Usuario where usuario = ?");
 		if ( $stmt === FALSE ) {
-		  die('prepare() failed: ' . $mysqli->error);
+		  die('prepare() failed: ' .$this->con->error);
 		}
 		$stmt->bind_param('s', $id);
 		return $stmt->execute();
 	}
-	/*
-	function modificarUsuario($id)
+	
+	function modificarUsuario($usuario, $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado)
 	{
 		
 
-		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_Usuario` SET `contrasena` = \'124\', `nombre_usuario` = \'qw\', `apellido_usuario` = \'qw\', `perfil` = \'0\', `correo_usuario` = \'asd@asd.ase\', `habilitado` = \'1\' WHERE `tb_Usuario`.`usuario` = \'p4\';";);
+		$stmt = $this->con->prepare("UPDATE tb_Usuario SET contrasena = ?, nombre_usuario = ?, apellido_usuario = ?, perfil = ?, correo_usuario = ?, habilitado = ? WHERE usuario = ?;");
 
 		if ( $stmt === FALSE ) {
-		  die('prepare() failed: ' . $mysqli->error);
+		  die('prepare() failed: ' . $this->con->error);
 		}
-		$stmt->bind_param('i', $id);
-		return $stmt->execute();
-		
-
+		$stmt->bind_param('sssisis', $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado, $usuario);
+		$stmt->execute();
+		$stmt->close();
+		return true;
 	}
-*/
+
 }
 
 

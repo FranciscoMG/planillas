@@ -48,7 +48,7 @@
 							}
 							?> <span class="caret"></span></button>
  							<ul class="dropdown-menu">
-	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario']; ?> </a></li>
+	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario_perfil']; ?> </a></li>
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
@@ -84,9 +84,8 @@
 						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(true);">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(false);">Modificar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" onClick="ocultar_mostrarAgregar(false);">Eliminar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" data-id="whateverYouWant">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
 
@@ -501,6 +500,8 @@
 <!--/////////////////////////////////  Modal de Usuarios/////////////////////////////////////-->
 
 	<?php require("include/modalUsuarios.php"); ?>
+	<?php require("include/modalUsuariosBorrar.php"); ?>
+
 
 <!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
 
@@ -516,13 +517,14 @@
 <!--////////////////////////////////////// Modal de Grupos ////////////////////////-->
 	<?php require("include/modalGrupos.php"); ?>
 
+
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/planillas.js"></script>
 
 <?php
-	if ($_SESSION['registrando'] == 1) {
+	if ($_SESSION['registrando'] == 1 || isset($_SESSION['mensaje_modal'])) {
 		echo "<script>
 		$('#modalRegistro').modal('show');
 		</script>";

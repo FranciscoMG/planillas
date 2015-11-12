@@ -42,7 +42,7 @@
             $_SESSION['usuario']=$usuario;
             $_SESSION['contrasena']=$contrasena;
             $_SESSION['tipoPerfil']=$fila['perfil'];
-            $_SESSION['nombre_usuario']=$fila['nombre_usuario']." ".$fila['apellido_usuario'];
+            $_SESSION['nombre_usuario_perfil']=$fila['nombre_usuario']." ".$fila['apellido_usuario'];
             header("Location: ../masterPage.php");
             exit();
         } else {
