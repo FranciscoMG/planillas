@@ -68,18 +68,29 @@ function desabilitar_habiltarOpciones(){
 	}
 }
 
-function ocultar_mostrarAgregar(oculta) {
+function ocultar_mostrarBotonesModal(oculta) {
 	var btnModificar= document.getElementById("btn_Modificar");
 	var btnEliminar= document.getElementById("btn_Eliminar");
 	var btnAgregar= document.getElementById("btn_Agregar");
 
-	if (oculta) {
-		btnModificar.className="ocultar_botones";
-		btnEliminar.className="ocultar_botones";
-		btnAgregar.className="btn btn-primary btn-block";
-	} else {
-		btnModificar.className="col-xs-6 col-sm-6 col-md-6 col-lg-6";
-		btnEliminar.className="col-xs-6 col-sm-6 col-md-6 col-lg-6";
-		btnAgregar.className="ocultar_botones";
+	switch (oculta) {
+		case 0:
+			btnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+			btnEliminar.className="ocultar_botones";
+			btnAgregar.className="ocultar_botones";
+
+			break;
+		case 1:
+			btnModificar.className="ocultar_botones";
+			btnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+			btnAgregar.className="ocultar_botones";
+
+			break;
+		case 2:
+			btnModificar.className="ocultar_botones";
+			btnEliminar.className="ocultar_botones";
+			btnAgregar.className="btn btn-primary btn-block";
+
+			break;
 	}
 }

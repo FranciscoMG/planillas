@@ -12,7 +12,7 @@
 				<h4 class="modal-title">Registro Docentes</h4>
 			</div>
       <!-- Body -->
-			<form action="" method="post">
+			<form action="docentes/gestion_docentes.php" method="post">
 				<div class="modal-body">
 					<div class="col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtCedula">Cédula:</label>
@@ -46,6 +46,7 @@
             <select class="form-control" name="cboContrato">
               <option value="0">Interino</option>
               <option value="1">Propiedad</option>
+              <option value="2">Sustituto</option>
             </select>
           </div>
         </div>
@@ -63,17 +64,17 @@
           <?php
             if ($_SESSION[masterActivo] == 1) {
               echo "
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
+              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Modificar'>
+                <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
               </div>
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnAgregar'>Eliminar</button>
+              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Eliminar'>
+                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
               </div>
               <br/>";
             }
           ?>
 				  <div class="col-xs-12 col-sm-12 col-lg-12">
-					  <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
+					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar" id='btn_Agregar'>Registrar</button>
 					</div>
 				</div>
 			</form>

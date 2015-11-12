@@ -84,7 +84,7 @@
 						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" data-id="whateverYouWant">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
@@ -93,9 +93,9 @@
 						echo '<li class="desabilitado_li disabled" id="li_nav">
 						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
 						              <ul class="dropdown-menu">
-						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
-						                <li><a href="#">Modificar</a></li>
-						                <li><a href="#">Eliminar</a></li>
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(2)">Agregar</a></li>
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(0)">Modificar</a></li>
+						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(1)">Eliminar</a></li>
 						              </ul>
 						            </li>';}?>
 
