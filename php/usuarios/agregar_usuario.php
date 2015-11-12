@@ -55,7 +55,7 @@ if (isset($_POST['btnEliminar'])) {
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar'])) {
 
-  $_SESSION['mensaje_modal']="";
+  $_SESSION['mensaje-modal']="";
 
   include_once("../conexion_bd.php");
 
