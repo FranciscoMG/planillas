@@ -38,9 +38,7 @@ class docentesBD extends conexionBD {
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
-		echo $cedula.', '.$nombre.', '.$apellidos.', '.$grado_academico.', '.$tipo_contrato;
 		$stmt->bind_param('sssii', $cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
-		printf("Error: %s.\n", mysqli_stmt_error($sentencia));
 		$stmt->execute();
 		$newId = $stmt->insert_id;
 		$stmt->close();

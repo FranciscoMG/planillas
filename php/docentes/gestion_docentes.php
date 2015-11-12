@@ -14,7 +14,6 @@ if (isset($_POST['btnModificar'])) {
   $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
   $grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
   $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
-  $_SESSION['mensaje_modal']=$cedula.$nombre.$apellidos.$grado_academico.$tipo_contrato;
   $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
   header("Location: ../masterPage.php");
   exit();
@@ -53,7 +52,7 @@ if (isset($_POST['btnRegistrar'])) {
   $_SESSION['registrando'] = 1;
 
   if(empty($cedula)) {
-    $_SESSION['mensaje-modal']= "Se debe la cédula del docente";
+    $_SESSION['mensaje-modal']= "Se debe la ingresar la cédula del docente";
     header("Location: ../masterPage.php");
     exit();
   } else {
@@ -83,12 +82,11 @@ if (isset($_POST['btnRegistrar'])) {
     if ($seRealizo) {
       unset($_SESSION['docente']);
       $_SESSION['registrando'] = 0;
-      $_SESSION['registrando'] = 0;
       header("Location: ../masterPage.php");
       $_SESSION['mensaje-modal']= "";
       exit();
     } else {
-      $_SESSION['mensaje-modal']= "Ocurrió un error cuando se agregó un usuario";
+      $_SESSION['mensaje-modal']= "Ocurrió un error cuando se agregó un docente";
       header("Location: ../masterPage.php");
       exit();
     }
