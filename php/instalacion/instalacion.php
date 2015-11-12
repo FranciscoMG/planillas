@@ -17,5 +17,12 @@
 
   mysql_query("INSERT INTO tb_Usuario VALUES ('admin', 'abc93ffecd07d06922d1232c7beff0a8', 'Administrador', 'del Sistema', '0', '', '1');") or die ("Error al insertar el primer usuario: ".mysql_error());
 
+  mysql_query("CREATE TABLE tb_Cursos (
+    sigla varchar(10) not null primary key,
+    nombre_curso varchar(100) not null,
+    creditos int not null,
+    jornada double not null
+    );") or die ("Error al crear la tabla tb_Cursos".mysql_error());
+
   echo ("La base fue creada correctamente. <a href='../../index.php'>Inicie el sistema</a>");
 ?>

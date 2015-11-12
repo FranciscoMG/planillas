@@ -52,7 +52,9 @@
 	 							<li class="divider"></li>
 	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
-									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>";
+									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>
+
+										<li><a class='texto_cambiar' data-toggle='modal' data-target='#modalActivarUsuarios'>Activar usuarios</a></li>";
 								}
 									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
@@ -65,8 +67,9 @@
 		<div  id="perfil-nav" class="row ">
 			<div  class="container">
 
-					<div class="col-sx-12">
-						<nav class="navbar container-fluid" role="navigation">
+				<div class="col-sx-12">
+					<nav class="navbar container-fluid" role="navigation">
+					
 			        <div class="navbar-header">
 			          <button type="button" class="boton-menu navbar-toggle collapsed" data-toggle="collapse" data-target="#menuPagina">
 			            <span class="boton-menu icon-bar"></span>
@@ -84,15 +87,20 @@
 						echo'<li class="dropdown">
 			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro" data-id="whateverYouWant">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
 
 					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-						echo '<li class="desabilitado_li disabled" id="li_nav">
-						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
-						              <ul class="dropdown-menu">
+						if ($_SESSION['tipoPerfil'] == 0) {
+							echo '<li class="desabilitado_li disabled" id="li_nav">';
+						    echo '<a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
+						} else {
+							echo '<li class="" id="li_nav">';
+						 	echo '<a class="" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
+						}
+						        echo '<ul class="dropdown-menu">
 						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes">Agregar</a></li>
 						                <li><a href="#">Modificar</a></li>
 						                <li><a href="#">Eliminar</a></li>
@@ -100,9 +108,14 @@
 						            </li>';}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-						echo '<li class="desabilitado_li disabled" id="li_nav2">
-			              <a class="desabilitado_a disabled" data-toggle="dropdown" id="a_nav2" href="#">Cursos <span class="caret"></span></a>
-			              <ul class="dropdown-menu">
+					if ($_SESSION['tipoPerfil'] == 0) {
+							echo '<li class="desabilitado_li disabled" id="li_nav2">';
+						    echo '<a class="desabilitado_a disabled" id="a_nav2" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>';
+						} else {
+							echo '<li class="" id="li_nav2">';
+						 	echo '<a class="" id="a_nav2" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>';
+						}
+						echo '<ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
 			                <li><a href="#">Modificar</a></li>
 			                <li><a href="#">Eliminar</a></li>
@@ -110,9 +123,14 @@
 			            </li>';}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-						echo'<li class="desabilitado_li disabled" id="li_nav3">
-						        <a class="desabilitado_a disabled" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>
-						        <ul class="dropdown-menu">
+					if ($_SESSION['tipoPerfil'] == 0) {
+							echo '<li class="desabilitado_li disabled" id="li_nav3">';
+						    echo '<a class="desabilitado_a disabled" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>';
+						} else {
+							echo '<li class="" id="li_nav3">';
+						 	echo '<a class="" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>';
+						}
+						echo'<ul class="dropdown-menu">
 						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
 						          <li><a href="#">Modificar</a></li>
 						          <li><a href="#">Eliminar</a></li>
@@ -120,9 +138,14 @@
 						      </li>';}?>
 
 			 <?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-					echo '<li class="desabilitado_li disabled" id="li_nav4">
-				        <a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>
-				        <ul class="dropdown-menu">
+			 	if ($_SESSION['tipoPerfil'] == 0) {
+							echo '<li class="desabilitado_li disabled" id="li_nav4">';
+						    echo '<a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
+						} else {
+							echo '<li class="" id="li_nav4">';
+						 	echo '<a class="" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
+						}
+					echo '<ul class="dropdown-menu">
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
 				          <li><a href="#">Modificar</a></li>
 				          <li><a href="#">Eliminar</a></li>
@@ -501,8 +524,11 @@
 
 	<?php require("include/modalUsuarios.php"); ?>
 	<?php require("include/modalUsuariosBorrar.php"); ?>
-
-
+	<?php 
+		if ($_SESSION['tipoPerfil'] == 0) {
+			require("include/modalActivarUsuarios.php"); 
+		}
+	?>
 <!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
 
 	<?php require("include/modalDocentes.php"); ?>
@@ -524,7 +550,7 @@
 <script src="../js/planillas.js"></script>
 
 <?php
-	if ($_SESSION['registrando'] == 1 || isset($_SESSION['mensaje_modal'])) {
+	if ($_SESSION['registrando'] == 1) {
 		echo "<script>
 		$('#modalRegistro').modal('show');
 		</script>";

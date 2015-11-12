@@ -12,13 +12,13 @@
 				<h4 class="modal-title">Registro Cursos</h4>
 			</div>
       <!-- Body -->
-			<form action="" method="post">
+			<form action="cursos/manejadorCursos.php" method="post">
 				<div class="modal-body">
 					<div class="col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtSigla">Sigla del curso:</label>
           </div>
           <div class="col-xs-8 col-sm-8 col-lg-8">
-            <input type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
+            <input required type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
           </div>
           <div class="form-group col-xs-4 col-sm-4 col-lg-4">
             <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
@@ -26,11 +26,11 @@
           </div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre del curso:</label>
-    				<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
+    				<input type="text" class="form-control input-border" name="txtNombreCurso" placeholder="Nombre">
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="cboCreditos">Cantidad de créditos:</label>
-            <select class="form-control" name="cboCreditos">
+            <select class="form-control" name="cboCreditosCursos">
               <?php
                 for($i=0;$i<=12;$i++){
                   echo "<option>".$i."</option>";
@@ -40,7 +40,7 @@
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTiempo">Cantidad de tiempos:</label>
-            <select class="form-control" name="cboTiempo">
+            <select class="form-control" name="cboTiempoCursos">
               <option>3/4</option>
               <option>2/4</option>
               <option>1/4</option>
@@ -64,16 +64,16 @@
             if ($_SESSION[masterActivo] == 1) {
               echo "
               <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
+                <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
               </div>
               <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
-                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnAgregar'>Eliminar</button>
+                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
               </div>
               <br/>";
             }
           ?>
 				  <div class="col-xs-12 col-sm-12 col-lg-12">
-					  <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
+					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
 					</div>
 				</div>
 			</form>

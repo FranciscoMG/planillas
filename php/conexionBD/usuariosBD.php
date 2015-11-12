@@ -6,11 +6,14 @@ session_start();
 include_once("conexionBD.php");
 //Nuestra clase solo para manejar a los usuarios hereda de la clase principal de conexión
 class usuariosBD extends conexionBD {
+
+	//----------------------------------------
 	function __construct()
     {
     	parent::__construct();
 	}
 
+	///////////////////////////////////////////////////////////////////////
 	function autenticarUsuario($email, $password)
 	{
 
@@ -36,6 +39,7 @@ class usuariosBD extends conexionBD {
 		return null;
 	}
 
+	/////////////////////////////////////////////////////////
 	function obtenerlistadoDeUsuarios()
 	{
 		$query = "SELECT * FROM tb_Usuario";
@@ -48,6 +52,7 @@ class usuariosBD extends conexionBD {
 		return false;
 	}
 
+	////////////////////////////////////////////////////////////
 	function agregarUsuario($usuario, $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado)
 	{
 		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_Usuario`
@@ -78,6 +83,7 @@ class usuariosBD extends conexionBD {
 		return (!is_nan($newId)) ? $newId : FALSE; //Asignación Ternaria
 	}
 
+	////////////////////////////////////////////////////////////////
 	function borrarUsuario($id)
 	{
 		$stmt = $this->con->prepare("DELETE FROM tb_Usuario where usuario = ?");
@@ -88,6 +94,7 @@ class usuariosBD extends conexionBD {
 		return $stmt->execute();
 	}
 	
+	/////////////////////////////////////////////////////////////////
 	function modificarUsuario($usuario, $contrasena, $nombre_usuario, $apellido_usuario, $perfil, $correo_usuario, $habilitado)
 	{
 		
@@ -102,6 +109,20 @@ class usuariosBD extends conexionBD {
 		$stmt->close();
 		return true;
 	}
+
+	////////////////////////////////////////////////////////////////
+	function habilitarUsuario($id , $isHabilitado) {
+		$stmt = $this->con->prepare("UPDATE tb_Usuario SET habilitado = ? WHERE usuario = ?;");
+		if ( $stmt === FALSE ) {
+		  die('prepare() failed: ' . $this->con->error);
+		}
+
+		$stmt->bind_param("is" , $isHabilitado , $id);
+		$stmt->execute();
+		$stmt->close();
+		return true;
+	}
+
 
 }
 

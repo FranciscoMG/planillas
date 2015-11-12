@@ -56,16 +56,16 @@ table thead th {
 	text-align: center;
 }
 .master #tabla-planillas {
-	-webkit-transition: 1s!important;
-	-o-transition: 1s!important;
-	transition: 1s!important;
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
 }
 #contenedor-tabla {
 	margin-bottom: 0;
 	padding-bottom: 2%;
-	-webkit-transition: 0.5s!important;
-	-o-transition: 0.5s!important;
-	transition: 0.5s!important;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
 }
 .master .contenedor-tabla-fluid {
 	margin-left: auto;
@@ -78,7 +78,7 @@ main #contenedor-tabla .contenedor-tabla-0 {
 	border: 2px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-1 {
-	height: 100vh;
+	height: 70vh;
 	border: 2px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-2 {
@@ -86,9 +86,6 @@ main #contenedor-tabla .contenedor-tabla-2 {
 	padding-top: 2%;
 	margin-bottom: 20px;
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.4);
-	-webkit-transition: 1s!important;
-	-o-transition: 1s!important;
-	transition: 1s!important;
 }
 #contenedor-tabla .clearfix a{
 	margin-top: 27px;
@@ -325,4 +322,9 @@ body {
 
 .texto_cambiar:hover{
 	cursor: pointer!important;
+}
+
+/**********Ocultar botones de modal***********/
+.ocultar_botones {
+	display: none;
 }

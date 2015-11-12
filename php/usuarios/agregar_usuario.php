@@ -29,6 +29,22 @@ if (isset($_POST['btnModificar'])) {
     }
 }
 
+/////////////////////// MODIFICAR ACTIVO /////////////////////////
+if (isset($_POST['btnModificarHabilitado'])) {
+
+  $id = $_POST['cboUsuariosHabilitar'];
+
+  if (isset($_POST['isHabilitado'])) {
+    if ($_POST['isHabilitado'] == "si") {
+      $db->habilitarUsuario($id , 1);
+    } else {
+      $db->habilitarUsuario($id , 0);
+    }
+  }
+  header("Location: ../masterPage.php");
+  exit();
+}
+
 ////////////////////// ELIMINAR //////////////////////////////////
 if (isset($_POST['btnEliminar'])) {
   $db->borrarUsuario($_POST['cboUsuario']);
