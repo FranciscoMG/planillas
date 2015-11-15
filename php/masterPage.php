@@ -540,6 +540,8 @@
 <!--////////////////////////////////////// Modal de Grupos ////////////////////////-->
 	<?php require("include/modalGrupos.php"); ?>
 
+<!--////////////////////////////////////// Modal de Alertas ////////////////////////-->
+	<?php require("include/modalAlertas.php"); ?>
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
@@ -551,6 +553,14 @@
 		echo "<script>
 		$('#modalRegistro').modal('show');
 		</script>";
+	}
+?>
+<?php
+	if ($_SESSION['alerta'] == 1) {
+		echo "<script>
+		$('#modalAlertas').modal('show');
+		</script>";
+		$_SESSION['alerta'] =0;
 	}
 ?>
 </html>

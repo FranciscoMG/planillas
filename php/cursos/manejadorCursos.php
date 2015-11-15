@@ -10,13 +10,18 @@ if (isset($_POST['btnRegistrar'])) {
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
 
-	$jornada = convertirFraccionesDoble($jornada);
+	$jornada1 = convertirFraccionesDoble($jornada);
 
-	if ($db->existeCurso($sigla) != false) {
+	$resultado = $db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada1);
+
+	if ($resultado == FALSE) {
+		//// El curso ya existe
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "El curso ya existe";
 		header("Location: ../masterPage.php");
 		exit();
-	} 
-	$db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada);
+	}
+
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de registrar
@@ -38,10 +43,10 @@ if (isset($_POST['btnModificar'])) {
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
 
-	$jornada = convertirFraccionesDoble($jornada);
+	$jornada1 = convertirFraccionesDoble($jornada);
 
 	if ($db->existeCurso($sigla) != false) {
-		$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada);
+		$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1);
 	}
 	header("Location: ../masterPage.php");
 	exit();

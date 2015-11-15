@@ -32,7 +32,7 @@ if (isset($_POST['btnRegistrar'])) {
 
   $_SESSION['mensaje_modal']="";
 
-  include_once("../conexion_bd.php");
+  //include_once("../conexion_bd.php");
 
   $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
   $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
@@ -41,13 +41,14 @@ if (isset($_POST['btnRegistrar'])) {
   $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
 
   $_SESSION['mensaje-modal']="";
+
   $_SESSION['docente']= array(
     'cedula' => $cedula,
     'nombre' => $nombre,
     'apellidos' => $apellidos,
     'grado_academico'=> $grado_academico,
     'tipo_contrato'=> $tipo_contrato,
-  );
+  ); 
 
   $_SESSION['registrando'] = 1;
 
