@@ -1,6 +1,5 @@
 <?php
   session_start();
-
 ?>
 
 <?php include_once("conexionBD/usuariosBD.php"); ?>

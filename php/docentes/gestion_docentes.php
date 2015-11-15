@@ -30,9 +30,7 @@ if (isset($_POST['btnEliminar'])) {
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar'])) {
 
-  $_SESSION['mensaje_modal']="";
-
-  //include_once("../conexion_bd.php");
+  $_SESSION['mensaje-modal']="";
 
   $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
   $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
