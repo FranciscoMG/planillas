@@ -114,8 +114,8 @@
 						}
 						echo '<ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
-			                <li><a href="#">Modificar</a></li>
-			                <li><a href="#">Eliminar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarModificarCursos()" >Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarEliminarCursos()">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
 
@@ -560,7 +560,7 @@
 		echo "<script>
 		$('#modalAlertas').modal('show');
 		</script>";
-		$_SESSION['alerta'] =0;
+		$_SESSION['alerta'] = 0;
 	}
 ?>
 </html>

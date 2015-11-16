@@ -9,11 +9,11 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title ">Alerta</h4>
       </div>
-      <div class="modal-body text-danger">
-        <p><?php echo $_SESSION['alerta-contenido']; ?></p>
+      <div class="modal-body text-center">
+        <p class="texto-efectos1"><?php echo $_SESSION['alerta-contenido']; ?></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
 

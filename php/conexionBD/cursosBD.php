@@ -20,11 +20,10 @@ class cursosBD extends conexionBD
 		}
 		
 		$stmt->bind_param("ssid" , $sigla , $nombre_curso , $creditos , $jornada);
-		$stmt->execute();
-		$newId = $stmt->insert_id;
-		$stmt->close();
+		return $stmt->execute();
+		
 
-		return (!is_nan($newId)) ? $newId : FALSE; //Asignación Ternaria;
+		//Asignación Ternaria;
 	}
 
 	////////////////////////////////////////////////////
@@ -43,6 +42,18 @@ class cursosBD extends conexionBD
 	////////////////////////////////////////////////////
 	function existeCurso ($id) {
 		$query = "SELECT * FROM tb_Cursos WHERE sigla = '".$id."'";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$stmt->close();
+		return false;
+	}
+
+	////////////////////////////////////////////////////
+	function obtenerCursos() {
+		$query = "SELECT * FROM tb_Cursos ORDER BY sigla";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

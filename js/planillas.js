@@ -94,3 +94,33 @@ function ocultar_mostrarBotonesModal(oculta) {
 			break;
 	}
 }
+function activarModificarCursos() {
+	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
+	var cursosAgregar = document.getElementById('cursosAgregar');
+	
+	var cursosBtnModificar = document.getElementById('cursosBtnModificar');
+	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
+	var cursosBtnAgregar = document.getElementById('cursosBtnAgregar');
+
+	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+}
+
+function activarEliminarCursos() {
+	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
+	var cursosAgregar = document.getElementById('cursosAgregar');
+	
+	var cursosBtnModificar = document.getElementById('cursosBtnModificar');
+	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
+	var cursosBtnAgregar = document.getElementById('cursosBtnAgregar');
+
+	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+
+}
