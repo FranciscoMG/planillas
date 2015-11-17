@@ -21,7 +21,7 @@
             }
            ?>
         ">&times;</a>
-				<h4 class="modal-title">Registro Usuarios <?php $_POST['id']; ?></h4>
+				<h4 class="modal-title">Registro Usuarios</h4>
 			</div>
 			<form action="usuarios/agregar_usuario.php" method="post">
 				<div class="modal-body">
@@ -55,7 +55,7 @@
 				<div class="modal-footer modal-delete-border">
           <?php
           if(isset($_SESSION['masterActivo'])){
-            if ($_SESSION[masterActivo] == 1) {
+            if ($_SESSION['masterActivo'] == 1) {
               echo "
               <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' style='padding-bottom:15px;' id='btn_Eliminar'>
                 <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>

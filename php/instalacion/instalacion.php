@@ -1,7 +1,7 @@
 <?php
   mysql_connect("localhost","root","interactivas") or die ("Error al realizar la conexión inicial: ".mysql_error());
 
-  mysql_query("SET NAMES 'utf8'");
+  mysql_query("SET NAMES 'utf8';");
   mysql_query("CREATE DATABASE SIDOP DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;") or die ("Error a crear la base de datos: ".mysql_error());
   mysql_select_db("SIDOP");
 
@@ -31,7 +31,7 @@
     nombre_curso varchar(100) not null,
     creditos int not null,
     jornada double not null
-    );") or die ("Error al crear la tabla tb_Cursos".mysql_error());
+    );") or die ("Error al crear la tabla tb_Curso".mysql_error());
 
     mysql_query("CREATE TABLE tb_Carrera (
       id_Carrera varchar(8) COLLATE utf8_unicode_ci NOT NULL,
