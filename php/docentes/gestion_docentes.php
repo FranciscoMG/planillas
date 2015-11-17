@@ -39,13 +39,14 @@ if (isset($_POST['btnRegistrar'])) {
   $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
 
   $_SESSION['mensaje-modal']="";
+
   $_SESSION['docente']= array(
     'cedula' => $cedula,
     'nombre' => $nombre,
     'apellidos' => $apellidos,
     'grado_academico'=> $grado_academico,
     'tipo_contrato'=> $tipo_contrato,
-  );
+  ); 
 
   $_SESSION['registrando'] = 1;
 

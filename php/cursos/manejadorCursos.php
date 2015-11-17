@@ -10,39 +10,53 @@ if (isset($_POST['btnRegistrar'])) {
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
 
-	$jornada = convertirFraccionesDoble($jornada);
+	if ($sigla != "" && $nombre_curso != "") {
+		$jornada1 = convertirFraccionesDoble($jornada);
 
-	if ($db->existeCurso($sigla) != false) {
-		header("Location: ../masterPage.php");
-		exit();
-	} 
-	$db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada);
+		$resultado = $db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada1);
+
+		if ($resultado === FALSE) {
+			//// El curso ya existe
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "El curso ya existe";
+			header("Location: ../masterPage.php");
+			exit();
+		}
+
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Curso agregado";
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Debe ingresar la sigla y el nombre del curso";
+	}
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de registrar
 
 /////////////////////////// ELIMINAR //////////////
 if (isset($_POST['btnEliminar'])) {
-	$sigla = $_POST['txtSigla'];
+	$sigla = $_POST['cboxSigla'];
 
 	$db->eliminarCurso($sigla);
 	
+	$_SESSION['alerta'] = 1;
+	$_SESSION['alerta-contenido'] = "Curso eliminado";
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de eliminar
 
 //////////////////////////// MODIFICAR /////////////
 if (isset($_POST['btnModificar'])) {
-	$sigla = $_POST['txtSigla'];
+	$sigla = $_POST['cboxSigla'];
 	$nombre_curso = $_POST['txtNombreCurso'];
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
 
-	$jornada = convertirFraccionesDoble($jornada);
+	$jornada1 = convertirFraccionesDoble($jornada);
 
-	if ($db->existeCurso($sigla) != false) {
-		$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada);
-	}
+	$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1);
+	$_SESSION['alerta'] = 1;
+	$_SESSION['alerta-contenido'] = "Curso modificado";
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de modificar

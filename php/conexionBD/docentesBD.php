@@ -21,20 +21,11 @@ class docentesBD extends conexionBD {
 	}
 
 	function agregarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato) {
-		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_Docente`
-																(`cedula`,
-																`nombre`,
-																`apellidos`,
-																`grado_academico`,
-																`tipo_contrato`) VALUES (
-																	?,
-																	?,
-																	?,
-																	?,
-																	?)");
+		$stmt = $this->con->prepare("INSERT INTO tb_Docente (cedula , nombre, apellidos , grado_academico , tipo_contrato) VALUES ( ? , ? , ? , ? , ? )");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
+
 		$stmt->bind_param('sssii', $cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
 		$stmt->execute();
 		$newId = $stmt->insert_id;

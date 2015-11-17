@@ -14,17 +14,16 @@ class cursosBD extends conexionBD
 
 	/////////////////////////////////////////////////////
 	function agregarCurso ($sigla , $nombre_curso , $creditos , $jornada) {
-		$stmt = $this->con->prepare("INSERT INTO tb_Cursos (sigla , nombre_curso , creditos , jornada ) VALUES (? , ?, ? , ?);");
+		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada`) VALUES (?, ?, ?, ?)");
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
+		
+		$stmt->bind_param("ssid" , $sigla , $nombre_curso , $creditos , $jornada);
+		return $stmt->execute();
+		
 
-		$stmt->bind_param('ssid', $sigla , $nombre_curso , $creditos , $jornada);
-		$stmt->execute();
-		$newId = $stmt->insert_id;
-		$stmt->close();
-
-		return true;
+		//Asignación Ternaria;
 	}
 
 	////////////////////////////////////////////////////
@@ -48,7 +47,19 @@ class cursosBD extends conexionBD
 		{
 			return $rs; //Retornamos las tuplas encontradas
 		}
-		$this->cerrar();
+		$stmt->close();
+		return false;
+	}
+
+	////////////////////////////////////////////////////
+	function obtenerCursos() {
+		$query = "SELECT * FROM tb_Cursos ORDER BY sigla";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$stmt->close();
 		return false;
 	}
 
