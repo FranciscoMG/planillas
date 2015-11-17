@@ -1,6 +1,7 @@
 <?php
   mysql_connect("localhost","root","interactivas") or die ("Error al realizar la conexión inicial: ".mysql_error());
 
+  mysql_query("SET NAMES 'utf8'");
   mysql_query("CREATE DATABASE SIDOP DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;") or die ("Error a crear la base de datos: ".mysql_error());
   mysql_select_db("SIDOP");
 
@@ -25,12 +26,19 @@
     tipo_contrato int(1) NOT NULL,
     PRIMARY KEY (`cedula`)) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
 
-  mysql_query("CREATE TABLE tb_Cursos (
+  mysql_query("CREATE TABLE tb_Curso (
     sigla varchar(10) not null primary key,
     nombre_curso varchar(100) not null,
     creditos int not null,
     jornada double not null
     );") or die ("Error al crear la tabla tb_Cursos".mysql_error());
+
+    mysql_query("CREATE TABLE tb_Carrera (
+      id_Carrera varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+      nombre_Carrera varchar(100) COLLATE utf8_unicode_ci NOT NULL)
+      DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+
+    mysql_query("INSERT INTO tb_Carrera (id_Carrera, nombre_Carrera) VALUES ('330208', 'Administración Aduanera y Comercio Exterior'), ('330102', 'Dirección de Empresas'), ('320208', 'Enseñanza del Inglés'), ('600002', 'Informática Empresarial'), ('600502', 'Informática y Tecnología Multimedia'), ('420201', 'Ingeniería Eléctrica');");
 
   echo ("La base fue creada correctamente. <a href='../../index.php'>Inicie el sistema</a>");
 ?>
