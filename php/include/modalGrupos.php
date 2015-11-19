@@ -1,7 +1,9 @@
 <?php
   session_start();
-
 ?>
+
+<?php include_once("conexionBD/cursosBD.php"); ?>
+<?php $db = new cursosBD(); ?>
 
 <div id="modalGrupos" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -19,12 +21,18 @@
           </div>
           <div class="col-xs-10 col-sm-10 col-lg-10">
             <select class="form-control" name="cboCarrera">
-              <option>Carrera 1</option>
-              <option>Carrera 2</option>
+              <?php
+              $resultado = $db->obtenerCarreras();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['usuario'] != "admin") {
+                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                }
+              }
+              ?>
             </select>
           </div>
           <div class="form-group col-xs-2 col-sm-2 col-lg-2">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
+            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION['masterActivo'] == 1 ) {
                 echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
           <div class="col-xs-12 col-sm-12 col-lg-12">
@@ -37,7 +45,7 @@
             </select>
           </div>
           <div class="form-group col-xs-2 col-sm-2 col-lg-2">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
+            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION['masterActivo'] == 1 ) {
                 echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
@@ -57,7 +65,7 @@
             </select>
           </div>
           <div class="form-group col-xs-2 col-sm-2 col-lg-2">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
+            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION['masterActivo'] == 1 ) {
                 echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
           <div class="col-xs-12 col-sm-12 col-lg-12">
@@ -165,7 +173,7 @@
         <!-- Footer -->
         <div class="modal-footer modal-delete-border">
           <?php
-            if ($_SESSION[masterActivo] == 1) {
+            if ($_SESSION['masterActivo'] == 1) {
               echo "
               <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnAgregar'>Modificar</button>
@@ -177,7 +185,7 @@
             }
           ?>
           <div class="col-xs-12 col-sm-12 col-lg-12">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
+            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION['masterActivo'] == 1 ) {echo 'disabled';} ?> name="btnRegistrar">Registrar</button>
           </div>
         </div>
       </form>

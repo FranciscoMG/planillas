@@ -75,5 +75,17 @@ class cursosBD extends conexionBD
 		$stmt->close();
 		return true;
 	}
+
+	////////////////////////////////////////////////////
+	function obtenerCarreras() {
+		$query = "SELECT * FROM tb_Carrera ORDER BY nombre_Carrera";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$stmt->close();
+		return false;
+	}
 }
  ?>
