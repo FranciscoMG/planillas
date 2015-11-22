@@ -11,6 +11,16 @@ class docentesBD extends conexionBD {
     	parent::__construct();
 	}
 
+	function obtenerUnDocente($id) {
+		$query = "SELECT * FROM tb_Docente WHERE cedula = '".$id."'";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
+	}
 
 	function obtenerDocentes() {
 		$query = "SELECT * FROM tb_Docente";

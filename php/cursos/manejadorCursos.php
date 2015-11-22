@@ -72,7 +72,7 @@ function convertirFraccionesDoble ($fraccion) {
 			$valor = 0.5;
 			break;
 		case '1/4':
-			$valor = 0.24;
+			$valor = 0.25;
 			break;
 		case '2/4':
 			$valor = 0.5;
@@ -83,6 +83,41 @@ function convertirFraccionesDoble ($fraccion) {
 	}
 	return $valor;
 } // fin de funcion
+
+function convertirDobleFraciones ($fdouble) {
+	$valor = "";
+	switch ($fdouble) {
+		case 1:
+			$valor = "1";
+			break;
+		case 0.5:
+			$valor = "1/2";
+			break;
+		case 0.25:
+			$valor = "1/4";
+			break;
+		case 0.5:
+			$valor = "2/4";
+			break;
+		case 0.75:
+			$valor = "3/4";
+			break;		
+	}
+	return $valor;
+} // fin de funcion
+
+//////////////////// Llenar modal cursos //////////////
+if (isset($_GET['id'])) {
+	$resultado = $db->obtenerCursos();
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+        	if ($fila['sigla'] == $_GET['id']) {
+        		
+        		$jornada = convertirDobleFraciones($fila['jornada']);
+        		header("Location: ../masterPage.php?modalCursos=1&sigla=".$fila['sigla']."&nombre_curso=".$fila['nombre_curso']."&creditos=".$fila['creditos']."&jornada=".$jornada."");
+				exit();
+        	}
+        }
+}
 
 header("Location: ../masterPage.php");
 exit();

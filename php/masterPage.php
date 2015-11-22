@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 </head>
 <body>
 
@@ -54,7 +55,7 @@
 								<?php if($_SESSION['tipoPerfil'] == 0){
 									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>
 
-										<li><a class='texto_cambiar' data-toggle='modal' data-target='#modalActivarUsuarios'>Activar usuarios</a></li>";
+										";
 								}
 									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
@@ -89,14 +90,19 @@
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
+			                <li><a class="texto_cambiar" data-toggle="modal" data-target="#modalActivarUsuarios">Activar usuarios</a></li>
 			              </ul>
 			            </li>';}?>
 
 					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-
-						echo '<li class="desabilitado_li disabled" id="li_nav">
-						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>
-						              <ul class="dropdown-menu">
+						if ($_SESSION['tipoPerfil'] == 0) {
+							echo '<li class="desabilitado_li disabled" id="li_nav">
+						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
+						} else {
+						echo '<li class="" id="li_nav">
+						              <a class="" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
+						}
+						             echo '<ul class="dropdown-menu">
 						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(2)">Agregar</a></li>
 						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(0)">Modificar</a></li>
 						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(1)">Eliminar</a></li>
@@ -113,8 +119,8 @@
 						 	echo '<a class="" id="a_nav2" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>';
 						}
 						echo '<ul class="dropdown-menu">
-			                <li><a href="#" data-toggle="modal" data-target="#modalCursos">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarModificarCursos()" >Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarAgregarCursos()">Agregar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" >Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarEliminarCursos()">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
@@ -143,9 +149,9 @@
 						 	echo '<a class="" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
 						}
 					echo '<ul class="dropdown-menu">
-				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos">Agregar</a></li>
-				          <li><a href="#">Modificar</a></li>
-				          <li><a href="#">Eliminar</a></li>
+				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
+				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" >Modificar</a></li>
+				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
 				        </ul>
 				      </li>';}?>
 
@@ -186,7 +192,7 @@
 
 			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="tabla table-responsive contenedor-tabla-0" id="tabla-planillas">
-					<table class="table table-striped table-hover text-center">
+					<table id="example" class="display table table-striped table-hover text-center" cellspacing="0" width="100%">
 						<thead>
 							<tr>
 								<th>Sigla</th>
@@ -203,6 +209,7 @@
 						</thead>
 						<tbody>
 							<tr>
+								<td>atos 1</td>
 								<td>Datos 1</td>
 								<td>Datos 1</td>
 								<td>Datos 1</td>
@@ -212,7 +219,78 @@
 								<td>Datos 1</td>
 								<td>Datos 1</td>
 								<td>Datos 1</td>
-								<td>Datos 1</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>eatos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>patos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>watos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>catos</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+							</tr>
+							<tr>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
+								<td>Datos</td>
 							</tr>
 							<tr>
 								<td>Datos</td>
@@ -530,9 +608,6 @@
 
 	<?php require("include/modalDocentes.php"); ?>
 
-<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
-
-	<?php require("include/modalCursos.php"); ?>
 
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
 	<?php require("include/modalProyectos.php"); ?>
@@ -542,12 +617,32 @@
 
 <!--////////////////////////////////////// Modal de Alertas ////////////////////////-->
 	<?php require("include/modalAlertas.php"); ?>
+<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
+
+	<?php require("include/modalCursos.php"); ?>
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/planillas.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
 
+<?php 
+/////////////// MODAL PROYECTOS /////////////
+	if ($_GET['modalProyectos'] == 1) {
+		echo "<script>
+		$('#modalProyectos').modal('show');
+		</script>";
+	}
+ ?>
+<?php 
+/////////////// MODAL CURSOS /////////////
+	if ($_GET['modalCursos'] == 1) {
+		echo "<script>
+		$('#modalCursos').modal('show');
+		</script>";
+	}
+ ?>
 <?php
 	if ($_SESSION['registrando'] == 1) {
 		echo "<script>
@@ -556,6 +651,7 @@
 	}
 ?>
 <?php
+/////////////// ALERTAS ///////////
 	if ($_SESSION['alerta'] == 1) {
 		echo "<script>
 		$('#modalAlertas').modal('show');
@@ -563,4 +659,12 @@
 		$_SESSION['alerta'] = 0;
 	}
 ?>
+<?php
+/////////////// Tabla dinamica ///////////
+		echo "<script>
+		
+		</script>";
+?>
+
+
 </html>

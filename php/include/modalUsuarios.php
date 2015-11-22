@@ -83,7 +83,7 @@
             <select name="cboTipoPerfil" class="form-control">
               <option value="1">Docencia</option>
               <option value="2">Recursos humanos</option>
-              <option value="3">Administrativo</option>
+              <option value="0">Administrativo</option>
             </select>
           </div>
 
