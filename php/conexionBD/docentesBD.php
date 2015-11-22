@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 include_once("conexionBD.php");
 //Nuestra clase solo para manejar a los usuarios hereda de la clase principal de conexión
 class docentesBD extends conexionBD {
@@ -8,6 +11,16 @@ class docentesBD extends conexionBD {
     	parent::__construct();
 	}
 
+	function obtenerUnDocente($id) {
+		$query = "SELECT * FROM tb_Docente WHERE cedula = '".$id."'";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
+	}
 
 	function obtenerDocentes() {
 		$query = "SELECT * FROM tb_Docente";

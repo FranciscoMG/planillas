@@ -56,13 +56,11 @@ if (isset($_POST['btnRegistrar'])) {
     exit();
   } else {
     $resultado = $db->obtenerDocentes();
-    if (!is_null($resultado)) {
-      while ($fila= mysqli_fetch_assoc($resultado)) {
-        if ($fila['cedula']==$cedula) {
-          $_SESSION['mensaje-modal']= "El docente ya existe";
-          header("Location: ../masterPage.php");
-          exit();
-        }
+    while ($fila= mysqli_fetch_assoc($resultado)) {
+      if ($fila['cedula']==$cedula) {
+        $_SESSION['mensaje-modal']= "El docente ya existe";
+        header("Location: ../masterPage.php");
+        exit();
       }
     }
 

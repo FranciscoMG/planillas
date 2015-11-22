@@ -94,7 +94,7 @@ function ocultar_mostrarBotonesModal(oculta) {
 			break;
 	}
 }
-function activarModificarCursos() {
+function activarAgregarCursos() {
 	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
 	var cursosAgregar = document.getElementById('cursosAgregar');
 	
@@ -102,16 +102,18 @@ function activarModificarCursos() {
 	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
 	var cursosBtnAgregar = document.getElementById('cursosBtnAgregar');
 
-	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
-	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
 }
 
 function activarEliminarCursos() {
 	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
 	var cursosAgregar = document.getElementById('cursosAgregar');
+	var seccionCursosEliminar = document.getElementById('seccionCursosEliminar');
+	var selectCursos = document.getElementById('selectCursos');
 	
 	var cursosBtnModificar = document.getElementById('cursosBtnModificar');
 	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
@@ -122,5 +124,50 @@ function activarEliminarCursos() {
 	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
 	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-
+	seccionCursosEliminar.className="hide";
+	selectCursos.onchange="";
 }
+function cargarDatosCursos(obj) {
+	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	document.location="../php/cursos/manejadorCursos.php?id="+valorSeleccionado;
+}
+
+function activarAgregarProyecto() {
+	var proyectoEliminarModificar = document.getElementById('proyectoEliminarModificar');
+	var proyectoAgregar = document.getElementById('proyectoAgregar');
+	
+	var proyectoBtnModificar = document.getElementById('proyectosBtnModificar');
+	var proyectoBtnEliminar = document.getElementById('proyectosBtnEliminar');
+	var proyectoBtnAgregar = document.getElementById('proyectosBtnAgregar');
+
+	proyectoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectoAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+}
+
+function activarEliminarProyecto() {
+	var proyectosEliminarModificar = document.getElementById('proyectoEliminarModificar');
+	var proyectosAgregar = document.getElementById('proyectoAgregar');
+	var seccionEliminarProyecto = document.getElementById('seccionEliminarProyecto');
+	
+	var proyectosBtnModificar = document.getElementById('proyectosBtnModificar');
+	var proyectosBtnEliminar = document.getElementById('proyectosBtnEliminar');
+	var proyectosBtnAgregar = document.getElementById('proyectosBtnAgregar');
+	var selectEliminarProyecto = document.getElementById('selectEliminarProyecto');
+
+	proyectosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	proyectosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
+	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionEliminarProyecto.className="hide";
+	selectEliminarProyecto.onchange="";
+}
+
+function cargarDatosProyecto(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	document.location="../php/proyectos/gestorProyectos.php?id="+valorSeleccionado;
+}
+

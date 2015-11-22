@@ -21,8 +21,8 @@
             <input type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula">
           </div>
           <div class="form-group col-xs-4 col-sm-4 col-lg-4">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION['masterActivo'] == 1 ) {
-                echo 'disabled';} ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
+            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
+                echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
           </div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre:</label>
@@ -62,7 +62,7 @@
         <!-- Footer -->
 				<div class="modal-footer modal-delete-border">
           <?php
-            if ($_SESSION['masterActivo'] == 1) {
+            if ($_SESSION[masterActivo] == 1) {
               echo "
               <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Modificar'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>

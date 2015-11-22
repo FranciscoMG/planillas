@@ -1,8 +1,8 @@
 <?php include_once("conexionBD.php"); ?>
 
-<?php
+<?php 
 /**
-*
+* 
 */
 class cursosBD extends conexionBD
 {
@@ -14,21 +14,21 @@ class cursosBD extends conexionBD
 
 	/////////////////////////////////////////////////////
 	function agregarCurso ($sigla , $nombre_curso , $creditos , $jornada) {
-		$stmt = $this->con->prepare("INSERT INTO `tb_Curso`(`sigla`, `nombre_curso`, `creditos`, `jornada`) VALUES (?, ?, ?, ?)");
+		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada`) VALUES (?, ?, ?, ?)");
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
-
+		
 		$stmt->bind_param("ssid" , $sigla , $nombre_curso , $creditos , $jornada);
 		return $stmt->execute();
-
+		
 
 		//Asignación Ternaria;
 	}
 
 	////////////////////////////////////////////////////
 	function eliminarCurso ($sigla) {
-		$stmt = $this->con->prepare("DELETE FROM tb_Curso WHERE sigla = ?;");
+		$stmt = $this->con->prepare("DELETE FROM tb_Cursos WHERE sigla = ?;");
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
@@ -41,7 +41,7 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function existeCurso ($id) {
-		$query = "SELECT * FROM tb_Curso WHERE sigla = '".$id."'";
+		$query = "SELECT * FROM tb_Cursos WHERE sigla = '".$id."'";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -53,7 +53,7 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function obtenerCursos() {
-		$query = "SELECT * FROM tb_Curso ORDER BY sigla";
+		$query = "SELECT * FROM tb_Cursos ORDER BY sigla";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -65,7 +65,7 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function modificarCurso ($sigla , $nombre_curso , $creditos , $jornada) {
-		$stmt = $this->con->prepare("UPDATE tb_Curso SET nombre_curso = ? , creditos = ? , jornada = ? WHERE sigla = ?;");
+		$stmt = $this->con->prepare("UPDATE tb_Cursos SET nombre_curso = ? , creditos = ? , jornada = ? WHERE sigla = ?;");
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
@@ -78,7 +78,6 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function obtenerCarreras() {
-		$rs= $this->con->query("SET NAMES 'utf8';");
 		$query = "SELECT * FROM tb_Carrera ORDER BY nombre_Carrera";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)

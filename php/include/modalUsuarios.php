@@ -106,7 +106,7 @@
 				<div class="modal-footer modal-delete-border">
           <?php
           if(isset($_SESSION['masterActivo'])){
-            if ($_SESSION['masterActivo'] == 1) {
+            if ($_SESSION[masterActivo] == 1) {
               echo "
               <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' style='padding-bottom:15px;' id='btn_Modificar'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
