@@ -15,6 +15,7 @@
       <!-- Body -->
 			<form action="cursos/manejadorCursos.php" method="post">
 				<div class="modal-body">
+
 					<div class="col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtSigla">Sigla del curso:</label>
           </div>
@@ -38,6 +39,26 @@
 
           <div id="cursosAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
             <input type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
+          </div>
+
+        <div class="col-xs-12 col-sm-12 col-lg-12">
+            <label for="cboxtxtCarrera">Carrera del curso:</label>
+          </div>
+          <div id="" class="col-xs-12 col-sm-12 col-lg-12">
+            <select class="form-control" name="cboxtxtCarrera" id="" onchange="">
+            <?php 
+            if ($_GET['modalCursos'] == 1) {
+              echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
+              $resultado = $db->obtenerCarreras();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['id_Carrera'] != $_GET['id_Carrera']) {
+                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                }
+              }
+            } else {
+            }
+             ?>
+            </select>
           </div>
 
         <div id="seccionCursosEliminar">

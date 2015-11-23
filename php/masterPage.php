@@ -166,17 +166,38 @@
 				}
 					echo '
 			          <ul class="dropdown-menu">
-			            <li><a href="#">Agregar</a></li>
-			            <li><a href="#">Modificar</a></li>
-			            <li><a href="#">Eliminar</a></li>
+			            <li><a href="#" href="#" data-toggle="modal" data-target="#modalPresupuesto" onclick="activarAgregarPresupuesto()">Agregar</a></li>
+			            <li><a href="#" href="#" data-toggle="modal" data-target="#modalPresupuesto" onclick="activarModificarPresupuesto()">Modificar</a></li>
+			            <li><a href="#" href="#" data-toggle="modal" data-target="#modalPresupuesto" onclick="activarEliminarPresupuesto()">Eliminar</a></li>
 			          </ul>
 			        </li>';}?>
 
 						<li class="dropdown" id="li_nav6">
 			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                <li><a href="#">Por carrera</a></li>
-			                <li><a href="#">Por profesor</a></li>
+			              <?php 
+			              	if($_SESSION['tipoPerfil'] == 0){
+			              		echo '
+			                	<li><a href="reportes/reporteUsuarios.php" target="_blank">Reporte de usuarios</a></li>
+			                	<li role="separator" class="divider"></li>';
+			              	}
+			               ?>
+			                <li><a href="reportes/reporteDocente.php" target="_blank">Reporte de docentes</a></li>
+			                <li><a href="#">Reporte de un docente</a></li>
+			                <li role="separator" class="divider"></li>
+			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
+			                <li><a href="#">Reporte de un proyecto</a></li>
+			                <li role="separator" class="divider"></li>
+			                <li><a href="#">Reporte de presupuestos</a></li>
+			                <li><a href="#">Reporte de un presupuesto</a></li>
+			                <li role="separator" class="divider"></li>
+			                <li><a href="#">Reporte de cursos / grupos</a></li>
+			                <li><a href="#">Reporte de un curso / grupo</a></li>
+
+
+
+
+	
 			              </ul>
 			            </li>
 			          </ul>
@@ -624,15 +645,28 @@
 
 <!--////////////////////////////////////// Modal de Alertas ////////////////////////-->
 	<?php require("include/modalAlertas.php"); ?>
-<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
 
+<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
 	<?php require("include/modalCursos.php"); ?>
+
+<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
+	<?php require("include/modalPresupuesto.php"); ?>
+
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/planillas.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
+
+<?php 
+/////////////// MODAL PRESUPUESTO /////////////
+	if ($_GET['modalPresupuesto'] == 1) {
+		echo "<script>
+		$('#modalPresupuesto').modal('show');
+		</script>";
+	}
+ ?>
 
 <?php 
 /////////////// MODAL USUARIOS /////////////
@@ -675,12 +709,7 @@
 		$_SESSION['alerta'] = 0;
 	}
 ?>
-<?php
-/////////////// Tabla dinamica ///////////
-		echo "<script>
-		
-		</script>";
-?>
+
 
 
 </html>

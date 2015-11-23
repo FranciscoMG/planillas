@@ -13,13 +13,13 @@ class cursosBD extends conexionBD
 	}
 
 	/////////////////////////////////////////////////////
-	function agregarCurso ($sigla , $nombre_curso , $creditos , $jornada) {
-		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada`) VALUES (?, ?, ?, ?)");
+	function agregarCurso ($sigla , $nombre_curso , $creditos , $jornada , $fk_carrera) {
+		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada` , `fk_carrera`) VALUES (?, ?, ?, ? , ?)");
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
 		
-		$stmt->bind_param("ssid" , $sigla , $nombre_curso , $creditos , $jornada);
+		$stmt->bind_param("ssids" , $sigla , $nombre_curso , $creditos , $jornada , $fk_carrera);
 		return $stmt->execute();
 		
 
@@ -64,13 +64,13 @@ class cursosBD extends conexionBD
 	}
 
 	////////////////////////////////////////////////////
-	function modificarCurso ($sigla , $nombre_curso , $creditos , $jornada) {
-		$stmt = $this->con->prepare("UPDATE tb_Cursos SET nombre_curso = ? , creditos = ? , jornada = ? WHERE sigla = ?;");
+	function modificarCurso ($sigla , $nombre_curso , $creditos , $jornada , $fk_carrera) {
+		$stmt = $this->con->prepare("UPDATE tb_Cursos SET nombre_curso = ? , creditos = ? , jornada = ? , fk_carrera = ? WHERE sigla = ?;");
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
 
-		$stmt->bind_param('sids' , $nombre_curso , $creditos , $jornada , $sigla);
+		$stmt->bind_param('sidss' , $nombre_curso , $creditos , $jornada , $fk_carrera , $sigla);
 		$stmt->execute();
 		$stmt->close();
 		return true;

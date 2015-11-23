@@ -211,6 +211,7 @@ function cargarDatosProyecto(obj){
 	document.location="../php/proyectos/gestorProyectos.php?id="+valorSeleccionado;
 }
 
+///////////////////////////////////////////////////////////////////////////////////
 function refrescar(){
 	document.location="masterPage.php";
 }
@@ -218,4 +219,64 @@ function refrescar(){
 function cargarDatosUsuarios(obj){
 	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
 	document.location="../php/usuarios/agregar_usuario.php?id="+valorSeleccionado;
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+
+function activarAgregarPresupuesto() {
+	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
+	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
+	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
+	
+	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
+	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
+	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
+
+	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	seccionEliminarPresupuesto.className="";
+}
+function activarModificarPresupuesto(){
+	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
+	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
+	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
+	
+	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
+	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
+	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
+
+	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 ";
+	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionEliminarPresupuesto.className="";
+}
+
+function activarEliminarPresupuesto() {
+	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
+	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
+	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
+	
+	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
+	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
+	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
+	var selectEliminarPresupuesto = document.getElementById('selectEliminarPresupuesto');
+
+	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionEliminarPresupuesto.className="hide";
+	selectEliminarPresupuesto.onchange="";
+}
+
+function cargarDatosPresupuesto(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	document.location="../php/presupuestos/gestorPresupuesto.php?id="+valorSeleccionado;
 }
