@@ -23,10 +23,21 @@
                 $resultado = $db->obtenerlistadoDeUsuarios();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
                     if ($fila['usuario'] != "admin") {
+
+                      $tipoPerfilUser = "";
+                      if ($fila['perfil'] == 0) {
+                        $tipoPerfilUser = "Administrativo";
+                      } 
+                      if  ($fila['perfil'] == 1) {
+                        $tipoPerfilUser = "Docencia";
+                      }
+                      if  ($fila['perfil'] == 2) {
+                        $tipoPerfilUser = "Recursos Humanos";
+                      }
                       if ($fila['habilitado'] == 1) {
-                       echo "<option style='color: green;' value='".$fila['usuario']."'>".$fila['usuario']."</option>";
+                       echo "<option style='color: green;' value='".$fila['usuario']."'>".$fila['usuario']." / ".$tipoPerfilUser."</option>";
                       } else {
-                       echo "<option style='color: gray;' value='".$fila['usuario']."'>".$fila['usuario']."</option>";
+                       echo "<option style='color: gray;' value='".$fila['usuario']."'>".$fila['usuario']." / ".$tipoPerfilUser."</option>";
 
                       }
                     }
@@ -53,3 +64,20 @@
 		</div>
 	</div>
 </div>
+
+<?php 
+function tipoDePerfilString($perfil) {
+  $valor="";
+  switch ($perfil) {
+    case 0:
+      $valor = "Administrativo";
+      break;
+    case 1:
+      $valor = "Docencia";
+      break;
+    case 0:
+      $valor = "Recursos Humanos";
+      break;
+   return $valor;
+  }}
+ ?>

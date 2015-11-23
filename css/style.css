@@ -73,11 +73,11 @@ table thead th {
 }
 main #contenedor-tabla .contenedor-tabla-0 {
 	height: 33vh;
-	border: 2px solid #B4C7E8;
+	border: 1px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-1 {
 	height: 100%;
-	border: 2px solid #B4C7E8;
+	
 }
 main #contenedor-tabla .contenedor-tabla-2 {
 	padding-bottom: 0.5%;

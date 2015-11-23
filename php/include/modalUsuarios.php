@@ -29,8 +29,15 @@
             <?php
               if (isset($_SESSION['masterActivo'])) {
                 if ($_SESSION['masterActivo'] == 1) {
-                  echo "<select name='cboUsuario' class='form-control'>";
+                  echo "<select name='cboUsuario' class='form-control' onchange='cargarDatosUsuarios(this)'>";
                     $resultado = $db->obtenerlistadoDeUsuarios();
+                    if (isset($_GET['modalUsuarios'])) {
+                      echo "<option value='".$_GET['usuario']."'>".$_GET['usuario']."</option>";
+                    } 
+                    else
+                     {
+                      echo "<option></option>"; 
+                    }
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                       echo "<option value='".$fila['usuario']."'>".$fila['usuario']."</option>";
                     }
@@ -49,25 +56,37 @@
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre:</label>
     				<input required type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" value="<?php
+            if (isset($_GET['modalUsuarios'])) {
+              echo $_GET['nombre_usuario'];
+            } else {
     					if (!empty($_SESSION['nombre_usuario'])) {
     						echo trim($_SESSION['nombre_usuario']);
     					}
+            }
   				 ?>">
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtApellidos">Apellidos:</label>
     				<input required type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" value="<?php
+            if (isset($_GET['modalUsuarios'])) {
+              echo $_GET['apellido_usuario'];
+            } else {
   						if (!empty($_SESSION['apellidos'])) {
   							echo trim($_SESSION['apellidos']);
     					}
+            }
   				 ?>">
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="txtCorreo">Correo electrónico:</label>
             <input required type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php
+            if (isset($_GET['modalUsuarios'])) {
+              echo $_GET['correo_usuario'];
+            } else {
               if (!empty($_SESSION['correo'])) {
                 echo trim($_SESSION['correo']);
               }
+            }
            ?>">
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
@@ -81,9 +100,34 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTipoPerfil">Tipo de perfil:</label>
             <select name="cboTipoPerfil" class="form-control">
+            <?php 
+            if (isset($_GET['modalUsuarios'])) {
+              $perfil="";
+              if ($_GET['perfil'] == 0) {
+                echo
+              '<option value="0">Administrativo</option>
+              <option value="1">Docencia</option>
+              <option value="2">Recursos humanos</option>';
+              }
+              if ($_GET['perfil'] == 1) {
+                echo
+              '<option value="1">Docencia</option>
+              <option value="0">Administrativo</option>
+              <option value="2">Recursos humanos</option>';
+              }
+              if ($_GET['perfil'] == 2) {
+               echo
+              '<option value="2">Recursos humanos</option>
+              <option value="0">Administrativo</option>
+              <option value="1">Docencia</option>';
+              }
+            } else {
+              echo '
               <option value="1">Docencia</option>
               <option value="2">Recursos humanos</option>
-              <option value="0">Administrativo</option>
+              <option value="0">Administrativo</option>';
+            }
+              ?>
             </select>
           </div>
 
