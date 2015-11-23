@@ -43,7 +43,7 @@
           </div>
         <div id="seccionEliminarPresupuesto">
           <div id="presupuestoAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
-            <input type="text" class="form-control input-border" name="txtNombrePresupuesto" placeholder="nombre" <?php if (isset($_GET['modalPresupuesto'])) {
+            <input class="form-control input-border"  type="text" name="txtNombrePresupuesto" placeholder="nombre" <?php if (isset($_GET['modalPresupuesto'])) {
               echo "value=".$_GET['nombre_presupuesto'];
             } ?>>
           </div>

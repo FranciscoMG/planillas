@@ -1,14 +1,15 @@
+<?php include_once("conexionBD/docentesBD.php"); ?>
+<?php $db = new docentesBD(); ?>
 <?php
   session_start();
-
 ?>
 
 <div id="modalDocentes" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+		<div class="modal-content ">
 			<!-- Header -->
       <div class="modal-header modal-delete-border">
-				<a type="button" class="close" href="">&times;</a>
+				<a type="button" class="close" href="masterPage.php">&times;</a>
 				<h4 class="modal-title">Registro Docentes</h4>
 			</div>
       <!-- Body -->
@@ -17,64 +18,103 @@
 					<div class="col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtCedula">Cédula:</label>
           </div>
-          <div class="col-xs-8 col-sm-8 col-lg-8">
-            <input type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula">
-          </div>
-          <div class="form-group col-xs-4 col-sm-4 col-lg-4">
-            <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] == 1 ) {
-                echo 'disabled'; } ?> name="btnRegistrar"><span class="glyphicon glyphicon-search"></span></button>
-          </div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    				<label for="txtNombre">Nombre:</label>
-    				<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre">
-					</div>
-					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
-    				<label for="txtApellidos">Apellidos:</label>
-    				<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos">
-  				</div>
-          <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboGrado">Grado Académico:</label>
-            <select class="form-control" name="cboGrado">
-              <option value="0">Bachillerato</option>
-              <option value="1">Licenciatura</option>
-              <option value="2">Maestría</option>
-              <option value="3">Doctorado</option>
+          <div id="docenteEliminarModificar" class="col-xs-12 col-sm-12 col-lg-12">
+            <select id="selectEliminarDocente" class="form-control" name="cboxIDocente" onchange="cargarDatosDocentes(this)">
+              <?php
+              if (isset($_GET['modalDocentes'])) {
+                if ($_GET['cedula'] != 1) {
+                echo "<option value='".$_GET['cedula']."'>".$_GET['nombre']." ".$_GET['apellidos']."</option>";
+              }
+              }
+              echo "<option></option>";
+              $resultado = $db->obtenerDocentes();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['cedula'] != 1) {
+                echo "<option value='".$fila['cedula']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
+              }
+              }
+               ?>
             </select>
           </div>
-          <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboContrato">Tipo contrato:</label>
-            <select class="form-control" name="cboContrato">
-              <option value="0">Interino</option>
-              <option value="1">Propiedad</option>
-              <option value="2">Sustituto</option>
-            </select>
+          <div id="seccionEliminarDocente">
+            <div id="docenteAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
+              <input type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula" <?php
+              if (isset($_GET['modalDocentes'])) {
+                echo "value=".$_GET['cedula'];
+              } ?>>
+            </div>
+  					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+      				<label for="txtNombre">Nombre:</label>
+      				<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" <?php
+              if (isset($_GET['modalDocentes'])) {
+                echo "value=".$_GET['nombre'];
+              } ?>>
+  					</div>
+  					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
+      				<label for="txtApellidos">Apellidos:</label>
+      				<input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" <?php
+              if (isset($_GET['modalDocentes'])) {
+                echo "value=".$_GET['apellidos'];
+              } ?>>
+    				</div>
+            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+              <label for="cboGrado">Grado Académico:</label>
+              <?php
+                $grados= array("Bachillerato", "Licenciatura", "Maestría", "Doctorado");
+                echo "<select class='form-control' name='cboGrado'>";
+                for ($i=0; $i < count($grados); $i++) {
+                  if (isset($_GET['modalDocentes'])) {
+                    if ($_GET['grado'] == $i) {
+                      echo "<option value='".$i."' selected>".$grados[$i]."</option>";
+                    } else {
+                      echo "<option value='".$i."'>".$grados[$i]."</option>";
+                    }
+                  }
+                  else {
+                    echo "<option value='".$i."'>".$grados[$i]."</option>";
+                  }
+                }
+                echo "</select>";
+              ?>
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+              <label for="cboContrato">Tipo contrato:</label>
+              <?php
+                $contrato= array("Interino", "Propiedad", "Sustituto");
+                echo "<select class='form-control' name='cboContrato'>";
+                for ($i=0; $i < count($contrato); $i++) {
+                  if (isset($_GET['modalDocentes'])) {
+                    if ($_GET['contrato'] == $i) {
+                      echo "<option value='".$i."' selected>".$contrato[$i]."</option>";
+                    } else {
+                      echo "<option value='".$i."'>".$contrato[$i]."</option>";
+                    }
+                  }
+                  else {
+                    echo "<option value='".$i."'>".$contrato[$i]."</option>";
+                  }
+                }
+                echo "</select>";
+              ?>
+            </div>
           </div>
         </div>
-        <!-- Mensaje -->
-				<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
-					<p class="form-control-static texto-efectos1">
-					<?php
-						if (!empty($_SESSION['mensaje-modal'])) {
-							echo $_SESSION['mensaje-modal'];
-						}
-					?></p>
-				</div>
         <!-- Footer -->
 				<div class="modal-footer modal-delete-border">
           <?php
             if ($_SESSION[masterActivo] == 1) {
               echo "
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Modificar'>
+              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' style='padding-bottom:15px;' id='docentesBtnModificar'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
               </div>
-              <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6' style='padding-bottom:15px;' id='btn_Eliminar'>
+              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 hide' style='padding-bottom:15px;' id='docentesBtnEliminar'>
                 <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
               </div>
               <br/>";
             }
           ?>
-				  <div class="col-xs-12 col-sm-12 col-lg-12">
-					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar" id='btn_Agregar'>Registrar</button>
+				  <div class="col-xs-12 col-sm-12 col-lg-12 hide" id='docentesBtnAgregar'>
+					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
 					</div>
 				</div>
 			</form>

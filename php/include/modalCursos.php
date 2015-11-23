@@ -30,7 +30,9 @@
               }
                 $resultado = $db->obtenerCursos();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
+                  if ($fila['sigla'] != 1 && $fila['sigla'] != $_GET['sigla']) {
                   echo "<option value='".$fila['sigla']."'>".$fila['sigla']." / ".$fila['nombre_curso']."</option>";
+                  }
                 }
               
                ?>
@@ -40,6 +42,8 @@
           <div id="cursosAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
             <input type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
           </div>
+
+      <div id="seccionCursosEliminar">
 
         <div class="col-xs-12 col-sm-12 col-lg-12">
             <label for="cboxtxtCarrera">Carrera del curso:</label>
@@ -56,12 +60,15 @@
                 }
               }
             } else {
+              $resultado = $db->obtenerCarreras();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+              }
             }
              ?>
             </select>
           </div>
-
-        <div id="seccionCursosEliminar">
+          
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre del curso:</label>
     				<input 
