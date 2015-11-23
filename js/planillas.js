@@ -94,9 +94,12 @@ function ocultar_mostrarBotonesModal(oculta) {
 			break;
 	}
 }
+
+////////////////////////////////////////////////////////
 function activarAgregarCursos() {
 	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
 	var cursosAgregar = document.getElementById('cursosAgregar');
+	var seccionCursosEliminar = document.getElementById('seccionCursosEliminar');
 	
 	var cursosBtnModificar = document.getElementById('cursosBtnModificar');
 	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
@@ -107,6 +110,24 @@ function activarAgregarCursos() {
 	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	seccionCursosEliminar.className="";
+}
+
+function activarModificarCursos() {
+	var cursosEliminarModificar = document.getElementById('cursosEliminarModificar');
+	var cursosAgregar = document.getElementById('cursosAgregar');
+	var seccionCursosEliminar = document.getElementById('seccionCursosEliminar');
+	
+	var cursosBtnModificar = document.getElementById('cursosBtnModificar');
+	var cursosBtnEliminar = document.getElementById('cursosBtnEliminar');
+	var cursosBtnAgregar = document.getElementById('cursosBtnAgregar');
+
+	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionCursosEliminar.className="";
 }
 
 function activarEliminarCursos() {
@@ -132,9 +153,12 @@ function cargarDatosCursos(obj) {
 	document.location="../php/cursos/manejadorCursos.php?id="+valorSeleccionado;
 }
 
+/////////////////////////////////////////////////////////
+
 function activarAgregarProyecto() {
 	var proyectoEliminarModificar = document.getElementById('proyectoEliminarModificar');
 	var proyectoAgregar = document.getElementById('proyectoAgregar');
+	var seccionEliminarProyecto = document.getElementById('seccionEliminarProyecto');
 	
 	var proyectoBtnModificar = document.getElementById('proyectosBtnModificar');
 	var proyectoBtnEliminar = document.getElementById('proyectosBtnEliminar');
@@ -145,6 +169,22 @@ function activarAgregarProyecto() {
 	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
 	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	seccionEliminarProyecto.className="";
+}
+function activarModificarProyecto(){
+	var proyectoBtnModificar = document.getElementById('proyectosBtnModificar');
+	var proyectoBtnEliminar = document.getElementById('proyectosBtnEliminar');
+	var proyectoBtnAgregar = document.getElementById('proyectosBtnAgregar');
+	var proyectoEliminarModificar = document.getElementById('proyectoEliminarModificar');
+	var proyectoAgregar = document.getElementById('proyectoAgregar');
+	var seccionEliminarProyecto = document.getElementById('seccionEliminarProyecto');
+
+	proyectoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 ";
+	proyectoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionEliminarProyecto.className="";
 }
 
 function activarEliminarProyecto() {
@@ -171,3 +211,6 @@ function cargarDatosProyecto(obj){
 	document.location="../php/proyectos/gestorProyectos.php?id="+valorSeleccionado;
 }
 
+function refrescar(){
+	document.location="masterPage.php";
+}

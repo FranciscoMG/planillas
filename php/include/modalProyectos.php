@@ -6,7 +6,7 @@
   session_start();
 ?>
 
-<div id="modalProyectos" class="modal fade" role="dialog">
+<div id="modalProyectos" class="modal fade" role="dialog" >
 	<div class="modal-dialog">
 		<div class="modal-content ">
 			<!-- Header -->
@@ -150,5 +150,6 @@
 				</div>
 			</form>
 		</div>
+    
 	</div>
 </div>

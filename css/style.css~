@@ -56,9 +56,7 @@ table thead th {
 	text-align: center;
 }
 .master #tabla-planillas {
-	-webkit-transition: 1s;
-	-o-transition: 1s;
-	transition: 1s;
+	
 }
 #contenedor-tabla {
 	margin-bottom: 0;

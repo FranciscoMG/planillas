@@ -120,7 +120,8 @@
 						}
 						echo '<ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarAgregarCursos()">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" >Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" 
+			                onclick="activarModificarCursos()">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarEliminarCursos()">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
@@ -150,7 +151,7 @@
 						}
 					echo '<ul class="dropdown-menu">
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
-				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" >Modificar</a></li>
+				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
 				        </ul>
 				      </li>';}?>
@@ -188,10 +189,10 @@
 
 			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
 
-			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-down"  ></span></a>
+			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-up"  ></span></a>
 
 			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tabla table-responsive contenedor-tabla-0" id="tabla-planillas">
+				<div class="tabla table-responsive contenedor-tabla-1" id="tabla-planillas">
 					<table id="example" class="display table table-striped table-hover text-center" cellspacing="0" width="100%">
 						<thead>
 							<tr>
