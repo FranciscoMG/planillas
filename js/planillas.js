@@ -231,10 +231,10 @@ function activarEliminarDocente() {
 	var selectEliminarDocente = document.getElementById('selectEliminarDocente');
 
 	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
-	docentesAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	docentesBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	docentesBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	docentesBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
 	seccionEliminarDocente.className="hide";
 	selectEliminarDocente.onchange="";
 }
@@ -249,6 +249,6 @@ function refrescar(){
 }
 
 function cargarDatosUsuarios(obj){
-	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	document.location="../php/usuarios/agregar_usuario.php?id="+valorSeleccionado;
 }
