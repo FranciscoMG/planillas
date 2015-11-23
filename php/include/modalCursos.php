@@ -15,6 +15,7 @@
       <!-- Body -->
 			<form action="cursos/manejadorCursos.php" method="post">
 				<div class="modal-body">
+
 					<div class="col-xs-12 col-sm-12 col-lg-12">
   					<label for="txtSigla">Sigla del curso:</label>
           </div>
@@ -29,7 +30,9 @@
               }
                 $resultado = $db->obtenerCursos();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
+                  if ($fila['sigla'] != 1 && $fila['sigla'] != $_GET['sigla']) {
                   echo "<option value='".$fila['sigla']."'>".$fila['sigla']." / ".$fila['nombre_curso']."</option>";
+                  }
                 }
               
                ?>
@@ -40,7 +43,32 @@
             <input type="text" class="form-control input-border" name="txtSigla" placeholder="Sigla">
           </div>
 
-        <div id="seccionCursosEliminar">
+      <div id="seccionCursosEliminar">
+
+        <div class="col-xs-12 col-sm-12 col-lg-12">
+            <label for="cboxtxtCarrera">Carrera del curso:</label>
+          </div>
+          <div id="" class="col-xs-12 col-sm-12 col-lg-12">
+            <select class="form-control" name="cboxtxtCarrera" id="" onchange="">
+            <?php 
+            if ($_GET['modalCursos'] == 1) {
+              echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
+              $resultado = $db->obtenerCarreras();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['id_Carrera'] != $_GET['id_Carrera']) {
+                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                }
+              }
+            } else {
+              $resultado = $db->obtenerCarreras();
+              while ($fila = mysqli_fetch_assoc($resultado)) {
+                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+              }
+            }
+             ?>
+            </select>
+          </div>
+          
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre del curso:</label>
     				<input 

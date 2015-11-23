@@ -9,11 +9,12 @@ if (isset($_POST['btnRegistrar'])) {
 	$nombre_curso = $_POST['txtNombreCurso'];
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
+	$fk_carrera = $_POST['cboxtxtCarrera'];
 
 	if ($sigla != "" && $nombre_curso != "") {
 		$jornada1 = convertirFraccionesDoble($jornada);
 
-		$resultado = $db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada1);
+		$resultado = $db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada1 , $fk_carrera);
 
 		if ($resultado === FALSE) {
 			//// El curso ya existe
@@ -51,10 +52,11 @@ if (isset($_POST['btnModificar'])) {
 	$nombre_curso = $_POST['txtNombreCurso'];
 	$creditos = $_POST['cboCreditosCursos'];
 	$jornada = $_POST['cboTiempoCursos'];
+	$fk_carrera = $_POST['cboxtxtCarrera'];
 
 	$jornada1 = convertirFraccionesDoble($jornada);
 
-	$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1);
+	$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1 , $fk_carrera);
 	$_SESSION['alerta'] = 1;
 	$_SESSION['alerta-contenido'] = "Curso modificado";
 	header("Location: ../masterPage.php");
@@ -112,8 +114,16 @@ if (isset($_GET['id'])) {
         while ($fila = mysqli_fetch_assoc($resultado)) {
         	if ($fila['sigla'] == $_GET['id']) {
         		
+        		$resultado2 = $db->obtenerCarreras();
+        		while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+        			if ($fila2['id_Carrera'] == $fila['fk_carrera']) {
+        				$id_Carrera = $fila2['id_Carrera'];
+        				$nombre_Carrera = $fila2['nombre_Carrera'];
+        			}
+        		}
+
         		$jornada = convertirDobleFraciones($fila['jornada']);
-        		header("Location: ../masterPage.php?modalCursos=1&sigla=".$fila['sigla']."&nombre_curso=".$fila['nombre_curso']."&creditos=".$fila['creditos']."&jornada=".$jornada."");
+        		header("Location: ../masterPage.php?modalCursos=1&sigla=".$fila['sigla']."&nombre_curso=".$fila['nombre_curso']."&creditos=".$fila['creditos']."&jornada=".$jornada."&id_Carrera=".$id_Carrera."&nombre_Carrera=".$nombre_Carrera."");
 				exit();
         	}
         }
