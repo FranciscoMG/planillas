@@ -26,11 +26,12 @@
                 echo " <option value=".$_GET['sigla'].">".$_GET['sigla']."</option>";
               } else {
                 echo " <option ></option>";
+              }
                 $resultado = $db->obtenerCursos();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
                   echo "<option value='".$fila['sigla']."'>".$fila['sigla']." / ".$fila['nombre_curso']."</option>";
                 }
-              }
+              
                ?>
             </select>
           </div>

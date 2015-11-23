@@ -29,8 +29,9 @@
                 if ($_GET['id_proyecto'] != 1) {
                 echo "<option value='".$_GET['id_proyecto']."'>".$_GET['nombre_proyecto']."</option>";
               }
+              } else {
+               echo "<option></option>";
               } 
-              echo "<option></option>";
               $resultado = $db->obtenerProyecto();
               while ($fila = mysqli_fetch_assoc($resultado)) {
                 if ($fila['id_proyecto'] != 1) {

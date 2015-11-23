@@ -214,3 +214,8 @@ function cargarDatosProyecto(obj){
 function refrescar(){
 	document.location="masterPage.php";
 }
+
+function cargarDatosUsuarios(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	document.location="../php/usuarios/agregar_usuario.php?id="+valorSeleccionado;
+}

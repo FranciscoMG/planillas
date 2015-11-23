@@ -81,7 +81,7 @@
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
 			            <li class="">
-			              <a class="" href="#">Inicio</a>
+			              <a class="" href="masterPage.php">Inicio</a>
 			            </li>
 
 						<?php if($_SESSION['tipoPerfil'] == 0){
@@ -157,8 +157,14 @@
 				      </li>';}?>
 
 			<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2){
+				if ($_SESSION['tipoPerfil'] == 0) {
 				echo '<li class="desabilitado_li disabled" id="li_nav5">
-			          <a class="desabilitado_a disabled" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>
+			          <a class="desabilitado_a disabled" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>';
+				} else {
+					echo '<li class="" id="li_nav5">
+			          <a class="" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>';
+				}
+					echo '
 			          <ul class="dropdown-menu">
 			            <li><a href="#">Agregar</a></li>
 			            <li><a href="#">Modificar</a></li>
@@ -222,7 +228,7 @@
 								<td>Datos 1</td>
 							</tr>
 							<tr>
-								<td>Datos</td>
+								<td>perro</td>
 								<td>Datos</td>
 								<td>Datos</td>
 								<td>eatos</td>
@@ -627,6 +633,15 @@
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/planillas.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
+
+<?php 
+/////////////// MODAL USUARIOS /////////////
+	if ($_GET['modalUsuarios'] == 1) {
+		echo "<script>
+		$('#modalRegistro').modal('show');
+		</script>";
+	}
+ ?>
 
 <?php 
 /////////////// MODAL PROYECTOS /////////////

@@ -17,16 +17,20 @@ if (isset($_POST['btnModificar'])) {
   $correo= isset($_POST['txtCorreo'])?$_POST['txtCorreo']:"";
 
    if ($confirmarContrasena != $contrasena) {
-      $_SESSION['mensaje-modal']= "Las contraseñas no coinciden";
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Las contraseñas no coinciden";
       if ($_SESSION['masterActivo'] == 1 ) {
         header("Location: ../masterPage.php");
       exit();
-      } else {
+      }
+    } else {
         $db->modificarUsuario($_POST['cboUsuario'], $contrasena, $nombre_usuario, $apellidos, $tipoPerfil, $correo, 0);
-        header("Location: ../inicio.php");
+        $_SESSION['alerta'] = 1;
+        $_SESSION['alerta-contenido'] = "Usuario modificado";
+        header("Location: ../masterPage.php");
         exit();
       }
-    }
+    
 }
 
 /////////////////////// MODIFICAR ACTIVO /////////////////////////
@@ -206,11 +210,23 @@ if (isset($_POST['btnRegistrar'])) {
       header("Location: ../inicio.php");
       exit();
     }
+  }
 }
 
-} else {
+///////////////////// Cargar datos usuario //////////
+if (isset($_GET['id'])) {
+  $resultado = $db->obtenerlistadoDeUsuarios();
+  while ($fila = mysqli_fetch_assoc($resultado)) {
+    if ($_GET['id'] == $fila['usuario']) {
+      header("Location: ../masterPage.php?modalUsuarios=1&usuario=".$fila['usuario']."&nombre_usuario=".$fila['nombre_usuario']."&apellido_usuario=".$fila['apellido_usuario']."&perfil=".$fila['perfil']."&correo_usuario=".$fila['correo_usuario']."");
+       exit();
+    }
+  }
+}
+
+
   header("Location: ../masterPage.php");
   exit();
-}
+
 
   ?>

@@ -40,6 +40,18 @@ class usuariosBD extends conexionBD {
 	}
 
 	/////////////////////////////////////////////////////////
+	function obtenerUsuario($id)
+	{
+		$query = "SELECT * FROM tb_Usuario WHERE usuario = '".$id."'";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
+	}
+	/////////////////////////////////////////////////////////
 	function obtenerlistadoDeUsuarios()
 	{
 		$query = "SELECT * FROM tb_Usuario";
