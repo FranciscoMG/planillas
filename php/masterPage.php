@@ -70,7 +70,7 @@
 
 				<div class="col-sx-12">
 					<nav class="navbar container-fluid" role="navigation">
-					
+
 			        <div class="navbar-header">
 			          <button type="button" class="boton-menu navbar-toggle collapsed" data-toggle="collapse" data-target="#menuPagina">
 			            <span class="boton-menu icon-bar"></span>
@@ -102,11 +102,10 @@
 						echo '<li class="" id="li_nav">
 						              <a class="" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
 						}
-						             echo '<ul class="dropdown-menu">
-						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(2)">Agregar</a></li>
-						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(0)">Modificar</a></li>
-						                <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onClick="ocultar_mostrarBotonesModal(1)">Eliminar</a></li>
-
+			          echo '<ul class="dropdown-menu">
+						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarAgregarDocente()">Agregar</a></li>
+						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarModificarDocente()">Modificar</a></li>
+						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarEliminarDocente()">Eliminar</a></li>
 						              </ul>
 						            </li>';}?>
 
@@ -120,8 +119,7 @@
 						}
 						echo '<ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarAgregarCursos()">Agregar</a></li>
-			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" 
-			                onclick="activarModificarCursos()">Modificar</a></li>
+			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" >Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalCursos" onclick="activarEliminarCursos()">Eliminar</a></li>
 			              </ul>
 			            </li>';}?>
@@ -151,7 +149,7 @@
 						}
 					echo '<ul class="dropdown-menu">
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
-				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
+				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" >Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
 				        </ul>
 				      </li>';}?>
@@ -189,10 +187,10 @@
 
 			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
 
-			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-up"  ></span></a>
+			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-down"  ></span></a>
 
 			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tabla table-responsive contenedor-tabla-1" id="tabla-planillas">
+				<div class="tabla table-responsive contenedor-tabla-0" id="tabla-planillas">
 					<table id="example" class="display table table-striped table-hover text-center" cellspacing="0" width="100%">
 						<thead>
 							<tr>
@@ -600,9 +598,9 @@
 
 	<?php require("include/modalUsuarios.php"); ?>
 	<?php require("include/modalUsuariosBorrar.php"); ?>
-	<?php 
+	<?php
 		if ($_SESSION['tipoPerfil'] == 0) {
-			require("include/modalActivarUsuarios.php"); 
+			require("include/modalActivarUsuarios.php");
 		}
 	?>
 <!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
@@ -628,7 +626,16 @@
 <script src="../js/planillas.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 
-<?php 
+<?php
+/////////////// MODAL DOCENTES /////////////
+	if ($_GET['modalDocentes'] == 1) {
+		echo "<script>
+		$('#modalDocentes').modal('show');
+		</script>";
+	}
+ ?>
+
+<?php
 /////////////// MODAL PROYECTOS /////////////
 	if ($_GET['modalProyectos'] == 1) {
 		echo "<script>
@@ -636,7 +643,7 @@
 		</script>";
 	}
  ?>
-<?php 
+<?php
 /////////////// MODAL CURSOS /////////////
 	if ($_GET['modalCursos'] == 1) {
 		echo "<script>
@@ -663,7 +670,7 @@
 <?php
 /////////////// Tabla dinamica ///////////
 		echo "<script>
-		
+
 		</script>";
 ?>
 

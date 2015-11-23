@@ -1,11 +1,16 @@
+<?php session_start(); ?>
+<?php include_once("../conexionBD/docentesBD.php"); ?>
+<?php $db= new docentesBD(); ?>
 <?php
 
-  session_start();
+$_SESSION['alerta'] = 0;
+$_SESSION['alerta-contenido'] = 0;
 
-  //
-  include_once("../conexionBD/docentesBD.php");
-  $db = new docentesBD();
-  //
+$cedula = $_POST['cboxIDDocente'];
+$nombre = $_POST['txtNombre'];
+$apellidos = $_POST['txtApellidos'];
+$grado_academico = $_POST['cboGrado'];
+$tipo_contrato = $_POST['cboContrato'];
 
 //////////////////////// MODIFICAR //////////////////////////////
 if (isset($_POST['btnModificar'])) {
@@ -46,7 +51,7 @@ if (isset($_POST['btnRegistrar'])) {
     'apellidos' => $apellidos,
     'grado_academico'=> $grado_academico,
     'tipo_contrato'=> $tipo_contrato,
-  ); 
+  );
 
   $_SESSION['registrando'] = 1;
 
@@ -90,6 +95,17 @@ if (isset($_POST['btnRegistrar'])) {
       exit();
     }
   }
+}
+
+//////////////////// Llenar modal proyectos //////////////
+if (isset($_GET['id'])) {
+	$resultado = $db->obtenerDocentes();
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+        	if ($fila['cedula'] == $_GET['id']) {
+        		header("Location: ../masterPage.php?modalDocentes=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
+				exit();
+        	}
+        }
 }
 
   ?>

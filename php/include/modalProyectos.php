@@ -24,12 +24,12 @@
           <div id="proyectoEliminarModificar" class="col-xs-12 col-sm-12 col-lg-12">
             <select id="selectEliminarProyecto" class="form-control" name="cboxIDProyecto" onchange="cargarDatosProyecto(this)">
 
-              <?php 
+              <?php
               if (isset($_GET['modalProyectos'])) {
                 if ($_GET['id_proyecto'] != 1) {
                 echo "<option value='".$_GET['id_proyecto']."'>".$_GET['nombre_proyecto']."</option>";
               }
-              } 
+              }
               echo "<option></option>";
               $resultado = $db->obtenerProyecto();
               while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -50,7 +50,7 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTipo">Tipo de proyecto:</label>
             <select class="form-control" name="cboTipo_proyecto">
-            <?php 
+            <?php
             if (isset($_GET['modalProyectos'])) {
               if ($_GET['tipo_proyecto'] == 0) {
                 echo "<option value='".$_GET['tipo_proyecto']."'>Acción Social</option>";
@@ -70,11 +70,11 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTiemposProyecto">Cantidad de tiempos:</label>
             <select class="form-control" name="cboTiemposProyecto">
-              <?php 
-              if (isset($_GET['modalProyectos'])) {
-                echo "<option value='".$_GET['jornada_proyecto']."'>".$_GET['jornada_proyecto']."</option>";
-              }
-               ?>
+              <?php
+                if (isset($_GET['modalProyectos'])) {
+                  echo "<option value='".$_GET['jornada_proyecto']."'>".$_GET['jornada_proyecto']."</option>";
+                }
+              ?>
               <option>3/4</option>
               <option>2/4</option>
               <option>1/4</option>
@@ -85,7 +85,7 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboPrimario">Principal/Responsable:</label>
             <select class="form-control" name="cboPrimario">
-              <?php 
+              <?php
               if (isset($_GET['modalProyectos'])) {
                 $resultado2 = $dbDocentes->obtenerUnDocente($_GET['fk_encargado']);
                 while ($fila = mysqli_fetch_assoc($resultado2)) {
@@ -100,14 +100,13 @@
                     echo "<option value='".$fila['cedula']."'>".$fila['nombre']."</option>";
                   }
                 }
-
                ?>
             </select>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboSecundario">Asociado/Colaborador:</label>
             <select class="form-control" name="cboSecundario">
-              <?php 
+              <?php
               if (isset($_GET['modalProyectos'])) {
                 $resultado2 = $dbDocentes->obtenerUnDocente($_GET['fk_ayudante']);
                 while ($fila = mysqli_fetch_assoc($resultado2)) {
@@ -150,6 +149,6 @@
 				</div>
 			</form>
 		</div>
-    
+
 	</div>
 </div>
