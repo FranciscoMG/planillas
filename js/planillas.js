@@ -199,9 +199,9 @@ function activarAgregarDocente() {
 
 	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
 	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12";
-	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
 	seccionEliminarDocente.className="";
 }
 
@@ -213,11 +213,11 @@ function activarModificarDocente(){
 	var docenteAgregar = document.getElementById('docenteAgregar');
 	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente');
 
-	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 ";
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
-	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
 	seccionEliminarDocente.className="";
 }
 
@@ -233,16 +233,18 @@ function activarEliminarDocente() {
 
 	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
 	seccionEliminarDocente.className="hide";
 	selectEliminarDocente.onchange="";
 }
 
 function cargarDatosDocentes(obj){
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
-	document.location="../php/docentes/gestion_docentes.php?id="+valorSeleccionado;
+	if (valorSeleccionado != "0") {
+	 	document.location="../php/docentes/gestion_docentes.php?id="+valorSeleccionado;
+ }
 }
 
 function refrescar(){
@@ -261,7 +263,7 @@ function activarAgregarPresupuesto() {
 	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
 	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
 	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
-	
+
 	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
 	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
 	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
@@ -277,7 +279,7 @@ function activarModificarPresupuesto(){
 	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
 	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
 	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
-	
+
 	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
 	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
 	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
@@ -294,7 +296,7 @@ function activarEliminarPresupuesto() {
 	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
 	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
 	var seccionEliminarPresupuesto = document.getElementById('seccionEliminarPresupuesto');
-	
+
 	var presupuestoBtnModificar = document.getElementById('presupuestoBtnModificar');
 	var presupuestoBtnEliminar = document.getElementById('presupuestoBtnEliminar');
 	var presupuestoBtnAgregar = document.getElementById('presupuestoBtnAgregar');
@@ -310,7 +312,6 @@ function activarEliminarPresupuesto() {
 }
 
 function cargarDatosPresupuesto(obj){
-	var valorSeleccionado = obj.options[obj.selectedIndex].value; 
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	document.location="../php/presupuestos/gestorPresupuesto.php?id="+valorSeleccionado;
 }
-

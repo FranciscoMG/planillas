@@ -19,30 +19,28 @@
   					<label for="txtCedula">Cédula:</label>
           </div>
           <div id="docenteEliminarModificar" class="col-xs-12 col-sm-12 col-lg-12">
-            <select id="selectEliminarDocente" class="form-control" name="cboxIDocente" onchange="cargarDatosDocentes(this)">
+            <select id="selectEliminarDocente" class="form-control" name="cboxIDDocente" onchange="cargarDatosDocentes(this)">
               <?php
-              if (isset($_GET['modalDocentes'])) {
-                if ($_GET['cedula'] != 1) {
-                echo "<option value='".$_GET['cedula']."'>".$_GET['nombre']." ".$_GET['apellidos']."</option>";
-              }
-              }
-              echo "<option></option>";
-              $resultado = $db->obtenerDocentes();
-              while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['cedula'] != 1) {
-                echo "<option value='".$fila['cedula']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
-              }
-              }
-               ?>
+                echo "<option value='0'></option>";
+                $resultado = $db->obtenerDocentes();
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                  if (isset($_GET['modalDocentes']) && $_GET['cedula'] == $fila['cedula']) {
+                    echo "<option value='".$fila['cedula']."' selected>".$fila['cedula']." - ".$fila['nombre']." ".$fila['apellidos']."</option>";
+                  } else {
+                    echo "<option value='".$fila['cedula']."'>".$fila['cedula']." - ".$fila['nombre']." ".$fila['apellidos']."</option>";
+                  }
+                }
+              ?>
             </select>
           </div>
+          <br/>
           <div id="seccionEliminarDocente">
             <div id="docenteAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
               <input type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula" <?php
               if (isset($_GET['modalDocentes'])) {
                 echo "value=".$_GET['cedula'];
               } ?>>
-            </div>
+            </div><br/><br/><br/>
   					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
       				<label for="txtNombre">Nombre:</label>
       				<input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" <?php
@@ -103,17 +101,17 @@
 				<div class="modal-footer modal-delete-border">
           <?php
             if ($_SESSION[masterActivo] == 1) {
-              echo "
-              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' style='padding-bottom:15px;' id='docentesBtnModificar'>
-                <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
-              </div>
-              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 hide' style='padding-bottom:15px;' id='docentesBtnEliminar'>
-                <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
-              </div>
-              <br/>";
+              echo "</br>
+                    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton' id='docentesBtnModificar'>
+                      <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
+                    </div>
+                    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide' id='docentesBtnEliminar'>
+                      <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar'>Eliminar</button>
+                    </div>
+                    </br>";
             }
           ?>
-				  <div class="col-xs-12 col-sm-12 col-lg-12 hide" id='docentesBtnAgregar'>
+				  <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide" id='docentesBtnAgregar'>
 					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ class docentesBD extends conexionBD {
 	}
 
 	function obtenerUnDocente($id) {
-		$query = "SELECT * FROM tb_Docente WHERE cedula = '".$id."'";
+		$query = "SELECT * FROM tb_Docente WHERE cedula = '".$id."';";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -23,7 +23,7 @@ class docentesBD extends conexionBD {
 	}
 
 	function obtenerDocentes() {
-		$query = "SELECT * FROM tb_Docente";
+		$query = "SELECT * FROM tb_Docente WHERE cedula != '1';";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -34,7 +34,7 @@ class docentesBD extends conexionBD {
 	}
 
 	function agregarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato) {
-		$stmt = $this->con->prepare("INSERT INTO tb_Docente (cedula , nombre, apellidos , grado_academico , tipo_contrato) VALUES ( ? , ? , ? , ? , ? )");
+		$stmt = $this->con->prepare("INSERT INTO tb_Docente (cedula , nombre, apellidos , grado_academico , tipo_contrato) VALUES ( ? , ? , ? , ? , ? );");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
@@ -51,7 +51,7 @@ class docentesBD extends conexionBD {
 		$stmt = $this->con->prepare("UPDATE tb_Docente SET nombre = ?, apellidos = ?, grado_academico = ?, tipo_contrato = ? WHERE cedula = ?;");
 
 		if ( $stmt === FALSE ) {
-		  die('prepare() failed: ' . $this->con->error);
+		  return false;
 		}
 		$stmt->bind_param('ssiis', $nombre, $apellidos, $grado_academico, $tipo_contrato, $cedula);
 		$stmt->execute();
@@ -60,7 +60,7 @@ class docentesBD extends conexionBD {
 	}
 
 	function borrarDocente($cedula) {
-		$stmt = $this->con->prepare("DELETE FROM tb_Docente WHERE cedula = ?");
+		$stmt = $this->con->prepare("DELETE FROM tb_Docente WHERE cedula = ?;");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' .$this->con->error);
 		}

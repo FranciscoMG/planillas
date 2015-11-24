@@ -3,44 +3,58 @@
 <?php $db= new docentesBD(); ?>
 <?php
 
-$cedula = $_POST['cboxIDDocente'];
-$nombre = $_POST['txtNombre'];
-$apellidos = $_POST['txtApellidos'];
-$grado_academico = $_POST['cboGrado'];
-$tipo_contrato = $_POST['cboContrato'];
+if (isset($_POST['txtCedula']) && !empty($_POST['txtCedula'])) {
+  $cedula= $_POST['txtCedula'];
+} else {
+  if (isset($_POST['cboxIDDocente']) && $_POST['cboxIDDocente'] != "0") {
+    $cedula= $_POST['cboxIDDocente'];
+  } else {
+    $cedula= "";
+  }
+}
+
+$nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
+$apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
+$grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
+$tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
 
 //////////////////////// MODIFICAR //////////////////////////////
 if (isset($_POST['btnModificar'])) {
-  $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
-  $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
-  $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
-  $grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
-  $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
-  $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+  $seRealizo= $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+  if ($seRealizo) {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Docente modificado con éxito";
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el docente";
+  }
   header('Location: ../masterPage.php');
   exit();
 }
 
 ////////////////////// ELIMINAR //////////////////////////////////
 if (isset($_POST['btnEliminar'])) {
-  $db->borrarDocente($_POST['txtCedula']);
-  $_SESSION['alerta'] = 1;
-  $_SESSION['alerta-contenido'] = "Usuario borrado con éxito";
+  if ($cedula != "") {
+    $seRealizo= $db->borrarDocente($cedula);
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    header('Location: ../masterPage.php');
+    exit();
+  }
+  if ($seRealizo) {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Docente borrado con éxito";
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el docente";
+  }
   header('Location: ../masterPage.php');
   exit();
 }
 
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar'])) {
-
-  $_SESSION['mensaje-modal']="";
-
-  $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
-  $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
-  $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
-  $grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
-  $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
-
   if(empty($cedula)) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Se debe la ingresar la cédula del docente";
@@ -52,7 +66,7 @@ if (isset($_POST['btnRegistrar'])) {
       if ($fila['cedula']==$cedula) {
         $_SESSION['alerta'] = 1;
   			$_SESSION['alerta-contenido'] = "El docente ya existe";
-        header("Location: ../masterPage.php?modalDocentes=1");
+        header("Location: ../masterPage.php");
         exit();
       }
     }
@@ -75,12 +89,12 @@ if (isset($_POST['btnRegistrar'])) {
 
     if (!$seRealizo) {
       $_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "Docente agregrado";
+			$_SESSION['alerta-contenido'] = "Docente agregrado con éxito";
       header("Location: ../masterPage.php");
       exit();
     } else {
       $_SESSION['alerta'] = 1;
-      $_SESSION['alerta-contenido'] = "Ocurrio un error al agregar el docente";
+      $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el docente";
       header("Location: ../masterPage.php");
       exit();
     }
@@ -98,4 +112,4 @@ if (isset($_GET['id'])) {
   }
 }
 
-  ?>
+?>
