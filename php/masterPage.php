@@ -133,9 +133,9 @@
 						 	echo '<a class="" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>';
 						}
 						echo'<ul class="dropdown-menu">
-						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos">Agregar</a></li>
-						          <li><a href="#">Modificar</a></li>
-						          <li><a href="#">Eliminar</a></li>
+						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarAgregarGrupos()">Agregar</a></li>
+						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarModificarGrupos()">Modificar</a></li>
+						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarEliminarGrupos()">Eliminar</a></li>
 					          </ul>
 						      </li>';}?>
 
@@ -173,7 +173,7 @@
 						<li class="dropdown" id="li_nav6">
 			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			              <?php 
+			              <?php
 			              	if($_SESSION['tipoPerfil'] == 0){
 			              		echo '
 			                	<li><a href="reportes/reporteUsuarios.php" target="_blank">Reporte de usuarios</a></li>
@@ -195,7 +195,7 @@
 
 
 
-	
+
 			              </ul>
 			            </li>
 			          </ul>
@@ -657,33 +657,42 @@
 <script src="../js/planillas.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 
-<?php 
-/////////////// MODAL PRESUPUESTO /////////////
-	if ($_GET['modalPresupuesto'] == 1) {
-		echo "<script>
-		$('#modalPresupuesto').modal('show')
-		</script>";
-	}
-?>
 <?php
-/////////////// MODAL DOCENTES /////////////
-	if ($_GET['modalDocentes'] == 1) {
-		echo "<script>
-		$('#modalDocentes').modal('show');
-
-		</script>";
-	}
- ?>
-
-
-<?php 
 /////////////// MODAL USUARIOS /////////////
 	if ($_GET['modalUsuarios'] == 1) {
 		echo "<script>
 		$('#modalRegistro').modal('show');
 		</script>";
 	}
- ?>
+?>
+
+<?php
+ /////////////// MODAL DOCENTES /////////////
+ 	if ($_GET['modalDocentes'] == 1) {
+ 		echo "<script>
+ 		$('#modalDocentes').modal('show');
+
+ 		</script>";
+ 	}
+?>
+
+<?php
+/////////////// MODAL CURSOS /////////////
+	if ($_GET['modalCursos'] == 1) {
+		echo "<script>
+		$('#modalCursos').modal('show');
+		</script>";
+	}
+?>
+
+<?php
+/////////////// MODAL GRUPOS /////////////
+	if ($_GET['modalGrupos'] == 1) {
+		echo "<script>
+		$('#modalGrupos').modal('show');
+		</script>";
+	}
+?>
 
 <?php
 /////////////// MODAL PROYECTOS /////////////
@@ -692,15 +701,17 @@
 		$('#modalProyectos').modal('show');
 		</script>";
 	}
- ?>
+?>
+
 <?php
-/////////////// MODAL CURSOS /////////////
-	if ($_GET['modalCursos'] == 1) {
+/////////////// MODAL PRESUPUESTO /////////////
+	if ($_GET['modalPresupuesto'] == 1) {
 		echo "<script>
-		$('#modalCursos').modal('show');
+		$('#modalPresupuesto').modal('show')
 		</script>";
 	}
- ?>
+?>
+
 <?php
 	if ($_SESSION['registrando'] == 1) {
 		echo "<script>
@@ -708,6 +719,7 @@
 		</script>";
 	}
 ?>
+
 <?php
 /////////////// ALERTAS ///////////
 	if ($_SESSION['alerta'] == 1) {

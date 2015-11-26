@@ -56,7 +56,7 @@ table thead th {
 	text-align: center;
 }
 .master #tabla-planillas {
-	
+
 }
 #contenedor-tabla {
 	margin-bottom: 0;
@@ -77,7 +77,7 @@ main #contenedor-tabla .contenedor-tabla-0 {
 }
 main #contenedor-tabla .contenedor-tabla-1 {
 	height: 100%;
-	
+
 }
 main #contenedor-tabla .contenedor-tabla-2 {
 	padding-bottom: 0.5%;
@@ -266,8 +266,9 @@ body {
 	box-shadow: 0px 0px 0px;
 }
 
-.espacio-botones-modal {
-	margin: 30px 0px 20px 0px;
+.espacio-boton {
+	padding-bottom:15px;
+	padding-top:15px;
 }
 
 /************* Texto intermitente *************/
@@ -290,6 +291,12 @@ body {
 
 .inputColor{
 	color: #005da4;
+}
+
+.input-readonly {
+	border: 0px;
+	font-weight: bold;
+	cursor: default;
 }
 
 /**********Opciones desabilitadas***********/

@@ -3,94 +3,105 @@
 <?php $db= new docentesBD(); ?>
 <?php
 
-$_SESSION['alerta'] = 0;
-$_SESSION['alerta-contenido'] = 0;
+if (isset($_POST['txtCedula']) && !empty($_POST['txtCedula'])) {
+  $cedula= $_POST['txtCedula'];
+} else {
+  if (isset($_POST['cboxIDDocente']) && $_POST['cboxIDDocente'] != "0") {
+    $cedula= $_POST['cboxIDDocente'];
+  } else {
+    $cedula= "";
+  }
+}
 
-$cedula = $_POST['cboxIDDocente'];
-$nombre = $_POST['txtNombre'];
-$apellidos = $_POST['txtApellidos'];
-$grado_academico = $_POST['cboGrado'];
-$tipo_contrato = $_POST['cboContrato'];
+$nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
+$apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
+$grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
+$tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
 
 //////////////////////// MODIFICAR //////////////////////////////
 if (isset($_POST['btnModificar'])) {
-  $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
-  $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
-  $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
-  $grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
-  $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
-  $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
-  header("Location: ../masterPage.php");
+  if ($cedula != "") {
+    $seRealizo= $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    header('Location: ../masterPage.php');
+    exit();
+  }
+  if ($seRealizo) {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Docente modificado con éxito";
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el docente";
+  }
+  header('Location: ../masterPage.php');
   exit();
 }
 
 ////////////////////// ELIMINAR //////////////////////////////////
 if (isset($_POST['btnEliminar'])) {
-  $db->borrarDocente($_POST['txtCedula']);
-  $_SESSION['mensaje-modal']= "Usuario borrado con éxito";
+  if ($cedula != "") {
+    $seRealizo= $db->borrarDocente($cedula);
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    header('Location: ../masterPage.php');
+    exit();
+  }
+  if ($seRealizo) {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Docente borrado con éxito";
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el docente";
+  }
   header('Location: ../masterPage.php');
   exit();
 }
 
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar'])) {
-
-  $_SESSION['mensaje-modal']="";
-
-  $cedula= isset($_POST['txtCedula'])?$_POST['txtCedula']:"";
-  $nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
-  $apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
-  $grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
-  $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
-
-  $_SESSION['mensaje-modal']="";
-
-  $_SESSION['docente']= array(
-    'cedula' => $cedula,
-    'nombre' => $nombre,
-    'apellidos' => $apellidos,
-    'grado_academico'=> $grado_academico,
-    'tipo_contrato'=> $tipo_contrato,
-  );
-
-  $_SESSION['registrando'] = 1;
-
   if(empty($cedula)) {
-    $_SESSION['mensaje-modal']= "Se debe la ingresar la cédula del docente";
-    header("Location: ../masterPage.php");
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "Se debe la ingresar la cédula del docente";
+    header("Location: ../masterPage.php?modalDocentes=1");
     exit();
   } else {
     $resultado = $db->obtenerDocentes();
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['cedula']==$cedula) {
-        $_SESSION['mensaje-modal']= "El docente ya existe";
+        $_SESSION['alerta'] = 1;
+  			$_SESSION['alerta-contenido'] = "El docente ya existe";
         header("Location: ../masterPage.php");
         exit();
       }
     }
 
     if (empty($nombre)) {
-      $_SESSION['mensaje-modal']= "Debe ingresar el nombre";
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Debe ingresar el nombre";
       header("Location: ../masterPage.php");
       exit();
     }
 
     if (empty($apellidos)) {
-      $_SESSION['mensaje-modal']= "Debe ingresar los apellidos";
+      $_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "Debe ingresar los apellidos";
       header("Location: ../masterPage.php");
       exit();
     }
 
     $seRealizo = $db->agregarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
 
-    if ($seRealizo) {
-      unset($_SESSION['docente']);
-      $_SESSION['registrando'] = 0;
+    if (!$seRealizo) {
+      $_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "Docente agregrado con éxito";
       header("Location: ../masterPage.php");
-      $_SESSION['mensaje-modal']= "";
       exit();
     } else {
-      $_SESSION['mensaje-modal']= "Ocurrió un error cuando se agregó un docente";
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el docente";
       header("Location: ../masterPage.php");
       exit();
     }
@@ -100,12 +111,12 @@ if (isset($_POST['btnRegistrar'])) {
 //////////////////// Llenar modal proyectos //////////////
 if (isset($_GET['id'])) {
 	$resultado = $db->obtenerDocentes();
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-        	if ($fila['cedula'] == $_GET['id']) {
-        		header("Location: ../masterPage.php?modalDocentes=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
-				exit();
-        	}
-        }
+  while ($fila = mysqli_fetch_assoc($resultado)) {
+  	if ($fila['cedula'] == $_GET['id']) {
+      header("Location: ../masterPage.php?modalDocentes=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
+  		exit();
+  	}
+  }
 }
 
-  ?>
+?>
