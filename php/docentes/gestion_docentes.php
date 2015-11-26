@@ -20,7 +20,14 @@ $tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
 
 //////////////////////// MODIFICAR //////////////////////////////
 if (isset($_POST['btnModificar'])) {
-  $seRealizo= $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+  if ($cedula != "") {
+    $seRealizo= $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+  } else {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    header('Location: ../masterPage.php');
+    exit();
+  }
   if ($seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Docente modificado con éxito";

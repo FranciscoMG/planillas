@@ -1,3 +1,6 @@
+var idProfesor= 0;
+var idHorario= 0;
+
 function cambiarTableHorizontal() {
 	var boton = document.getElementById("boton-tamano-tabla-horizontal");
 
@@ -66,6 +69,12 @@ function desabilitar_habiltarOpciones(){
 		a_nav5.className="dropdown-toggle";
 		habilita.className= "glyphicon glyphicon-ban-circle";
 	}
+}
+/////////////////////////////////////////////////////////
+
+function cargarDatosUsuarios(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	document.location="../php/usuarios/agregar_usuario.php?id="+valorSeleccionado;
 }
 
 ////////////////////////////////////////////////////////
@@ -251,14 +260,57 @@ function refrescar(){
 	document.location="masterPage.php";
 }
 
-function cargarDatosUsuarios(obj){
-	var valorSeleccionado = obj.options[obj.selectedIndex].value;
-	document.location="../php/usuarios/agregar_usuario.php?id="+valorSeleccionado;
-}
-
 /////////////////////////////////////////////////////////////////////////
 
+function activarAgregarGrupos() {
+	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
+	var grupoBtnAgregar = document.getElementById('grupoBtnAgregar');
+	var grupoBtnModificar = document.getElementById('grupoBtnModificar');
+	var docenteBtnEliminar = document.getElementById('grupoBtnEliminar');
 
+	grupoAgregarModificar.className="";
+	grupoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+	grupoBtnModificar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	grupoBtnEliminar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+}
+
+function activarModificarGrupos(){
+	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
+	var grupoBtnAgregar = document.getElementById('grupoBtnAgregar');
+	var grupoBtnModificar = document.getElementById('grupoBtnModificar');
+	var grupoBtnEliminar = document.getElementById('grupoBtnEliminar');
+
+	grupoAgregarModificar.className="";
+	grupoBtnAgregar.className="hide";
+	grupoBtnModificar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+	grupoBtnEliminar.className="hide";
+}
+
+function activarEliminarGrupos() {
+	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
+	var grupoBtnAgregar = document.getElementById('grupoBtnAgregar');
+	var grupoBtnModificar = document.getElementById('grupoBtnModificar');
+	var grupoBtnEliminar = document.getElementById('grupoBtnEliminar');
+
+	grupoAgregarModificar.className="hide";
+	grupoBtnAgregar.className="hide";
+	grupoBtnModificar.className="hide";
+	grupoBtnEliminar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+}
+
+function cargarDatosCarrera(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	if (valorSeleccionado != "0") {
+	 	document.location="masterPage.php?modalGrupos=1&id_carrera="+valorSeleccionado;
+ }
+}
+
+function cargarDatosCursos2(obj) {
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	document.location=window.location+"&id_curso="+valorSeleccionado;
+}
+
+////////////////////////////////////////////////////////////////////////
 function activarAgregarPresupuesto() {
 	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
 	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
@@ -275,6 +327,7 @@ function activarAgregarPresupuesto() {
 	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
 	seccionEliminarPresupuesto.className="";
 }
+
 function activarModificarPresupuesto(){
 	var presupuestoEliminarModificar = document.getElementById('presupuestoEliminarModificar');
 	var presupuestoAgregar = document.getElementById('presupuestoAgregar');
@@ -315,3 +368,19 @@ function cargarDatosPresupuesto(obj){
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	document.location="../php/presupuestos/gestorPresupuesto.php?id="+valorSeleccionado;
 }
+
+$("#btnProfesor").click(function () {
+	$("#div-profesores").html($("#div-profesores").html()+'<div id="inputProfesor'+idProfesor+'" class="form-group"><input class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+	$("button").on('click', function() {
+ 		$("#"+$(this).parent().attr('id')).remove();
+	});
+	idProfesor++;
+});
+
+$("#btnHorario").click(function () {
+	$("#div-horarios").html($("#div-horarios").html()+'<div id="inputHorario'+idHorario+'" class="form-group"><input class="input-readonly" type="text" value="'+$("#selectDiaSemana option:selected").text()+" "+$("#selectHoraInicio option:selected").text()+" - "+$("#selectHoraFin option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+	$("button").on('click', function() {
+ 		$("#"+$(this).parent().attr('id')).remove();
+	});
+	idProfesor++;
+});

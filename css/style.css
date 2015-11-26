@@ -293,6 +293,12 @@ body {
 	color: #005da4;
 }
 
+.input-readonly {
+	border: 0px;
+	font-weight: bold;
+	cursor: default;
+}
+
 /**********Opciones desabilitadas***********/
 
 .desabilitado_a{

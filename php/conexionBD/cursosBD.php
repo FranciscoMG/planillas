@@ -1,8 +1,8 @@
 <?php include_once("conexionBD.php"); ?>
 
-<?php 
+<?php
 /**
-* 
+*
 */
 class cursosBD extends conexionBD
 {
@@ -18,10 +18,10 @@ class cursosBD extends conexionBD
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
-		
+
 		$stmt->bind_param("ssids" , $sigla , $nombre_curso , $creditos , $jornada , $fk_carrera);
 		return $stmt->execute();
-		
+
 
 		//Asignación Ternaria;
 	}
@@ -57,6 +57,17 @@ class cursosBD extends conexionBD
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$stmt->close();
+		return false;
+	}
+
+	////////////////////////////////////////////////////
+	function obtenerCursosCarrera() {
+		$query = "SELECT fk_carrera, sigla, nombre_curso FROM tb_PlanEstudios, tb_Cursos WHERE fk_curso=sigla ORDER BY fk_carrera;";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0) {
 			return $rs; //Retornamos las tuplas encontradas
 		}
 		$stmt->close();
