@@ -86,7 +86,7 @@
               if ($_GET['creditos'] != "") {
                 echo "<option>".$_GET['creditos']."</option>";
               }
-              for($i=0;$i<=12;$i++){
+              for($i=0;$i<=14;$i++){
                 echo "<option>".$i."</option>";
               }
               ?>
@@ -100,11 +100,15 @@
               echo "<option>".$_GET['jornada']."</option>";
             }
             echo"
-              <option>3/4</option>
-              <option>2/4</option>
+              <option>1/8</option>
               <option>1/4</option>
+              <option>3/8</option>
               <option>1/2</option>
+              <option>5/8</option>
+              <option>3/4</option>
+              <option>7/8</option>
               <option>1</option>";
+
               ?>
             </select>
           </div>
