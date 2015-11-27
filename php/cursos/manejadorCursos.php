@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include_once("../conexionBD/cursosBD.php"); ?>
+<?php include_once("../include/conversor.php"); ?>
 <?php 
 
 	$db = new cursosBD();
@@ -62,51 +63,6 @@ if (isset($_POST['btnModificar'])) {
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de modificar
-
-/////////////////////////////////////////////////////////
-function convertirFraccionesDoble ($fraccion) {
-	$valor = 0.0;
-	switch ($fraccion) {
-		case '1':
-			$valor = 1;
-			break;
-		case '1/2':
-			$valor = 0.5;
-			break;
-		case '1/4':
-			$valor = 0.25;
-			break;
-		case '2/4':
-			$valor = 0.5;
-			break;
-		case '3/4':
-			$valor = 0.75;
-			break;		
-	}
-	return $valor;
-} // fin de funcion
-
-function convertirDobleFraciones ($fdouble) {
-	$valor = "";
-	switch ($fdouble) {
-		case 1:
-			$valor = "1";
-			break;
-		case 0.5:
-			$valor = "1/2";
-			break;
-		case 0.25:
-			$valor = "1/4";
-			break;
-		case 0.5:
-			$valor = "2/4";
-			break;
-		case 0.75:
-			$valor = "3/4";
-			break;		
-	}
-	return $valor;
-} // fin de funcion
 
 //////////////////// Llenar modal cursos //////////////
 if (isset($_GET['id'])) {
