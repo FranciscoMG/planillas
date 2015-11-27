@@ -3,7 +3,7 @@
 	height: 30px;
 	background-color: rgba(0,0,0,0.2);
 	margin: 10px 0;
-
+	color: #E1DFF6
 }
 .separador-horizontal {
 	width: 100%;
@@ -102,7 +102,15 @@ main #contenedor-tabla .contenedor-tabla-2 {
 	background-color: #680000;
 	color: white;
 }
-
+table .tr_style:hover {
+	background-color: #CCD6F7!important;
+}
+table .th_style:hover{
+	background-color: #005A98;
+}
+table .a_click:hover{
+	cursor: pointer;
+}
 #contenedor-tabla .clearfix .btn-revision:hover {
 	background-color: #4F0000;
 }

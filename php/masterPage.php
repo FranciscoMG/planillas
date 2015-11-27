@@ -59,6 +59,11 @@
 								}
 									?>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
+
+								<li class="divider"></li>
+								
+								<li><a href="" data-toggle="modal" data-target="#modalConfirmacion">Exportar BD MySQL</a></li>
+								<li><a href="" data-toggle="modal" data-target="#modalBD">Importar BD MySQL</a></li>
  							</ul>
 						</div>
 					</div>
@@ -210,379 +215,11 @@
 	<main class="master">
 
 <!--************* Tabla principal ********************-->
-		<div class="container" id="contenedor-tabla">
-
-			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
-
-			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-up"  ></span></a>
-
-			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="tabla table-responsive contenedor-tabla-1" id="tabla-planillas">
-					<table id="example" class="display table table-striped table-hover text-center" cellspacing="0" width="100%">
-						<thead>
-							<tr>
-								<th>Sigla</th>
-								<th>Nombre</th>
-								<th>Jornada</th>
-								<th>Créditos</th>
-								<th>Grupo</th>
-								<th>Horario</th>
-								<th>Docente</th>
-								<th>PO 1050</th>
-								<th>PO 1052</th>
-								<th>Apoyo Vic Doc..</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>atos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-								<td>Datos 1</td>
-							</tr>
-							<tr>
-								<td>perro</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>eatos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>patos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>watos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>catos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-							<tr>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-								<td>Datos</td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-				<br><br>
-					<div class="row">
-					<div class="col-xs-6 col-sm-5">
-						<div class="form-group">
-							  <label for="sel1">Carrera:</label>
-							  <select class="form-control" id="sel1">
-							    <option>1</option>
-							    <option>2</option>
-							    <option>3</option>
-							    <option>4</option>
-							  </select>
-						</div>
-						</div>
-						<div class="clearfix">
-							<a href="#" class="btn btn-info btn-sm">Aplicar</a>
-							<a href="#" class="btn btn-danger btn-sm pull-right btn-revision" data-toggle="modal" data-target="#modalRevision">Revisión</a>
-
-						</div>
-					</div>
-			</div>
-		</div>
+<?php require("include/tabla.php"); ?>
 
 <!--************* Aside ********************-->
-		<div class="container container-aside">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="aside col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-sx-12">
-						<h4>Ultima revisión</h4>
-						<div class="separador-horizontal"></div>
-							<div class="table table-responsive">
-								<table class="table table-striped">
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-								</table>
-							</div>
+<?php require("include/asides.php"); ?>
 
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="aside col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-sx-12">
-						<h4>Comentarios</h4>
-						<div class="separador-horizontal"></div>
-							<div class="table table-responsive">
-								<table class="table table-striped">
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-									<tr>
-										<td>Datos</td>
-									</tr>
-								</table>
-							</div>
-
-					</div>
-			</div>
-		</div>
 
 	</main>
 
@@ -630,10 +267,14 @@
 			require("include/modalActivarUsuarios.php");
 		}
 	?>
+<!--/////////////////////////////////  Modal de BD/////////////////////////////////////-->
+	<?php require("include/modalConfirmacion.php"); ?>
+
+<!--/////////////////////////////////  Modal de BD/////////////////////////////////////-->
+	<?php require("include/modalImportarDB.php"); ?>
+
 <!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
-
 	<?php require("include/modalDocentes.php"); ?>
-
 
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
 	<?php require("include/modalProyectos.php"); ?>
@@ -649,6 +290,7 @@
 
 <!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
+
 
 
 </body>
@@ -725,6 +367,16 @@
 	if ($_SESSION['alerta'] == 1) {
 		echo "<script>
 		$('#modalAlertas').modal('show');
+		</script>";
+		$_SESSION['alerta'] = 0;
+	}
+?>
+
+<?php
+/////////////// Confirmacion ///////////
+	if ($_GET['modalConfirmacion'] == 1) {
+		echo "<script>
+		$('#modalConfirmacion').modal('show');
 		</script>";
 		$_SESSION['alerta'] = 0;
 	}

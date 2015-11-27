@@ -48,7 +48,7 @@ function convertirDobleFraciones ($fdouble) {
 		case 0.625:
 			$valor = "5/8";
 			break;
-		case 0.500:
+		case 0.5:
 			$valor = "1/2";
 			break;	
 

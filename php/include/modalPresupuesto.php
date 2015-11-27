@@ -63,14 +63,16 @@
             <select class="form-control" name="cboTiemposPresupuesto">
               <?php 
               if (isset($_GET['modalPresupuesto'])) {
-              
+                echo "<option>".$_GET['tiempo_presupuesto']."</option>";
               }
                ?>
-              <option>3/4</option>
-              <option>2/4</option>
-              <option>1/4</option>
-              <option>1/2</option>
-              <option>1</option>
+              <?php 
+              $valor=0;
+              while ($valor < 100) {
+                $valor=$valor+0.125;
+                echo "<option>".$valor."</option>";
+              }
+               ?>
             </select>
           </div>
 

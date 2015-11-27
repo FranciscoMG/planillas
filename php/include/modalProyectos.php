@@ -76,12 +76,14 @@
                   echo "<option value='".$_GET['jornada_proyecto']."'>".$_GET['jornada_proyecto']."</option>";
                 }
               ?>
-              <option>3/4</option>
-              <option>2/4</option>
+              <option>1/8</option>
               <option>1/4</option>
+              <option>3/8</option>
               <option>1/2</option>
-              <option>1</option>
-            </select>
+              <option>5/8</option>
+              <option>3/4</option>
+              <option>7/8</option>
+              <option>1</option>            </select>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboPrimario">Principal/Responsable:</label>

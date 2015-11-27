@@ -6,11 +6,11 @@
 $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
 $codigo = $_POST['txtCodigoPresupuesto'];
-$tiempo_presupuesto = $_POST['cboTiemposPresupuesto'];
+$tiempo_presupuesto = (double)$_POST['cboTiemposPresupuesto'];
 
 //////////////// AGREGAR //////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
-	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , 0.9);
+	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto);
 	if ($resultado === FALSE) {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto";
