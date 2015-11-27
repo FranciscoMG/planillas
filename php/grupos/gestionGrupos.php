@@ -2,6 +2,7 @@
 <?php
   include_once("../conexionBD/gruposBD.php");
   include_once("../conexionBD/docentesBD.php");
+  include_once("../include/conversor.php");
 ?>
 <?php
   $db = new gruposBD();
@@ -12,20 +13,23 @@
 $carrera= isset($_POST['cboIDCarrera'])?$_POST['cboIDCarrera']:"";
 $curso= isset($_POST['cboIDCurso'])?$_POST['cboIDCurso']:"";
 $num_grupo= isset($_POST['cboGrupo'])?$_POST['cboGrupo']:"";
-$jornada= isset($_POST['cboTiempo'])?$_POST['cboTiempo']:"";
+$jornada= isset($_POST['cboJornada'])?$_POST['cboJornada']:"";
 $docentes= array(
   array(),
 );
 for ($i=0; $i < 6; $i++) {
 	if (isset($_POST['txtProfesor'.$i])) {
 		$tmp= explode("-", $_POST['txtProfesor'.$i])[0];
-		$nombre= explode(" ", $tmp)[0];
-		$apellidos= explode(" ", $tmp)[1].explode(" ", $tmp)[2];
+		$nombre= trim(explode(" ", $tmp)[0]);
+		$apellidos= trim(explode(" ", $tmp)[1]);
+    if (!empty(trim(explode(" ", $tmp)[2]))) {
+      $apellidos.=" ".trim(explode(" ", $tmp)[2]);
+    }
     $resultado = $db2->obtenerDocentes();
     while ($fila = mysqli_fetch_assoc($resultado)) {
       if ($nombre == $fila['nombre'] && $apellidos == $fila['apellidos']) {
         $docentes[$i][0]= $fila['cedula'];
-        $docentes[$i][1]= explode("-", $_POST['txtProfesor'.$i])[1];
+        $docentes[$i][1]= convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesor'.$i])[1]));
       }
     }
 	}
@@ -36,16 +40,16 @@ $horarioCurso= array(
 for ($i=0; $i < 6; $i++) {
 	if (isset($_POST['txtHorario'.$i])) {
 		$tmp= explode(" ", $_POST['txtHorario'.$i]);
-    $horarioCurso[$i][0]= $tmp[0];
-    $horarioCurso[$i][1]= $tmp[1];
-    $horarioCurso[$i][2]= $tmp[3];
+    $horarioCurso[$i][0]= trim($tmp[0]);
+    $horarioCurso[$i][1]= trim($tmp[1]);
+    $horarioCurso[$i][2]= trim($tmp[3]);
 	}
 }
 
 //////////////////// Llenar modal grupos ////////////////////
 
 if (isset($_POST['btnModificar'])) {
-  $seRealizo = $db->agregarGrupo($curso, $num_grupo, $docentes, $horarioCurso, $jornada);
+  $seRealizo = $db->agregarGrupo($curso, $num_grupo, $docentes, $horarioCurso, convertirFraccionesDoble(trim($jornada)));
   if (!$seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";

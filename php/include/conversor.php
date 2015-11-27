@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function convertirFraccionesDoble($fraccion){
 	$valor = 0.0;
@@ -17,17 +17,17 @@ function convertirFraccionesDoble($fraccion){
 			break;
 		case '1/2':
 			$valor = 0.500;
-			break;		
+			break;
 
 		case '3/8':
 			$valor = 0.375;
-			break;	
+			break;
 		case '1/4':
 			$valor = 0.250;
-			break;	
+			break;
 		case '1/8':
 			$valor = 0.125;
-			break;	
+			break;
 	}
 	return $valor;
 } // fin de funcion
@@ -50,7 +50,7 @@ function convertirDobleFraciones ($fdouble) {
 			break;
 		case 0.500:
 			$valor = "1/2";
-			break;	
+			break;
 
 		case 0.375:
 			$valor = "3/8";
@@ -60,7 +60,7 @@ function convertirDobleFraciones ($fdouble) {
 			break;
 		case 0.125:
 			$valor = "1/8";
-			break;	
+			break;
 	}
 	return $valor;
 } // fin de funcion

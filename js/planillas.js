@@ -382,5 +382,5 @@ $("#btnHorario").click(function () {
 	/*$("button").on('click', function() {
  		$("#"+$(this).parent().attr('id')).remove();
 	});*/
-	idProfesor++;
+	idHorario++;
 });
