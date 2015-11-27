@@ -370,17 +370,17 @@ function cargarDatosPresupuesto(obj){
 }
 
 $("#btnProfesor").click(function () {
-	$("#div-profesores").html($("#div-profesores").html()+'<div id="inputProfesor'+idProfesor+'" class="form-group"><input class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
-	$("button").on('click', function() {
+	$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+	/*$("button").on('click', function() {
  		$("#"+$(this).parent().attr('id')).remove();
-	});
+	});*/
 	idProfesor++;
 });
 
 $("#btnHorario").click(function () {
-	$("#div-horarios").html($("#div-horarios").html()+'<div id="inputHorario'+idHorario+'" class="form-group"><input class="input-readonly" type="text" value="'+$("#selectDiaSemana option:selected").text()+" "+$("#selectHoraInicio option:selected").text()+" - "+$("#selectHoraFin option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
-	$("button").on('click', function() {
+	$("#div-horarios").html($("#div-horarios").html()+'<div id="divHorario'+idHorario+'" class="form-group"><input name="txtHorario'+idHorario+'" class="input-readonly" type="text" value="'+$("#selectDiaSemana option:selected").text()+" "+$("#selectHoraInicio option:selected").text()+" - "+$("#selectHoraFin option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+	/*$("button").on('click', function() {
  		$("#"+$(this).parent().attr('id')).remove();
-	});
+	});*/
 	idProfesor++;
 });
