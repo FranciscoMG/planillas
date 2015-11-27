@@ -20,7 +20,7 @@
 				<h4 class="modal-title">Registro Grupos</h4>
 			</div>
       <!-- Body -->
-			<form action="grupos/gestionGrupos.php" method="post">
+			<form id="formGrupos" action="grupos/gestionGrupos.php" method="post">
 				<div class="modal-body">
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="txtCarrera">Carrera:</label>
@@ -186,7 +186,7 @@
             }
           ?>
 				  <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide" id='grupoBtnAgregar'>
-					  <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
+					  <button id="btnRegistrar" type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
 					</div>
         </div>
       </form>
