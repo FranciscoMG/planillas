@@ -270,8 +270,8 @@ function activarAgregarGrupos() {
 
 	grupoAgregarModificar.className="";
 	grupoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
-	grupoBtnModificar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
-	grupoBtnEliminar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	grupoBtnModificar.className="hide";
+	grupoBtnEliminar.className="hide";
 }
 
 function activarModificarGrupos(){
@@ -301,7 +301,17 @@ function activarEliminarGrupos() {
 function cargarDatosCarrera(obj){
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	if (valorSeleccionado != "0") {
-	 	document.location="masterPage.php?modalGrupos=1&id_carrera="+valorSeleccionado;
+		if ($('#grupoBtnModificar').attr('class') == "hide" && $('#grupoBtnEliminar').attr('class') == "hide") {
+			document.location="masterPage.php?modalGrupos=1&id_carrera="+valorSeleccionado;
+		} else {
+			if ($('#grupoBtnAgregar').attr('class') == "hide" && $('#grupoBtnEliminar').attr('class') == "hide") {
+				document.location="masterPage.php?modalGrupos=2&id_carrera="+valorSeleccionado;
+			} else {
+				if ($('#grupoBtnAgregar').attr('class') == "hide" && $('#grupoBtnModificar').attr('class') == "hide") {
+					document.location="masterPage.php?modalGrupos=3&id_carrera="+valorSeleccionado;
+				}
+			}
+		}
  }
 }
 

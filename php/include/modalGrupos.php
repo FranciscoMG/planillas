@@ -182,7 +182,7 @@
           <?php
             if ($_SESSION['masterActivo'] == 1) {
               echo "</br>
-                    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton' id='grupoBtnModificar'>
+                    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide' id='grupoBtnModificar'>
                       <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
                     </div>
                     <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide' id='grupoBtnEliminar'>
@@ -191,7 +191,7 @@
                     </br>";
             }
           ?>
-				  <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide" id='grupoBtnAgregar'>
+				  <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton" id='grupoBtnAgregar'>
 					  <button id="btnRegistrar" type="submit" class="btn btn-primary btn-block" name="btnRegistrar">Registrar</button>
 					</div>
         </div>

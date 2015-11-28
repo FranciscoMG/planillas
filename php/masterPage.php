@@ -138,9 +138,9 @@
 						 	echo '<a class="" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>';
 						}
 						echo'<ul class="dropdown-menu">
-						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarAgregarGrupos()">Agregar</a></li>
-						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarModificarGrupos()">Modificar</a></li>
-						          <li><a href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarEliminarGrupos()">Eliminar</a></li>
+						          <li><a id="a-Agregar" href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarAgregarGrupos()">Agregar</a></li>
+						          <li><a id="a-Modificar" href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarModificarGrupos()">Modificar</a></li>
+						          <li><a id="a-Eliminar" href="#" data-toggle="modal" data-target="#modalGrupos" onclick="activarEliminarGrupos()">Eliminar</a></li>
 					          </ul>
 						      </li>';}?>
 
@@ -331,7 +331,17 @@
 /////////////// MODAL GRUPOS /////////////
 	if ($_GET['modalGrupos'] == 1) {
 		echo "<script>
-		$('#modalGrupos').modal('show');
+		$('#a-Agregar').click();
+		</script>";
+	}
+	if ($_GET['modalGrupos'] == 2) {
+		echo "<script>
+		$('#a-Modificar').click();
+		</script>";
+	}
+	if ($_GET['modalGrupos'] == 3) {
+		echo "<script>
+		$('#a-Eliminar').click();
 		</script>";
 	}
 ?>
