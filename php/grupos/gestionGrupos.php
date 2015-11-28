@@ -40,7 +40,12 @@ $horarioCurso= array(
 for ($i=0; $i < 6; $i++) {
 	if (isset($_POST['txtHorario'.$i])) {
 		$tmp= explode(" ", $_POST['txtHorario'.$i]);
-    $horarioCurso[$i][0]= trim($tmp[0]);
+    $diaSemana = array("L","K","M","J","V","S");
+    for($dS=0;$dS< count($diaSemana);$dS++) {
+      if(trim($tmp[0]) == $diaSemana[$dS]) {
+        $horarioCurso[$i][0]= $dS;
+      }
+    }
     $horarioCurso[$i][1]= trim($tmp[1]);
     $horarioCurso[$i][2]= trim($tmp[3]);
 	}

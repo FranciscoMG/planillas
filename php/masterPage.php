@@ -61,7 +61,7 @@
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
 
 								<li class="divider"></li>
-								
+
 								<li><a href="" data-toggle="modal" data-target="#modalConfirmacion">Exportar BD MySQL</a></li>
 								<li><a href="" data-toggle="modal" data-target="#modalBD">Importar BD MySQL</a></li>
  							</ul>

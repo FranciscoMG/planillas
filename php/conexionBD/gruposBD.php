@@ -15,12 +15,6 @@ class gruposBD extends conexionBD {
 			$this->agregarGrupoDocentes($curso, $num_grupo, $docentes[$i][0], $docentes[$i][1]);
 		}
 		for ($i=0; $i < count($horarios); $i++) {
-			$diaSemana = array("L","K","M","J","V","S");
-			for($dS=0;$dS< count($diaSemana);$dS++) {
-				if($horarios[$i][0] == $diaSemana[$dS]) {
-					$horarios[$i][0]= $dS;
-				}
-			}
 			$this->agregarGrupoHorarios($curso, $num_grupo, $horarios[$i][0], $horarios[$i][1], $horarios[$i][2]);
 		}
 

@@ -10,15 +10,15 @@ if ($_SESSION['masterActivo'] == 1 && $_SESSION['tipoPerfil'] == 0) {
 	//ENTER THE RELEVANT INFO BELOW
 	$mysqlDatabaseName ='SIDO';
 	$mysqlUserName ='root';
-	$mysqlPassword ='maikol';
+	$mysqlPassword ='interactivas';
 	$mysqlHostName ='localhost';
 	$mysqlImportFilename = '../../backups/'.$_POST['fileName'];
 
 	//DO NOT EDIT BELOW THIS LINE
 	//Export the database and output the status to the page
 	$command='mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
-	system($command);  
-	
+	system($command);
+
 
 	$_SESSION['alerta-contenido'] = "Base de Datos importada";
 
