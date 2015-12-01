@@ -51,10 +51,7 @@ CREATE TABLE `tb_Cursos` (
   `nombre_curso` varchar(100) NOT NULL,
   `creditos` int(11) NOT NULL,
   `jornada` double NOT NULL,
-  `fk_carrera` varchar(8) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`sigla`),
-  KEY `fk_carrera` (`fk_carrera`),
-  CONSTRAINT `tb_Cursos_ibfk_1` FOREIGN KEY (`fk_carrera`) REFERENCES `tb_Carrera` (`id_Carrera`)
+  PRIMARY KEY (`sigla`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,7 +61,7 @@ CREATE TABLE `tb_Cursos` (
 
 LOCK TABLES `tb_Cursos` WRITE;
 /*!40000 ALTER TABLE `tb_Cursos` DISABLE KEYS */;
-INSERT INTO `tb_Cursos` VALUES ('1','1',1,1,'002'),('2','777',2,0.75,'002'),('toooo','s',0,0.125,'003'),('toooot','w',0,0.5,'003');
+INSERT INTO `tb_Cursos` VALUES ('prueba','asdas',5,0.25),('rr','rrrr',2,0.5),('TM1100','Introduccion a la Informatica y tecnologia Multimedi',4,0.75),('TM4200','Diseno Grafico para Multimedia',2,0.75),('TM4400','Imagen en Movimiento',2,0.75);
 /*!40000 ALTER TABLE `tb_Cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,8 +88,108 @@ CREATE TABLE `tb_Docente` (
 
 LOCK TABLES `tb_Docente` WRITE;
 /*!40000 ALTER TABLE `tb_Docente` DISABLE KEYS */;
-INSERT INTO `tb_Docente` VALUES ('1','1','1',1,1),('123','Armando','apellido',1,1),('1234','Sergio','apellido',1,1);
+INSERT INTO `tb_Docente` VALUES ('1','1','1',1,1),('123','MÃ³nica','MuÃ±oz RamÃ­rez',1,1),('1234','Sergio','apellido',0,2);
 /*!40000 ALTER TABLE `tb_Docente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_Grupos`
+--
+
+DROP TABLE IF EXISTS `tb_Grupos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_Grupos` (
+  `sigla` varchar(10) NOT NULL,
+  `num_grupo` int(2) NOT NULL,
+  `jornada` double NOT NULL,
+  PRIMARY KEY (`sigla`,`num_grupo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_Grupos`
+--
+
+LOCK TABLES `tb_Grupos` WRITE;
+/*!40000 ALTER TABLE `tb_Grupos` DISABLE KEYS */;
+INSERT INTO `tb_Grupos` VALUES ('TM1100',2,0.375);
+/*!40000 ALTER TABLE `tb_Grupos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_GruposDocentes`
+--
+
+DROP TABLE IF EXISTS `tb_GruposDocentes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_GruposDocentes` (
+  `sigla` varchar(10) NOT NULL,
+  `num_grupo` int(2) NOT NULL,
+  `fk_docente` varchar(25) NOT NULL,
+  `tiempo_individual` double NOT NULL,
+  PRIMARY KEY (`sigla`,`num_grupo`,`fk_docente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_GruposDocentes`
+--
+
+LOCK TABLES `tb_GruposDocentes` WRITE;
+/*!40000 ALTER TABLE `tb_GruposDocentes` DISABLE KEYS */;
+INSERT INTO `tb_GruposDocentes` VALUES ('TM1100',2,'123',0.125),('TM1100',2,'1234',0.75);
+/*!40000 ALTER TABLE `tb_GruposDocentes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_GruposHorarios`
+--
+
+DROP TABLE IF EXISTS `tb_GruposHorarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_GruposHorarios` (
+  `sigla` varchar(10) NOT NULL,
+  `num_grupo` int(2) NOT NULL,
+  `dia` int(1) NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
+  PRIMARY KEY (`sigla`,`num_grupo`,`dia`,`hora_inicio`,`hora_fin`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_GruposHorarios`
+--
+
+LOCK TABLES `tb_GruposHorarios` WRITE;
+/*!40000 ALTER TABLE `tb_GruposHorarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_GruposHorarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_PlanEstudios`
+--
+
+DROP TABLE IF EXISTS `tb_PlanEstudios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_PlanEstudios` (
+  `fk_carrera` varchar(8) NOT NULL,
+  `fk_curso` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_PlanEstudios`
+--
+
+LOCK TABLES `tb_PlanEstudios` WRITE;
+/*!40000 ALTER TABLE `tb_PlanEstudios` DISABLE KEYS */;
+INSERT INTO `tb_PlanEstudios` VALUES ('001','TM1100'),('002','TM4200');
+/*!40000 ALTER TABLE `tb_PlanEstudios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -117,7 +214,7 @@ CREATE TABLE `tb_Presupuesto` (
 
 LOCK TABLES `tb_Presupuesto` WRITE;
 /*!40000 ALTER TABLE `tb_Presupuesto` DISABLE KEYS */;
-INSERT INTO `tb_Presupuesto` VALUES (6,'aaa','aaa',1);
+INSERT INTO `tb_Presupuesto` VALUES (6,'aaa','aaa',11.875);
 /*!40000 ALTER TABLE `tb_Presupuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +237,7 @@ CREATE TABLE `tb_Proyectos` (
   KEY `fk_ayudante` (`fk_ayudante`),
   CONSTRAINT `tb_Proyectos_ibfk_1` FOREIGN KEY (`fk_encargado`) REFERENCES `tb_Docente` (`cedula`),
   CONSTRAINT `tb_Proyectos_ibfk_2` FOREIGN KEY (`fk_ayudante`) REFERENCES `tb_Docente` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +246,7 @@ CREATE TABLE `tb_Proyectos` (
 
 LOCK TABLES `tb_Proyectos` WRITE;
 /*!40000 ALTER TABLE `tb_Proyectos` DISABLE KEYS */;
-INSERT INTO `tb_Proyectos` VALUES (1,'1',1,1,'1','1'),(11,'Pueblo',1,0.5,'1234','1234'),(12,'Arqueologia',1,0.25,'123','123');
+INSERT INTO `tb_Proyectos` VALUES (1,'1',1,1,'1','1'),(11,'Pueblo',1,0.875,'1234','1234'),(12,'Arqueologia',1,0.5,'123','123'),(15,'ee',0,0.25,'123','123');
 /*!40000 ALTER TABLE `tb_Proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +275,7 @@ CREATE TABLE `tb_Usuario` (
 
 LOCK TABLES `tb_Usuario` WRITE;
 /*!40000 ALTER TABLE `tb_Usuario` DISABLE KEYS */;
-INSERT INTO `tb_Usuario` VALUES ('admin','202cb962ac59075b964b07152d234b70','Pedro','Rodriguez',0,'asdad@asd.com',1),('p1','202cb962ac59075b964b07152d234b70','Vini','Rodriguez',1,'as@12.com',1),('p2','123','ppp','ttt',1,'pppp@u.com',0),('p3','123','sodn','oooo',1,'2opwin@asd.sad',0),('user-docencia','202cb962ac59075b964b07152d234b70','Carlos','Avellanos',1,'hdf@s.com',1),('user-recursos-humano','202cb962ac59075b964b07152d234b70','Ana','Olivares',2,'sd@',1);
+INSERT INTO `tb_Usuario` VALUES ('admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema',0,'prueba@prueba.com',1),('francisco','202cb962ac59075b964b07152d234b70','Francisco','Meléndez',0,'a@a.com',1),('user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 ',1,'unejemplolargo@ij.com',1),('user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido',2,'asd@asd.asd',1);
 /*!40000 ALTER TABLE `tb_Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -191,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-28 18:02:38
+-- Dump completed on 2015-12-01 11:00:18

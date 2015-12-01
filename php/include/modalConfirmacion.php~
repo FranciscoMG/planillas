@@ -14,7 +14,7 @@
       <div class="modal-body text-center">
         <p class="texto-efectos1">
           <?php 
-            echo "¿Desea crear un respaldo de la base de datos?";
+            echo "¿Desea crear un respaldo de la base de datos?<br/><br/>Los backups se encuentran en la ruta: /var/www/html/SIDOP/backups/";
            ?>
         </p>
       <br>
