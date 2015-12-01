@@ -76,7 +76,6 @@
                   echo "<option value='".$_GET['jornada_proyecto']."'>".$_GET['jornada_proyecto']."</option>";
                 }
               ?>
-	      <option>1/16</option>
               <option>1/8</option>
               <option>1/4</option>
               <option>3/8</option>

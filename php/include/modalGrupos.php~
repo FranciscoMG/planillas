@@ -91,7 +91,6 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-lg-10">
               <select id="selectTiempoProfesor" class="form-control" name="cboTiempoProfesor">
-		<option>1/16</option>
                 <option>1/8</option>
                 <option>1/4</option>
                 <option>3/8</option>
