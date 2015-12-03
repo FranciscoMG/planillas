@@ -1,4 +1,4 @@
-<?php include_once("../conexion_bd.php"); ?>
+
 <?php include_once("../conexionBD/usuariosBD.php"); ?>
 <?php include_once("../conexionBD/logBD.php"); ?>
   
