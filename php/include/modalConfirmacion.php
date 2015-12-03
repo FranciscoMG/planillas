@@ -21,11 +21,11 @@
 
          <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-              <a href="BD_Backup/obtenerBD.php" class="btn btn-danger"> aceptar</a>
+              <a href="BD_Backup/obtenerBD.php" class="btn btn-success"> aceptar</a>
             </div>
     
             <div class="btn-group" role="group">
-              <a href="masterPage.php" class="btn btn-success"> regresar</a>
+              <a href="masterPage.php" class="btn btn-warning"> regresar</a>
             </div>
         </div>
 

@@ -21,11 +21,11 @@
         <br>
          <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-danger">importar</button>
+              <button type="submit" class="btn btn-success">importar</button>
             </div>
     
             <div class="btn-group" role="group">
-              <a type="button" href="masterPage.php" class="btn btn-success">regresar</a>
+              <a type="button" href="masterPage.php" class="btn btn-warning">regresar</a>
             </div>
         </div>
       </form>

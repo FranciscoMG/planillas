@@ -1,8 +1,10 @@
-<?php include_once("../conexion_bd.php"); ?>
-<?php include_once("../conexionBD/usuariosBD.php"); ?>
-<?php include_once("../conexionBD/logBD.php"); ?>
-  
-<?php 
+<?php
+  include_once("../conexion_bd.php");
+
+  //
+  include_once("../conexionBD/usuariosBD.php");
+  //
+
   session_start();
 
   $usuario= isset($_POST['txtUsuario'])?$_POST['txtUsuario']:"";
@@ -10,7 +12,6 @@
 
   //
   $db = new usuariosBD();
-  $dbLog = new logBD();
   //
 
   if(empty($usuario) || empty($contrasena)) {
@@ -38,21 +39,9 @@
         if (md5($contrasena) == $fila['contrasena']) {
 
           if($fila['habilitado']== 1) {
-            $_SESSION['usuario'] = $usuario;
             $_SESSION['tipoPerfil']=$fila['perfil'];
             $_SESSION['nombre_usuario_perfil']=$fila['nombre_usuario']." ".$fila['apellido_usuario'];
             header("Location: ../masterPage.php");
-	          ////////////////// LOG /////////////////////
-            $utc = date("U");
-            $anio = date("Y");
-            $mes = date("m");
-            $hora = date("d");
-            $minuto = date("H");
-            $segundo = date("i");
-            @$ip = getenv(REMOTE_ADDR);
-            $navegador = $_SERVER["HTTP_USER_AGENT"]; 
-            $dbLog->agregarLog($utc , $anio , $mes , $hora , $minuto , $segundo , $ip , $navegador , $usuario , md5($contrasena) , $fila['nombre_usuario'] , $fila['apellido_usuario']);
-            /////////////////////////////////////////////
             exit();
         } else {
           $_SESSION['mensaje']= "El perfil no está habilitado";

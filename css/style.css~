@@ -3,7 +3,7 @@
 	height: 30px;
 	background-color: rgba(0,0,0,0.2);
 	margin: 10px 0;
-
+	color: #E1DFF6
 }
 .separador-horizontal {
 	width: 100%;
@@ -56,7 +56,7 @@ table thead th {
 	text-align: center;
 }
 .master #tabla-planillas {
-	
+
 }
 #contenedor-tabla {
 	margin-bottom: 0;
@@ -76,12 +76,7 @@ main #contenedor-tabla .contenedor-tabla-0 {
 	border: 1px solid #B4C7E8;
 }
 main #contenedor-tabla .contenedor-tabla-1 {
-	height: 100%;	
-}
-#example{
-	-webkit-transition: 0.5s!important;
-	-o-transition: 0.5s!important;
-	transition: 0.5s!important;
+	height: 100%;
 
 }
 main #contenedor-tabla .contenedor-tabla-2 {
@@ -89,10 +84,6 @@ main #contenedor-tabla .contenedor-tabla-2 {
 	padding-top: 2%;
 	margin-bottom: 20px;
 	box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.4);
--webkit-transition: 0.5s!important;
-	-o-transition: 0.5s!important;
-	transition: 0.5s!important;
-
 }
 #contenedor-tabla .clearfix a{
 	margin-top: 27px;
@@ -111,7 +102,15 @@ main #contenedor-tabla .contenedor-tabla-2 {
 	background-color: #680000;
 	color: white;
 }
-
+table .tr_style:hover {
+	background-color: #CCD6F7!important;
+}
+table .th_style:hover{
+	background-color: #005A98;
+}
+table .a_click:hover{
+	cursor: pointer;
+}
 #contenedor-tabla .clearfix .btn-revision:hover {
 	background-color: #4F0000;
 }
@@ -275,8 +274,9 @@ body {
 	box-shadow: 0px 0px 0px;
 }
 
-.espacio-botones-modal {
-	margin: 30px 0px 20px 0px;
+.espacio-boton {
+	padding-bottom:15px;
+	padding-top:15px;
 }
 
 /************* Texto intermitente *************/
@@ -299,6 +299,13 @@ body {
 
 .inputColor{
 	color: #005da4;
+}
+
+.input-readonly {
+	width: 90%;
+	border: 0px;
+	font-weight: bold;
+	cursor: default;
 }
 
 /**********Opciones desabilitadas***********/
