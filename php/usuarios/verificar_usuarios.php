@@ -1,6 +1,4 @@
 <?php
-  include_once("../conexion_bd.php");
-
   //
   include_once("../conexionBD/usuariosBD.php");
   //
