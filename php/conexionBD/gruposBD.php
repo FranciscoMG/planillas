@@ -60,7 +60,8 @@ class gruposBD extends conexionBD {
 	}
 
 	function obtenerGrupos($mostrarDistinto) {
-		$query= "SELECT gr.fk_carrera, gr.fk_curso, cu.nombre_curso, gr.num_grupo, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera = gd.fk_carrera AND gr.fk_carrera = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo";
+		$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, gr.num_grupo, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera = gd.fk_carrera AND gr.fk_carrera = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo
+";
 		if ($mostrarDistinto) {
 			$query.= ";";
 		} else {
@@ -125,6 +126,42 @@ class gruposBD extends conexionBD {
 		}
 		$stmt->bind_param('ssi', $carrera, $curso, $num_grupo);
 		return $stmt->execute();
+	}
+
+	function llenarTabla($id_Carrera){
+
+		if ($id_Carrera == "" || $id_Carrera == "all") {
+
+		$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera = gd.fk_carrera AND gr.fk_carrera = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo;";
+
+		} else {
+			$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera = '".$id_Carrera."' AND gr.fk_carrera = '".$id_Carrera."') AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo;";
+		}
+
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
+	}
+
+	function obtenerCarrera($id_Carrera) {
+		$query= "SELECT * FROM tb_Carrera";
+		if ($id_Carrera == "") {
+			$query.= ";";
+		} else {
+			$query.= " WHERE fk_carrera ='".$id_Carrera."' ;";
+		}
+
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
 	}
 }
 ?>

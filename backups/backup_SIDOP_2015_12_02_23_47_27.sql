@@ -61,7 +61,7 @@ CREATE TABLE `tb_Cursos` (
 
 LOCK TABLES `tb_Cursos` WRITE;
 /*!40000 ALTER TABLE `tb_Cursos` DISABLE KEYS */;
-INSERT INTO `tb_Cursos` VALUES ('prueba','asdas',5,0.25),('rr','rrrr',2,0.5),('TM1100','Introduccion a la Informatica y tecnologia Multimedi',4,0.75),('TM4200','Diseno Grafico para Multimedia',2,0.75),('TM4400','Imagen en Movimiento',2,0.75);
+INSERT INTO `tb_Cursos` VALUES ('1','1',0,0),('TM1100','Introducción a la Informática y Tecnología Multimedia',4,0.5),('TM4100','Desarrollo de aplicaciones interactivas',3,0.75),('TM4200','Diseño Gráfico para Multimedia',2,0.75),('TM4400','Imagen en Movimiento',2,0.75);
 /*!40000 ALTER TABLE `tb_Cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `tb_Docente` (
 
 LOCK TABLES `tb_Docente` WRITE;
 /*!40000 ALTER TABLE `tb_Docente` DISABLE KEYS */;
-INSERT INTO `tb_Docente` VALUES ('1','1','1',1,1),('123','MÃ³nica','MuÃ±oz RamÃ­rez',1,1),('1234','Sergio','apellido',0,2);
+INSERT INTO `tb_Docente` VALUES ('1','1','1',1,1),('123','MÃ³nica','MuÃ±oz RamÃ­rez',1,1),('1234','Sergio','apellido',0,2),('12345','AarÃ³n','Galazarga Carrillo',0,1);
 /*!40000 ALTER TABLE `tb_Docente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,10 +100,11 @@ DROP TABLE IF EXISTS `tb_Grupos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_Grupos` (
-  `sigla` varchar(10) NOT NULL,
+  `fk_carrera` varchar(8) NOT NULL,
+  `fk_curso` varchar(10) NOT NULL,
   `num_grupo` int(2) NOT NULL,
   `jornada` double NOT NULL,
-  PRIMARY KEY (`sigla`,`num_grupo`)
+  PRIMARY KEY (`fk_carrera`,`fk_curso`,`num_grupo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -113,7 +114,7 @@ CREATE TABLE `tb_Grupos` (
 
 LOCK TABLES `tb_Grupos` WRITE;
 /*!40000 ALTER TABLE `tb_Grupos` DISABLE KEYS */;
-INSERT INTO `tb_Grupos` VALUES ('TM1100',2,0.375);
+INSERT INTO `tb_Grupos` VALUES ('001','TM1100',1,0.125),('001','TM4100',1,0.125);
 /*!40000 ALTER TABLE `tb_Grupos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,11 +126,12 @@ DROP TABLE IF EXISTS `tb_GruposDocentes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_GruposDocentes` (
-  `sigla` varchar(10) NOT NULL,
+  `fk_carrera` varchar(8) NOT NULL,
+  `fk_curso` varchar(10) NOT NULL,
   `num_grupo` int(2) NOT NULL,
   `fk_docente` varchar(25) NOT NULL,
   `tiempo_individual` double NOT NULL,
-  PRIMARY KEY (`sigla`,`num_grupo`,`fk_docente`)
+  PRIMARY KEY (`fk_carrera`,`fk_curso`,`num_grupo`,`fk_docente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,7 +141,7 @@ CREATE TABLE `tb_GruposDocentes` (
 
 LOCK TABLES `tb_GruposDocentes` WRITE;
 /*!40000 ALTER TABLE `tb_GruposDocentes` DISABLE KEYS */;
-INSERT INTO `tb_GruposDocentes` VALUES ('TM1100',2,'123',0.125),('TM1100',2,'1234',0.75);
+INSERT INTO `tb_GruposDocentes` VALUES ('001','TM1100',1,'123',0.0625),('001','TM4100',1,'12345',0.125);
 /*!40000 ALTER TABLE `tb_GruposDocentes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,12 +153,13 @@ DROP TABLE IF EXISTS `tb_GruposHorarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_GruposHorarios` (
-  `sigla` varchar(10) NOT NULL,
+  `fk_carrera` varchar(8) NOT NULL,
+  `fk_curso` varchar(10) NOT NULL,
   `num_grupo` int(2) NOT NULL,
-  `dia` int(1) NOT NULL,
+  `dia_semana` int(1) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL,
-  PRIMARY KEY (`sigla`,`num_grupo`,`dia`,`hora_inicio`,`hora_fin`)
+  PRIMARY KEY (`fk_carrera`,`fk_curso`,`num_grupo`,`dia_semana`,`hora_inicio`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -166,6 +169,7 @@ CREATE TABLE `tb_GruposHorarios` (
 
 LOCK TABLES `tb_GruposHorarios` WRITE;
 /*!40000 ALTER TABLE `tb_GruposHorarios` DISABLE KEYS */;
+INSERT INTO `tb_GruposHorarios` VALUES ('001','TM1100',1,0,'07:00:00','07:00:00'),('001','TM4100',1,2,'08:00:00','11:50:00'),('001','TM4100',1,3,'13:00:00','16:50:00');
 /*!40000 ALTER TABLE `tb_GruposHorarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +203,7 @@ CREATE TABLE `tb_Log` (
 
 LOCK TABLES `tb_Log` WRITE;
 /*!40000 ALTER TABLE `tb_Log` DISABLE KEYS */;
-INSERT INTO `tb_Log` VALUES (1449025479,2015,12,1,21,4,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','',''),(1449025671,2015,12,1,21,7,'127.0.0.1','Apache/2.4.10 (Ubuntu)','admin','123','',''),(1449026191,2015,12,1,21,16,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','123','Administrador'),(1449026297,2015,12,1,21,18,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','Administrador','del SIstema'),(1449026347,2015,12,1,21,19,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449029847,2015,12,1,22,17,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449034182,2015,12,1,23,29,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449036199,2015,12,2,0,3,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449036220,2015,12,2,0,3,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 '),(1449037187,2015,12,2,0,19,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449100539,2015,12,2,17,55,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449101645,2015,12,2,18,14,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449101659,2015,12,2,18,14,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449102384,2015,12,2,18,26,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449102930,2015,12,2,18,35,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106787,2015,12,2,19,39,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106871,2015,12,2,19,41,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106969,2015,12,2,19,42,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 '),(1449107039,2015,12,2,19,43,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema');
+INSERT INTO `tb_Log` VALUES (1449025479,2015,12,1,21,4,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','',''),(1449025671,2015,12,1,21,7,'127.0.0.1','Apache/2.4.10 (Ubuntu)','admin','123','',''),(1449026191,2015,12,1,21,16,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','123','Administrador'),(1449026297,2015,12,1,21,18,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','123','Administrador','del SIstema'),(1449026347,2015,12,1,21,19,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449029847,2015,12,1,22,17,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449034182,2015,12,1,23,29,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449036199,2015,12,2,0,3,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449036220,2015,12,2,0,3,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 '),(1449037187,2015,12,2,0,19,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449100539,2015,12,2,17,55,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449101645,2015,12,2,18,14,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449101659,2015,12,2,18,14,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido'),(1449102384,2015,12,2,18,26,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449102930,2015,12,2,18,35,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106787,2015,12,2,19,39,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106871,2015,12,2,19,41,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449106969,2015,12,2,19,42,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 '),(1449107039,2015,12,2,19,43,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449110687,2015,12,2,20,44,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449118730,2015,12,2,22,58,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','francisco','202cb962ac59075b964b07152d234b70','Francisco','Meléndez'),(1449119175,2015,12,2,23,6,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema'),(1449119587,2015,12,2,23,13,'127.0.0.1','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/53','francisco','202cb962ac59075b964b07152d234b70','Francisco','Meléndez');
 /*!40000 ALTER TABLE `tb_Log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +225,7 @@ CREATE TABLE `tb_Mensaje` (
   KEY `receptor` (`receptor`),
   CONSTRAINT `tb_Mensaje_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `tb_Usuario` (`usuario`),
   CONSTRAINT `tb_Mensaje_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `tb_Usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +234,7 @@ CREATE TABLE `tb_Mensaje` (
 
 LOCK TABLES `tb_Mensaje` WRITE;
 /*!40000 ALTER TABLE `tb_Mensaje` DISABLE KEYS */;
-INSERT INTO `tb_Mensaje` VALUES (5,'admin','francisco','Prueba de mensaje\r\n','2015-12-02 19:42:18'),(6,'user-docencia','admin','Prueba de mensaje. se realizo modificaciones a la tablas y se agregaron nuevos presupuestos. Se necesita que se apruebe la revisiÃ³n. ','2015-12-02 19:43:48');
+INSERT INTO `tb_Mensaje` VALUES (7,'admin','francisco','Prueba de mensaje para Fran\r\n','2015-12-02 22:58:40'),(8,'francisco','admin','pppppppppppppppppppppppppppppppppppp','2015-12-02 23:06:05'),(9,'admin','francisco','segunda prueba yyyyyyyyyyyyyyyyyyyy','2015-12-02 23:12:56');
 /*!40000 ALTER TABLE `tb_Mensaje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,34 +257,8 @@ CREATE TABLE `tb_PlanEstudios` (
 
 LOCK TABLES `tb_PlanEstudios` WRITE;
 /*!40000 ALTER TABLE `tb_PlanEstudios` DISABLE KEYS */;
-INSERT INTO `tb_PlanEstudios` VALUES ('001','TM1100'),('002','TM4200');
+INSERT INTO `tb_PlanEstudios` VALUES ('001','TM1100'),('002','TM4200'),('001','TM4400'),('002','TM1100'),('001','TM4100');
 /*!40000 ALTER TABLE `tb_PlanEstudios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tb_Presupuesto`
---
-
-DROP TABLE IF EXISTS `tb_Presupuesto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tb_Presupuesto` (
-  `id_presupuesto` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_presupuesto` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
-  `codigo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `tiempo_presupuesto` double NOT NULL,
-  PRIMARY KEY (`id_presupuesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_Presupuesto`
---
-
-LOCK TABLES `tb_Presupuesto` WRITE;
-/*!40000 ALTER TABLE `tb_Presupuesto` DISABLE KEYS */;
-INSERT INTO `tb_Presupuesto` VALUES (6,'aaa','aaa',11.875);
-/*!40000 ALTER TABLE `tb_Presupuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -311,7 +289,7 @@ CREATE TABLE `tb_Proyectos` (
 
 LOCK TABLES `tb_Proyectos` WRITE;
 /*!40000 ALTER TABLE `tb_Proyectos` DISABLE KEYS */;
-INSERT INTO `tb_Proyectos` VALUES (1,'1',1,1,'1','1'),(11,'Pueblo',1,0.875,'1234','1234'),(12,'Arqueologia',1,0.5,'123','123'),(15,'ee',0,0.25,'123','123');
+INSERT INTO `tb_Proyectos` VALUES (1,'1',1,1,'1','1'),(11,'Pueblo',1,0,'1234','1234'),(12,'Arqueologia',1,0,'123','123'),(15,'ee',0,0.25,'123','123');
 /*!40000 ALTER TABLE `tb_Proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +317,7 @@ CREATE TABLE `tb_RegistroActividad` (
 
 LOCK TABLES `tb_RegistroActividad` WRITE;
 /*!40000 ALTER TABLE `tb_RegistroActividad` DISABLE KEYS */;
-INSERT INTO `tb_RegistroActividad` VALUES (11,'2015-12-02 00:00:00','user-docencia','lorem sdkoj  qohdbouq souabsd ousa duh asudh asojd huasbdaoiusdb aus d'),(33,'2015-12-09 00:00:00','user-recursos-humano','lorem ohd ou oushdb ouias douas hd'),(1449030193,'2015-12-01 22:23:13','admin','Prueba de descripcion');
+INSERT INTO `tb_RegistroActividad` VALUES (1449030193,'2015-12-01 22:23:13','admin','Prueba de descripcion');
 /*!40000 ALTER TABLE `tb_RegistroActividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +346,7 @@ CREATE TABLE `tb_Usuario` (
 
 LOCK TABLES `tb_Usuario` WRITE;
 /*!40000 ALTER TABLE `tb_Usuario` DISABLE KEYS */;
-INSERT INTO `tb_Usuario` VALUES ('admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema',0,'prueba@prueba.com',1),('francisco','202cb962ac59075b964b07152d234b70','Francisco','Meléndez',0,'a@a.com',1),('user-docencia','202cb962ac59075b964b07152d234b70','Nombre','Apellido1 apellido2 ',1,'unejemplolargo@ij.com',1),('user-recursos-humano','202cb962ac59075b964b07152d234b70','recursos h','apellido',2,'asd@asd.asd',1);
+INSERT INTO `tb_Usuario` VALUES ('admin','202cb962ac59075b964b07152d234b70','Administrador','del SIstema',0,'prueba@prueba.com',1),('francisco','202cb962ac59075b964b07152d234b70','Francisco','Meléndez',0,'a@a.com',1);
 /*!40000 ALTER TABLE `tb_Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -381,4 +359,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-02 19:44:42
+-- Dump completed on 2015-12-02 23:47:27

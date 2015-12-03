@@ -94,7 +94,7 @@ main #contenedor-tabla .contenedor-tabla-2 {
 #contenedor-tabla .clearfix a:hover {
 	background-color: #006E35;
 }
-#contenedor-tabla .clearfix .btn-revision {
+.btn-revision {
 	background-color: #680000;
 }
 
@@ -125,7 +125,7 @@ table .a_click:hover{
 	padding-bottom: 1%;
 }
 .aside .table {
-	height: 100px;
+	height: 200px;
 }
 footer {
 	color: white;

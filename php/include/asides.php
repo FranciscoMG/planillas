@@ -22,9 +22,9 @@
 									echo "<p>";
 									while ($fila2 = mysqli_fetch_assoc($resultadoUsuarios)) {
 										echo $fila2['nombre_usuario']." ";
-										echo $fila2['apellido_usuario']." / ";
+										echo $fila2['apellido_usuario']."<br/>";
 									}
-									echo $fila['fecha']."<br>";
+									echo "Fecha: ".$fila['fecha']."<br/>";
 									echo "</p>";
 									echo $fila['descripcion'];
 									echo "<td><tr>";
@@ -48,14 +48,17 @@
 										echo "<tr><td>";
 
 										$resultadoUsuarios = $dbUsuarios->obtenerUsuario($fila3['emisor']);
-										while ($fila2 = mysqli_fetch_assoc($resultadoUsuarios)) {
+										while ($fila4 = mysqli_fetch_assoc($resultadoUsuarios)) {
 											if ($contador == 0) {
 												echo "<p style='color:blue;'>";
 											} else {
 												echo "<p>";
 											}
 
-											echo "De: ".$fila2['nombre_usuario']." ".$fila2['apellido_usuario']." / ".$fila3['fecha']."<br></p>";
+											echo "De: ".$fila4['nombre_usuario']." ";
+											echo $fila4['apellido_usuario']."<br/>";
+											echo "Fecha: ".$fila3['fecha']."<br/>";
+											echo "</p>";
 											$contador =1;
 										}
 										echo $fila3['contenido_mensaje'];
