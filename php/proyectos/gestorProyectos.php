@@ -2,6 +2,15 @@
 <?php include_once("../conexionBD/proyectosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
+
 <?php $db= new proyectosBD(); ?>
 <?php 
 $_SESSION['alerta'] = 0;
@@ -25,6 +34,12 @@ if (isset($_POST['proyectosBtnAgregar'])) {
 	if ($resultado != false) {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Proyecto agregado";
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se agregó el proyecto: ".$nombre_proyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        ////////////////////////////////////////////
+
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
@@ -47,6 +62,12 @@ if (isset($_POST['btnEliminarProyecto'])) {
 		$db->eliminarProyecto($idProyecto);
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Proyecto eliminado";
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se eliminó el proyecto id: ".$idProyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        ///////////////////////////////////////////
+
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
@@ -66,6 +87,12 @@ if (isset($_POST['btnModificarProyectos'])) {
 		if ($resultado != false) {
 			$_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "Proyecto modificado";
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se modificó el proyecto: ".$nombre_proyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        /////////////////////////////////////////////
+
 			header("Location: ../masterPage.php");
 		}
 	} else {

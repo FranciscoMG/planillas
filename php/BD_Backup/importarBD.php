@@ -8,7 +8,7 @@ if ($_SESSION['masterActivo'] == 1 && $_SESSION['tipoPerfil'] == 0) {
 	if (ereg(".sql$", $_POST['fileName'])) {
 
 	//ENTER THE RELEVANT INFO BELOW
-	$mysqlDatabaseName ='SIDO';
+	$mysqlDatabaseName ='SIDOP';
 	$mysqlUserName ='root';
 	$mysqlPassword ='otto';
 	$mysqlHostName ='localhost';

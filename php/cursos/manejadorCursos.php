@@ -1,8 +1,16 @@
 <?php session_start(); ?>
 <?php include_once("../conexionBD/cursosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
-<?php 
 
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
+<?php 
 	$db = new cursosBD();
 ////////////////////////////// AGREGAR /////////////
 if (isset($_POST['btnRegistrar'])) {
@@ -27,6 +35,9 @@ if (isset($_POST['btnRegistrar'])) {
 
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Curso agregado";
+
+		$descripcionRegistroActividad="Se agregó el curso ".$sigla." ".$nombre_curso;
+		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 	} else {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Debe ingresar la sigla y el nombre del curso";
@@ -41,6 +52,9 @@ if (isset($_POST['btnEliminar'])) {
 
 	$db->eliminarCurso($sigla);
 	
+	$descripcionRegistroActividad="Se eliminó el curso ".$sigla;
+		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+
 	$_SESSION['alerta'] = 1;
 	$_SESSION['alerta-contenido'] = "Curso eliminado";
 	header("Location: ../masterPage.php");
@@ -60,6 +74,10 @@ if (isset($_POST['btnModificar'])) {
 	$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1 , $fk_carrera);
 	$_SESSION['alerta'] = 1;
 	$_SESSION['alerta-contenido'] = "Curso modificado";
+
+	$descripcionRegistroActividad="Se modificó el curso ".$sigla." ".$nombre_curso;
+		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+
 	header("Location: ../masterPage.php");
 	exit();
 } // fin de modificar

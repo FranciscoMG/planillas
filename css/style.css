@@ -94,8 +94,12 @@ main #contenedor-tabla .contenedor-tabla-2 {
 #contenedor-tabla .clearfix a:hover {
 	background-color: #006E35;
 }
-#contenedor-tabla .clearfix .btn-revision {
+.btn-revision {
+	margin-right: 1%;
 	background-color: #680000;
+}
+.btn-margin-left {
+	margin-left: 2%!important;
 }
 
 .btn-minus{
@@ -125,7 +129,7 @@ table .a_click:hover{
 	padding-bottom: 1%;
 }
 .aside .table {
-	height: 100px;
+	height: 200px;
 }
 footer {
 	color: white;
@@ -294,6 +298,10 @@ body {
 	70% {opacity:0.0}
 	100%{opacity:1.0}
 }
+.texto-efectos2 {
+	 color: #00F;
+	 font-size: 16px;
+	 }
 
 /********************Input********************/
 

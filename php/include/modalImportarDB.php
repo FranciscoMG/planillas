@@ -14,17 +14,18 @@
       <div class="modal-body text-center">
         <p class="texto-efectos1">¿Desea importar un archivo .sql y sobreescribir <br> la base de datos existente?</p>
       <br>
+      <br/>Los backups se encuentran en la ruta: /var/www/html/SIDOP/backups/</p>
 
       <form action="BD_Backup/importarBD.php" method="POST">
          <input class="form-control" type="file" name="fileName" accept=".sql">
         <br>
          <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-danger">importar</button>
+              <button type="submit" class="btn btn-success">importar</button>
             </div>
     
             <div class="btn-group" role="group">
-              <a type="button" href="masterPage.php" class="btn btn-success">regresar</a>
+              <a type="button" href="masterPage.php" class="btn btn-warning">regresar</a>
             </div>
         </div>
       </form>

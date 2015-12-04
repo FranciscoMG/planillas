@@ -7,6 +7,16 @@
 	$_SESSION['masterActivo']=1;
 ?>
 
+<?php include_once("conexionBD/estadoDatos.php"); ?>
+<?php $dbEstadoDatos = new estadoDatosBD(); ?>
+<?php 
+	$resultadoEstadoDatos = $dbEstadoDatos->obtenerEstadoDatos();
+	while ($fila = mysqli_fetch_assoc($resultadoEstadoDatos)) {
+		$estado = $fila['estado'];
+		$revisiones = $fila['revisiones'];
+		$periodo = $fila['periodo'];
+	}
+?>
 <!DOCTYPE HTML>
 <html lang="es">
 <head>
@@ -51,19 +61,27 @@
  							<ul class="dropdown-menu">
 	 							<li class="dropdown-header"><a href="#"> <?php echo $_SESSION['nombre_usuario_perfil']; ?> </a></li>
 	 							<li class="divider"></li>
-	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario</a></li>
+	 							<li><a href="sesion/cerrarSesion.php">Cambiar usuario <span class='glyphicon glyphicon-user' ></span></a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
+									if ($estado == $_SESSION['tipoPerfil']) {
+									
 									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'>Cambiar Opciones <span class='glyphicon glyphicon-ok-circle' id='spam_h'></span></a></li>
 
 										";
+									}
 								}
 									?>
+	 							<li><a href="" data-toggle="modal" data-target="#modalMensajes">Enviar mensaje <span class='glyphicon glyphicon-envelope' ></span></a></li>
 	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
 
-								<li class="divider"></li>
+	 							<?php if ($_SESSION['tipoPerfil'] == 0) {
+	 							echo '
+									<li class="divider"></li>
 
-								<li><a href="" data-toggle="modal" data-target="#modalConfirmacion">Exportar BD MySQL</a></li>
-								<li><a href="" data-toggle="modal" data-target="#modalBD">Importar BD MySQL</a></li>
+									<li><a href="" data-toggle="modal" data-target="#modalConfirmacion">Exportar BD MySQL</a></li>
+									<li><a href="" data-toggle="modal" data-target="#modalBD">Importar BD MySQL</a></li>';
+	 							} ?>
+
  							</ul>
 						</div>
 					</div>
@@ -85,22 +103,22 @@
 			        </div>
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
-			            <li class="">
-			              <a class="" href="masterPage.php">Inicio</a>
+			            <li class="" >
+			              <a class="" href="masterPage.php" >Inicio</a>
 			            </li>
 
-						<?php if($_SESSION['tipoPerfil'] == 0){
-						echo'<li class="dropdown">
-			              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
+						
+						<li class="dropdown <?php if($_SESSION['tipoPerfil'] != 0){echo "hide";} ?>">
+			              <a class="dropdown-toggle " data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
 			                <li><a class="texto_cambiar" data-toggle="modal" data-target="#modalActivarUsuarios">Activar usuarios</a></li>
 			              </ul>
-			            </li>';}?>
+			            </li>
 
 					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-						if ($_SESSION['tipoPerfil'] == 0) {
+						if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav">
 						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
 						} else {
@@ -115,7 +133,7 @@
 						            </li>';}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-					if ($_SESSION['tipoPerfil'] == 0) {
+					if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav2">';
 						    echo '<a class="desabilitado_a disabled" id="a_nav2" data-toggle="dropdown" href="#">Cursos <span class="caret"></span></a>';
 						} else {
@@ -130,7 +148,7 @@
 			            </li>';}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-					if ($_SESSION['tipoPerfil'] == 0) {
+					if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav3">';
 						    echo '<a class="desabilitado_a disabled" id="a_nav3" data-toggle="dropdown" href="#">Grupos <span class="caret"></span></a>';
 						} else {
@@ -145,7 +163,7 @@
 						      </li>';}?>
 
 			 <?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
-			 	if ($_SESSION['tipoPerfil'] == 0) {
+			 	if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav4">';
 						    echo '<a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
 						} else {
@@ -160,7 +178,7 @@
 				      </li>';}?>
 
 			<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2){
-				if ($_SESSION['tipoPerfil'] == 0) {
+				if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 				echo '<li class="desabilitado_li disabled" id="li_nav5">
 			          <a class="desabilitado_a disabled" id="a_nav5" data-toggle="dropdown" href="#">Presup. <span class="caret"></span></a>';
 				} else {
@@ -267,6 +285,10 @@
 			require("include/modalActivarUsuarios.php");
 		}
 	?>
+
+<!--/////////////////////////////////  Modal de Mensajes/////////////////////////////////////-->
+	<?php require("include/modalMensajes.php"); ?>
+
 <!--/////////////////////////////////  Modal de BD/////////////////////////////////////-->
 	<?php require("include/modalConfirmacion.php"); ?>
 
@@ -285,11 +307,20 @@
 <!--////////////////////////////////////// Modal de Alertas ////////////////////////-->
 	<?php require("include/modalAlertas.php"); ?>
 
+<!--////////////////////////////////////// Modal de Alertas Revisiones ////////////-->
+	<?php require("include/modalAlertaRevisiones.php"); ?>
+
+<!--////////////////////////////////////// Modal de Alertas Revisiones ////////////-->
+	<?php require("include/modalAlertaRevisionesRechasar.php"); ?>
+
 <!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
 	<?php require("include/modalCursos.php"); ?>
 
-<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Presupuestos/////////////////////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
+
+
+
 
 
 
@@ -382,6 +413,7 @@
 	}
 ?>
 
+
 <?php
 /////////////// Confirmacion ///////////
 	if ($_GET['modalConfirmacion'] == 1) {
@@ -392,3 +424,10 @@
 	}
 ?>
 </html>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>

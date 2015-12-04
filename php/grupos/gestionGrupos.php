@@ -1,3 +1,12 @@
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
+
 <?php session_start(); ?>
 <?php
   include_once("../conexionBD/gruposBD.php");
@@ -56,6 +65,12 @@ if (isset($_POST['btnRegistrar'])) {
   if (!$seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";
+
+    ///// registro de actividad //////
+    $descripcionRegistroActividad="Se agregó el grupo: ".$curso." - ".$num_grupo;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+    //////////////////////////////////
+
     header("Location: ../masterPage.php");
     exit();
   } else {
@@ -71,6 +86,12 @@ if (isset($_POST['btnModificar'])) {
   if ($seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo modificado con éxito";
+
+    ///// registro de actividad //////
+    $descripcionRegistroActividad="Se modificó el grupo: ";
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+    ////////////////////////////////
+
     header("Location: ../masterPage.php");
     exit();
   } else {
@@ -93,6 +114,12 @@ if (isset($_POST['btnEliminar'])) {
   if ($seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo borrado con éxito";
+
+    ///// registro de actividad //////
+    $descripcionRegistroActividad="Se eliminó el grupo: ";
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+    /////////////////////////////////
+
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el grupo";

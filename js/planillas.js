@@ -415,3 +415,10 @@ $("#btnHorario").click(function () {
 		idHorario++;
 	}
 });
+
+//////////////////////////////////////////////
+function cargarCboxPorCarrera(obj) {
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	var valorTexto = obj.options[obj.selectedIndex].text;
+	document.location="masterPage.php?cargarPorCarrera="+valorSeleccionado+"&valorPorCarreraTexto="+valorTexto;
+}

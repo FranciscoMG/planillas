@@ -1,7 +1,15 @@
-<?php
+<?php session_start(); ?>
 
-  session_start();
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
 
+<?php 
   //
   include_once("../conexionBD/usuariosBD.php");
   $db = new usuariosBD();
@@ -26,7 +34,13 @@ if (isset($_POST['btnModificar'])) {
     } else {
         $db->modificarUsuario($_POST['cboUsuario'], $contrasena, $nombre_usuario, $apellidos, $tipoPerfil, $correo, 0);
         $_SESSION['alerta'] = 1;
-        $_SESSION['alerta-contenido'] = "Usuario modificado";
+        $_SESSION['alerta-contenido'] = "Usuario modificado: ";
+
+        ///////////// registro de actividad //////////
+        $descripcionRegistroActividad="Se modificó al usuario: ".$_POST['cboUsuario'];
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        /////////////////////////////////////////////
+
         header("Location: ../masterPage.php");
         exit();
       }
@@ -41,7 +55,18 @@ if (isset($_POST['btnModificarHabilitado'])) {
   if (isset($_POST['isHabilitado'])) {
     if ($_POST['isHabilitado'] == "si") {
       $db->habilitarUsuario($id , 1);
+
+      ///////////// registro de actividad //////////
+      $descripcionRegistroActividad="Se habilitó al usuario: ".$id;
+      $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+      ////////////////////////////////////////////
+
     } else {
+      ///////////// registro de actividad //////////
+      $descripcionRegistroActividad="Se deshabilitó al usuario: ".$id;
+      $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+      //////////////////////////////////////////////
+
       $db->habilitarUsuario($id , 0);
     }
   }
@@ -52,6 +77,12 @@ if (isset($_POST['btnModificarHabilitado'])) {
 ////////////////////// ELIMINAR //////////////////////////////////
 if (isset($_POST['btnEliminar'])) {
   $db->borrarUsuario($_POST['cboUsuario']);
+
+  $_SESSION['alerta'] = 1;
+        $_SESSION['alerta-contenido'] = "Usuario eliminado ";
+
+  $descripcionRegistroActividad="Se eliminó al usuario: ".$_POST['cboUsuario'];
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
   header('Location: ../masterPage.php');
   exit();
 }
@@ -172,6 +203,8 @@ if (isset($_POST['btnRegistrar'])) {
         exit();
       }
     }
+
+
 
     $_SESSION['mensaje-modal']="";
     $_SESSION['usuario']="";
