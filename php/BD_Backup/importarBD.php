@@ -10,7 +10,7 @@ if ($_SESSION['masterActivo'] == 1 && $_SESSION['tipoPerfil'] == 0) {
 	//ENTER THE RELEVANT INFO BELOW
 	$mysqlDatabaseName ='SIDO';
 	$mysqlUserName ='root';
-	$mysqlPassword ='maikol';
+	$mysqlPassword ='otto';
 	$mysqlHostName ='localhost';
 	$mysqlImportFilename = '../../backups/'.$_POST['fileName'];
 

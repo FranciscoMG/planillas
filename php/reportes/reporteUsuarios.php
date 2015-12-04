@@ -1,5 +1,5 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 if ($_SESSION[masterActivo] != 1 || $_SESSION['tipoPerfil'] !=0) {
 	header("Location: ../sesion/cerrarSesion.php");
 }
@@ -15,7 +15,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 
 /////////////////// Header ///////////////////////
-$pdf->Image('../../img/ucr-logo.png',20,8,40);
+$pdf->Image('../../img/ucr-logo.png',10,8,40);
 $pdf->Cell(80);
 $pdf->Cell(50,10,"Universidad de Costa Rica");
 $pdf->Ln();
