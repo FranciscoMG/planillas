@@ -2,6 +2,15 @@
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php $db = new presupuestoBD(); ?>
 
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
+
 <?php 
 $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
@@ -19,6 +28,12 @@ if (isset($_POST['presupuestoBtnAgregar'])) {
 	} else {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Presupuesto agregado";
+
+		///////////// registro de actividad //////////
+        $descripcionRegistroActividad="Se agregó el presupuesto: ".$nombre_presupuesto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        /////////////////////////////////////////////
+
 		header("Location: ../masterPage.php");
 		exit();
 	}
@@ -35,6 +50,12 @@ if (isset($_POST['btnEliminarPresupuesto'])) {
 	} else {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Presupuesto eliminado";
+
+		///////////// registro de actividad //////////
+        $descripcionRegistroActividad="Se eliminó el presupuesto id: ".$id_presupuesto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        /////////////////////////////////////////////
+
 		header("Location: ../masterPage.php");
 		exit();
 	}
@@ -51,6 +72,12 @@ if (isset($_POST['btnModificarPresupuesto'])) {
 	} else {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Presupuesto modificado";
+
+		///////////// registro de actividad //////////
+        $descripcionRegistroActividad="Se modificó el presupuesto: ".$nombre_presupuesto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        /////////////////////////////////////////////
+
 		header("Location: ../masterPage.php");
 		exit();
 	}

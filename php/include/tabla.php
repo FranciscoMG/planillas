@@ -5,6 +5,7 @@
 <?php $dbGrupos = new gruposBD(); ?>
 
 <?php $dbCursos = new cursosBD(); ?>
+
 	<div class="container" id="contenedor-tabla">
 
 			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
@@ -106,7 +107,33 @@
 				</div>
 				<br>
 				<div class="row">
-					<a href="#" class="btn btn-danger btn-sm pull-right btn-revision" data-toggle="modal" data-target="#modalRevision">Revisión</a>
+				<?php 
+				if ($revisiones == 1 && $_SESSION['tipoPerfil'] == 0) {
+					echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Finalizar Proceso</a>';
+				} else {
+					if ($_SESSION['tipoPerfil'] == 0) {
+						if($estado == $_SESSION['tipoPerfil']) {
+							echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Aprovar</a>';
+						} else {
+							echo '<a class="btn btn-success btn-sm pull-right disabled" data-toggle="modal" data-target="#modalAlertaRevisiones">Aprovar</a>';
+						}
+					} else {
+						if($estado == $_SESSION['tipoPerfil']) {
+						echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Enviar a revisión</a>';
+						} else {
+							echo '<a class="btn btn-success btn-sm pull-right disabled" data-toggle="modal" data-target="#modalAlertaRevisiones">Enviar a revisión</a>';
+						}
+					}
+				}
+
+				if ($_SESSION['tipoPerfil'] == 0) {
+					if($estado == $_SESSION['tipoPerfil']) {
+					echo '<a class="btn btn-danger btn-sm pull-right btn-revision " data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechasar datos</a>';
+					} else {
+						echo '<a class="btn btn-danger btn-sm pull-right btn-revision disabled" data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechasar datos</a>';
+					}
+				}
+				?>
 				</div>
 				<br>
 			</div>

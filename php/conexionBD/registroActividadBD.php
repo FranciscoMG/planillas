@@ -18,7 +18,7 @@ class registroActividadBD extends conexionBD {
 	////////////////////////////////////////////////////////////
 	function agregarRegistroActividad($utc , $fecha , $usuario , $descripcion)
 	{
-		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_RegistroActividad`
+		$stmt = $this->con->prepare("INSERT INTO `tb_RegistroActividad`
 									(`utc`,
 									`fecha`,
 									`usuario`,
@@ -42,7 +42,7 @@ class registroActividadBD extends conexionBD {
 	/////////////////////////////////////////////////////////
 	function obtenerRegistroActividad()
 	{
-		$query = "SELECT * FROM tb_RegistroActividad ORDER BY fecha asc LIMIT 25 ";
+		$query = "SELECT * FROM tb_RegistroActividad ORDER BY fecha desc LIMIT 25 ";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

@@ -95,7 +95,11 @@ main #contenedor-tabla .contenedor-tabla-2 {
 	background-color: #006E35;
 }
 .btn-revision {
+	margin-right: 1%;
 	background-color: #680000;
+}
+.btn-margin-left {
+	margin-left: 2%!important;
 }
 
 .btn-minus{
@@ -294,6 +298,10 @@ body {
 	70% {opacity:0.0}
 	100%{opacity:1.0}
 }
+.texto-efectos2 {
+	 color: #00F;
+	 font-size: 16px;
+	 }
 
 /********************Input********************/
 
