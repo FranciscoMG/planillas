@@ -219,11 +219,14 @@
               <?php
                 if (isset($_GET['num_grupo_doble']) && $_GET['num_grupo_doble'] != 0) {
                   echo "<input id='cbhGrupoDoble' type='checkbox' name='chbGrupoDoble' onchange='activarGrupoDoble()' checked>";
+                  echo "<label for='cbhGrupoDoble' onclick='activarGrupoDoble()'>Este grupo es doble</label>";
                 } else {
-                  echo "<input id='cbhGrupoDoble' type='checkbox' name='chbGrupoDoble' onchange='activarGrupoDoble()'>";
+                  if (isset($_GET['modalGrupos']) && $_GET['modalGrupos'] == 1) {
+                    echo "<input id='cbhGrupoDoble' type='checkbox' name='chbGrupoDoble' onchange='activarGrupoDoble()'>";
+                    echo "<label for='cbhGrupoDoble' onclick='activarGrupoDoble()'>Este grupo es doble</label>";
+                  }
                 }
               ?>
-              <label for="cbhGrupoDoble" onclick="activarGrupoDoble()">Este grupo es doble</label>
             </div>
             <div id="grupoDoble" <?php if($_GET['num_grupo_doble'] != 0) {echo "class=''";} else {echo "class='hide'";} ?>>
               <div id="grupoAgregarDoble" class="form-group col-xs-12 col-sm-12 col-lg-12">
