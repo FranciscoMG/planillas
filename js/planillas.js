@@ -471,7 +471,7 @@ function cargarDatosPresupuesto(obj){
 
 $("#btnProfesor").click(function () {
 	idProfesor= cuentaDiv(false, false);
-	if (idProfesor < 6) {
+	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
 		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		$("button").on('click', function() {
 			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
@@ -497,7 +497,7 @@ $("#btnHorario").click(function () {
 
 $("#btnProfesorDoble").click(function () {
 	idProfesor= cuentaDiv(true, false);
-	if (idProfesor < 6) {
+	if (idProfesor < 6 && $("#selectAgregarDocenteDoble option:selected").text() != "") {
 		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		$("button").on('click', function() {
 			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {

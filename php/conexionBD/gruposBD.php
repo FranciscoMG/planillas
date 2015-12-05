@@ -17,7 +17,6 @@ class gruposBD extends conexionBD {
 		for ($i=0; $i < count($horarios); $i++) {
 			$this->agregarGrupoHorarios($carrera, $curso, $num_grupo, $horarios[$i][0], $horarios[$i][1], $horarios[$i][2]);
 		}
-
 		if ($num_grupo_doble != 0) {
 			for ($i=0; $i < count($docentesDoble); $i++) {
 				$this->agregarGrupoDocentes($carrera, $curso, $num_grupo_doble, $docentesDoble[$i][0], $docentesDoble[$i][1]);

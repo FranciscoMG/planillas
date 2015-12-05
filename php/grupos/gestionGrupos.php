@@ -140,11 +140,11 @@ if (isset($_POST['btnModificar'])) {
 }
 
 if (isset($_POST['btnEliminar'])) {
-  if ($curso != "") {
+  if ($carrera != 0 && $curso != 0) {
     $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2]);
   } else {
     $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ninguna carrera o grupo";
     header('Location: ../masterPage.php');
     exit();
   }
