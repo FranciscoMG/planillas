@@ -1,6 +1,10 @@
 <?php session_start(); ?>
-<?php include_once("../conexionBD/docentesBD.php"); ?>
 <?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
+<?php include_once("../include/conversor.php"); ?>
+<?php include_once("../conexionBD/docentesBD.php"); ?>
+
+<?php $dbDocentes = new docentesBD();  ?>
+<?php $db= new docentesConPermisoBD(); ?>
 
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
 <?php 
@@ -11,29 +15,30 @@ $usuario = $_SESSION['usuario'];
 $descripcionRegistroActividad = "";
 ?>
 
-<?php $dbDocentesConPermisos = new docentesConPermisoBD(); ?>
-<?php $db= new docentesBD(); ?>
 <?php
 
-if (isset($_POST['txtCedula']) && !empty($_POST['txtCedula'])) {
-  $cedula= $_POST['txtCedula'];
+if (isset($_POST['txtCedula2']) && !empty($_POST['txtCedula2'])) {
+  $cedula= $_POST['txtCedula2'];
 } else {
-  if (isset($_POST['cboxIDDocente']) && $_POST['cboxIDDocente'] != "0") {
-    $cedula= $_POST['cboxIDDocente'];
+  if (isset($_POST['cboxIDDocente2']) && $_POST['cboxIDDocente2'] != "0") {
+    $cedula= $_POST['cboxIDDocente2'];
   } else {
     $cedula= "";
   }
 }
 
-$nombre= isset($_POST['txtNombre'])?$_POST['txtNombre']:"";
-$apellidos= isset($_POST['txtApellidos'])?$_POST['txtApellidos']:"";
-$grado_academico= isset($_POST['cboGrado'])?$_POST['cboGrado']:"";
-$tipo_contrato= isset($_POST['cboContrato'])?$_POST['cboContrato']:"";
+$nombre= isset($_POST['txtNombre2'])?$_POST['txtNombre2']:"";
+$apellidos= isset($_POST['txtApellidos2'])?$_POST['txtApellidos2']:"";
+$grado_academico= isset($_POST['cboGrado2'])?$_POST['cboGrado2']:"";
+$tipo_contrato= isset($_POST['cboContrato2'])?$_POST['cboContrato2']:"";
+$fk_presupuesto= isset($_POST['cboPresupuesto2'])?$_POST['cboPresupuesto2']:"";
+$jornada_docenteConPermiso= isset($_POST['cboJornadaDocenteConPermiso2'])?$_POST['cboJornadaDocenteConPermiso2']:"";
+$jornada_docenteConPermiso = convertirFraccionesDoble($jornada_docenteConPermiso);
 
 //////////////////////// MODIFICAR //////////////////////////////
-if (isset($_POST['btnModificar'])) {
+if (isset($_POST['btnModificar2'])) {
   if ($cedula != "") {
-    $seRealizo= $db->modificarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+    $seRealizo= $db->modificarDocenteConPermiso($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
@@ -47,7 +52,7 @@ if (isset($_POST['btnModificar'])) {
     ////////////////// Registro de actividad /////////////
     $descripcionRegistroActividad="Se modificó el docente: ".$cedula." ".$nombre." ".$apellidos;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-    ////////////////////////////////////////
+    //////////////////////////////////////////
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el docente";
@@ -57,9 +62,9 @@ if (isset($_POST['btnModificar'])) {
 }
 
 ////////////////////// ELIMINAR //////////////////////////////////
-if (isset($_POST['btnEliminar'])) {
+if (isset($_POST['btnEliminar2'])) {
   if ($cedula != "") {
-    $seRealizo= $db->borrarDocente($cedula);
+    $seRealizo= $db->borrarDocenteConPermiso($cedula);
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
@@ -73,7 +78,7 @@ if (isset($_POST['btnEliminar'])) {
     ////////////////// Registro de actividad /////////////
     $descripcionRegistroActividad="Se eliminó el docente con la cédula: ".$cedula;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-    /////////////////////////////////////////////////////
+    //////////////////////////////////////////////
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el docente";
@@ -83,14 +88,9 @@ if (isset($_POST['btnEliminar'])) {
 }
 
 //////////////////// AGREGAR ////////////////////////////////
-if (isset($_POST['btnRegistrar'])) {
-  if(empty($cedula)) {
-    $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Se debe la ingresar la cédula del docente";
-    header("Location: ../masterPage.php?modalDocentes=1");
-    exit();
-  } else {
-    $resultado = $db->obtenerDocentes();
+if (isset($_POST['btnRegistrar2'])) {
+
+    $resultado = $db->obtenerDocentesConPermiso();
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['cedula']==$cedula) {
         $_SESSION['alerta'] = 1;
@@ -98,9 +98,16 @@ if (isset($_POST['btnRegistrar'])) {
         header("Location: ../masterPage.php");
         exit();
       }
+   
+
+    if (empty($nombre)) {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Debe ingresar el nombre";
+      header("Location: ../masterPage.php");
+      exit();
     }
 
-    $resultado2 = $dbDocentesConPermisos->obtenerDocentesConPermiso();
+    $resultado2 = $dbDocentes->obtenerDocentes();
 
     while ($fila= mysqli_fetch_assoc($resultado2)) {
       if ($fila['cedula']==$cedula) {
@@ -111,15 +118,6 @@ if (isset($_POST['btnRegistrar'])) {
       }
     }
 
-
-
-    if (empty($nombre)) {
-      $_SESSION['alerta'] = 1;
-      $_SESSION['alerta-contenido'] = "Debe ingresar el nombre";
-      header("Location: ../masterPage.php");
-      exit();
-    }
-
     if (empty($apellidos)) {
       $_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "Debe ingresar los apellidos";
@@ -127,7 +125,14 @@ if (isset($_POST['btnRegistrar'])) {
       exit();
     }
 
-    $seRealizo = $db->agregarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
+    if (empty($fk_presupuesto) || $fk_presupuesto == "") {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Debe agregar un presupuesto";
+      header("Location: ../masterPage.php");
+      exit();
+    }
+
+    $seRealizo = $db->agregarDocenteConPermiso($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
 
     if (!$seRealizo) {
       $_SESSION['alerta'] = 1;
@@ -136,7 +141,7 @@ if (isset($_POST['btnRegistrar'])) {
       ////////////////// Registro de actividad /////////////
       $descripcionRegistroActividad="Se agregó el docente ".$cedula." ".$nombre." ".$apellidos;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-      //////////////////////////////////////////////////
+      /////////////////////////////////////////////
 
       header("Location: ../masterPage.php");
       exit();
@@ -151,10 +156,10 @@ if (isset($_POST['btnRegistrar'])) {
 
 //////////////////// Llenar modal proyectos //////////////
 if (isset($_GET['id'])) {
-	$resultado = $db->obtenerDocentes();
+	$resultado = $db->obtenerDocentesConPermiso();
   while ($fila = mysqli_fetch_assoc($resultado)) {
   	if ($fila['cedula'] == $_GET['id']) {
-      header("Location: ../masterPage.php?modalDocentes=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
+      header("Location: ../masterPage.php?modalDocentesConPermisos=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
   		exit();
   	}
   }

@@ -42,6 +42,8 @@ function desabilitar_habiltarOpciones(){
 	var a_nav4= document.getElementById("a_nav4");
 	var li_nav5= document.getElementById("li_nav5");
 	var a_nav5= document.getElementById("a_nav5");
+	var li_nav6= document.getElementById("li_nav6");
+	var a_nav6= document.getElementById("a_nav6");
 	var habilita= document.getElementById("spam_h");
 
 	if(li_nav.className == "dropdown" && a_nav.className == "dropdown-toggle"){
@@ -55,6 +57,9 @@ function desabilitar_habiltarOpciones(){
 		a_nav4.className="desabilitado_a disabled";
 		li_nav5.className="desabilitado_li disabled";
 		a_nav5.className="desabilitado_a disabled";
+		li_nav6.className="desabilitado_li disabled";
+		a_nav6.className="desabilitado_a disabled";
+
 		habilita.className= "glyphicon glyphicon-ok-circle  hab_opcion";
 	}else{
 		li_nav.className="dropdown";
@@ -67,6 +72,8 @@ function desabilitar_habiltarOpciones(){
 		a_nav4.className="dropdown-toggle";
 		li_nav5.className="dropdown";
 		a_nav5.className="dropdown-toggle";
+		li_nav6.className="dropdown";
+		a_nav6.className="dropdown-toggle";
 		habilita.className= "glyphicon glyphicon-ban-circle";
 	}
 }
@@ -249,12 +256,73 @@ function activarEliminarDocente() {
 	selectEliminarDocente.onchange="";
 }
 
+///////////////////////////////////////////////
+function activarAgregarDocenteConPermisos() {
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar2');
+	var docenteAgregar = document.getElementById('docenteAgregar2');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente2');
+
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar2');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar2');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar2');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+	seccionEliminarDocente.className="";
+}
+function activarModificarDocenteConPermisos(){
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar2');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar2');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar2');
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar2');
+	var docenteAgregar = document.getElementById('docenteAgregar2');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente2');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	seccionEliminarDocente.className="";
+}
+
+function activarEliminarDocenteConPermisos() {
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar2');
+	var docenteAgregar = document.getElementById('docenteAgregar2');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente2');
+
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar2');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar2');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar2');
+	var selectEliminarDocente = document.getElementById('selectEliminarDocente2');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	seccionEliminarDocente.className="hide";
+	selectEliminarDocente.onchange="";
+}
+/////////////////////////////////////////////////
 function cargarDatosDocentes(obj){
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	if (valorSeleccionado != "0") {
 	 	document.location="../php/docentes/gestion_docentes.php?id="+valorSeleccionado;
  }
 }
+
+
+function cargarDatosDocentesConPermiso(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	if (valorSeleccionado != "0") {
+	 	document.location="../php/docentes/gestion_docentesConPermiso.php?id="+valorSeleccionado;
+ }
+}
+
 
 function refrescar(){
 	document.location="masterPage.php";
