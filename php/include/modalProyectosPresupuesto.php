@@ -49,7 +49,7 @@
           
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTipo_proyecto2">Tipo de proyecto:</label>
-            <select class="form-control" name="cboTipo_proyecto2" >
+            <select class="form-control" name="cboTipo_proyecto2" disabled>
             <?php
             if (isset($_GET['modalProyectosPresupuesto'])) {
               if ($_GET['tipo_proyecto'] == 0) {
@@ -126,12 +126,16 @@
 				<div class="modal-footer modal-delete-border">
          
            <div id='proyectosBtnEliminar2' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 <?php if ($_GET["eliminadoPresupuestoProyecto"] == "") {echo "hide";} ?>' style='padding-bottom:15px;'>
-             <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminarProyectoPresupuesto'>Eliminar</button>
+             
+             <button name='btnEliminarProyectoPresupuesto' type='submit' class='btn btn-danger btn-revision btn-block' >Eliminar</button>
+             
             </div>
           <br/>
             
 				  <div id="proyectosBtnAgregar2" class="col-xs-12 col-sm-12 col-lg-12 <?php if ($_GET["agregandoPresupuestoProyecto"] == "") {echo "hide";} ?>">
-					  <button type="submit" class="btn btn-primary btn-block" <?php if ($_SESSION[masterActivo] != 1 ) {echo 'disabled';} ?> name="proyectosBtnAgregarPresupuesto">Agregar</button>
+					  
+            <button name="proyectosBtnAgregarPresupuesto" type="submit" class="btn btn-primary btn-block"  >Agregar</button>
+
 					</div>
 				</div>
 			</form>

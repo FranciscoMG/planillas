@@ -26,45 +26,48 @@ $fk_encargado = $_POST['cboxPrimario2'];
 $fk_ayudante = $_POST['cboSecundario2'];
 $fk_presupuesto = $_POST['cboxPresupuesto2'];
 
-/////////////////////// Agregar /////////////////////
-if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
+/////////////////////////// Eliminar ///////////////////////
+if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 	if ($idProyecto != "") {
-	
+
 	$valorDouble = convertirFraccionesDoble($jornada_proyecto);
 
-	$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+	$existe = 0;
 
-	if ($resultado != false) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Proyecto asignado al proyecto".$nombre_proyecto;
+	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
 
-		///////////// registro de actividad //////////
-		$descripcionRegistroActividad="Se agregó el proyecto: ".$nombre_proyecto;
-        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-        ////////////////////////////////////////////
+	if ($resultado2 != false) {
+	echo  "<script>
+		alert();
+		</script>";
+		while ($fila = mysqli_fetch_assoc($resultado2)) {
+			if($fila['fk_id_presupuesto'] == $fk_presupuesto && $fila['fk_docente'] == $fk_encargado && $fila['jornada'] < 99) {
+				$valorDouble = ($fila['jornada'] - $valorDouble);
 
-		header("Location: ../masterPage.php");
-		exit();
-	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto al proyecto ".$fk_presupuesto.' - '.$fk_encargado.' - '.$valorDouble;
-		header("Location: ../masterPage.php");
-		exit();
+				$existe = 1;
+
+				if ($valorDouble < 0) {
+					$_SESSION['alerta'] = 1;
+					$_SESSION['alerta-contenido'] = "No puede eliminar esa cantidad de tiempos del docente devido a que el docente solo posee: ".$fila['jornada']." esta cantidad esta asignada en un grupo o otro proyecto".$valorDouble;
+					header("Location: ../masterPage.php");
+					exit();
+				}
+				if ($valorDouble > 01) {
+					$_SESSION['alerta'] = 1;
+					$_SESSION['alerta-contenido'] = "No puede agregar más de un tiempo al docente";
+					header("Location: ../masterPage.php");
+					exit();
+				}
+			}
+		}
 	}
-	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
-		header("Location: ../masterPage.php");
-		exit();
-	}
-}
 
-/////////////////////////// Eliminar ///////////////////////
-if (isset($_POST['btnEliminarProyecto'])) {
-	if ($idProyecto != "") {
-		$db->eliminarProyecto($idProyecto);
+	if($existe == 1){
+		$resultado = $dbPresupuestoDocente->modificarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Proyecto eliminado";
+
 
 		///////////// registro de actividad //////////
 		$descripcionRegistroActividad="Se eliminó el proyecto id: ".$idProyecto;
@@ -75,11 +78,80 @@ if (isset($_POST['btnEliminarProyecto'])) {
 		exit();
 	} else {
 		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "No se ha asignado un presupuesto a este proyecto";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+	} else {
+		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
 		header("Location: ../masterPage.php");
 		exit();
 	}
 }
+
+
+/////////////////////// Agregar /////////////////////
+if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
+	if ($idProyecto != "") {
+	
+	$valorDouble = convertirFraccionesDoble($jornada_proyecto);
+
+
+	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+
+	$existe = 0;
+
+	if ($resultado2 != false) {
+		while ($fila = mysqli_fetch_assoc($resultado2)) {
+			if($fila['fk_id_presupuesto'] == $fk_presupuesto && $fila['fk_docente'] == $fk_encargado && $fila['jornada'] < 99) {
+				$valorDouble = ($valorDouble + $fila['jornada']);
+
+				$existe = 1;
+				if ($valorDouble > 1) {
+					$_SESSION['alerta'] = 1;
+					$_SESSION['alerta-contenido'] = "No puede agregar más de un tiempo al docente";
+					header("Location: ../masterPage.php");
+					exit();
+				}
+			}
+		}
+	}	
+	echo "string".$fk_presupuesto.' - '.$fk_encargado.' - '.$valorDouble;
+
+	if ($existe == 1) {
+		$resultado = $dbPresupuestoDocente->modificarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+	} else {
+		$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+	}
+
+	if ($resultado != false) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Presupuesto asignado al proyecto".$nombre_proyecto;
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se ha asignado un presupuesto a un proyecto: ".$nombre_proyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        ////////////////////////////////////////////
+
+		header("Location: ../masterPage.php");
+		exit();
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto al proyecto ";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+}
+
+
+
 
 
 //////////////////// Llenar modal proyectos //////////////
@@ -96,5 +168,9 @@ if (isset($_GET['id'])) {
 }
  ?>
 
-<?php header("Location: ../masterPage.php");
-		exit(); ?>
+<?php 
+echo "string ".$idProyecto." - ".$_POST['proyectosBtnAgregarPresupuesto'];
+
+//header("Location: ../masterPage.php");
+//exit();
+ ?>

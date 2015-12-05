@@ -105,6 +105,18 @@ class cursosBD extends conexionBD
 		return false;
 	}
 
+	//////////////////////////////////////////
+	function obtenerCarrerasPlanEstudio() {
+		$query = "SELECT * FROM tb_PlanEstudios";
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$stmt->close();
+		return false;
+	}
+
 	////////////////////////////////////////////////
 	function agregarCarreraPlanEstudio($fk_carrera , $sigla) {
 		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_PlanEstudios` (`fk_carrera`, `fk_curso`) VALUES (?, ?);");
@@ -141,5 +153,7 @@ class cursosBD extends conexionBD
 		$stmt->close();
 		return true;
 	}
+
+
 }
  ?>

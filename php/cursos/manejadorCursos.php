@@ -88,11 +88,19 @@ if (isset($_GET['id'])) {
         while ($fila = mysqli_fetch_assoc($resultado)) {
         	if ($fila['sigla'] == $_GET['id']) {
         		
-        		$resultado2 = $db->obtenerCarreras();
+        		$resultado2 = $db->obtenerCarrerasPlanEstudio();
         		while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-        			if ($fila2['id_Carrera'] == $fila['fk_carrera']) {
-        				$id_Carrera = $fila2['id_Carrera'];
-        				$nombre_Carrera = $fila2['nombre_Carrera'];
+        			if ($fila2['fk_curso'] == $_GET['id']) {
+        				$id_Carrera = $fila2['fk_carrera'];
+
+        				$resultado3 = $db->obtenerCarreras();
+        				while ($fila3 = mysqli_fetch_assoc($resultado3)) {
+        					if ($fila3['id_Carrera'] == $fila2['fk_carrera']) {
+        						
+        						$nombre_Carrera = $fila3['nombre_Carrera'];
+        					}
+        				}
+
         			}
         		}
 

@@ -16,7 +16,7 @@ class presupuestoDocenteBD extends conexionBD {
 	/////////////////////////////////////////////////////////
 	function obtenerPresupuestoDocente($fk_id_presupuesto , $fk_docente)
 	{
-		$query = "SELECT * FROM `tb_PresupuestoDocente` WHERE fk_id_presupuesto = '".$id."' AND fk_docente = '".$fk_docente."'";
+		$query = "SELECT * FROM `SIDOP`.`tb_PresupuestoDocente` ;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -28,13 +28,13 @@ class presupuestoDocenteBD extends conexionBD {
 	/////////////////////////////////////////////////////////
 	function obtenerlistadoDePresupuestoDocente()
 	{
-		$query = "SELECT * FROM `tb_PresupuestoDocente` WHERE id_presupuesto != 1";
+		$query = "SELECT * FROM `tb_PresupuestoDocente` ;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
 			return $rs; //Retornamos las tuplas encontradas
 		}
-		$this->cerrar();
+		//$this->cerrar();
 		return false;
 	}
 
@@ -48,10 +48,10 @@ class presupuestoDocenteBD extends conexionBD {
 		}
 		$stmt->bind_param('isd', $fk_id_presupuesto , $fk_docente , $jornada);
 		$stmt->execute();
-		$newId = $stmt->insert_id;
+		//$newId = $stmt->insert_id;
 		$stmt->close();
 
-		return (!is_nan($newId)) ? $newId : FALSE; //Asignación Ternaria
+		return true; //Asignación Ternaria
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -68,12 +68,12 @@ class presupuestoDocenteBD extends conexionBD {
 	/////////////////////////////////////////////////////////////////
 	function modificarPresupuestoDocente($fk_id_presupuesto , $fk_docente , $jornada)
 	{
-		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_PresupuestoDocente` SET `fk_id_presupuesto` = ?, `fk_docente` = ?, `jornada` = ? WHERE `tb_PresupuestoDocente`.`id` = 2;");
+		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_PresupuestoDocente` SET `jornada` = ? WHERE `fk_id_presupuesto` = ? AND fk_docente = ?;");
 
 		if ( $stmt === FALSE ) {
-		  die('prepare() failed: ' . $this->con->error);
+		  die(' MODIFICAR prepare() failed: ' . $this->con->error);
 		}
-		$stmt->bind_param('isd', $fk_id_presupuesto , $fk_docente , $jornada);
+		$stmt->bind_param('dis', $jornada , $fk_id_presupuesto , $fk_docente);
 		return $stmt->execute();
 	}
 }
