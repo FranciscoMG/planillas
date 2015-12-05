@@ -162,7 +162,7 @@
 					          </ul>
 						      </li>';}?>
 
-			 <?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+			 <?php if(true){
 			 	if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav4">';
 						    echo '<a class="desabilitado_a disabled" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
@@ -170,11 +170,21 @@
 							echo '<li class="" id="li_nav4">';
 						 	echo '<a class="" id="a_nav4" data-toggle="dropdown" href="#">Proyectos <span class="caret"></span></a>';
 						}
-					echo '<ul class="dropdown-menu">
-				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
+
+					echo '<ul class="dropdown-menu">';
+					if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1) {
+				    echo '<li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
 				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
-				        </ul>
+				          <li class="divider"></li>';
+				    } 
+				    if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2) 
+				    {
+				    echo '<li><a href="#" data-toggle="modal" data-target="#modalProyectosPresupuesto" onclick="activarAgregarProyectoPresupuesto()">Asignar presupuesto a proyecto</a></li>
+
+				        <li><a href="#" data-toggle="modal" data-target="#modalProyectosPresupuesto" onclick="activarEliminarProyectoPresupuesto()">Remover presupuesto de proyecto</a></li>';
+				      }
+				    echo'</ul>
 				      </li>';}?>
 
 			<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2){
@@ -196,7 +206,7 @@
 				<?php if(true){
 			 	if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav6">';
-						    echo '<a class="desabilitado_a disabled" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos<span class="caret"></span></a>';
+						    echo '<a class="desabilitado_a disabled" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
 						} else {
 							echo '<li class="" id="li_nav6">';
 						 	echo '<a class="" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
@@ -300,16 +310,16 @@
 <!--/////////////////////////////////  Modal de Mensajes/////////////////////////////////////-->
 	<?php require("include/modalMensajes.php"); ?>
 
-<!--/////////////////////////////////  Modal de BD/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de BD//////////////////////////////////-->
 	<?php require("include/modalConfirmacion.php"); ?>
 
-<!--/////////////////////////////////  Modal de BD/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de BD/////////////////////////////////-->
 	<?php require("include/modalImportarDB.php"); ?>
 
-<!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Docentes ///////////////////////////-->
 	<?php require("include/modalDocentes.php"); ?>
 
-<!--/////////////////////////////////  Modal de Docentes/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Docentes con Permisos //////////////-->
 	<?php require("include/modalDocentesConPermisos.php"); ?>
 
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
@@ -327,10 +337,13 @@
 <!--////////////////////////////////////// Modal de Alertas Revisiones ////////////-->
 	<?php require("include/modalAlertaRevisionesRechasar.php"); ?>
 
-<!--/////////////////////////////////  Modal de Cursos/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Cursos ////////////////////////////-->
 	<?php require("include/modalCursos.php"); ?>
 
-<!--/////////////////////////////////  Modal de Presupuestos/////////////////////////////////////-->
+<!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
+	<?php require("include/modalProyectosPresupuesto.php"); ?>
+
+<!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
 
 
@@ -406,6 +419,15 @@
 	if ($_GET['modalProyectos'] == 1) {
 		echo "<script>
 		$('#modalProyectos').modal('show');
+		</script>";
+	}
+?>
+
+<?php
+/////////////// MODAL PROYECTOS PRESUPUESTOS ///////
+	if ($_GET['modalProyectosPresupuesto'] == 1) {
+		echo "<script>
+		$('#modalProyectosPresupuesto').modal('show');
 		</script>";
 	}
 ?>

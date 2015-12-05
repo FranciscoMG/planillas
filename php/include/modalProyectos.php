@@ -69,7 +69,7 @@
             </select>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboTiemposProyecto">Cantidad de tiempos:</label>
+            <label for="cboTiemposProyecto">Jornada:</label>
             <select class="form-control" name="cboTiemposProyecto">
               <?php
                 if (isset($_GET['modalProyectos'])) {

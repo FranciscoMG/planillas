@@ -1,0 +1,100 @@
+<?php session_start(); ?>
+<?php include_once("../conexionBD/proyectosBD.php"); ?>
+<?php include_once("../include/conversor.php"); ?>
+<?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+<?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
+
+
+<?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php 
+$dbRegistroActividad = new registroActividadBD(); 
+$utc = date('U');
+$fecha = date("Y-m-d H:i:s");
+$usuario = $_SESSION['usuario'];
+$descripcionRegistroActividad = "";
+?>
+
+<?php $db= new proyectosBD(); ?>
+<?php 
+$_SESSION['alerta'] = 0;
+$_SESSION['alerta-contenido'] = 0;
+
+$idProyecto = $_POST['cboxIDProyecto2'];
+$tipo_proyecto = $_POST['cboTipo_proyecto2'];
+$jornada_proyecto = $_POST['cboTiemposProyecto2'];
+$fk_encargado = $_POST['cboxPrimario2'];
+$fk_ayudante = $_POST['cboSecundario2'];
+$fk_presupuesto = $_POST['cboxPresupuesto2'];
+
+/////////////////////// Agregar /////////////////////
+if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
+	if ($idProyecto != "") {
+	
+	$valorDouble = convertirFraccionesDoble($jornada_proyecto);
+
+	$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+
+	if ($resultado != false) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Proyecto asignado al proyecto".$nombre_proyecto;
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se agregó el proyecto: ".$nombre_proyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        ////////////////////////////////////////////
+
+		header("Location: ../masterPage.php");
+		exit();
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto al proyecto ".$fk_presupuesto.' - '.$fk_encargado.' - '.$valorDouble;
+		header("Location: ../masterPage.php");
+		exit();
+	}
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+}
+
+/////////////////////////// Eliminar ///////////////////////
+if (isset($_POST['btnEliminarProyecto'])) {
+	if ($idProyecto != "") {
+		$db->eliminarProyecto($idProyecto);
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Proyecto eliminado";
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se eliminó el proyecto id: ".$idProyecto;
+        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+        ///////////////////////////////////////////
+
+		header("Location: ../masterPage.php");
+		exit();
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+}
+
+
+//////////////////// Llenar modal proyectos //////////////
+if (isset($_GET['id'])) {
+	$resultado = $db->obtenerProyecto();
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+        	if ($fila['id_proyecto'] == $_GET['id']) {
+        		
+        		$fraccion = convertirDobleFraciones($fila['jornada_proyecto']);
+        		header("Location: ../masterPage.php?modalProyectosPresupuesto=1&id_proyecto=".$fila['id_proyecto']."&nombre_proyecto=".$fila['nombre_proyecto']."&tipo_proyecto=".$fila['tipo_proyecto']."&jornada_proyecto=".$fraccion."&fk_encargado=".$fila['fk_encargado']."&fk_ayudante=".$fila['fk_ayudante']."&agregandoPresupuestoProyecto=".$_GET['agregandoPresupuestoProyecto']."&eliminadoPresupuestoProyecto=".$_GET['eliminadoPresupuestoProyecto']);
+				exit();
+        	}
+        }
+}
+ ?>
+
+<?php header("Location: ../masterPage.php");
+		exit(); ?>

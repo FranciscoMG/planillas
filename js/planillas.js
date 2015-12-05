@@ -202,6 +202,45 @@ function cargarDatosProyecto(obj){
 	document.location="../php/proyectos/gestorProyectos.php?id="+valorSeleccionado;
 }
 
+/////////////////////////////////////////////////////////
+function cargarDatosProyectoPresupuestoAgregar(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	document.location="../php/proyectos/gestorProyectosAsignarPresupuesto.php?id="+valorSeleccionado+"&agregandoPresupuestoProyecto=1";
+}
+
+function cargarDatosProyectoPresupuestoEliminar(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	document.location="../php/proyectos/gestorProyectosAsignarPresupuesto.php?id="+valorSeleccionado+"&eliminadoPresupuestoProyecto=1";
+}
+
+/////////////////////////////////////////////////////////
+
+function activarAgregarProyectoPresupuesto() {
+	var selectEliminarProyecto2 = document.getElementById('selectEliminarProyecto2');
+	var seccionEliminarProyecto = document.getElementById('seccionEliminarProyecto2');
+
+	var proyectoBtnEliminar = document.getElementById('proyectosBtnEliminar2');
+	var proyectoBtnAgregar = document.getElementById('proyectosBtnAgregar2');
+
+	selectEliminarProyecto2.setAttribute("onchange", "cargarDatosProyectoPresupuestoAgregar(this)");
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	seccionEliminarProyecto.className="hide";
+}
+
+function activarEliminarProyectoPresupuesto() {
+	var selectEliminarProyecto2 = document.getElementById('selectEliminarProyecto2');
+	var seccionEliminarProyecto = document.getElementById('seccionEliminarProyecto2');
+
+	var proyectosBtnEliminar = document.getElementById('proyectosBtnEliminar2');
+	var proyectosBtnAgregar = document.getElementById('proyectosBtnAgregar2');
+
+
+	selectEliminarProyecto2.setAttribute("onchange", "cargarDatosProyectoPresupuestoEliminar(this)");
+	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
+	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	seccionEliminarProyecto.className="hide";
+}
 
 /////////////////////////////////////////////////////////
 function activarAgregarDocente() {
