@@ -1,6 +1,3 @@
-var idProfesor= 1;
-var idHorario= 1;
-
 function cambiarTableHorizontal() {
 	var boton = document.getElementById("boton-tamano-tabla-horizontal");
 
@@ -372,6 +369,7 @@ function refrescar(){
 function activarAgregarGrupos() {
 	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
 	var grupoAgregar = document.getElementById('grupoAgregar');
+	var grupoAgregarDoble = document.getElementById('grupoAgregarDoble');
 	var grupoBtnAgregar = document.getElementById('grupoBtnAgregar');
 	var grupoBtnModificar = document.getElementById('grupoBtnModificar');
 	var docenteBtnEliminar = document.getElementById('grupoBtnEliminar');
@@ -379,6 +377,7 @@ function activarAgregarGrupos() {
 
 	grupoAgregarModificar.className="";
 	grupoAgregar.className="form-group col-xs-12 col-sm-12 col-lg-12";
+	grupoAgregarDoble.className="form-group col-xs-12 col-sm-12 col-lg-12";
 	grupoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
 	grupoBtnModificar.className="hide";
 	grupoBtnEliminar.className="hide";
@@ -388,12 +387,14 @@ function activarAgregarGrupos() {
 function activarModificarGrupos(){
 	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
 	var grupoAgregar = document.getElementById('grupoAgregar');
+	var grupoAgregarDoble = document.getElementById('grupoAgregarDoble');
 	var grupoBtnAgregar = document.getElementById('grupoBtnAgregar');
 	var grupoBtnModificar = document.getElementById('grupoBtnModificar');
 	var grupoBtnEliminar = document.getElementById('grupoBtnEliminar');
 
 	grupoAgregarModificar.className="";
 	grupoAgregar.className="hide";
+	grupoAgregarDoble.className="hide";
 	grupoBtnAgregar.className="hide";
 	grupoBtnModificar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
 	grupoBtnEliminar.className="hide";
@@ -411,6 +412,14 @@ function activarEliminarGrupos() {
 	grupoBtnModificar.className="hide";
 	grupoBtnEliminar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
 	selectCurso.onchange= "";
+}
+
+function activarGrupoDoble() {
+	if (document.getElementById('cbhGrupoDoble').checked) {
+		document.getElementById('grupoDoble').className="";
+	} else {
+		document.getElementById('grupoDoble').className="hide";
+	}
 }
 
 function cargarDatosCarrera(obj){
@@ -435,7 +444,7 @@ function cargarDatosGrupo(obj){
 	var valorSeleccionado2 = (obj.options[obj.selectedIndex].value).split(" ");
 	if (valorSeleccionado != "0") {
 		if ($('#grupoBtnAgregar').attr('class') == "hide" && $('#grupoBtnEliminar').attr('class') == "hide") {
-			document.location="../php/grupos/gestionGrupos.php?id_carrera="+valorSeleccionado+"&curso="+valorSeleccionado2[0]+"&num_grupo="+valorSeleccionado2[1];
+			document.location="../php/grupos/gestionGrupos.php?id_carrera="+valorSeleccionado+"&curso="+valorSeleccionado2[0]+"&num_grupo="+valorSeleccionado2[1]+"&num_grupo_doble="+valorSeleccionado2[2];
 		}
 	}
 }
@@ -500,8 +509,9 @@ function cargarDatosPresupuesto(obj){
 }
 
 $("#btnProfesor").click(function () {
-	if (idProfesor < 6) {
-		$("#div-profesores").html($("#div-profesores").html()+'<div id="#divProfesor'+(idProfesor-1)+'" class="form-group"><input name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+	idProfesor= cuentaDiv(false, false);
+	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
+		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		$("button").on('click', function() {
 			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
 				$("#"+$(this).parent().attr('id')).remove();
@@ -512,8 +522,9 @@ $("#btnProfesor").click(function () {
 });
 
 $("#btnHorario").click(function () {
+	idHorario= cuentaDiv(false, true);
 	if (idHorario < 6) {
-		$("#div-horarios").html($("#div-horarios").html()+'<div id="#divHorario'+(idHorario-1)+'" class="form-group"><input name="txtHorario'+idHorario+'" class="input-readonly" type="text" value="'+$("#selectDiaSemana option:selected").text()+" "+$("#selectHoraInicio option:selected").text()+" - "+$("#selectHoraFin option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		$("#div-horarios").html($("#div-horarios").html()+'<div id="divHorario'+idHorario+'" class="form-group"><input name="txtHorario'+idHorario+'" class="input-readonly" type="text" value="'+$("#selectDiaSemana option:selected").text()+" "+$("#selectHoraInicio option:selected").text()+" - "+$("#selectHoraFin option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		$("button").on('click', function() {
 			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
 				$("#"+$(this).parent().attr('id')).remove();
@@ -522,6 +533,62 @@ $("#btnHorario").click(function () {
 		idHorario++;
 	}
 });
+
+$("#btnProfesorDoble").click(function () {
+	idProfesor= cuentaDiv(true, false);
+	if (idProfesor < 6 && $("#selectAgregarDocenteDoble option:selected").text() != "") {
+		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		$("button").on('click', function() {
+			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
+				$("#"+$(this).parent().attr('id')).remove();
+			}
+		});
+		idProfesor++;
+	}
+});
+
+$("#btnHorarioDoble").click(function () {
+	idHorario= cuentaDiv(true, true);
+	if (idHorario < 6) {
+		$("#div-horariosDoble").html($("#div-horariosDoble").html()+'<div id="divHorarioDoble'+idHorario+'" class="form-group"><input name="txtHorarioDoble'+idHorario+'" class="input-readonly" type="text" value="'+$("#selectDiaSemanaDoble option:selected").text()+" "+$("#selectHoraInicioDoble option:selected").text()+" - "+$("#selectHoraFinDoble option:selected").text()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		$("button").on('click', function() {
+			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
+				$("#"+$(this).parent().attr('id')).remove();
+			}
+		});
+		idHorario++;
+	}
+});
+
+function cuentaDiv(esDoble, tipoDiv) {
+	idDiv=0;
+	RevisarDiv= "";
+	if (esDoble) {
+		if (tipoDiv) {
+			RevisarDiv= "divHorarioDoble";
+		} else {
+			RevisarDiv= "divProfesorDoble";
+		}
+	} else {
+		if (tipoDiv) {
+			RevisarDiv= "divHorario";
+		} else {
+			RevisarDiv= "divProfesor";
+		}
+	}
+	for (var i = 0; i < 6; i++) {
+		if (document.getElementById(RevisarDiv+i)) {
+			if (tipoDiv) {
+				document.getElementById(RevisarDiv+i).id=RevisarDiv+idDiv;
+				idDiv++;
+			} else {
+				document.getElementById(RevisarDiv+i).id=RevisarDiv+idDiv;
+				idDiv++;
+			}
+		}
+	}
+	return idDiv;
+}
 
 //////////////////////////////////////////////
 function cargarCboxPorCarrera(obj) {

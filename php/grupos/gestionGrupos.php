@@ -1,6 +1,6 @@
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
-<?php 
-$dbRegistroActividad = new registroActividadBD(); 
+<?php
+$dbRegistroActividad = new registroActividadBD();
 $utc = date('U');
 $fecha = date("Y-m-d H:i:s");
 $usuario = $_SESSION['usuario'];
@@ -59,9 +59,46 @@ for ($i=0; $i < 6; $i++) {
     $horarioCurso[$i][2]= trim($tmp[3]);
 	}
 }
+$num_grupo_doble= isset($_POST['cboGrupoDoble'])?$_POST['cboGrupoDoble']:"";
+$docentesDoble= array(
+  array(),
+);
+for ($i=0; $i < 6; $i++) {
+	if (isset($_POST['txtProfesorDoble'.$i])) {
+		$tmp= explode("-", $_POST['txtProfesorDoble'.$i])[0];
+		$nombre= trim(explode(" ", $tmp)[0]);
+		$apellidos= trim(explode(" ", $tmp)[1]);
+    if (!empty(trim(explode(" ", $tmp)[2]))) {
+      $apellidos.=" ".trim(explode(" ", $tmp)[2]);
+    }
+    $resultado = $db2->obtenerDocentes();
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+      if ($nombre == $fila['nombre'] && $apellidos == $fila['apellidos']) {
+        $docentesDoble[$i][0]= $fila['cedula'];
+        $docentesDoble[$i][1]= convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesorDoble'.$i])[1]));
+      }
+    }
+	}
+}
+$horarioCursoDoble= array(
+  array(),
+);
+for ($i=0; $i < 6; $i++) {
+	if (isset($_POST['txtHorarioDoble'.$i])) {
+		$tmp= explode(" ", $_POST['txtHorarioDoble'.$i]);
+    $diaSemana = array("L","K","M","J","V","S");
+    for($dS=0;$dS< count($diaSemana);$dS++) {
+      if(trim($tmp[0]) == $diaSemana[$dS]) {
+        $horarioCursoDoble[$i][0]= $dS;
+      }
+    }
+    $horarioCursoDoble[$i][1]= trim($tmp[1]);
+    $horarioCursoDoble[$i][2]= trim($tmp[3]);
+	}
+}
 
 if (isset($_POST['btnRegistrar'])) {
-  $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $docentes, $horarioCurso, $jornada);
+  $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $num_grupo_doble, $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
   if (!$seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";
@@ -82,7 +119,7 @@ if (isset($_POST['btnRegistrar'])) {
 }
 
 if (isset($_POST['btnModificar'])) {
-  $seRealizo = $db->modificarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], $docentes, $horarioCurso, $jornada);
+  $seRealizo = $db->modificarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2], $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
   if ($seRealizo) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Grupo modificado con éxito";
@@ -103,11 +140,11 @@ if (isset($_POST['btnModificar'])) {
 }
 
 if (isset($_POST['btnEliminar'])) {
-  if ($curso != "") {
-    $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1]);
+  if ($carrera != 0 && $curso != 0) {
+    $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2]);
   } else {
     $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
+    $_SESSION['alerta-contenido'] = "No se ha seleccionado ninguna carrera o grupo";
     header('Location: ../masterPage.php');
     exit();
   }
@@ -129,22 +166,34 @@ if (isset($_POST['btnEliminar'])) {
 }
 
 //////////////////// Llenar modal grupos //////////////
-if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo'])) {
+if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo']) && isset($_GET['num_grupo_doble'])) {
   $d= 0;
   $h= 0;
+  $dD= 0;
+  $hD= 0;
   $diaSemana = array("L","K","M","J","V","S");
   $resultado = $db->obtenerGrupos(FALSE);
   while ($fila = mysqli_fetch_assoc($resultado)) {
-    if ($fila['fk_carrera'] == $_GET['id_carrera'] && $fila['fk_curso'] == $_GET['curso'] && $fila['num_grupo'] == $_GET['num_grupo']) {
+    if ($fila['fk_carrera'] == $_GET['id_carrera'] && $fila['fk_curso'] == $_GET['curso'] && $fila['num_grupo'] == $_GET['num_grupo'] && $fila['num_grupo_doble'] == $_GET['num_grupo_doble']) {
       $carrera= $fila['fk_carrera'];
       $curso= $fila['fk_curso'];
       $num_grupo= $fila['num_grupo'];
-      $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
-      $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
-      $d++;
-      $horarioCurso[$h][0]= $diaSemana[$fila['dia_semana']];
-      $horarioCurso[$h][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
-      $h++;
+      $num_grupo_doble= $fila['num_grupo_doble'];
+      if ($fila['profesorDoble']) {
+        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
+        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
+        $dD++;
+        $horarioCursoDoble[$hD][0]= $diaSemana[$fila['dia_semana']];
+        $horarioCursoDoble[$hD][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
+        $hD++;
+      } else {
+        $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
+        $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
+        $d++;
+        $horarioCurso[$h][0]= $diaSemana[$fila['dia_semana']];
+        $horarioCurso[$h][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
+        $h++;
+      }
     }
     $jornada= convertirDobleFraciones($fila['jornada']);
   }
@@ -152,7 +201,11 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
   $horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
   $docentes= serialize($docentes);
   $horarioCurso= serialize($horarioCurso);
-  header("Location: ../masterPage.php?modalGrupos=2&id_carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&docentes=".$docentes."&horarios=".$horarioCurso."&jornada=".$jornada);
+  $docentesDoble= array_values(array_unique($docentesDoble, SORT_REGULAR));
+  $horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
+  $docentesDoble= serialize($docentesDoble);
+  $horarioCursoDoble= serialize($horarioCursoDoble);
+  header("Location: ../masterPage.php?modalGrupos=2&id_carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&docentes=".$docentes."&docentesDoble=".$docentesDoble."&horarios=".$horarioCurso."&horariosDoble=".$horarioCursoDoble."&jornada=".$jornada);
   exit();
 }
 ?>
