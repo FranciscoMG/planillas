@@ -40,7 +40,7 @@ class gruposBD extends conexionBD {
 	}
 
 	function agregarGrupoDocentes($carrera, $curso, $num_grupo, $docente, $tiempo_individual) {
-		$stmt = $this->con->prepare("INSERT INTO tb_GruposDocentes VALUES (?, ?, ?, ?, ?);");
+		$stmt = $this->con->prepare("INSERT INTO tb_GruposDocentes VALUES (?, ?, ?, ?, ?, null);");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}

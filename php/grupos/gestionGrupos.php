@@ -22,6 +22,7 @@ $descripcionRegistroActividad = "";
 $carrera= isset($_POST['cboIDCarrera'])?$_POST['cboIDCarrera']:"";
 $curso= isset($_POST['cboIDCurso'])?$_POST['cboIDCurso']:"";
 $num_grupo= isset($_POST['cboGrupo'])?$_POST['cboGrupo']:"";
+$esDoble= isset($_POST['chbGrupoDoble'])?TRUE:FALSE;
 $jornada= isset($_POST['cboJornada'])?convertirFraccionesDoble(trim($_POST['cboJornada'])):"";
 $docentes= array(
   array(),
@@ -98,49 +99,82 @@ for ($i=0; $i < 6; $i++) {
 }
 
 if (isset($_POST['btnRegistrar'])) {
-  $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $num_grupo_doble, $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
-  if (!$seRealizo) {
-    $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";
+  if ($carrera != "0" && $curso != "0" && $num_grupo != "0" && count($docentes[0]) > 1 && count($horarioCurso[0]) > 1) {
+    if ($esDoble && !($num_grupo_doble !="0" && count($docentesDoble[0]) > 1 && count($horarioCursoDoble[0]) > 1)) {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Debe llenar todos los campos para agregar un grupo doble";
+      header("Location: ../masterPage.php");
+      exit();
+    }
+    $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $num_grupo_doble, $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
+    if (!$seRealizo) {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";
+      unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
 
-    ///// registro de actividad //////
-    $descripcionRegistroActividad="Se agregó el grupo: ".$curso." - ".$num_grupo;
-        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-    //////////////////////////////////
+      ///// registro de actividad //////
+      $descripcionRegistroActividad="Se agregó el grupo: ".$curso." - G".$num_grupo;
+      if ($num_grupo_doble != 0) {
+        $descripcionRegistroActividad.=" y G".$num_grupo_doble;
+      }
+      $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+      //////////////////////////////////
 
-    header("Location: ../masterPage.php");
-    exit();
+      header("Location: ../masterPage.php");
+      exit();
+    } else {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el grupo";
+      header("Location: ../masterPage.php");
+      exit();
+    }
   } else {
     $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el grupo";
+    $_SESSION['alerta-contenido'] = "Debe llenar todos los campos para agregar un grupo";
     header("Location: ../masterPage.php");
     exit();
   }
 }
 
 if (isset($_POST['btnModificar'])) {
-  $seRealizo = $db->modificarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2], $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
-  if ($seRealizo) {
-    $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Grupo modificado con éxito";
+  if ($carrera != "0" && $curso != "0" && count($docentes[0]) > 1 && count($horarioCurso[0]) > 1) {
+    if ($esDoble && !(count($docentesDoble[0]) > 1 && count($horarioCursoDoble[0]) > 1)) {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Debe llenar todos los campos para modificar un grupo doble";
+      header("Location: ../masterPage.php");
+      exit();
+    }
+    $seRealizo = $db->modificarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2], $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
+    if ($seRealizo) {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Grupo modificado con éxito";
 
-    ///// registro de actividad //////
-    $descripcionRegistroActividad="Se modificó el grupo: ";
-        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-    ////////////////////////////////
+      ///// registro de actividad //////
+      $descripcionRegistroActividad="Se modificó el grupo: ".explode(" ", $curso)[0]." - G".explode(" ", $curso)[1];
+      if (explode(" ", $curso)[2] != "0") {
+        $descripcionRegistroActividad.=" y G".explode(" ", $curso)[2];
+      }
+      $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+      ////////////////////////////////
 
-    header("Location: ../masterPage.php");
-    exit();
+      header("Location: ../masterPage.php");
+      exit();
+    } else {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el grupo";
+      header("Location: ../masterPage.php");
+      exit();
+    }
   } else {
     $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el grupo";
+    $_SESSION['alerta-contenido'] = "Debe llenar todos los campos para modificar un grupo";
     header("Location: ../masterPage.php");
     exit();
   }
 }
 
 if (isset($_POST['btnEliminar'])) {
-  if ($carrera != 0 && $curso != 0) {
+  if ($carrera != "0" && $curso != "0") {
     $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2]);
   } else {
     $_SESSION['alerta'] = 1;
@@ -153,8 +187,11 @@ if (isset($_POST['btnEliminar'])) {
     $_SESSION['alerta-contenido'] = "Grupo borrado con éxito";
 
     ///// registro de actividad //////
-    $descripcionRegistroActividad="Se eliminó el grupo: ";
-        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+    $descripcionRegistroActividad="Se eliminó el grupo: ".explode(" ", $curso)[0]." - G".explode(" ", $curso)[1];
+    if (explode(" ", $curso)[2] != "0") {
+      $descripcionRegistroActividad.=" y G".explode(" ", $curso)[2];
+    }
+    $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
     /////////////////////////////////
 
   } else {
