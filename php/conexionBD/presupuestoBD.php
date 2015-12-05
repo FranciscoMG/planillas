@@ -28,7 +28,7 @@ class presupuestoBD extends conexionBD {
 	/////////////////////////////////////////////////////////
 	function obtenerlistadoDePresupuesto()
 	{
-		$query = "SELECT * FROM tb_Presupuesto";
+		$query = "SELECT * FROM tb_Presupuesto WHERE id_presupuesto != 1";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

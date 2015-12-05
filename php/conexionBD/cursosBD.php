@@ -14,12 +14,14 @@ class cursosBD extends conexionBD
 
 	/////////////////////////////////////////////////////
 	function agregarCurso ($sigla , $nombre_curso , $creditos , $jornada , $fk_carrera) {
-		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada` , `fk_carrera`) VALUES (?, ?, ?, ? , ?)");
+		$stmt = $this->con->prepare("INSERT INTO `tb_Cursos`(`sigla`, `nombre_curso`, `creditos`, `jornada`) VALUES (?, ?, ?, ? )");
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
 
-		$stmt->bind_param("ssids" , $sigla , $nombre_curso , $creditos , $jornada , $fk_carrera);
+		$this->agregarCarreraPlanEstudio($fk_carrera , $sigla);
+
+		$stmt->bind_param("ssid" , $sigla , $nombre_curso , $creditos , $jornada);
 		return $stmt->execute();
 
 
@@ -32,6 +34,8 @@ class cursosBD extends conexionBD
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
+
+		$this->eliminarCarreraPlanEstudio($sigla);
 
 		$stmt->bind_param('s' , $sigla);
 		$stmt->execute();
@@ -76,17 +80,19 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function modificarCurso ($sigla , $nombre_curso , $creditos , $jornada , $fk_carrera) {
-		$stmt = $this->con->prepare("UPDATE tb_Cursos SET nombre_curso = ? , creditos = ? , jornada = ? , fk_carrera = ? WHERE sigla = ?;");
+		$stmt = $this->con->prepare("UPDATE tb_Cursos SET nombre_curso = ? , creditos = ? , jornada = ?  WHERE sigla = ?;");
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
 
-		$stmt->bind_param('sidss' , $nombre_curso , $creditos , $jornada , $fk_carrera , $sigla);
+		$this-> modificarCarreraPlanEstudio($sigla , $fk_carrera);
+
+		$stmt->bind_param('sids' , $nombre_curso , $creditos , $jornada , $sigla);
 		$stmt->execute();
 		$stmt->close();
 		return true;
 	}
-
+	////////////////////////////////////////////////////
 	////////////////////////////////////////////////////
 	function obtenerCarreras() {
 		$query = "SELECT * FROM tb_Carrera ORDER BY nombre_Carrera";
@@ -97,6 +103,43 @@ class cursosBD extends conexionBD
 		}
 		$stmt->close();
 		return false;
+	}
+
+	////////////////////////////////////////////////
+	function agregarCarreraPlanEstudio($fk_carrera , $sigla) {
+		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_PlanEstudios` (`fk_carrera`, `fk_curso`) VALUES (?, ?);");
+		if ($stmt === FALSE) {
+			die("prepare fail agregarCarreraPlanEstudio()");
+		}
+
+		$stmt->bind_param("ss", $fk_carrera , $sigla );
+		return $stmt->execute();
+	}
+
+	////////////////////////////////////////////////
+	function eliminarCarreraPlanEstudio($sigla) {
+		$stmt = $this->con->prepare("DELETE FROM tb_PlanEstudios WHERE fk_curso = ? ;");
+		if ($stmt === FALSE) {
+			die("Prepare fail");
+		}
+
+		$stmt->bind_param('s', $sigla);
+		$stmt->execute();
+		$stmt->close();
+		return true;
+	}
+
+	/////////////////////////////////////////////////
+	function modificarCarreraPlanEstudio($sigla , $fk_carrera) {
+		$stmt = $this->con->prepare("UPDATE tb_PlanEstudios SET fk_carrera = ?  WHERE fk_curso = ?;");
+		if ($stmt === FALSE) {
+			die("Prepare fail");
+		}
+
+		$stmt->bind_param('is' ,$fk_carrera , $sigla);
+		$stmt->execute();
+		$stmt->close();
+		return true;
 	}
 }
  ?>

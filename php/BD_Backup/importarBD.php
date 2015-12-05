@@ -11,7 +11,7 @@ if ($_SESSION['masterActivo'] == 1 && $_SESSION['tipoPerfil'] == 0) {
 	$mysqlDatabaseName ='SIDOP';
 	$mysqlUserName ='root';
 	$mysqlPassword ='maikol';
-	$mysqlHostName ='localhost';
+	$mysqlHostName ='';
 	$mysqlImportFilename = '../../backups/'.$_POST['fileName'];
 
 	//DO NOT EDIT BELOW THIS LINE
