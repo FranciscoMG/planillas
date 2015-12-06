@@ -1,5 +1,14 @@
 <?php session_start() ?>
 <?php include_once("../include/conversor.php"); ?>
+<?php include_once("../conexionBD/gruposBD.php"); ?>
+<?php $dbGrupos = new gruposBD(); ?>
+
+<?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
+<?php $dbDocentesConPermiso = new docentesConPermisoBD(); ?>
+
+<?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+<?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
+
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php $db = new presupuestoBD(); ?>
 
@@ -49,6 +58,39 @@ if (isset($_POST['presupuestoBtnAgregar'])) {
 
 //////////////// ELIMINAR ///////////////////////////
 if (isset($_POST['btnEliminarPresupuesto'])) {
+
+	//////// Verifica que el presupuesto no este siendo usado ///
+	/// De proyectos
+	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+	while ($fila = mysqli_fetch_assoc($resultado2)) {
+		if ($fila['fk_id_presupuesto'] == $id_presupuesto) {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un proyecto.";
+			header("Location: ../masterPage.php");
+			exit();
+		}
+	}
+	//// De docentes con permisos
+	$resultado3 = $dbDocentesConPermiso->obtenerDocentesConPermiso();
+	while ($fila2 = mysqli_fetch_assoc($resultado3)) {
+		if ($fila2['fk_presupuesto'] == $id_presupuesto) {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un docente con permiso temporal.";
+			header("Location: ../masterPage.php");
+			exit();
+		}
+	}
+	////// De gruposDocentes 
+	$resultado4 = $dbGrupos->obtenerGrupoDocentes();
+	while ($fila3 = mysqli_fetch_assoc($resultado4)) {
+		if ($fila3['fk_presupuesto'] == $id_presupuesto) {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un grupo.";
+			header("Location: ../masterPage.php");
+			exit();
+		}
+	}
+	//////////////////////
 	$resultado = $db->borrarPresupuesto($id_presupuesto);
 	if ($resultado == false) {
 		$_SESSION['alerta'] = 1;

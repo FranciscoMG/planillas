@@ -140,6 +140,18 @@ class gruposBD extends conexionBD {
 		return $stmt->execute();
 	}
 
+	function obtenerGrupoDocentes() {
+		$query= "SELECT * FROM tb_GruposDocentes";
+		
+		$rs= $this->con->query($query);
+		if($rs->num_rows > 0)
+		{
+			return $rs; //Retornamos las tuplas encontradas
+		}
+		$this->cerrar();
+		return false;
+	}
+
 	function borrarGrupoHorario($carrera, $curso, $num_grupo) {
 		$stmt = $this->con->prepare("DELETE FROM tb_GruposHorarios WHERE fk_carrera = ? AND fk_curso = ? AND num_grupo = ?;");
 		if ( $stmt === FALSE ) {
