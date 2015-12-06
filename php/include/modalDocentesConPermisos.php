@@ -28,10 +28,12 @@
                 echo "<option value='0'></option>";
                 $resultado = $db->obtenerDocentesConPermiso();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                  if (isset($_GET['modalDocentesConPermisos']) && $_GET['cedula'] == $fila['cedula']) {
+                  if (isset($_GET['modalDocentesConPermisos']) && $_GET['cedula'] == $fila['cedula'] && $fila['cedula'] != 1) {
                     echo "<option value='".$fila['cedula']."' selected>".$fila['cedula']." - ".$fila['nombre']." ".$fila['apellidos']."</option>";
                   } else {
+                    if ($fila['cedula'] != 1) {
                     echo "<option value='".$fila['cedula']."'>".$fila['cedula']." - ".$fila['nombre']." ".$fila['apellidos']."</option>";
+                  }
                   }
                 }
               ?>

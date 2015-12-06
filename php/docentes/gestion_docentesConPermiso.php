@@ -1,4 +1,7 @@
 <?php session_start(); ?>
+<?php include_once("../conexionBD/presupuestoBD.php"); ?>
+<?php $dbPresupuesto = new presupuestoBD(); ?>
+
 <?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
@@ -75,6 +78,25 @@ if (isset($_POST['btnEliminar2'])) {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "Docente borrado con éxito";
 
+    /////////// Sumar al presupuesto //++++++++++++
+    $resultado4 = $db->obtenerDocentesConPermiso();
+    while ($fila4 = mysqli_fetch_assoc($resultado4)) {
+      if ($fila4['cedula'] == $cedula) {
+          $jornada_docenteConPermiso = $fila4['jornada_docenteConPermiso'];
+          die($jornada_docenteConPermiso);
+      }
+    }
+
+    $resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
+      while ($fila3 = mysqli_fetch_assoc($resultado3)) {
+        if ($fila3['id_presupuesto'] == $fk_presupuesto) {
+          $tiempo_sobrante2 = $fila3['tiempo_sobrante'];
+        }
+      }
+    $tiempo_sobrante2 = ($tiempo_sobrante2 + $jornada_docenteConPermiso);
+    $dbPresupuesto->sumarPresupuesto($fk_presupuesto , $tiempo_sobrante2);
+    /////////////////////////
+
     ////////////////// Registro de actividad /////////////
     $descripcionRegistroActividad="Se eliminó el docente con la cédula: ".$cedula;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
@@ -89,17 +111,6 @@ if (isset($_POST['btnEliminar2'])) {
 
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar2'])) {
-
-    $resultado = $db->obtenerDocentesConPermiso();
-    while ($fila= mysqli_fetch_assoc($resultado)) {
-      if ($fila['cedula']==$cedula) {
-        $_SESSION['alerta'] = 1;
-  			$_SESSION['alerta-contenido'] = "El docente ya existe";
-        header("Location: ../masterPage.php");
-        exit();
-      }
-   
-
     if (empty($nombre)) {
       $_SESSION['alerta'] = 1;
       $_SESSION['alerta-contenido'] = "Debe ingresar el nombre";
@@ -107,8 +118,17 @@ if (isset($_POST['btnRegistrar2'])) {
       exit();
     }
 
+    ///// Verifica que la cedula del docente no exista
+    $resultado = $db->obtenerDocentesConPermiso();
+    while ($fila= mysqli_fetch_assoc($resultado)) {
+      if ($fila['cedula']==$cedula) {
+        $_SESSION['alerta'] = 1;
+        $_SESSION['alerta-contenido'] = "El docente ya existe";
+        header("Location: ../masterPage.php");
+        exit();
+      }
+   
     $resultado2 = $dbDocentes->obtenerDocentes();
-
     while ($fila= mysqli_fetch_assoc($resultado2)) {
       if ($fila['cedula']==$cedula) {
         $_SESSION['alerta'] = 1;
@@ -117,24 +137,51 @@ if (isset($_POST['btnRegistrar2'])) {
         exit();
       }
     }
+    ////////////////////////
 
+    //// Contorles ////////////
     if (empty($apellidos)) {
       $_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "Debe ingresar los apellidos";
       header("Location: ../masterPage.php");
       exit();
     }
-
     if (empty($fk_presupuesto) || $fk_presupuesto == "") {
       $_SESSION['alerta'] = 1;
       $_SESSION['alerta-contenido'] = "Debe agregar un presupuesto";
       header("Location: ../masterPage.php");
       exit();
     }
+    /////////////////////////////
+
+    //////////// Verificar tiempos del presupuesto /////
+    $resultado = $dbPresupuesto->obtenerlistadoDePresupuesto();
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+      if ($fila['id_presupuesto'] == $fk_presupuesto) {
+        if ($fila['tiempo_sobrante'] < $jornada_docenteConPermiso) {
+          $_SESSION['alerta'] = 1;
+          $_SESSION['alerta-contenido'] = "Este presupuesto solo tiene ".$fila['tiempo_sobrante']." tiempos, no puede agregar los ".$jornada_docenteConPermiso." tiempos del docente.";
+          header("Location: ../masterPage.php");
+          exit();
+        }
+      }
+    }
+    /////////////////////////
 
     $seRealizo = $db->agregarDocenteConPermiso($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
 
     if (!$seRealizo) {
+      //////// Restar al presupuesto //------------
+      $resultado2 = $dbPresupuesto->obtenerlistadoDePresupuesto();
+      while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+        if ($fila2['id_presupuesto'] == $fk_presupuesto) {
+          $tiempo_sobrante = $fila2['tiempo_sobrante'];
+        }
+      }
+      $tiempo_sobrante = ($tiempo_sobrante - $jornada_docenteConPermiso);
+
+      $resultado3 = $dbPresupuesto->restarPresupuesto($fk_presupuesto , $tiempo_sobrante);
+      /////////////////////////////////-----------------
       $_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "Docente agregrado con éxito";
 

@@ -96,6 +96,18 @@ class presupuestoBD extends conexionBD {
 		$stmt->bind_param('di', $tiempo_sobrante , $id_presupuesto );
 		return $stmt->execute();
 	}
+
+	/////////////////////////////////////////////////////////////
+	function sumarPresupuesto($id_presupuesto, $tiempo_sobrante)
+	{
+		$stmt = $this->con->prepare("UPDATE tb_Presupuesto SET tiempo_sobrante = ? WHERE id_presupuesto = ?;");
+
+		if ( $stmt === FALSE ) {
+		  die('prepare() failed: ' . $this->con->error);
+		}
+		$stmt->bind_param('di', $tiempo_sobrante , $id_presupuesto );
+		return $stmt->execute();
+	}
 }
 
 
