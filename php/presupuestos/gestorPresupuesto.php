@@ -28,26 +28,26 @@ $codigo = $_POST['txtCodigoPresupuesto'];
 $tiempo_presupuesto = fraccionADecimalPresupuesto($_POST['cboTiemposPresupuesto']);
 $tiempo_sobrante = $tiempo_presupuesto;
 
-//////////////// AGREGAR //////////////////////////////
+//////////////// AGREGAR /////////////////////////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
 	if(empty($nombre_presupuesto)) {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Debe agregar el nombre del presupuesto";
+		$_SESSION['alerta-contenido'] = "Debe agregar el nombre del presupuesto.";
 		header("Location: ../masterPage.php");
 		exit();
 	}
 	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto , $tiempo_sobrante);
 	if ($resultado === FALSE) {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto";
+		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto.";
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto agregado";
+		$_SESSION['alerta-contenido'] = "Presupuesto agregado.";
 
 		///////////// registro de actividad //////////
-        $descripcionRegistroActividad="Se agregó el presupuesto: ".$nombre_presupuesto;
+        $descripcionRegistroActividad="Se agregó el presupuesto: ".$nombre_presupuesto." con ".$_POST['cboTiemposPresupuesto']." tiempos.";
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         /////////////////////////////////////////////
 
@@ -56,9 +56,14 @@ if (isset($_POST['presupuestoBtnAgregar'])) {
 	}
 }
 
-//////////////// ELIMINAR ///////////////////////////
+//////////////// ELIMINAR /////////////////////////////////////////////////
 if (isset($_POST['btnEliminarPresupuesto'])) {
-
+if (empty($id_presupuesto)) {
+	$_SESSION['alerta'] = 1;
+	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
+	header("Location: ../masterPage.php");
+	exit();
+}
 	//////// Verifica que el presupuesto no este siendo usado ///
 	/// De proyectos
 	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
@@ -91,20 +96,32 @@ if (isset($_POST['btnEliminarPresupuesto'])) {
 		}
 	}
 	//////////////////////
+
+	///////// Para registro de actividad ///
+	$resultado5 = $db->obtenerlistadoDePresupuesto();
+		$nombre_presupuesto2 = "";
+		while ($fila4 = mysqli_fetch_assoc($resultado5)) {
+			if($fila4['id_presupuesto'] == $id_presupuesto) {
+				$nombre_presupuesto2 = $fila4['nombre_presupuesto'];
+			}
+		}
+	///////////
+
 	$resultado = $db->borrarPresupuesto($id_presupuesto);
+
 	if ($resultado == false) {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al eliminar el presupuesto";
+		$_SESSION['alerta-contenido'] = "Error al eliminar el presupuesto.";
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto eliminado";
+		$_SESSION['alerta-contenido'] = "Presupuesto eliminado.";
 
-		///////////// registro de actividad //////////
-        $descripcionRegistroActividad="Se eliminó el presupuesto id: ".$id_presupuesto;
+	///////////// registro de actividad //////////
+        $descripcionRegistroActividad="Se eliminó el presupuesto ".$nombre_presupuesto2.".";
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
-        /////////////////////////////////////////////
+    /////////////////////////////////////////////
 
 		header("Location: ../masterPage.php");
 		exit();
@@ -113,15 +130,21 @@ if (isset($_POST['btnEliminarPresupuesto'])) {
 
 //////////////////// MODIFICAR ///////////////////////
 if (isset($_POST['btnModificarPresupuesto'])) {
+if (empty($id_presupuesto)) {
+	$_SESSION['alerta'] = 1;
+	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
+	header("Location: ../masterPage.php");
+	exit();
+}
 	$resultado = $db->modificarPresupuesto($id_presupuesto, $nombre_presupuesto , $codigo );
 	if ($resultado == false) {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto";
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto modificado";
+		$_SESSION['alerta-contenido'] = "Presupuesto modificado.";
 
 		///////////// registro de actividad //////////
         $descripcionRegistroActividad="Se modificó el presupuesto: ".$nombre_presupuesto;
