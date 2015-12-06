@@ -43,12 +43,12 @@ $pdf->Cell(10,4,iconv("UTF-8","ISO-8859-1","Sistema de planillas SIDOP"));
 $pdf->Ln(13);
 $pdf->SetFont('Arial','B',10);
 ////////////////// Contenido //////////////////////
-	$pdf->Cell(30,10,"Usuario",0,0,"C");
-	$pdf->Cell(30,10,"Nombre",0,0,"C");
-	$pdf->Cell(40,10,"Apellidos",0,0,"C");
-	$pdf->Cell(30,10,"Tipo de Perfil",0,0,"C");
-	$pdf->Cell(40,10,"Correo",0,0,"C");
-	$pdf->Cell(20,10,"habilitado",0,0,"C");
+	$pdf->Cell(30,10,"Usuario",1,0,"C");
+	$pdf->Cell(30,10,"Nombre",1,0,"C");
+	$pdf->Cell(40,10,"Apellidos",1,0,"C");
+	$pdf->Cell(30,10,"Tipo de Perfil",1,0,"C");
+	$pdf->Cell(40,10,"Correo",1,0,"C");
+	$pdf->Cell(20,10,"Habilitado",1,0,"C");
 	$pdf->Ln();
 
 	$pdf->SetFont('Arial','',9);

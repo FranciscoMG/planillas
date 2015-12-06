@@ -46,13 +46,26 @@ $pdf->Ln(13);
 $pdf->SetFont('Arial','B',10);
 
 ////////////////// Contenido //////////////////////
-	$pdf->Cell(50,10,"Nombre del presupuesto",0,0,"C");
-	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1","Código"),0,0,"C");
-	$pdf->Cell(30,10,"Tiempos Total",0,0,"C");
-	$pdf->Cell(45,10,"Real Asignado",0,0,"C");
-	$pdf->Cell(45,10,"Tiempos Disponibles ",0,0,"C");
-	$pdf->Cell(45,10,"Diferencia ",0,0,"C");
+
+	$pdf->Cell(50,10,"Nombre del presupuesto",1,0,"C");
+	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1","Código"),1,0,"C");
+	$pdf->Cell(30,10,"Tiempos Total",1,0,"C");
+	$pdf->Cell(45,10,"Real Asignado",1,0,"C");
+	$pdf->Cell(45,10,"Tiempos Disponibles ",1,0,"C");
+	$pdf->Cell(45,10,"Diferencia ",1,0,"C");
 	$pdf->Ln();
+
+
+/////////////////////Datos/////////////////////////////
+
+	$pdf->SetFont('Arial','',10);
+
+	$pdf->Cell(50,10,"No ",1,0,"C");
+	$pdf->Cell(20,10,"No ",1,0,"C");
+	$pdf->Cell(30,10,"No ",1,0,"C");
+	$pdf->Cell(45,10,"No ",1,0,"C");
+	$pdf->Cell(45,10,"No ",1,0,"C");
+	$pdf->Cell(45,10,"No ",1,0,"C");
 
 	$pdf->SetFont('Arial','',9);
 while ($fila = mysqli_fetch_assoc($resultado)) {

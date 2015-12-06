@@ -17,19 +17,19 @@ if ($_SESSION[masterActivo] != 1) {
 <?php
 
 
-$pdf = new FPDF();
+$pdf = new FPDF('L','mm','A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 
 /////////////////// Header ///////////////////////
 $pdf->Image('../../img/ucr-logo.png',10,8,40);
-$pdf->Cell(80);
+$pdf->Cell(110);
 $pdf->Cell(50,10,"Universidad de Costa Rica");
 $pdf->Ln();
-$pdf->Cell(80);
+$pdf->Cell(110);
 $pdf->Cell(90,0,iconv("UTF-8","ISO-8859-1","       Sede del Pacífico"));
 $pdf->Ln();
-$pdf->Cell(80);
+$pdf->Cell(110);
 
 $tipoPerfil;
 if ($_SESSION['tipoPerfil'] == 0) {
@@ -52,11 +52,12 @@ $pdf->Ln(13);
 $pdf->SetFont('Arial','B',10);
 
 //////////////////// Contenido ///////////////////////
-	$pdf->Cell(30,10,"Nombre",0,0,"C");
-	$pdf->Cell(30,10,"Tipo",0,0,"C");
-	$pdf->Cell(20,10,"Tiempos",0,0,"C");
-	$pdf->Cell(55,10,"Principal/Responsable",0,0,"C");
-	$pdf->Cell(55,10,"Asociado/Colaborador",0,0,"C");
+	$pdf->Cell(30,10,"Nombre",1,0,"C");
+	$pdf->Cell(30,10,"Tipo",1,0,"C");
+	$pdf->Cell(20,10,"Tiempos",1,0,"C");
+	$pdf->Cell(60,10,"Principal/Responsable",1,0,"C");
+	$pdf->Cell(60,10,"Asociado/Colaborador",1,0,"C");
+	$pdf->Cell(50,10,"Presupuesto",1,0,"C");
 	$pdf->Ln();
 
 	$pdf->SetFont('Arial','',9);
@@ -75,15 +76,16 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_encargado']);
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
 		if ($fila['fk_encargado'] == $fila2['cedula']) {
-			$pdf->Cell(55,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']),1);
+			$pdf->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']),1);
 		}
 	}
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_ayudante']);
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
 		if ($fila['fk_ayudante'] == $fila2['cedula']) {
-			$pdf->Cell(55,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']),1);
+			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']),1);
 		}
 	}
+	$pdf->Cell(50,10,"NO ",1);
 	$pdf->Ln();
 	}
 }
