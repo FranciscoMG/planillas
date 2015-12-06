@@ -66,11 +66,38 @@
                 echo "<option>".$_GET['tiempo_presupuesto']."</option>";
               }
                ?>
+               <option>1/8</option>
+              <option>1/4</option>
+              <option>3/8</option>
+              <option>1/2</option>
+              <option>5/8</option>
+              <option>3/4</option>
+              <option>7/8</option>
+              <option>1</option>";
               <?php 
+
+              $valor=1;
+              while ($valor < 99) {
+                echo"
+              <option>".$valor." 1/8</option>
+              <option>".$valor." 1/4</option>
+              <option>".$valor." 3/8</option>
+              <option>".$valor." 1/2</option>
+              <option>".$valor." 5/8</option>
+              <option>".$valor." 3/4</option>
+              <option>".$valor." 7/8</option>";
+              $valor = $valor + 1;
+              echo "
+              <option>".$valor."</option>";
+              }
+
+
+
+
               $valor=0;
               while ($valor < 100) {
                 $valor=$valor+0.0625;
-                echo "<option>".$valor."</option>";
+                
               }
                ?>
             </select>

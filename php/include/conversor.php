@@ -71,5 +71,125 @@ function convertirDobleFraciones ($fdouble) {
 	return $valor;
 } // fin de funcion
 
+////////////////////////////////////////////////////
+function fraccionADecimalPresupuesto($fraccion) {
+	$tamano = strlen($fraccion);
+
+
+	if($tamano == 1 || $tamano ==2) {
+		$final = (double) $fraccion;
+	}
+	if($tamano == 3) {
+		switch ($fraccion) {
+		case '1':
+			$valor = 1.000;
+			break;
+		case '7/8':
+			$valor = 0.875;
+			break;
+		case '3/4':
+			$valor = 0.750;
+			break;
+		case '5/8':
+			$valor = 0.625;
+			break;
+		case '1/2':
+			$valor = 0.500;
+			break;
+
+		case '3/8':
+			$valor = 0.375;
+			break;
+		case '1/4':
+			$valor = 0.250;
+			break;
+		case '1/8':
+			$valor = 0.125;
+			break;
+		case '1/16':
+			$valor = 0.0625;
+			break;
+		}
+		$final =  $valor;
+	}
+	if($tamano == 5) {
+		$double = (double) substr($fraccion, 0, 1);
+		$fraccion = substr($fraccion, 2, 3);;
+
+		switch ($fraccion) {
+		case '1':
+			$valor = 1.000;
+			break;
+		case '7/8':
+			$valor = 0.875;
+			break;
+		case '3/4':
+			$valor = 0.750;
+			break;
+		case '5/8':
+			$valor = 0.625;
+			break;
+		case '1/2':
+			$valor = 0.500;
+			break;
+
+		case '3/8':
+			$valor = 0.375;
+			break;
+		case '1/4':
+			$valor = 0.250;
+			break;
+		case '1/8':
+			$valor = 0.125;
+			break;
+		case '1/16':
+			$valor = 0.0625;
+			break;
+		}
+
+		$double2 = $valor;
+		$final = $double2 + $double;
+	
+	}
+	if($tamano == 6) {
+		$double = (double) substr($fraccion, 0, 2);
+		$fraccion = substr($fraccion, 3, 3);;
+
+		switch ($fraccion) {
+		case '1':
+			$valor = 1.000;
+			break;
+		case '7/8':
+			$valor = 0.875;
+			break;
+		case '3/4':
+			$valor = 0.750;
+			break;
+		case '5/8':
+			$valor = 0.625;
+			break;
+		case '1/2':
+			$valor = 0.500;
+			break;
+		case '3/8':
+			$valor = 0.375;
+			break;
+		case '1/4':
+			$valor = 0.250;
+			break;
+		case '1/8':
+			$valor = 0.125;
+			break;
+		case '1/16':
+			$valor = 0.0625;
+			break;
+		}
+
+		$double2 = $valor;
+		$final = $double + $double2;
+	}
+	return $final;
+}
+
 
  ?>

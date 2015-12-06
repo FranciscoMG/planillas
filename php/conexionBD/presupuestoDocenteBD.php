@@ -39,41 +39,39 @@ class presupuestoDocenteBD extends conexionBD {
 	}
 
 	////////////////////////////////////////////////////////////
-	function agregarPresupuestoDocente($fk_id_presupuesto , $fk_docente , $jornada)
+	function agregarPresupuestoDocente($fk_id_presupuesto , $fk_docente , $jornada , $idProyecto)
 	{
-		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_PresupuestoDocente` (`fk_id_presupuesto`, `fk_docente`, `jornada`) VALUES (?, ?, ?);");
+		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_PresupuestoDocente` (`fk_id_presupuesto`, `fk_docente`, `jornada` , `fk_proyecto`) VALUES (?, ?, ? , ?);");
 
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
-		$stmt->bind_param('isd', $fk_id_presupuesto , $fk_docente , $jornada);
-		$stmt->execute();
-		//$newId = $stmt->insert_id;
-		$stmt->close();
+		$stmt->bind_param('isdi', $fk_id_presupuesto , $fk_docente , $jornada , $idProyecto);
+		
 
-		return true; //Asignación Ternaria
+		return $stmt->execute(); //Asignación Ternaria
 	}
 
 	////////////////////////////////////////////////////////////////
-	function borrarPresupuestoDocente($fk_id_presupuesto , $fk_docente)
+	function borrarPresupuestoDocente($idProyecto)
 	{
-		$stmt = $this->con->prepare("DELETE FROM `tb_PresupuestoDocente` where fk_id_presupuesto = ? AND fk_docente = ?");
+		$stmt = $this->con->prepare("DELETE FROM `tb_PresupuestoDocente` where fk_proyecto = '".$idProyecto."'");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' .$this->con->error);
 		}
-		$stmt->bind_param('is', $fk_id_presupuesto , $fk_docente);
+		$stmt->bind_param('i', $idProyecto);
 		return $stmt->execute();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	function modificarPresupuestoDocente($fk_id_presupuesto , $fk_docente , $jornada)
+	function modificarPresupuestoDocente($fk_id_presupuesto , $fk_docente , $jornada ,$idProyecto)
 	{
-		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_PresupuestoDocente` SET `jornada` = ? WHERE `fk_id_presupuesto` = ? AND fk_docente = ?;");
+		$stmt = $this->con->prepare("UPDATE `SIDOP`.`tb_PresupuestoDocente` SET `jornada` = ? WHERE `fk_id_presupuesto` = ? AND fk_docente = ? AND 	fk_proyecto = ?;");
 
 		if ( $stmt === FALSE ) {
 		  die(' MODIFICAR prepare() failed: ' . $this->con->error);
 		}
-		$stmt->bind_param('dis', $jornada , $fk_id_presupuesto , $fk_docente);
+		$stmt->bind_param('disi', $jornada , $fk_id_presupuesto , $fk_docente , $idProyecto);
 		return $stmt->execute();
 	}
 }
