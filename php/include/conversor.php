@@ -96,7 +96,6 @@ function fraccionADecimalPresupuesto($fraccion) {
 		case '1/2':
 			$valor = 0.500;
 			break;
-
 		case '3/8':
 			$valor = 0.375;
 			break;

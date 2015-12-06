@@ -17,6 +17,7 @@ $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
 $codigo = $_POST['txtCodigoPresupuesto'];
 $tiempo_presupuesto = fraccionADecimalPresupuesto($_POST['cboTiemposPresupuesto']);
+$tiempo_sobrante = $tiempo_presupuesto;
 
 //////////////// AGREGAR //////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
@@ -26,7 +27,7 @@ if (isset($_POST['presupuestoBtnAgregar'])) {
 		header("Location: ../masterPage.php");
 		exit();
 	}
-	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto);
+	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto , $tiempo_sobrante);
 	if ($resultado === FALSE) {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto";
@@ -70,7 +71,7 @@ if (isset($_POST['btnEliminarPresupuesto'])) {
 
 //////////////////// MODIFICAR ///////////////////////
 if (isset($_POST['btnModificarPresupuesto'])) {
-	$resultado = $db->modificarPresupuesto($id_presupuesto, $nombre_presupuesto , $codigo , $tiempo_presupuesto);
+	$resultado = $db->modificarPresupuesto($id_presupuesto, $nombre_presupuesto , $codigo );
 	if ($resultado == false) {
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto";

@@ -39,20 +39,22 @@ class presupuestoBD extends conexionBD {
 	}
 
 	////////////////////////////////////////////////////////////
-	function agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto)
+	function agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto , $tiempo_sobrante)
 	{
 		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_Presupuesto`
 									(`nombre_presupuesto`,
 									`codigo`,
-									`tiempo_presupuesto`)
+									`tiempo_presupuesto`,
+									`tiempo_sobrante`)
 									VALUES
 									(?,
+									 ?,
 									 ?,
 									 ?)");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
-		$stmt->bind_param('ssd', $nombre_presupuesto , $codigo , $tiempo_presupuesto);
+		$stmt->bind_param('ssdd', $nombre_presupuesto , $codigo , $tiempo_presupuesto , $tiempo_sobrante);
 		$stmt->execute();
 		$newId = $stmt->insert_id;
 		$stmt->close();
@@ -74,12 +76,24 @@ class presupuestoBD extends conexionBD {
 	/////////////////////////////////////////////////////////////////
 	function modificarPresupuesto($id_presupuesto, $nombre_presupuesto , $codigo , $tiempo_presupuesto)
 	{
-		$stmt = $this->con->prepare("UPDATE tb_Presupuesto SET nombre_presupuesto = ?, codigo = ?, tiempo_presupuesto = ? WHERE id_presupuesto = ?;");
+		$stmt = $this->con->prepare("UPDATE tb_Presupuesto SET nombre_presupuesto = ?, codigo = ? WHERE id_presupuesto = ?;");
 
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: ' . $this->con->error);
 		}
-		$stmt->bind_param('ssdi', $nombre_presupuesto , $codigo , $tiempo_presupuesto , $id_presupuesto);
+		$stmt->bind_param('ssi', $nombre_presupuesto , $codigo , $id_presupuesto);
+		return $stmt->execute();
+	}
+
+	//////////////////////////////////////////////////////////////
+	function restarPresupuesto($id_presupuesto, $tiempo_sobrante)
+	{
+		$stmt = $this->con->prepare("UPDATE tb_Presupuesto SET tiempo_sobrante = ? WHERE id_presupuesto = ?;");
+
+		if ( $stmt === FALSE ) {
+		  die('prepare() failed: ' . $this->con->error);
+		}
+		$stmt->bind_param('di', $tiempo_sobrante , $id_presupuesto );
 		return $stmt->execute();
 	}
 }

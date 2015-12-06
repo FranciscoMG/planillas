@@ -60,7 +60,7 @@
          
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTiemposPresupuesto">Cantidad de tiempos:</label>
-            <select class="form-control" name="cboTiemposPresupuesto">
+            <select class="form-control" name="cboTiemposPresupuesto" <?php if (isset($_GET['modalPresupuesto'])) {echo " disabled";} ?>>
               <?php 
               if (isset($_GET['modalPresupuesto'])) {
                 echo "<option>".$_GET['tiempo_presupuesto']."</option>";
