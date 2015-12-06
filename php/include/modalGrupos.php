@@ -58,9 +58,17 @@
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                       if ($_GET['id_carrera'] == $fila['fk_carrera']) {
                         if ($_GET['curso'] == $fila['fk_curso'] && $_GET['num_grupo'] == $fila['num_grupo']) {
-                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']."' selected>G".$fila['num_grupo']." ".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']." ".$fila['num_grupo_doble']."' selected>G".$fila['num_grupo']." ";
+                          if ($fila['num_grupo_doble'] != 0) {
+                            echo " y G".$fila['num_grupo_doble']." ";
+                          }
+                          echo $fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                         } else {
-                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']."'>G".$fila['num_grupo']." ".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']." ".$fila['num_grupo_doble']."'>G".$fila['num_grupo']." ";
+                          if ($fila['num_grupo_doble'] != 0) {
+                            echo " y G".$fila['num_grupo_doble']." ";
+                          }
+                          echo $fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                         }
                       }
                     }
@@ -69,7 +77,11 @@
                       $resultado = $db->obtenerGrupos(TRUE);
                       while ($fila = mysqli_fetch_assoc($resultado)) {
                         if ($_GET['id_carrera'] == $fila['fk_carrera']) {
-                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']."'>G".$fila['num_grupo']." ".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']." ".$fila['num_grupo_doble']."'>G".$fila['num_grupo']." ";
+                          if ($fila['num_grupo_doble'] != 0) {
+                            echo " y G".$fila['num_grupo_doble']." ";
+                          }
+                          echo $fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                         }
                       }
                     }
@@ -82,10 +94,17 @@
             <div id="grupoAgregar" class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="cboGrupo">Número de grupo:</label>
               <select class="form-control" name="cboGrupo">
+                <option value="0"></option>
                 <?php
-                  for($i=1;$i<=60;$i++){
+                if ($periodo == 0) {
+                  for($i=1;$i<=9;$i++){
                     echo "<option>".$i."</option>";
                   }
+                } else {
+                  for($i=901;$i<=909;$i++){
+                    echo "<option>".$i."</option>";
+                  }
+                }
                 ?>
               </select>
             </div>
@@ -110,7 +129,7 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-lg-10">
               <select id="selectTiempoProfesor" class="form-control" name="cboTiempoProfesor">
-		<option>1/16</option>
+		            <option>1/16</option>
                 <option>1/8</option>
                 <option>1/4</option>
                 <option>3/8</option>
@@ -122,14 +141,14 @@
               </select>
             </div>
             <div class="form-group col-xs-2 col-sm-2 col-lg-2">
-              <button id= "btnProfesor" type="button" class="btn btn-success btn-block" name="btnAgregarProfesor" onclick="cuentaDivs(true)"><span class="glyphicon glyphicon-plus"></span></button>
+              <button id= "btnProfesor" type="button" class="btn btn-success btn-block" name="btnAgregarProfesor" onclick=""><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <div id="div-profesores" class="col-xs-12 col-sm-12 col-lg-12">
               <?php
                 if (isset($_GET['docentes'])) {
                   $docentesDiv = unserialize($_GET['docentes']);
                   for ($i=0; $i < count($docentesDiv); $i++) {
-                    echo "<div id='#divProfesor".$i."' class='form-group'><input name='txtProfesor".$i."' class='input-readonly' type='text' value='".$docentesDiv[$i][0]." - ".$docentesDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divProfesor".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                    echo "<div id='divProfesor".$i."' class='form-group'><input name='txtProfesor".$i."' class='input-readonly' type='text' value='".$docentesDiv[$i][0]." - ".$docentesDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divProfesor".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
                   }
                 }
               ?>
@@ -153,7 +172,7 @@
             <div class="col-xs-3 col-sm-3 col-lg-3">
               <select id="selectHoraInicio" class="form-control" name="cboHoraInicio">
                 <?php
-                  for($i=7;$i<=21;$i++){
+                  for($i=7;$i<=20;$i++){
                     for($j=0;$j<=50;$j+=10){
                       if($j==0){
                         echo "<option>".$i.":".$j."0</option>";
@@ -171,7 +190,7 @@
             <div class="col-xs-3 col-sm-3 col-lg-3">
               <select id="selectHoraFin" class="form-control" name="cboHoraFin">
                 <?php
-                  for($i=7;$i<=21;$i++){
+                  for($i=7;$i<=20;$i++){
                     for($j=0;$j<=50;$j+=10){
                       if($j==0){
                         echo "<option>".$i.":".$j."0</option>";
@@ -184,17 +203,156 @@
               </select>
             </div>
             <div class="form-group col-xs-2 col-sm-2 col-lg-2">
-              <button id="btnHorario" type="button" class="btn btn-success btn-block" name="btnAgregarHorario" onclick="cuentaDivs(false)"><span class="glyphicon glyphicon-plus"></span></button>
+              <button id="btnHorario" type="button" class="btn btn-success btn-block" name="btnAgregarHorario" onclick=""><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <div id="div-horarios" class="col-xs-12 col-sm-12 col-lg-12">
               <?php
                 if (isset($_GET['horarios'])) {
                   $horariosDiv = unserialize($_GET['horarios']);
                   for ($i=0; $i < count($horariosDiv); $i++) {
-                    echo "<div id='#divHorario".$i."' class='form-group'><input name='txtHorario".$i."' class='input-readonly' type='text' value='".$horariosDiv[$i][0]." ".$horariosDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divHorario".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                    echo "<div id='divHorario".$i."' class='form-group'><input name='txtHorario".$i."' class='input-readonly' type='text' value='".$horariosDiv[$i][0]." ".$horariosDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divHorario".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
                   }
                 }
               ?>
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+              <?php
+                if (isset($_GET['num_grupo_doble']) && $_GET['num_grupo_doble'] != 0) {
+                  echo "<input id='cbhGrupoDoble' type='checkbox' name='chbGrupoDoble' onchange='activarGrupoDoble()' checked>";
+                  echo "<label for='cbhGrupoDoble' onclick='activarGrupoDoble()'>Este grupo es doble</label>";
+                } else {
+                  if (isset($_GET['modalGrupos']) && $_GET['modalGrupos'] == 1) {
+                    echo "<input id='cbhGrupoDoble' type='checkbox' name='chbGrupoDoble' onchange='activarGrupoDoble()'>";
+                    echo "<label for='cbhGrupoDoble' onclick='activarGrupoDoble()'>Este grupo es doble</label>";
+                  }
+                }
+              ?>
+            </div>
+            <div id="grupoDoble" <?php if($_GET['num_grupo_doble'] != 0) {echo "class=''";} else {echo "class='hide'";} ?>>
+              <div id="grupoAgregarDoble" class="form-group col-xs-12 col-sm-12 col-lg-12">
+                <label for="cboGrupoDoble">Número de grupo doble:</label>
+                <select class="form-control" name="cboGrupoDoble">
+                  <option value="0"></option>
+                  <?php
+                  if ($periodo == 0) {
+                    for($i=51;$i<=59;$i++){
+                      echo "<option>".$i."</option>";
+                    }
+                  } else {
+                    for($i=951;$i<=959;$i++){
+                      echo "<option>".$i."</option>";
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+                <label for="cboIDDocenteDoble">Docente:</label>
+                <select id="selectAgregarDocenteDoble" class="form-control" name="cboIDDocenteDoble">
+                  <?php
+                    echo "<option value='0'></option>";
+                    $resultado = $db3->obtenerDocentes();
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                      if (isset($_GET['modalDocentes']) && $_GET['cedula'] == $fila['cedula']) {
+                        echo "<option value='".$fila['cedula']."' selected>".$fila['nombre']." ".$fila['apellidos']."</option>";
+                      } else {
+                        echo "<option value='".$fila['cedula']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
+                      }
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-lg-12">
+                <label for="cboTiempoProfesorDoble">Cantidad de tiempo individual:</label>
+              </div>
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <select id="selectTiempoProfesorDoble" class="form-control" name="cboTiempoProfesorDoble">
+                  <option>1/16</option>
+                  <option>1/8</option>
+                  <option>1/4</option>
+                  <option>3/8</option>
+                  <option>1/2</option>
+                  <option>5/8</option>
+                  <option>3/4</option>
+                  <option>7/8</option>
+                  <option>1</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 col-sm-2 col-lg-2">
+                <button id= "btnProfesorDoble" type="button" class="btn btn-success btn-block" name="btnAgregarProfesorDoble"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              <div id="div-profesoresDoble" class="col-xs-12 col-sm-12 col-lg-12">
+                <?php
+                  if (isset($_GET['docentesDoble'])) {
+                    $docentesDobleDiv = unserialize($_GET['docentesDoble']);
+                    for ($i=0; $i < count($docentesDobleDiv); $i++) {
+                      echo "<div id='divProfesorDoble".$i."' class='form-group'><input name='txtProfesorDoble".$i."' class='input-readonly' type='text' value='".$docentesDobleDiv[$i][0]." - ".$docentesDobleDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divProfesorDoble".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                    }
+                  }
+                ?>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-lg-12">
+                <label for="cboDiaSemanaDoble">Horario:</label>
+              </div>
+              <div class="col-xs-2 col-sm-2 col-lg-2">
+                <select id="selectDiaSemanaDoble" class="form-control" name="cboDiaSemanaDoble">
+                  <?php
+                    $semana = array("L","K","M","J","V","S");
+                    for($i=0;$i<=5;$i++) {
+                      echo "<option>".$semana[$i]."</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-xs-1 col-sm-1 col-lg-1">
+                <label for="cboHoraInicioDoble" style="margin-top:8px;">de</label>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-lg-3">
+                <select id="selectHoraInicioDoble" class="form-control" name="cboHoraInicioDoble">
+                  <?php
+                    for($i=7;$i<=20;$i++){
+                      for($j=0;$j<=50;$j+=10){
+                        if($j==0){
+                          echo "<option>".$i.":".$j."0</option>";
+                        }else {
+                          echo "<option>".$i.":".$j."</option>";
+                        }
+                      }
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col-xs-1 col-sm-1 col-lg-1">
+                <label for="cboHoraFinDoble" style="margin-top:8px;">a</label>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-lg-3">
+                <select id="selectHoraFinDoble" class="form-control" name="cboHoraFinDoble">
+                  <?php
+                    for($i=7;$i<=20;$i++){
+                      for($j=0;$j<=50;$j+=10){
+                        if($j==0){
+                          echo "<option>".$i.":".$j."0</option>";
+                        }else {
+                          echo "<option>".$i.":".$j."</option>";
+                        }
+                      }
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-xs-2 col-sm-2 col-lg-2">
+                <button id="btnHorarioDoble" type="button" class="btn btn-success btn-block" name="btnAgregarHorarioDoble"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              <div id="div-horariosDoble" class="col-xs-12 col-sm-12 col-lg-12">
+                <?php
+                  if (isset($_GET['horariosDoble'])) {
+                    $horariosDobleDiv = unserialize($_GET['horariosDoble']);
+                    for ($i=0; $i < count($horariosDobleDiv); $i++) {
+                      echo "<div id='divHorarioDoble".$i."' class='form-group'><input name='txtHorarioDoble".$i."' class='input-readonly' type='text' value='".$horariosDobleDiv[$i][0]." ".$horariosDobleDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divHorarioDoble".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                    }
+                  }
+                ?>
+              </div>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="cboJornada">Jornada:</label>
@@ -235,25 +393,6 @@
     </div>
   </div>
   <script type="text/javascript">
-    idDiv=0;
-    function cuentaDivs(tipoDiv) {
-      RevisarDiv= "";
-      if (tipoDiv) {
-        RevisarDiv= "divProfesor";
-      } else {
-        RevisarDiv= "divHorario";
-      }
-      for (var i = 0; i < 6; i++) {
-        if ($("#"+RevisarDiv+i).length) {
-          if (tipoDiv) {
-            $("#"+RevisarDiv+i).attr('id', "#"+RevisarDiv+idDiv);
-            idDiv++;
-          } else {
-            $("#"+RevisarDiv+i).attr('id', "#"+RevisarDiv+idDiv);
-            idDiv++;
-          }
-        }
-      }
-    }
+
   </script>
 </div>

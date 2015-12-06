@@ -93,7 +93,7 @@
             </select>
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboTiempo">Cantidad de tiempos:</label>
+            <label for="cboTiempo">Jornada:</label>
             <select class="form-control" name="cboTiempoCursos">
             <?php 
             if ($_GET['jornada'] != "") {

@@ -113,9 +113,9 @@
 				} else {
 					if ($_SESSION['tipoPerfil'] == 0) {
 						if($estado == $_SESSION['tipoPerfil']) {
-							echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Aprovar</a>';
+							echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Aprobar</a>';
 						} else {
-							echo '<a class="btn btn-success btn-sm pull-right disabled" data-toggle="modal" data-target="#modalAlertaRevisiones">Aprovar</a>';
+							echo '<a class="btn btn-success btn-sm pull-right disabled" data-toggle="modal" data-target="#modalAlertaRevisiones">Aprobar</a>';
 						}
 					} else {
 						if($estado == $_SESSION['tipoPerfil']) {
@@ -128,9 +128,9 @@
 
 				if ($_SESSION['tipoPerfil'] == 0) {
 					if($estado == $_SESSION['tipoPerfil']) {
-					echo '<a class="btn btn-danger btn-sm pull-right btn-revision " data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechasar datos</a>';
+					echo '<a class="btn btn-danger btn-sm pull-right btn-revision " data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechazar datos</a>';
 					} else {
-						echo '<a class="btn btn-danger btn-sm pull-right btn-revision disabled" data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechasar datos</a>';
+						echo '<a class="btn btn-danger btn-sm pull-right btn-revision disabled" data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechazar datos</a>';
 					}
 				}
 				?>
