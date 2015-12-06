@@ -71,5 +71,9 @@ function convertirDobleFraciones ($fdouble) {
 	return $valor;
 } // fin de funcion
 
+function convertirIntDiaSemana($intDS) {
+  $diaSemana = array("L","K","M","J","V","S");
+	return $diaSemana[$intDS];
+}
 
  ?>

@@ -6,20 +6,17 @@
 
 <?php $dbCursos = new cursosBD(); ?>
 
-	<div class="container" id="contenedor-tabla">
-
-			<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
-
-			<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-up"  ></span></a>
-
-			<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="row ">
-					<div class="col-xs-8 col-sm-6 col-md-4 col-lg-4 form-inline">
-						<div class="form-group">
-							  <label for="sel1">Carrera:</label>
-							  <select class="form-control input-sm" id="sel1" onchange="cargarCboxPorCarrera(this)">
-								<?php 
-							 	 $resultadoGrupos = $dbGrupos->obtenerCarrera();
+<div class="container" id="contenedor-tabla">
+	<a onclick="cambiarTableHorizontal()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-horizontal"class="glyphicon glyphicon-resize-full"  ></span></a>
+	<a onclick="cambiarTableVertical()" class="btn btn-lg pull-right"><span id="boton-tamano-tabla-vertical"class="glyphicon glyphicon-menu-up"  ></span></a>
+	<div class="contenedor-tabla-2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="row">
+			<div class="col-xs-8 col-sm-6 col-md-4 col-lg-4 form-inline">
+				<div class="form-group">
+					<label for="sel1">Carrera:</label>
+						<select class="form-control input-sm" id="sel1" onchange="cargarCboxPorCarrera(this)">
+							<?php
+								$resultadoGrupos = $dbGrupos->obtenerCarrera();
 
 								if ($_GET['cargarPorCarrera'] != "") {
 									echo "<option >".$_GET['valorPorCarreraTexto']."</option>";
@@ -28,86 +25,216 @@
 								if ($_GET['valorPorCarreraTexto'] != 'Todo') {
 									echo " <option value='all'>Todo</option>";
 								}
-
-								 ?>
-
-
-							  <?php 
-
+							?>
+							<?php
 							  while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
-							  	if ($fila['nombre_Carrera'] != $_GET['valorPorCarreraTexto']) {
-							  	echo "<option value='".$fila['id_Carrera']."'>";
-							  	echo $fila['nombre_Carrera'];
-							  	echo "</option>";
-							  	}
-							  }
-							   ?>
-							  </select>
-						</div>
-						</div>
-					</div>
-				<div class="tabla table-responsive contenedor-tabla-1" id="tabla-planillas">
-						<br>
-					<table id="example" class="display table table-hover text-center" cellspacing="0" width="100%">
-						<thead>
-							<tr>
-								<th class="th_style">Sigla</th>
-								<th class="th_style">Nombre</th>
-								<th class="th_style">Jornada</th>
-								<th class="th_style">Créditos</th>
-								<th class="th_style">Grupo</th>
-								<th class="th_style"> Horario </th>
-								<th class="th_style">Docente</th>
-								<th class="th_style">PO 1052</th>
-								<th class="th_style">Apoyo Vic Doc..</th>
-
-								<?php 
-								if ($_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 0) {
-									echo '<th class="">Eliminar Grupo</th>';
+									if ($fila['nombre_Carrera'] != $_GET['valorPorCarreraTexto']) {
+								  	echo "<option value='".$fila['id_Carrera']."'>";
+								  	echo $fila['nombre_Carrera'];
+								  	echo "</option>";
+								  }
 								}
-								if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-									echo '<th class="">Eliminar Presup.</th>';
-								}
-								 ?>
-							</tr>
-						</thead>
-						<tbody>
-						<?php 
-						$cantidad=0;
-
-						$resultadoGrupos = $dbGrupos->llenarTabla($_GET['cargarPorCarrera']);
-
-						while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
-							echo "<tr class='tr_style' >";
-								echo "<td>".$fila['fk_curso']."</td>";
-								echo "<td>".$fila['nombre_curso']."</td>";
-								echo "<td>".convertirDobleFraciones ($fila['jornada'])."</td>";
-								echo "<td>".$fila['creditos']."</td>";
-								echo "<td>".$fila['num_grupo']."</td>";
-								echo "<td>".$fila['diaSemana']." ".substr($fila['hora_inicio'], 0,5 )." - ".substr($fila['hora_fin'], 0,5 )."</td>";
-								echo "<td>".$fila['nombre']." ".$fila['apellidos']."</td>";
-								echo "<td>Datos ".$cantidad."</td>";
-								echo "<td>Datos ".$cantidad."</td>";
-
-
-								if ($_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 0) {
-									echo "<td> <a class='a_click'>eliminar grupo</a> </td>";
-								}
-								if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-									echo "<td> <a class='a_click'>eliminar presup.</a> </td>";
-								}
-
-							echo "</tr>";
-							$cantidad = $cantidad+1;
-						}
-
-						 ?>
-						</tbody>
-					</table>
+							?>
+						</select>
 				</div>
-				<br>
-				<div class="row">
-				<?php 
+			</div>
+		</div>
+		<div class="tabla table-responsive contenedor-tabla-1" id="tabla-planillas">
+			<br/>
+			<table id="example" class="display table table-hover text-center" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th class="th_style">Sigla</th>
+						<th class="th_style">Nombre</th>
+						<th class="th_style">Jornada</th>
+						<th class="th_style">Créditos</th>
+						<th class="th_style">Grupo</th>
+						<th class="th_style">Horario</th>
+						<th class="th_style">Docente</th>
+								<!--<th class="th_style">PO 1052</th>-->
+								<!--<th class="th_style">Apoyo Vic Doc..</th><!-->
+
+						<?php
+							if ($_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 0) {
+								echo '<th class="">Eliminar Grupo</th>';
+							}
+							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
+								echo '<th class="">Eliminar Presup.</th>';
+							}
+						?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						$d=0;
+						$h=0;
+						$dD=0;
+						$hD=0;
+						unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
+						$resultadoGrupos = $dbGrupos->llenarTabla($_GET['cargarPorCarrera']);
+						while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
+							if ($fila['fk_carrera'] == $carrera && $fila['fk_curso'] == $curso && $fila['num_grupo'] == $num_grupo && $fila['num_grupo_doble'] == $num_grupo_doble) {
+					      $carrera= $fila['fk_carrera'];
+					      $curso= $fila['fk_curso'];
+								$nombre_curso= $fila['nombre_curso'];
+								$creditos= $fila['creditos'];
+					      $num_grupo= $fila['num_grupo'];
+					      $num_grupo_doble= $fila['num_grupo_doble'];
+					      if ($fila['profesorDoble']) {
+					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
+					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
+					        $dD++;
+					        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
+					        $horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
+									$horarioCursoDoble[$hD][2]= $fila['hora_fin'];
+					        $hD++;
+					      } else {
+					        $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
+					        $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
+					        $d++;
+					        $horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
+					        $horarioCurso[$h][1]= $fila['hora_inicio'];
+									$horarioCurso[$h][2]= $fila['hora_fin'];
+					        $h++;
+					      }
+								$jornada= convertirDobleFraciones($fila['jornada']);
+					    } else {
+								if (count($docentes) > 0) {
+									$docentes= array_values(array_unique($docentes, SORT_REGULAR));
+									$horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
+									$docentesDoble= array_values(array_unique($docentesDoble, SORT_REGULAR));
+									$horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
+									echo "<tr class='tr_style'>\n";
+									echo "<td>".$curso."</td>\n";
+									echo "<td>".$nombre_curso."</td>\n";
+									echo "<td>".$jornada."</td>\n";
+									echo "<td>".$creditos."</td>\n";
+									echo "<td><div class='gruposDiv'>".$num_grupo."</div>";
+									if ($num_grupo_doble != 0) {
+										echo "<div class='gruposDiv'>".$num_grupo_doble."</div>";
+									}
+									echo "</td>\n";
+									echo "<td>";
+									echo "<div class='horariosDiv'>";
+									for ($i=0; $i < count($horarioCurso) ; $i++) {
+										echo $horarioCurso[$i][0]." ".substr($horarioCurso[$i][1],0,5)." - ".substr($horarioCurso[$i][2],0,5)."</br></br>";
+									}
+									echo "</div>";
+									if ($num_grupo_doble != 0) {
+										echo "<div class='horariosDiv'>";
+										for ($i=0; $i < count($horarioCursoDoble) ; $i++) {
+											echo $horarioCursoDoble[$i][0]." ".substr($horarioCursoDoble[$i][1],0,5)." - ".substr($horarioCursoDoble[$i][2],0,5)."</br></br>";
+										}
+										echo "</div>";
+									}
+									echo "</td>\n";
+									echo "<td>";
+									echo "<div class='docentesDiv'>";
+									for ($i=0; $i < count($docentes) ; $i++) {
+										echo $docentes[$i][0]."</br></br>";
+									}
+									echo "</div>";
+									if ($num_grupo_doble != 0) {
+										echo "<div class='docentesDiv'>";
+										for ($i=0; $i < count($docentesDoble) ; $i++) {
+											echo $docentesDoble[$i][0]."</br></br>";
+										}
+										echo "</div>";
+									}
+									echo "</td>\n";
+									if ($_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 0) {
+										echo "<td><a class='a_click'>eliminar grupo</a></td>\n";
+									}
+									if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
+										echo "<td><a class='a_click'>eliminar presup.</a></td>\n";
+									}
+									echo "</tr>\n";
+								}
+								$d=0;
+								$h=0;
+								$dD=0;
+								$hD=0;
+								unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
+								$carrera= $fila['fk_carrera'];
+					      $curso= $fila['fk_curso'];
+								$nombre_curso= $fila['nombre_curso'];
+					      $num_grupo= $fila['num_grupo'];
+					      $num_grupo_doble= $fila['num_grupo_doble'];
+								if ($fila['profesorDoble']) {
+					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
+					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
+					        $dD++;
+					        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
+					        $horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
+									$horarioCursoDoble[$hD][2]= $fila['hora_fin'];
+					        $hD++;
+					      } else {
+					        $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
+					        $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
+					        $d++;
+					        $horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
+					        $horarioCurso[$h][1]= $fila['hora_inicio'];
+									$horarioCurso[$h][2]= $fila['hora_fin'];
+					        $h++;
+					      }
+							}
+					  }
+						$docentes= array_values(array_unique($docentes, SORT_REGULAR));
+						$horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
+						$docentesDoble= array_values(array_unique($docentesDoble, SORT_REGULAR));
+						$horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
+						echo "<tr class='tr_style'>\n";
+						echo "<td>".$curso."</td>\n";
+						echo "<td>".$nombre_curso."</td>\n";
+						echo "<td>".$jornada."</td>\n";
+						echo "<td>".$creditos."</td>\n";
+						echo "<td><div class='gruposDiv'>".$num_grupo."</div>";
+						if ($num_grupo_doble != 0) {
+							echo "<div class='gruposDiv'>".$num_grupo_doble."</div>";
+						}
+						echo "</td>\n";
+						echo "<td>";
+						echo "<div class='horariosDiv'>";
+						for ($i=0; $i < count($horarioCurso) ; $i++) {
+							echo $horarioCurso[$i][0]." ".substr($horarioCurso[$i][1],0,5)." - ".substr($horarioCurso[$i][2],0,5)."</br></br>";
+						}
+						echo "</div>";
+						if ($num_grupo_doble != 0) {
+							echo "<div class='horariosDiv'>";
+							for ($i=0; $i < count($horarioCursoDoble) ; $i++) {
+								echo $horarioCursoDoble[$i][0]." ".substr($horarioCursoDoble[$i][1],0,5)." - ".substr($horarioCursoDoble[$i][2],0,5)."</br></br>";
+							}
+							echo "</div>";
+						}
+						echo "</td>\n";
+						echo "<td>";
+						echo "<div class='docentesDiv'>";
+						for ($i=0; $i < count($docentes) ; $i++) {
+							echo $docentes[$i][0]."</br></br>";
+						}
+						echo "</div>";
+						if ($num_grupo_doble != 0) {
+							echo "<div class='docentesDiv'>";
+							for ($i=0; $i < count($docentesDoble) ; $i++) {
+								echo $docentesDoble[$i][0]."</br></br>";
+							}
+							echo "</div>";
+						}
+						echo "</td>\n";
+						if ($_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 0) {
+							echo "<td><a class='a_click'>eliminar grupo</a></td>\n";
+						}
+						if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
+							echo "<td><a class='a_click'>eliminar presup.</a></td>\n";
+						}
+						echo "</tr>\n";
+					?>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div class="row">
+			<?php
 				if ($revisiones == 1 && $_SESSION['tipoPerfil'] == 0) {
 					echo '<a class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#modalAlertaRevisiones">Finalizar Proceso</a>';
 				} else {
@@ -133,8 +260,8 @@
 						echo '<a class="btn btn-danger btn-sm pull-right btn-revision disabled" data-toggle="modal" data-target="#modalAlertaRevisionesRechasar">Rechazar datos</a>';
 					}
 				}
-				?>
-				</div>
-				<br>
-			</div>
+			?>
 		</div>
+		<br>
+	</div>
+</div>
