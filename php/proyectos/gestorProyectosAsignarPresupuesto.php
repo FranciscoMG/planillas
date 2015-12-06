@@ -2,6 +2,10 @@
 <?php include_once("../conexionBD/proyectosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 <?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+<?php include_once("../conexionBD/docentesBD.php"); ?>
+
+<?php $dbDocentes = new docentesBD(); ?>
+
 <?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
 
 
@@ -37,15 +41,13 @@ if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
 
 	if ($resultado2 != false) {
-	echo  "<script>
-		alert();
-		</script>";
+
 		while ($fila = mysqli_fetch_assoc($resultado2)) {
-			if($fila['fk_id_presupuesto'] == $fk_presupuesto && $fila['fk_docente'] == $fk_encargado && $fila['jornada'] < 99) {
+			if($fila['fk_proyecto'] == $idProyecto && $fila['jornada'] < 99) {
 				$valorDouble = ($fila['jornada'] - $valorDouble);
 
 				$existe = 1;
-
+/*
 				if ($valorDouble < 0) {
 					$_SESSION['alerta'] = 1;
 					$_SESSION['alerta-contenido'] = "No puede eliminar esa cantidad de tiempos del docente devido a que el docente solo posee: ".$fila['jornada']." esta cantidad esta asignada en un grupo o otro proyecto".$valorDouble;
@@ -58,21 +60,31 @@ if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 					header("Location: ../masterPage.php");
 					exit();
 				}
+				*/
 			}
 		}
 	}
 
 	if($existe == 1){
-		$resultado = $dbPresupuestoDocente->modificarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
+		$resultado = $dbPresupuestoDocente->borrarPresupuestoDocente($idProyecto);
+
+
+		if ($resultado === FALSE) {
 
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Proyecto eliminado";
+		$_SESSION['alerta-contenido'] = "No se ha asignado un presupuesto a este proyecto";	
 
-
+		} else {
+		
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Presupuesto eliminado del proyecto";
+			
 		///////////// registro de actividad //////////
-		$descripcionRegistroActividad="Se eliminó el proyecto id: ".$idProyecto;
+		$descripcionRegistroActividad="Se eliminó el proyecto id: ";
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         ///////////////////////////////////////////
+		}
+
 
 		header("Location: ../masterPage.php");
 		exit();
@@ -104,7 +116,7 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 
 	if ($resultado2 != false) {
 		while ($fila = mysqli_fetch_assoc($resultado2)) {
-			if($fila['fk_id_presupuesto'] == $fk_presupuesto && $fila['fk_docente'] == $fk_encargado && $fila['jornada'] < 99) {
+			if($fila['idProyecto'] == $idProyecto && $fila['jornada'] < 99) {
 				$valorDouble = ($valorDouble + $fila['jornada']);
 
 				$existe = 1;
@@ -119,15 +131,12 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 	}	
 	echo "string".$fk_presupuesto.' - '.$fk_encargado.' - '.$valorDouble;
 
-	if ($existe == 1) {
-		$resultado = $dbPresupuestoDocente->modificarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
-	} else {
-		$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble);
-	}
+		$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble , $idProyecto);
+	
 
-	if ($resultado != false) {
+	if ($resultado == 1) {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto asignado al proyecto".$nombre_proyecto;
+		$_SESSION['alerta-contenido'] = "Presupuesto asignado al proyecto";
 
 		///////////// registro de actividad //////////
 		$descripcionRegistroActividad="Se ha asignado un presupuesto a un proyecto: ".$nombre_proyecto;
@@ -138,7 +147,7 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 		exit();
 	} else {
 		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto al proyecto ";
+		$_SESSION['alerta-contenido'] = "Error, este proyecto ya tiene un presupuesto asignado";
 		header("Location: ../masterPage.php");
 		exit();
 	}
@@ -156,12 +165,35 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 
 //////////////////// Llenar modal proyectos //////////////
 if (isset($_GET['id'])) {
+$existe = 0;	
+$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+ 	if ($fila2['fk_proyecto'] == $_GET['id'] && $fila2['jornada'] < 99) {
+    	$existe = 1;
+        }
+    }
+
+    if ($existe == 0 && $_GET['eliminadoPresupuestoProyecto'] == 1) {
+    	$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Este proyecto no tiene presupuestos asignados";
+		header("Location: ../masterPage.php");
+		exit();
+    }
+
 	$resultado = $db->obtenerProyecto();
         while ($fila = mysqli_fetch_assoc($resultado)) {
         	if ($fila['id_proyecto'] == $_GET['id']) {
-        		
+
+        		$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+        		while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+        			if ($fila2['fk_proyecto'] == $_GET['id'] && $fila2['jornada'] < 99) {
+        				$fk_presupuesto = $fila2['fk_id_presupuesto'];
+        			}
+        		}
+
+
         		$fraccion = convertirDobleFraciones($fila['jornada_proyecto']);
-        		header("Location: ../masterPage.php?modalProyectosPresupuesto=1&id_proyecto=".$fila['id_proyecto']."&nombre_proyecto=".$fila['nombre_proyecto']."&tipo_proyecto=".$fila['tipo_proyecto']."&jornada_proyecto=".$fraccion."&fk_encargado=".$fila['fk_encargado']."&fk_ayudante=".$fila['fk_ayudante']."&agregandoPresupuestoProyecto=".$_GET['agregandoPresupuestoProyecto']."&eliminadoPresupuestoProyecto=".$_GET['eliminadoPresupuestoProyecto']);
+        		header("Location: ../masterPage.php?modalProyectosPresupuesto=1&id_proyecto=".$fila['id_proyecto']."&nombre_proyecto=".$fila['nombre_proyecto']."&tipo_proyecto=".$fila['tipo_proyecto']."&jornada_proyecto=".$fraccion."&fk_encargado=".$fila['fk_encargado']."&fk_ayudante=".$fila['fk_ayudante']."&agregandoPresupuestoProyecto=".$_GET['agregandoPresupuestoProyecto']."&eliminadoPresupuestoProyecto=".$_GET['eliminadoPresupuestoProyecto']."&fk_presupuesto=".$fk_presupuesto."&idProyecto=".$_GET['id']);
 				exit();
         	}
         }

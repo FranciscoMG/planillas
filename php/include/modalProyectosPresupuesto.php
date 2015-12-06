@@ -108,11 +108,23 @@
             <select class="form-control" name="cboxPresupuesto2" >
               <?php
               if (isset($_GET['modalProyectosPresupuesto'])) {
+                if ($_GET['eliminadoPresupuestoProyecto'] == 1) {
+                   $resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
+                      while ($fila = mysqli_fetch_assoc($resultado3)) {
+                        if ($fila['id_presupuesto'] == $_GET['fk_presupuesto']) {
+                           echo "<option value='".$_GET['fk_presupuesto']."'>";
+                           echo $fila['nombre_presupuesto'];
+                           echo "</option>";
+                        }
+                 }
+                }else {
                 $resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
                  while ($fila = mysqli_fetch_assoc($resultado3)) {
+                  $resultado = $db->obtenerProyecto();
                    echo "<option value='".$fila['id_presupuesto']."'>";
                     echo $fila['nombre_presupuesto'];
                    echo "</option>";
+                 }
                  }
                 }
                ?>

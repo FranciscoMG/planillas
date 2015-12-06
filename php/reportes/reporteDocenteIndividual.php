@@ -10,7 +10,10 @@ if ($_SESSION[masterActivo] != 1) {
 <?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
 <?php $db = new docentesBD(); ?>
-<?php $resultadoDocente = $db->obtenerDocentes(); ?>
+<?php $resultadoDocente = $db->obtenerUnDocente(123); //SE INGRESA EL ID (CÉDULA)?>
+<?php $db = new gruposBD(); ?>
+<?php $resultado = $db->obtenerGrupos(); ?>
+
 
 <?php
 $pdf = new FPDF();
@@ -41,21 +44,20 @@ $pdf->Cell(53,10,iconv("UTF-8","ISO-8859-1","".$tipoPerfil),0,0,"C");
 
 $pdf->Ln(15);
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(10,10,"Reporte de Docentes");
+$pdf->Cell(10,10,"Reporte de Docente Individual");
 $pdf->Ln();
 $pdf->Cell(10,4,iconv("UTF-8","ISO-8859-1","Sistema de planillas SIDOP"));
 $pdf->Ln(10);
 $pdf->SetFont('Arial','B',8);
 
 ////////////////// Contenido //////////////////////
+$pdf->Cell(131,10,iconv("UTF-8","ISO-8859-1","Aarón Galagarza Carillo (Cambiar Nombre)"),1,0,"C");///CAMBIAR MÉTODO DEL NOMBRE
+$pdf->Ln();
 $pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1","Cédula"),1,0,"C");
-$pdf->Cell(20,10,"Nombre",1,0,"C");
-$pdf->Cell(30,10,"Apellidos",1,0,"C");
 $pdf->Cell(27,10,"Grado Academico",1,0,"C");
 $pdf->Cell(25,10,"Nombramiento",1,0,"C");
 $pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
 $pdf->Cell(27,10,"Jornada Faltante",1,0,"C");
-
 
 $pdf->Ln();
 
@@ -63,9 +65,7 @@ $pdf->SetFont('Arial','',8);
 
 
 while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
-	$pdf->Cell(25,10,$fila['cedula'],1,0,"C");
-	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
+  $pdf->Cell(25,10,$fila['cedula'],1,0,"C");
 
 	//Grado Academico
 	$grado_ac;
@@ -113,10 +113,55 @@ $pdf->SetTextColor(255,255,255);
 $pdf->SetFillColor(0, 193 , 0);
 $pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
 $pdf->SetTextColor(0,0,0);
-$pdf->SetX(137);
+$pdf->SetX(87);
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$pdf->SetX(114);
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$pdf->Ln();
+
+//////////////Contenido Grupos/////////////
+$pdf->Ln();
+
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(181,10,"Asignaciones",1,0,"C");
+$pdf->Ln();
+$pdf->Cell(18,10,"Sigla/Curso",1,0,"C");
+$pdf->Cell(60,10,"Nombre/Curso",1,0,"C");
+$pdf->Cell(18,10,"Cupo",1,0,"C");
+$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","Creditos"),1,0,"C");
+$pdf->Cell(13,10,"Grupo",1,0,"C");
+$pdf->Cell(18,10,"Proyecto",1,0,"C");
+$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
+
+$pdf->Ln();
+
+$pdf->SetFont('Arial','',8);
+
+while ($fila = mysqli_fetch_assoc($resultado)) {
+	$pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$pdf->Cell(60,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_curso']),1,0,"C");
+	$pdf->Cell(18,10,"No ",1,0,"C");
+	$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$pdf->Cell(13,10,$fila['num_grupo'],1,0,"C");
+  $pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$suma = $suma + $fila['jornada'];
+	$convertidoGrupo = convertirDobleFraciones($fila['jornada']);
+	$pdf->Cell(27,10,$convertidoGrupo,1,0,"C");
+	$pdf->Ln();
+
+}
+
+//////////////////////////Totales Grupo////////////////////////
+
+$pdf->SetTextColor(255,255,255);
+$pdf->SetFillColor(0, 193 , 0);
+$pdf->Cell(18,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
+$pdf->SetTextColor(0,0,0);
+$pdf->SetX(106);
 $pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
 $pdf->SetX(164);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$convertidoSuma = convertirDobleFraciones($suma);
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$convertidoSuma),1,0,"C");
 $pdf->Ln();
 
 $pdf->Output();

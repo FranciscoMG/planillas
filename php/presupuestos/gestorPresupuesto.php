@@ -1,4 +1,5 @@
 <?php session_start() ?>
+<?php include_once("../include/conversor.php"); ?>
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php $db = new presupuestoBD(); ?>
 
@@ -15,10 +16,16 @@ $descripcionRegistroActividad = "";
 $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
 $codigo = $_POST['txtCodigoPresupuesto'];
-$tiempo_presupuesto = (double)$_POST['cboTiemposPresupuesto'];
+$tiempo_presupuesto = fraccionADecimalPresupuesto($_POST['cboTiemposPresupuesto']);
 
 //////////////// AGREGAR //////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
+	if(empty($nombre_presupuesto)) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Debe agregar el nombre del presupuesto";
+		header("Location: ../masterPage.php");
+		exit();
+	}
 	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto);
 	if ($resultado === FALSE) {
 		$_SESSION['alerta'] = 1;
