@@ -106,10 +106,24 @@
               <?php
                 $resultado = $dbPresupuesto->obtenerlistadoDePresupuesto();
                 echo "<select class='form-control' name='cboPresupuesto2'>";
+
+                if ($_GET['fk_presupuesto'] != 0) {
+                    echo "<option value='".$_GET['fk_presupuesto']."'>";
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                      if ($fila['id_presupuesto'] == $_GET['fk_presupuesto']) {
+                        echo $fila['nombre_presupuesto'];
+                      }
+                    }
+                    echo "</option>";
+                  }
+
+                $resultado = $dbPresupuesto->obtenerlistadoDePresupuesto();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                  echo "<option value='".$fila['id_presupuesto']."'>";
-                    echo $fila['nombre_presupuesto'];
-                  echo "</option>";
+                  if ($_GET['fk_presupuesto'] != $fila['id_presupuesto']) {
+                    echo "<option value='".$fila['id_presupuesto']."'>";
+                     echo $fila['nombre_presupuesto'];
+                    echo "</option>";
+                  }
                 }
                 echo "</select>";
               ?>
@@ -119,7 +133,7 @@
             <select class="form-control" name="cboJornadaDocenteConPermiso2">
             <?php
             if ($_GET['jornada'] != "") {
-              echo "<option>".$_GET['jornada']."</option>";
+              echo "<option>".$_GET['jornada_fraccion']."</option>";
             }
             echo"
               <option>1/16</option>
