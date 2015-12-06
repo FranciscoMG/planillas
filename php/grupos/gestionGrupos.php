@@ -208,6 +208,7 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
   $h= 0;
   $dD= 0;
   $hD= 0;
+  unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
   $diaSemana = array("L","K","M","J","V","S");
   $resultado = $db->obtenerGrupos(FALSE);
   while ($fila = mysqli_fetch_assoc($resultado)) {

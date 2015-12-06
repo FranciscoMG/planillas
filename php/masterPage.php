@@ -9,7 +9,7 @@
 
 <?php include_once("conexionBD/estadoDatos.php"); ?>
 <?php $dbEstadoDatos = new estadoDatosBD(); ?>
-<?php 
+<?php
 	$resultadoEstadoDatos = $dbEstadoDatos->obtenerEstadoDatos();
 	while ($fila = mysqli_fetch_assoc($resultadoEstadoDatos)) {
 		$estado = $fila['estado'];
@@ -28,10 +28,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 </head>
-<body>
+<body onload="cambiaDivTabla();">
 
 <!-- //////// Header /////////////////////////////////////////////////////////// -->
-	<header >
+	<header>
 		<div class="container ">
 			<div id="logo-ucr" class="row">
 				<div  class="col-sx-12 col-sm-8 col-md-6 col-lg-4">
@@ -64,7 +64,7 @@
 	 							<li><a href="sesion/cerrarSesion.php"><span class='glyphicon glyphicon-user' ></span> Cambiar usuario </a></li>
 								<?php if($_SESSION['tipoPerfil'] == 0){
 									if ($estado == $_SESSION['tipoPerfil']) {
-									
+
 									echo "<li><a onClick='desabilitar_habiltarOpciones();' class='texto_cambiar'><span class='glyphicon glyphicon-ok-circle' id='spam_h'></span> Cambiar Opciones </a></li>
 
 										";
@@ -107,7 +107,7 @@
 			              <a class="" href="masterPage.php" >Inicio</a>
 			            </li>
 
-						
+
 						<li class="dropdown <?php if($_SESSION['tipoPerfil'] != 0){echo "hide";} ?>">
 			              <a class="dropdown-toggle " data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
@@ -177,8 +177,8 @@
 				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
 				          <li class="divider"></li>';
-				    } 
-				    if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2) 
+				    }
+				    if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 2)
 				    {
 				    echo '<li><a href="#" data-toggle="modal" data-target="#modalProyectosPresupuesto" onclick="activarAgregarProyectoPresupuesto()">Asignar presupuesto a proyecto</a></li>
 
@@ -474,6 +474,6 @@
 
 <script>
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
+    $('[data-toggle="popover"]').popover();
 });
 </script>

@@ -71,6 +71,10 @@ function convertirDobleFraciones ($fdouble) {
 	return $valor;
 } // fin de funcion
 
+function convertirIntDiaSemana($intDS) {
+  $diaSemana = array("L","K","M","J","V","S");
+	return $diaSemana[$intDS];
+}
 ////////////////////////////////////////////////////
 function fraccionADecimalPresupuesto($fraccion) {
 	$tamano = strlen($fraccion);
@@ -148,7 +152,7 @@ function fraccionADecimalPresupuesto($fraccion) {
 
 		$double2 = $valor;
 		$final = $double2 + $double;
-	
+
 	}
 	if($tamano == 6) {
 		$double = (double) substr($fraccion, 0, 2);

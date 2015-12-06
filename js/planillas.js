@@ -1,10 +1,10 @@
 function cambiarTableHorizontal() {
 	var boton = document.getElementById("boton-tamano-tabla-horizontal");
+	setTimeout(cambiaDivTabla,400);
 
 	if (boton.className == "glyphicon glyphicon-resize-full") {
 		var elemento = document.getElementById("contenedor-tabla");
 		elemento.className="container contenedor-tabla-fluid";
-
 		boton.className="glyphicon glyphicon-resize-small";
 	} else {
 		var elemento = document.getElementById("contenedor-tabla");
@@ -15,11 +15,11 @@ function cambiarTableHorizontal() {
 
 function cambiarTableVertical() {
 	var boton = document.getElementById("boton-tamano-tabla-vertical");
+	cambiaDivTabla();
 
 	if (boton.className == "glyphicon glyphicon-menu-up") {
 		var elemento = document.getElementById("tabla-planillas");
 		elemento.className="tabla table-responsive contenedor-tabla-0";
-
 		boton.className="glyphicon glyphicon-menu-down";
 	} else {
 		var elemento = document.getElementById("tabla-planillas");
@@ -595,4 +595,18 @@ function cargarCboxPorCarrera(obj) {
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	var valorTexto = obj.options[obj.selectedIndex].text;
 	document.location="masterPage.php?cargarPorCarrera="+valorSeleccionado+"&valorPorCarreraTexto="+valorTexto;
+}
+///////////////////////////////////////////
+
+function cambiaDivTabla() {
+	gruposDiv= document.getElementsByClassName("gruposDiv");
+ 	horariosDiv= document.getElementsByClassName("horariosDiv");
+	docentesDiv= document.getElementsByClassName("docentesDiv");
+	for (var i = 0; i < gruposDiv.length; i++) {
+		if (horariosDiv[i].offsetHeight > docentesDiv[i].offsetHeight) {
+			gruposDiv[i].style.height= (docentesDiv[i].offsetHeight)+"px";
+		} else {
+			gruposDiv[i].style.height= (horariosDiv[i].offsetHeight)+"px";
+		}
+	}
 }
