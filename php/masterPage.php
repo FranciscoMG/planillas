@@ -340,16 +340,14 @@
 <!--/////////////////////////////////  Modal de Cursos ////////////////////////////-->
 	<?php require("include/modalCursos.php"); ?>
 
+<!--/////////////  Modal de Asignación de presupuesto a grupos /////////////////////-->
+	<?php require("include/modalAsignarPresupuesto.php"); ?>
+
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalProyectosPresupuesto.php"); ?>
 
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
-
-
-
-
-
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>

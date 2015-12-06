@@ -13,20 +13,21 @@
 <?php $db = new presupuestoBD(); ?>
 
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
-<?php 
-$dbRegistroActividad = new registroActividadBD(); 
+<?php
+$dbRegistroActividad = new registroActividadBD();
 $utc = date('U');
 $fecha = date("Y-m-d H:i:s");
 $usuario = $_SESSION['usuario'];
 $descripcionRegistroActividad = "";
 ?>
 
-<?php 
+<?php
 $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
 $codigo = $_POST['txtCodigoPresupuesto'];
 $tiempo_presupuesto = fraccionADecimalPresupuesto($_POST['cboTiemposPresupuesto']);
 $tiempo_sobrante = $tiempo_presupuesto;
+$presupuestoGrupo= $_POST['cboPresupuestoGrupo'];
 
 //////////////// AGREGAR /////////////////////////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
@@ -85,7 +86,7 @@ if (empty($id_presupuesto)) {
 			exit();
 		}
 	}
-	////// De gruposDocentes 
+	////// De gruposDocentes
 	$resultado4 = $dbGrupos->obtenerGrupoDocentes();
 	while ($fila3 = mysqli_fetch_assoc($resultado4)) {
 		if ($fila3['fk_presupuesto'] == $id_presupuesto) {
@@ -154,6 +155,39 @@ if (empty($id_presupuesto)) {
 		header("Location: ../masterPage.php");
 		exit();
 	}
+}
+
+if (isset($POST['btnAsignarGrupoPresup'])) {
+	if (empty($presupuestoGrupo)) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+		if (isset($_GET['carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo']) && isset($_GET['num_grupo_doble'])) {
+			$resultado = $dbGrupos->agregarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo'], $presupuestoGrupo);
+			if ($_GET['num_grupo_doble'] != 0) {
+				$resultado = $dbGrupos->agregarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo_doble'], $presupuestoGrupo);
+			}
+		}
+
+		if ($resultado == false) {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
+			header("Location: ../masterPage.php");
+			exit();
+		} else {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "Presupuesto modificado.";
+
+			///////////// registro de actividad //////////
+	        $descripcionRegistroActividad="Se modificó el presupuesto: ".$nombre_presupuesto;
+	        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+	        /////////////////////////////////////////////
+
+			header("Location: ../masterPage.php");
+			exit();
+		}
 }
 
 //////////////////// Cargar datos modal ////////////
