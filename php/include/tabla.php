@@ -195,65 +195,67 @@
 								$nombre_presupuesto= $fila['nombre_presupuesto'];
 							}
 					  }
-						$docentes= array_values(array_unique($docentes, SORT_REGULAR));
-						$horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
-						$docentesDoble= array_values(array_unique($docentesDoble, SORT_REGULAR));
-						$horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
-						echo "<tr class='tr_style'>";
-						echo "<td>".$curso."</td>";
-						echo "<td>".$nombre_curso."</td>";
-						echo "<td>".$jornada."</td>";
-						echo "<td>".$creditos."</td>";
-						echo "<td><div class='gruposDiv'>".$num_grupo."</div>";
-						if ($num_grupo_doble != 0) {
-							echo "<div class='gruposDiv'>".$num_grupo_doble."</div>";
-						}
-						echo "</td>";
-						echo "<td>";
-						echo "<div class='horariosDiv'>";
-						for ($i=0; $i < count($horarioCurso) ; $i++) {
-							echo $horarioCurso[$i][0]." ".substr($horarioCurso[$i][1],0,5)." - ".substr($horarioCurso[$i][2],0,5)."</br></br>";
-						}
-						echo "</div>";
-						if ($num_grupo_doble != 0) {
+						if (count($docentes) > 0) {
+							$docentes= array_values(array_unique($docentes, SORT_REGULAR));
+							$horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
+							$docentesDoble= array_values(array_unique($docentesDoble, SORT_REGULAR));
+							$horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
+							echo "<tr class='tr_style'>";
+							echo "<td>".$curso."</td>";
+							echo "<td>".$nombre_curso."</td>";
+							echo "<td>".$jornada."</td>";
+							echo "<td>".$creditos."</td>";
+							echo "<td><div class='gruposDiv'>".$num_grupo."</div>";
+							if ($num_grupo_doble != 0) {
+								echo "<div class='gruposDiv'>".$num_grupo_doble."</div>";
+							}
+							echo "</td>";
+							echo "<td>";
 							echo "<div class='horariosDiv'>";
-							for ($i=0; $i < count($horarioCursoDoble) ; $i++) {
-								echo $horarioCursoDoble[$i][0]." ".substr($horarioCursoDoble[$i][1],0,5)." - ".substr($horarioCursoDoble[$i][2],0,5)."</br></br>";
+							for ($i=0; $i < count($horarioCurso) ; $i++) {
+								echo $horarioCurso[$i][0]." ".substr($horarioCurso[$i][1],0,5)." - ".substr($horarioCurso[$i][2],0,5)."</br></br>";
 							}
 							echo "</div>";
-						}
-						echo "</td>";
-						echo "<td>";
-						echo "<div class='docentesDiv'>";
-						for ($i=0; $i < count($docentes) ; $i++) {
-							$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
-							echo $docentes[$i][0]."</br></br>";
-						}
-						echo "</div>";
-						if ($num_grupo_doble != 0) {
+							if ($num_grupo_doble != 0) {
+								echo "<div class='horariosDiv'>";
+								for ($i=0; $i < count($horarioCursoDoble) ; $i++) {
+									echo $horarioCursoDoble[$i][0]." ".substr($horarioCursoDoble[$i][1],0,5)." - ".substr($horarioCursoDoble[$i][2],0,5)."</br></br>";
+								}
+								echo "</div>";
+							}
+							echo "</td>";
+							echo "<td>";
 							echo "<div class='docentesDiv'>";
-							for ($i=0; $i < count($docentesDoble) ; $i++) {
-								$sumaTiempos+=convertirFraccionesDoble($docentesDoble[$i][1]);
-								echo $docentesDoble[$i][0]."</br></br>";
+							for ($i=0; $i < count($docentes) ; $i++) {
+								$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
+								echo $docentes[$i][0]."</br></br>";
 							}
 							echo "</div>";
-						}
-						echo "</td>";
-						echo "<td>";
-						if ($id_presupuesto == 0) {
-							echo "Sin asignar";
-						} else {
-							echo $nombre_presupuesto;
-						}
-						echo "</td>";
-						if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-							if ($id_presupuesto == 0) {
-								echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
-							} else {
-								echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+							if ($num_grupo_doble != 0) {
+								echo "<div class='docentesDiv'>";
+								for ($i=0; $i < count($docentesDoble) ; $i++) {
+									$sumaTiempos+=convertirFraccionesDoble($docentesDoble[$i][1]);
+									echo $docentesDoble[$i][0]."</br></br>";
+								}
+								echo "</div>";
 							}
+							echo "</td>";
+							echo "<td>";
+							if ($id_presupuesto == 0) {
+								echo "Sin asignar";
+							} else {
+								echo $nombre_presupuesto;
+							}
+							echo "</td>";
+							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
+								if ($id_presupuesto == 0) {
+									echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
+								} else {
+									echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+								}
+							}
+							echo "</tr>";
 						}
-						echo "</tr>";
 					?>
 				</tbody>
 			</table>
