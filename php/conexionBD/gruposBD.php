@@ -175,12 +175,26 @@ class gruposBD extends conexionBD {
 		return $stmt->execute();
 	}
 
+	function borrarPresupGrupo($carrera, $curso, $num_grupo, $presupuesto) {
+		$stmt = $this->con->prepare("UPDATE tb_GruposDocentes SET fk_presupuesto = ? WHERE fk_carrera = ? AND fk_curso = ? AND num_grupo = ?;");
+		if ( $stmt === FALSE ) {
+			die('prepare() failed: '. $this->con->error);
+		}
+
+		$stmt->bind_param('issi', $presupuesto, $carrera, $curso, $num_grupo);
+		$stmt->execute();
+		$newId = $stmt->insert_id;
+		$stmt->close();
+
+		return (!is_nan($newId)) ? $newId : FALSE; //Asignación Ternaria
+	}
+
 	function llenarTabla($id_Carrera){
 		if ($id_Carrera == "" || $id_Carrera == "all") {
 
-		$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gr.num_grupo_doble, CASE WHEN (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) = true THEN false ELSE true END profesorDoble, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gd.fk_presupuesto, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera = gd.fk_carrera AND gr.fk_carrera = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND ((gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) OR (gr.num_grupo_doble = gd.num_grupo AND gr.num_grupo_doble = gh.num_grupo)) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo, gr.num_grupo_doble, gd.fk_docente, gh.dia_semana;";
+		$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gr.num_grupo_doble, CASE WHEN (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) = true THEN false ELSE true END profesorDoble, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gd.fk_presupuesto, pr.nombre_presupuesto, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_Docente do, tb_GruposHorarios gh,tb_GruposDocentes gd LEFT JOIN tb_Presupuesto pr ON gd.fk_presupuesto = pr.id_presupuesto WHERE gr.fk_curso != '1' AND (gr.fk_carrera = gd.fk_carrera AND gr.fk_carrera = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND ((gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) OR (gr.num_grupo_doble = gd.num_grupo AND gr.num_grupo_doble = gh.num_grupo)) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo, gr.num_grupo_doble, gd.fk_docente, gh.dia_semana;";
 		} else {
-			$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gr.num_grupo_doble, CASE WHEN (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) = true THEN false ELSE true END profesorDoble, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gd.fk_presupuesto, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_GruposDocentes gd, tb_Docente do, tb_GruposHorarios gh WHERE gr.fk_curso != '1' AND (gr.fk_carrera ='".$id_Carrera."' AND gr.fk_carrera ='".$id_Carrera."') AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND ((gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) OR (gr.num_grupo_doble = gd.num_grupo AND gr.num_grupo_doble = gh.num_grupo)) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo, gr.num_grupo_doble, gd.fk_docente, gh.dia_semana;";
+			$query= "SELECT gr.fk_carrera, ca.nombre_Carrera, gr.fk_curso, cu.nombre_curso, cu.creditos, gr.num_grupo, gr.num_grupo_doble, CASE WHEN (gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) = true THEN false ELSE true END profesorDoble, gd.fk_docente, do.nombre, do.apellidos, gd.tiempo_individual, gd.fk_presupuesto, pr.nombre_presupuesto, gh.dia_semana, gh.hora_inicio, gh.hora_fin, gr.jornada FROM tb_Grupos gr, tb_Carrera ca, tb_Cursos cu, tb_Docente do, tb_GruposHorarios gh,tb_GruposDocentes gd LEFT JOIN tb_Presupuesto pr ON gd.fk_presupuesto = pr.id_presupuesto WHERE gr.fk_curso != '1' AND (".$id_Carrera." = gd.fk_carrera AND ".$id_Carrera." = gh.fk_carrera) AND (gr.fk_curso = gd.fk_curso AND gr.fk_curso = gh.fk_curso) AND ((gr.num_grupo = gd.num_grupo AND gr.num_grupo = gh.num_grupo) OR (gr.num_grupo_doble = gd.num_grupo AND gr.num_grupo_doble = gh.num_grupo)) AND gr.fk_curso = cu.sigla AND gd.fk_docente = do.cedula GROUP BY gr.fk_carrera, fk_curso, gr.num_grupo, gr.num_grupo_doble, gd.fk_docente, gh.dia_semana;";
 		}
 
 		$rs= $this->con->query($query);

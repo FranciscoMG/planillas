@@ -431,6 +431,22 @@
 ?>
 
 <?php
+/////////////// MODAL GRUPOS PRESUPUESTOS ///////
+	if ($_GET['modalAsignarPresup'] == 1) {
+		echo "<script>
+		$('#modalAsignarPresupuesto').modal('show');
+		activarAsignarPresup();
+		</script>";
+	}
+	if ($_GET['modalAsignarPresup'] == 2) {
+		echo "<script>
+		$('#modalAsignarPresupuesto').modal('show');
+		eliminarAsignarPresup();
+		</script>";
+	}
+?>
+
+<?php
 /////////////// MODAL PRESUPUESTO /////////////
 	if ($_GET['modalPresupuesto'] == 1) {
 		echo "<script>

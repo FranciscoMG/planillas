@@ -97,6 +97,8 @@
 					        $h++;
 					      }
 								$jornada= convertirDobleFraciones($fila['jornada']);
+								$id_presupuesto= $fila['fk_presupuesto'];
+								$nombre_presupuesto= $fila['nombre_presupuesto'];
 					    } else {
 								if (count($docentes) > 0) {
 									$docentes= array_values(array_unique($docentes, SORT_REGULAR));
@@ -144,15 +146,17 @@
 									}
 									echo "</td>";
 									echo "<td>";
-									if ($fila['fk_presupuesto'] == 0) {
+									if ($id_presupuesto == 0) {
 										echo "Sin asignar";
+									} else {
+										echo $nombre_presupuesto;
 									}
 									echo "</td>";
 									if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-										if ($fila['fk_presupuesto'] == 0) {
-											echo "<td><a class='a_click' onclick='history.pushState(null, null, \"?modalAsignarPresup=0&carrera=".$carrera."&curso=".$curso."&num_grupo".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."\");' data-toggle='modal' data-target='#modalAsignarPresupuesto'>Agregar presup...</a></td>";
+										if ($id_presupuesto == 0) {
+											echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 										} else {
-											echo "<td><a class='a_click' onclick='history.pushState(null, null, \"?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."\");' data-toggle='modal' data-target='#modalAsignarPresupuesto'>Agregar presup...</a></td>";
+											echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 										}
 									}
 									echo "</tr>";
@@ -166,9 +170,10 @@
 								$carrera= $fila['fk_carrera'];
 					      $curso= $fila['fk_curso'];
 								$nombre_curso= $fila['nombre_curso'];
+								$creditos= $fila['creditos'];
 					      $num_grupo= $fila['num_grupo'];
 					      $num_grupo_doble= $fila['num_grupo_doble'];
-								if ($fila['profesorDoble']) {
+					      if ($fila['profesorDoble']) {
 					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
 					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
 					        $dD++;
@@ -185,6 +190,9 @@
 									$horarioCurso[$h][2]= $fila['hora_fin'];
 					        $h++;
 					      }
+								$jornada= convertirDobleFraciones($fila['jornada']);
+								$id_presupuesto= $fila['fk_presupuesto'];
+								$nombre_presupuesto= $fila['nombre_presupuesto'];
 							}
 					  }
 						$docentes= array_values(array_unique($docentes, SORT_REGULAR));
@@ -232,15 +240,17 @@
 						}
 						echo "</td>";
 						echo "<td>";
-						if ($fila['fk_presupuesto'] == 0) {
+						if ($id_presupuesto == 0) {
 							echo "Sin asignar";
+						} else {
+							echo $nombre_presupuesto;
 						}
 						echo "</td>";
 						if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-							if ($fila['fk_presupuesto'] == 0) {
-								echo "<td><a class='a_click' onclick='history.pushState(null, null, \"?modalAsignarPresup=0&carrera=".$carrera."&curso=".$curso."&num_grupo".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."\");' data-toggle='modal' data-target='#modalAsignarPresupuesto'>Agregar presup...</a></td>";
+							if ($id_presupuesto == 0) {
+								echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 							} else {
-								echo "<td><a class='a_click' onclick='history.pushState(null, null, \"?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."\");' data-toggle='modal' data-target='#modalAsignarPresupuesto'>Agregar presup...</a></td>";
+								echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 							}
 						}
 						echo "</tr>";

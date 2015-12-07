@@ -13,9 +13,9 @@
 				<h4 class="modal-title">Asignar Presupuesto</h4>
 			</div>
       <!-- Body -->
-			<form action="presupuestos/gestorPresupuesto.php" method="post">
+			<form action="presupuestos/gestorPresupuesto.php<?php echo "?carrera=".$_GET['carrera']."&curso=".$_GET['curso']."&num_grupo=".$_GET['num_grupo']."&num_grupo_doble=".$_GET['num_grupo_doble']."&total_tiempos=".$_GET['total_tiempos']; if ($_GET['modalAsignarPresup'] == 2) { echo "&id_presupuesto=".$_GET['id_presupuesto']; }?>" method="post">
 				<div class="modal-body">
-          <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+          <div id="asignarGrupoPresup" class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboPresupuestoGrupo">Presupuesto que lo respalda:</label>
             <select class="form-control" name="cboPresupuestoGrupo">
               <option value="0"></option>
@@ -30,13 +30,21 @@
               ?>
             </select>
           </div>
+          <div id="eliminarGrupoPresup" class="hide">
+            <center class="texto-efectos2">¿Desea quitar el presupuesto de este grupo?</center>
+          </div>
         </div>
         <!-- Footer -->
         <div class="modal-footer modal-delete-border">
-          <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton">
+          <div id="btnAsignarGrupoPresup" class="col-xs-12 col-sm-12 col-lg-12 espacio-boton">
             <button type="submit" class="btn btn-primary btn-block" name="btnAsignarGrupoPresup">Asignar presupuesto</button>
           </div>
+          <div id="btnEliminarGrupoPresup" class="hide">
+            <a class="btn btn-danger" href="masterPage.php">No</a>
+            <button type="submit" class="btn btn-success" name="btnEliminarGrupoPresup">Eliminar presupuesto</button>
+          </div>
         </div>
+
   		</form>
   	</div>
   </div>
