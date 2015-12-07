@@ -10,7 +10,7 @@ if ($_SESSION['masterActivo'] == 1 && $_SESSION['tipoPerfil'] == 0) {
 	$C_BASE_DATOS='SIDOP';
 	//usuario y contraseña de la base de datos mysql
 	$C_USUARIO='root';
-	$C_CONTRASENA='interactivas';  
+	$C_CONTRASENA='maikol';  
 	//ruta archivo de salida
 	//(el nombre lo componemos con Y_m_d_H_i_s para que sea diferente en cada backup)
 	$C_RUTA_ARCHIVO = '../../backups/backup_SIDOP_'.date("Y_m_d_H_i_s").'.sql';

@@ -31,6 +31,10 @@ function convertirFraccionesDoble($fraccion){
 		case '1/16':
 			$valor = 0.0625;
 			break;
+			
+		default:
+			$valor = 0;
+		break;
 	}
 	return $valor;
 } // fin de funcion
@@ -67,6 +71,10 @@ function convertirDobleFraciones ($fdouble) {
 		case 0.0625:
 			$valor = "1/16";
 			break;
+
+		default:
+			$valor = "Ad honorem";
+		break;
 	}
 	return $valor;
 } // fin de funcion
