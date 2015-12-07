@@ -70,7 +70,7 @@
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTiemposProyecto">Jornada:</label>
-            <select class="form-control" name="cboTiemposProyecto">
+            <select class="form-control" name="cboTiemposProyecto" <?php if (isset($_GET['modalProyectos'])) { echo " disabled";} ?> >
               <?php
                 if (isset($_GET['modalProyectos'])) {
                   echo "<option value='".$_GET['jornada_proyecto']."'>".$_GET['jornada_proyecto']."</option>";

@@ -194,5 +194,4 @@ function fraccionADecimalPresupuesto($fraccion) {
 	return $final;
 }
 
-
  ?>
