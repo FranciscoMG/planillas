@@ -1,8 +1,8 @@
-<?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+<?php include_once("conexionBD/presupuestoDocenteBD.php"); ?>
 <?php $dbPresupuestoDocente = new presupuestoDocenteBD() ?>
-<?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
+<?php include_once("conexionBD/docentesConPermisosBD.php"); ?>
 <?php $dbDocentesConPermisos = new docentesConPermisoBD(); ?>
-<?php include_once("../conexionBD/gruposBD.php"); ?>
+<?php include_once("conexionBD/gruposBD.php"); ?>
 <?php $dbGrupos = new gruposBD(); ?>
 
 
