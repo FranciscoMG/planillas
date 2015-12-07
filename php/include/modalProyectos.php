@@ -88,7 +88,7 @@
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboPrimario">Principal/Responsable:</label>
-            <select class="form-control" name="cboPrimario">
+            <select class="form-control" name="cboPrimario" <?php if (isset($_GET['modalProyectos'])) { echo " disabled";} ?> >
               <?php
               if (isset($_GET['modalProyectos'])) {
                 $resultado2 = $dbDocentes->obtenerUnDocente($_GET['fk_encargado']);

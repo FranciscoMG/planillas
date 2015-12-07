@@ -76,6 +76,7 @@ if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 		while ($fila2 = mysqli_fetch_assoc($resultado3)) {
 			if ($fila2['id_presupuesto'] == $fk_presupuesto) {
 				$tiempo_sobrante2 = $fila2['tiempo_sobrante'];
+				$nombre_presupuesto = $fila2['nombre_presupuesto'];
 			}
 		}
 		$tiempo_sobrante2 = ($tiempo_sobrante2 + $valorDouble);
@@ -89,14 +90,14 @@ if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 			$_SESSION['alerta-contenido'] = "No se ha asignado un presupuesto a este proyecto";	
 		} else {
 			$_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "Presupuesto eliminado del proyecto";
+			$_SESSION['alerta-contenido'] = "Presupuesto ".$nombre_presupuesto." eliminado del proyecto";
 
 			//////// Se quita del presupuesto ///
 			$dbPresupuesto->sumarPresupuesto($fk_presupuesto , $tiempo_sobrante2);
 			////////////////
 				
 			///////////// registro de actividad //////////
-			$descripcionRegistroActividad="Se eliminó el proyecto id: ";
+			$descripcionRegistroActividad="Se eliminó el presupuesto ".$nombre_presupuesto." del proyecto";
 	        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 	        ///////////////////////////////////////////
 		}

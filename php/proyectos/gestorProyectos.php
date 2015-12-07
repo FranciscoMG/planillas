@@ -99,7 +99,7 @@ if (isset($_POST['btnModificarProyectos'])) {
 	if ($idProyecto != "") {
 
 		$valorDouble = convertirFraccionesDoble($jornada_proyecto);
-		$resultado = $db->modificarProyecto($idProyecto, $nombre_proyecto , $tipo_proyecto , $valorDouble , $fk_encargado , $fk_ayudante);
+		$resultado = $db->modificarProyecto($idProyecto, $nombre_proyecto , $tipo_proyecto , $fk_ayudante);
 		if ($resultado != false) {
 			$_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "Proyecto modificado";

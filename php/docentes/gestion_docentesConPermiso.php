@@ -1,4 +1,6 @@
 <?php session_start(); ?>
+<?php include_once("../include/funciones.php"); ?>
+
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php $dbPresupuesto = new presupuestoBD(); ?>
 
@@ -167,6 +169,14 @@ if (isset($_POST['btnEliminar2'])) {
 
 //////////////////// AGREGAR ////////////////////////////////
 if (isset($_POST['btnRegistrar2'])) {
+  $tiemposDocente = verificarTiemposDocente($cedula);
+  if ( ($tiemposDocente + $jornada_docenteConPermiso) > 1 ) {
+    $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "No puede agregar mas tiempos al docente encargado <br>porque pasa el límite de un tiempo.";
+      header("Location: ../masterPage.php");
+      exit();
+  }
+
     if (empty($nombre)) {
       $_SESSION['alerta'] = 1;
       $_SESSION['alerta-contenido'] = "Debe ingresar el nombre.";

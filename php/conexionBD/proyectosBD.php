@@ -65,14 +65,14 @@ class proyectosBD extends conexionBD
 	}
 
 	////////////////////////////////////////////////////
-	function modificarProyecto ($id_proyecto , $nombre_proyecto , $tipo_proyecto , $jornada_proyecto, $fk_encargado, $fk_ayudante) 
+	function modificarProyecto ($id_proyecto , $nombre_proyecto , $tipo_proyecto  , $fk_ayudante) 
 	{
-		$stmt = $this->con->prepare("UPDATE `tb_Proyectos` SET `nombre_proyecto` = ?, `tipo_proyecto` = ?, `jornada_proyecto` = ?, `fk_encargado` = ?, `fk_ayudante` = ? WHERE `tb_Proyectos`.`id_proyecto` = ?;");
+		$stmt = $this->con->prepare("UPDATE `tb_Proyectos` SET `nombre_proyecto` = ?, `tipo_proyecto` = ? , `fk_ayudante` = ? WHERE `tb_Proyectos`.`id_proyecto` = ?;");
 		if ($stmt === FALSE) {
 			die("Prepare fail");
 		}
 
-		$stmt->bind_param('sidssi' ,  $nombre_proyecto , $tipo_proyecto , $jornada_proyecto, $fk_encargado, $fk_ayudante , $id_proyecto);
+		$stmt->bind_param('sisi' ,  $nombre_proyecto , $tipo_proyecto , $fk_ayudante , $id_proyecto);
 		return $stmt->execute();
 	}
 }
