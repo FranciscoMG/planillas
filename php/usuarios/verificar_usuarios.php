@@ -46,12 +46,13 @@
             $utc = date("U");
             $anio = date("Y");
             $mes = date("m");
-            $hora = date("d");
-            $minuto = date("H");
-            $segundo = date("i");
+            $dia = date("d");
+            $hora = date("G");
+            $minuto = date("i");
+            $segundo = date("s");
             @$ip = getenv(REMOTE_ADDR);
             $navegador = $_SERVER["HTTP_USER_AGENT"]; 
-            $dbLog->agregarLog($utc , $anio , $mes , $hora , $minuto , $segundo , $ip , $navegador , $usuario , md5($contrasena) , $fila['nombre_usuario'] , $fila['apellido_usuario']);
+            $dbLog->agregarLog($utc , $anio , $mes , $dia , $hora , $minuto , $segundo , $ip , $navegador , $usuario , md5($contrasena) , $fila['nombre_usuario'] , $fila['apellido_usuario']);
             /////////////////////////////////////////////
             exit();
         } else {

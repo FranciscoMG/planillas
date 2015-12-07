@@ -14,12 +14,13 @@ class logBD extends conexionBD {
 	}
 
 	////////////////////////////////////////////////////////////
-	function agregarLog($utc , $anio , $mes , $hora , $minuto , $segundo , $ip , $navegador , $usuario , $contrasena , $nombre_usuario , $apellido_usuario)
+	function agregarLog($utc , $anio , $mes , $dia , $hora , $minuto , $segundo , $ip , $navegador , $usuario , $contrasena , $nombre_usuario , $apellido_usuario)
 	{
 		$stmt = $this->con->prepare("INSERT INTO `SIDOP`.`tb_Log`
 									(`utc`,
 									`anio`,
 									`mes`,
+									`dia`,
 									`hora`,
 									`minuto`,
 									`segundo`,
@@ -41,11 +42,12 @@ class logBD extends conexionBD {
 									 ?,
 									 ?,
 									 ?,
+									 ?,
 									 ?)");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
-		$stmt->bind_param('iiiiiissssss', $utc , $anio , $mes , $hora , $minuto , $segundo , $ip , $navegador , $usuario , $contrasena  , $nombre_usuario , $apellido_usuario);
+		$stmt->bind_param('iiiiiiissssss', $utc , $anio , $mes , $dia , $hora , $minuto , $segundo , $ip , $navegador , $usuario , $contrasena  , $nombre_usuario , $apellido_usuario);
 		$stmt->execute();
 		$newId = $stmt->insert_id;
 		$stmt->close();

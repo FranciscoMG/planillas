@@ -1,4 +1,7 @@
 <?php session_start(); ?>
+<?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+<?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
+
 <?php include_once("../conexionBD/proyectosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 
@@ -59,6 +62,19 @@ if (isset($_POST['proyectosBtnAgregar'])) {
 /////////////////////////// Eliminar ///////////////////////
 if (isset($_POST['btnEliminarProyecto'])) {
 	if ($idProyecto != "") {
+
+		/// Verificar si existe //////
+	$resultado3 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+	while ($fila2 = mysqli_fetch_assoc($resultado3)) {
+		if ($fila2['fk_proyecto'] == $idProyecto) {
+			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta-contenido'] = "No se puede eliminarl el proyecto porque tiene un presupuesto asignado.";
+			header("Location: ../masterPage.php");
+			exit();
+		}
+	}
+	////////////////
+
 		$db->eliminarProyecto($idProyecto);
 		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Proyecto eliminado";
