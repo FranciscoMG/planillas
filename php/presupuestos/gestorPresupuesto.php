@@ -30,15 +30,7 @@ $tiempo_sobrante = $tiempo_presupuesto;
 
 //////////////// AGREGAR /////////////////////////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
-	$resultado2 = $db->obtenerlistadoDePresupuesto();
-	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-		if ($fila2['id_presupuesto'] == $id_presupuesto) {
-			$_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "El presupuesto ya existe.";
-			header("Location: ../masterPage.php");
-			exit();
-		}
-	}
+	if (!empty($_POST['cboTiemposPresupuesto'])) {
 
 	if(empty($nombre_presupuesto)) {
 		$_SESSION['alerta'] = 1;
@@ -63,6 +55,7 @@ if (isset($_POST['presupuestoBtnAgregar'])) {
 
 		header("Location: ../masterPage.php");
 		exit();
+	}
 	}
 }
 
