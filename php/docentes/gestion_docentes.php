@@ -16,7 +16,7 @@ $descripcionRegistroActividad = "";
 <?php
 
 if (isset($_POST['txtCedula']) && !empty($_POST['txtCedula'])) {
-  $cedula= $_POST['txtCedula'];
+  $cedula= trim($_POST['txtCedula']);
 } else {
   if (isset($_POST['cboxIDDocente']) && $_POST['cboxIDDocente'] != "0") {
     $cedula= $_POST['cboxIDDocente'];

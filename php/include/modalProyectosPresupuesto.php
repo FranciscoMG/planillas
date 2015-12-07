@@ -1,6 +1,9 @@
 <?php include_once("conexionBD/proyectosBD.php"); ?>
 <?php include_once("conexionBD/docentesBD.php"); ?>
 <?php include_once("conexionBD/presupuestoBD.php"); ?>
+<?php include_once("conexionBD/presupuestoDocenteBD.php"); ?>
+
+<?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
 
 <?php $dbPresupuesto = new presupuestoBD() ?>
 <?php $db = new proyectosBD(); ?>
@@ -36,10 +39,22 @@
                echo "<option></option>";
               }
               $resultado = $db->obtenerProyecto();
+              $existe2 = 0;
               while ($fila = mysqli_fetch_assoc($resultado)) {
                 if ($fila['id_proyecto'] != 1) {
-                echo "<option value='".$fila['id_proyecto']."'>".$fila['nombre_proyecto']."</option>";
-              }
+                  $existe2 = 0;
+                  $resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+                  while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+                    if ($fila2['fk_proyecto'] == $fila['id_proyecto'] && $fila['id_proyecto'] != 1) {
+                      $existe2 = 1;
+                    }
+                  }
+                  if ($existe2 == 1) {
+                  echo "<option value='".$fila['id_proyecto']."' >Tiene presupuesto    = ".$fila['nombre_proyecto']."</option>";
+                  } else {
+                 echo "<option value='".$fila['id_proyecto']."' >Sin presupuesto = ".$fila['nombre_proyecto']."</option>";
+                  }
+                }
               }
                ?>
 
