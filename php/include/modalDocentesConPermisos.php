@@ -10,7 +10,7 @@
 
 <div id="modalDocentesConPermisos" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content ">
+		<div class="modal-content">
 			<!-- Header -->
       <div class="modal-header modal-delete-border">
 				<a type="button" class="close" href="masterPage.php">&times;</a>
@@ -131,7 +131,7 @@
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboJornadaDocenteConPermiso2">Partida del presupuesto:</label>
             <select class="form-control" name="cboJornadaDocenteConPermiso2">
-            <?php 
+            <?php
             if ($_GET['jornada'] != "") {
               echo "<option>".$_GET['jornada_fraccion']."</option>";
             }

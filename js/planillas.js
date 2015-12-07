@@ -508,6 +508,35 @@ function cargarDatosPresupuesto(obj){
 	document.location="../php/presupuestos/gestorPresupuesto.php?id="+valorSeleccionado;
 }
 
+////////////////////////////////////////////////////////////////////////
+
+function activarAsignarPresup() {
+	var asignarGrupoPresup = document.getElementById('asignarGrupoPresup');
+	var eliminarGrupoPresup = document.getElementById('eliminarGrupoPresup');
+
+	var btnAsignarGrupoPresup = document.getElementById('btnAsignarGrupoPresup');
+	var btnEliminarGrupoPresup = document.getElementById('btnEliminarGrupoPresup');
+
+	asignarGrupoPresup.className="form-group col-xs-12 col-sm-12 col-lg-12";
+	eliminarGrupoPresup.className="hide";
+	btnAsignarGrupoPresup.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+	btnEliminarGrupoPresup.className="hide";
+}
+
+function eliminarAsignarPresup() {
+	var asignarGrupoPresup = document.getElementById('asignarGrupoPresup');
+	var eliminarGrupoPresup = document.getElementById('eliminarGrupoPresup');
+
+	var btnAsignarGrupoPresup = document.getElementById('btnAsignarGrupoPresup');
+	var btnEliminarGrupoPresup = document.getElementById('btnEliminarGrupoPresup');
+
+	asignarGrupoPresup.className="hide";
+	eliminarGrupoPresup.className="form-group col-xs-12 col-sm-12 col-lg-12";
+	btnAsignarGrupoPresup.className="hide";
+	btnEliminarGrupoPresup.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+}
+
+////////////////////////////////////////////////////////////////////////
 $("#btnProfesor").click(function () {
 	idProfesor= cuentaDiv(false, false);
 	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
@@ -590,13 +619,13 @@ function cuentaDiv(esDoble, tipoDiv) {
 	return idDiv;
 }
 
-//////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 function cargarCboxPorCarrera(obj) {
 	var valorSeleccionado = obj.options[obj.selectedIndex].value;
 	var valorTexto = obj.options[obj.selectedIndex].text;
 	document.location="masterPage.php?cargarPorCarrera="+valorSeleccionado+"&valorPorCarreraTexto="+valorTexto;
 }
-///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 function cambiaDivTabla() {
 	gruposDiv= document.getElementsByClassName("gruposDiv");

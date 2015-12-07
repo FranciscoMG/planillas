@@ -13,20 +13,21 @@
 <?php $db = new presupuestoBD(); ?>
 
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
-<?php 
-$dbRegistroActividad = new registroActividadBD(); 
+<?php
+$dbRegistroActividad = new registroActividadBD();
 $utc = date('U');
 $fecha = date("Y-m-d H:i:s");
 $usuario = $_SESSION['usuario'];
 $descripcionRegistroActividad = "";
 ?>
 
-<?php 
+<?php
 $id_presupuesto = $_POST['cboxIDPresupuesto'];
 $nombre_presupuesto = $_POST['txtNombrePresupuesto'];
 $codigo = $_POST['txtCodigoPresupuesto'];
 $tiempo_presupuesto = fraccionADecimalPresupuesto($_POST['cboTiemposPresupuesto']);
 $tiempo_sobrante = $tiempo_presupuesto;
+$presupuestoGrupo= $_POST['cboPresupuestoGrupo'];
 
 //////////////// AGREGAR /////////////////////////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
@@ -88,7 +89,7 @@ if (empty($id_presupuesto)) {
 			exit();
 		}
 	}
-	////// De gruposDocentes 
+	////// De gruposDocentes
 	$resultado4 = $dbGrupos->obtenerGrupoDocentes();
 	while ($fila3 = mysqli_fetch_assoc($resultado4)) {
 		if ($fila3['fk_presupuesto'] == $id_presupuesto) {
@@ -153,6 +154,105 @@ if (empty($id_presupuesto)) {
         $descripcionRegistroActividad="Se modificó el presupuesto: ".$nombre_presupuesto;
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         /////////////////////////////////////////////
+
+		header("Location: ../masterPage.php");
+		exit();
+	}
+}
+
+if (isset($_POST['btnAsignarGrupoPresup'])) {
+	if (empty($presupuestoGrupo)) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
+		header("Location: ../masterPage.php");
+		exit();
+	}
+	if (isset($_GET['total_tiempos'])) {
+		$resultado = $db->obtenerlistadoDePresupuesto();
+		while ($fila = mysqli_fetch_assoc($resultado)) {
+			if ($fila['id_presupuesto'] == $presupuestoGrupo) {
+				if ($fila['tiempo_sobrante'] < $_GET['total_tiempos']) {
+					$_SESSION['alerta'] = 1;
+					$_SESSION['alerta-contenido'] = "Este presupuesto solo tiene ".$fila['tiempo_sobrante']." tiempos, no puede agregar los ".$_GET['total_tiempos']." tiempos del grupo.";
+					header("Location: ../masterPage.php");
+					exit();
+				} else {
+					$tiempo_sobrante = $fila['tiempo_sobrante'];
+					$nombre_presupuesto = $fila['nombre_presupuesto'];
+				}
+			}
+		}
+	}
+	if (isset($_GET['carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo']) && isset($_GET['num_grupo_doble']) && isset($_GET['total_tiempos'])) {
+		$resultado = $dbGrupos->agregarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo'], $presupuestoGrupo);
+		if (!$resultado && $_GET['num_grupo_doble'] != "0") {
+			$resultado2 = $dbGrupos->agregarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo_doble'], $presupuestoGrupo);
+		}
+		if (!($resultado && $resultado2) || !$resultado) {
+			$tiempo_sobrante= ($tiempo_sobrante - $_GET['total_tiempos']);
+			$resultado3 = $db->restarPresupuesto($presupuestoGrupo, $tiempo_sobrante);
+		}
+	}
+
+	if (!$resultado3) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
+		header("Location: ../masterPage.php");
+		exit();
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Grupo agregado al presupuesto ".$nombre_presupuesto.".";
+
+		///////////// registro de actividad //////////
+	  $descripcionRegistroActividad="Se agrego el presupuesto ".$nombre_presupuesto." al grupo: ".$_GET['curso']." - G".$_GET['num_grupo'];
+		if ($_GET['num_grupo_doble'] != "0") {
+			$descripcionRegistroActividad.=" y G".$_GET['num_grupo_doble'];
+		}
+		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+	  /////////////////////////////////////////////
+
+		header("Location: ../masterPage.php");
+		exit();
+	}
+}
+
+if (isset($_POST['btnEliminarGrupoPresup'])) {
+	if (isset($_GET['total_tiempos']) && isset($_GET['id_presupuesto'])) {
+		$resultado = $db->obtenerlistadoDePresupuesto();
+		while ($fila = mysqli_fetch_assoc($resultado)) {
+			if ($fila['id_presupuesto'] == $_GET['id_presupuesto']) {
+				$tiempo_sobrante = $fila['tiempo_sobrante'];
+				$nombre_presupuesto = $fila['nombre_presupuesto'];
+			}
+		}
+	}
+	if (isset($_GET['carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo']) && isset($_GET['num_grupo_doble']) && isset($_GET['total_tiempos']) && isset($_GET['id_presupuesto'])) {
+		$resultado = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo'], 0);
+		if (!$resultado && $_GET['num_grupo_doble'] != "0") {
+			$resultado2 = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo_doble'], 0);
+		}
+		if (!($resultado && $resultado2) || !$resultado) {
+			$tiempo_sobrante= ($tiempo_sobrante + $_GET['total_tiempos']);
+			$resultado3 = $db->sumarPresupuesto($_GET['id_presupuesto'], $tiempo_sobrante);
+		}
+	}
+
+	if (!$resultado3) {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
+		header("Location: ../masterPage.php");
+		exit();
+	} else {
+		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta-contenido'] = "Grupo eliminado del presupuesto ".$nombre_presupuesto.".";
+
+		///////////// registro de actividad //////////
+		$descripcionRegistroActividad="Se quitó del presupuesto ".$nombre_presupuesto." el grupo: ".$_GET['curso']." - G".$_GET['num_grupo'];
+		if ($_GET['num_grupo_doble'] != "0") {
+			$descripcionRegistroActividad.=" y G".$_GET['num_grupo_doble'];
+		}
+		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
+		/////////////////////////////////////////////
 
 		header("Location: ../masterPage.php");
 		exit();
