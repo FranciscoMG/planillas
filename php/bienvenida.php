@@ -32,6 +32,10 @@
 			</div>
 		</div>
 	</header>
+<br>
+					<br>
+					<br>
+
 	<main>
 		<div class="container fondo-log">
 			<div class="row center-block">
@@ -40,7 +44,8 @@
 					<br>
 					<br>
 			
-					<h3>Bienvenido al Sistema de PLanillas SIDOP <br> </h3>
+					<h3>Bienvenido al Sistema de Planillas SIDOP <br> </h3>
+
 					<br>
 					<a href="inicio.php" >Ir al login...</a>
 

@@ -9,10 +9,13 @@ if ($_SESSION[masterActivo] != 1) {
 <?php include_once("../include/conversor.php");?>
 <?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
+<?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
+
+
 <?php $db = new docentesBD(); ?>
 <?php $resultadoDocente = $db->obtenerDocentes(); ?>
-<?php $dbDocente = new gruposBD(); ?>
-<?php $resultadoPresupuesto = $dbDocente->obtenerGrupoDocentes(); ?>
+<?php $dbGrupos = new gruposBD(); ?>
+<?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
 
 
 <?php
@@ -52,12 +55,12 @@ $pdf->SetFont('Arial','B',8);
 
 ////////////////// Contenido //////////////////////
 $pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1","Cédula"),1,0,"C");
-$pdf->Cell(20,10,"Nombre",1,0,"C");
-$pdf->Cell(30,10,"Apellidos",1,0,"C");
+$pdf->Cell(25,10,"Nombre",1,0,"C");
+$pdf->Cell(35,10,"Apellidos",1,0,"C");
 $pdf->Cell(27,10,"Grado Academico",1,0,"C");
 $pdf->Cell(25,10,"Nombramiento",1,0,"C");
-$pdf->Cell(27,10,"Jornada Faltante",1,0,"C");
 $pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
+$pdf->Cell(26,10,"Jornada Faltante",1,0,"C");
 
 $pdf->Ln();
 
@@ -66,8 +69,8 @@ $pdf->SetFont('Arial','',8);
 while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 	$cedula_docente = $fila['cedula'];
 	$pdf->Cell(25,10,$cedula_docente,1,0,"C");
-	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
+	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
+	$pdf->Cell(35,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
 
 	//Grado Academico
 	$grado_ac;
@@ -102,36 +105,60 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 
 	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$contrato_tipo),1,0,"C");
 
+	///////////////////////// Calculo de tiempos
+	$tiempoIndividual = 0;
+	$resultadoPresupuesto2 = $dbGrupos->obtenerGrupoDocentes();
+	while ($fila2 = mysqli_fetch_assoc($resultadoPresupuesto2)) {
+	 	if ($fila['cedula'] == $fila2['fk_docente']) {
+	 		$tiempoIndividual = ($tiempoIndividual + $fila2['tiempo_individual']);
+		}
+	 } 
+	$resultado1 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
+	while ($fila3 = mysqli_fetch_assoc($resultado1)) {
+		if ($fila3['fk_docente'] == $fila['cedula']) {
+			$tiempoIndividual = ($tiempoIndividual + $fila3['jornada']);
+		}
+	}
+	////////////////////
+	$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1",$tiempoIndividual),1,0,"C");
+
+	$faltante = 1 - $tiempoIndividual;
 
 	if ($fila['tipo_contrato'] == 1) {
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
-	}else{
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","--"),1,0,"C");
+		if ($faltante == 0 || $faltante == 1) {
+			$pdf->SetTextColor(0,0,0);
+		} else {
+			$pdf->SetTextColor(255,0,0);
+		}
+		$pdf->SetFillColor(255, 255 , 255);
+		$pdf->Cell(26,10,iconv("UTF-8","ISO-8859-1",$faltante),1,0,"C",true);
+		$pdf->SetTextColor(0,0,0);
+		$pdf->SetFillColor(255, 255 , 255);
+	} else {
+		$pdf->Cell(26,10,iconv("UTF-8","ISO-8859-1",$faltante),1,0,"C");
 	}
+
+
 	$pdf->Ln();
 }
 
 //////////////////////////Totales Docente////////////////////////
-$pdf->SetTextColor(255,255,255);
-$pdf->SetFillColor(0, 193 , 0);
-$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetX(137);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
-$pdf->Ln();
 
+//$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$pdf->Ln();
+/*
 $pdf->SetY(65);
 while ($fila2 = mysqli_fetch_assoc($resultadoPresupuesto)) {
-	$pdf->SetX(164);
+	$pdf->SetX(174);
 	$suma = $suma + $fila2['tiempo_individual'];
 	$convertidoDocentes = convertirDobleFraciones($fila2['tiempo_individual']);
 	$pdf->Cell(27,10,$convertidoDocentes,1,0,"C");
 	$pdf->Ln();
 }
 
-$pdf->SetX(164);
+$pdf->SetX(174);
 $convertidoSuma = convertirDobleFraciones($suma);
 $pdf->Cell(27,7,$convertidoSuma,1,0,"C");
-
+*/
 $pdf->Output();
 ?>

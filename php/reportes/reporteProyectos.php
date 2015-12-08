@@ -56,10 +56,14 @@ $pdf->SetFont('Arial','B',10);
 //////////////////// Contenido ///////////////////////
 	$pdf->Cell(30,10,"Nombre",1,0,"C");
 	$pdf->Cell(30,10,"Tipo",1,0,"C");
-	$pdf->Cell(20,10,"Tiempos",1,0,"C");
+	$pdf->Cell(20,10,"Jornada",1,0,"C");
 	$pdf->Cell(60,10,"Principal/Responsable",1,0,"C");
 	$pdf->Cell(60,10,"Asociado/Colaborador",1,0,"C");
-	$pdf->Cell(60,10,"Presupuesto",1,0,"C");
+	$pdf->Cell(40,10,"Presupuesto",1,0,"C");
+	$pdf->Cell(38,10,"Jornada asignada",1,0,"C");
+
+	$sumaAsignados = 0;
+
 	$pdf->Ln();
 
 	$pdf->SetFont('Arial','',9);
@@ -80,8 +84,6 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 
 	}
 
-	$sumaTiempos = $sumaTiempos + $fila['jornada_proyecto'];
-
 	$pdf->Cell(20,10,convertirDobleFraciones ($fila['jornada_proyecto']),1,0,"C");
 
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_encargado']);
@@ -97,13 +99,13 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_ayudante']);
 
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-
 		if ($fila['fk_ayudante'] == $fila2['cedula']) {
 			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']." ".$fila2['apellidos']),1,0,"C");
 		}
 
 	}
 
+	$nombrePresupuesto = "--";
 	$resultado4 = $dbDocentesPresupuesto->obtenerlistadoDePresupuestoDocente();
 	while ($fila4 = mysqli_fetch_assoc($resultado4)) {
 		if ($fila4["fk_proyecto"] == $fila["id_proyecto"]) {
@@ -111,18 +113,36 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 			$resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
 			while ($fila3 = mysqli_fetch_assoc($resultado3)) {
 				if ($fila4["fk_id_presupuesto"] == $fila3["id_presupuesto"]) {
-					$pdf->Cell(60,10,$fila3['nombre_presupuesto'],1,0,"C");
+					$nombrePresupuesto = $fila3['nombre_presupuesto'];
 				}
 			}
 		}
 	}
+	$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1",$nombrePresupuesto),1,0,"C");
+
+	$jornadaAsignada = 0;
+	if ($nombrePresupuesto != "--") {
+		$jornadaAsignada = $fila['jornada_proyecto'];
+	}
+	$sumaAsignados = ($sumaAsignados + $jornadaAsignada);
+	$pdf->Cell(38,10,iconv("UTF-8","ISO-8859-1",$jornadaAsignada),1,0,"C");
+
 
 	$pdf->Ln();
 	}
 }
 
 //////////////////////////Totales Presupuesto////////////////////////
+$pdf->Cell(200,10,"",0,0,"C");
+$pdf->SetTextColor(255,255,255);
+$pdf->SetFillColor(0, 193 , 0);
+$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1","Totales: "),1,0,"C",true);
+$pdf->SetTextColor(0,0,0);
+$pdf->Cell(38,10,$sumaAsignados,1,0,"C");
 
+
+
+/*
 $pdf->SetTextColor(255,255,255);
 $pdf->SetFillColor(0, 193 , 0);
 $pdf->Cell(30,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
@@ -132,7 +152,7 @@ $convertidoSuma = convertirDobleFraciones($sumaTiempos);
 $pdf->Cell(20,7,$sumaTiempos,1,0,"C");
 $pdf->SetX(210);
 $pdf->Ln();
-
+*/
 $pdf->Output();
 
 ?>

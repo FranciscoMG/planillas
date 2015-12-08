@@ -229,7 +229,8 @@
 			              	}
 			               ?>
 			                <li><a href="reportes/reporteDocente.php" target="_blank">Reporte de docentes</a></li>
-			                <li><a href="#">Reporte de un docente</a></li>
+			                <li><a href="">Reporte de un docente</a></li>
+			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos</a></li>
 			                <li role="separator" class="divider"></li>
 			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
 			                <li><a href="#">Reporte de un proyecto</a></li>

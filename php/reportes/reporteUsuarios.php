@@ -53,9 +53,9 @@ $pdf->SetFont('Arial','B',10);
 
 	$pdf->SetFont('Arial','',9);
 while ($fila = mysqli_fetch_assoc($resultado)) {
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['usuario']),1);
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_usuario']),1);
-	$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1",$fila['apellido_usuario']),1);
+	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['usuario']),1 , 0 ,"C");
+	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_usuario']),1, 0 ,"C");
+	$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1",$fila['apellido_usuario']),1, 0 ,"C");
 
 	///// Tipo de perfil /////
 	$tipoPerfil;
@@ -68,9 +68,9 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 			$tipoPerfil = "Recursos Humanos";
 		}
 	}
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$tipoPerfil),1);
+	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$tipoPerfil),1, 0 ,"C");
 	///////////////////////////
-	$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1",$fila['correo_usuario']),1);
+	$pdf->Cell(40,10,iconv("UTF-8","ISO-8859-1",$fila['correo_usuario']),1, 0 ,"C");
 
 	//// Habilitado /////
 	if ($fila['habilitado'] == 1) {

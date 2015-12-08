@@ -41,7 +41,7 @@
               $resultado = $db->obtenerProyecto();
               $existe2 = 0;
               while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['id_proyecto'] != 1) {
+                if ($fila['id_proyecto'] != 1 && $_GET['id_proyecto'] != $fila['id_proyecto']) {
                   $existe2 = 0;
                   $resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
                   while ($fila2 = mysqli_fetch_assoc($resultado2)) {
