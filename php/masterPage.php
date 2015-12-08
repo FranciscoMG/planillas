@@ -172,7 +172,7 @@
 						}
 
 					echo '<ul class="dropdown-menu">';
-					if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1) {
+					if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 2) {
 				    echo '<li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
 				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>

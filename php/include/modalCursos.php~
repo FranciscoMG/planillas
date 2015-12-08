@@ -5,7 +5,7 @@
 ?>
 
 <div id="modalCursos" class="modal fade" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-sm">
 		<div class="modal-content ">
 			<!-- Header -->
       <div class="modal-header modal-delete-border">
@@ -52,17 +52,14 @@
             <select class="form-control" name="cboxtxtCarrera" id="" onchange="">
             <?php 
             if ($_GET['modalCursos'] == 1) {
-              echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
-              $resultado = $db->obtenerCarreras();
-              while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['id_Carrera'] != $_GET['id_Carrera']) {
-                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
-                }
-              }
+              echo "<option value='".$_GET['id_carrera']."'>".$_GET['nombre_carrera']."</option>";
+             
             } else {
               $resultado = $db->obtenerCarreras();
               while ($fila = mysqli_fetch_assoc($resultado)) {
-                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                if ($fila['id_carrera'] != 1) {
+                  echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
+                }
               }
             }
              ?>
@@ -93,7 +90,7 @@
             </select>
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-            <label for="cboTiempo">Cantidad de tiempos:</label>
+            <label for="cboTiempo">Jornada:</label>
             <select class="form-control" name="cboTiempoCursos">
             <?php 
             if ($_GET['jornada'] != "") {
