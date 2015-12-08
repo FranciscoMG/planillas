@@ -39,7 +39,9 @@
                       echo "<option></option>"; 
                     }
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                      echo "<option value='".$fila['usuario']."'>".$fila['usuario']."</option>";
+                      if ($fila['usuario'] != "admin" && $fila['usuario'] != $_GET['usuario']) {
+                        echo "<option value='".$fila['usuario']."'>".$fila['usuario']."</option>";
+                      }
                     }
                   echo "</select>";
                 }
