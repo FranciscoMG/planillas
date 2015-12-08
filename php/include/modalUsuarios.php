@@ -33,10 +33,10 @@
                     $resultado = $db->obtenerlistadoDeUsuarios();
                     if (isset($_GET['modalUsuarios'])) {
                       echo "<option value='".$_GET['usuario']."'>".$_GET['usuario']."</option>";
-                    } 
+                    }
                     else
                      {
-                      echo "<option></option>"; 
+                      echo "<option></option>";
                     }
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                       if ($fila['usuario'] != "admin" && $fila['usuario'] != $_GET['usuario']) {
@@ -102,7 +102,7 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTipoPerfil">Tipo de perfil:</label>
             <select name="cboTipoPerfil" class="form-control">
-            <?php 
+            <?php
             if (isset($_GET['modalUsuarios'])) {
               $perfil="";
               if ($_GET['perfil'] == 0) {
@@ -134,33 +134,18 @@
           </div>
 
         </div>
-				<div class="form-group col-xs-12 col-sm-12 col-lg-12 text-center">
-					<p class="form-control-static texto-efectos1">
-					<?php
-						if (empty($_SESSION['mensaje-modal'])) {
-              if(isset($_SESSION['masterActivo'])){
-              if ($_SESSION['masterActivo'] != 1) {
-							  echo "¡Usted no podrá usar el perfil hasta que administración lo revise y apruebe!";
-
-              }
-            }
-						} else {
-							echo $_SESSION['mensaje-modal'];
-						}
-						?></p>
-				</div>
 				<div class="modal-footer modal-delete-border">
           <?php
           if(isset($_SESSION['masterActivo'])){
             if ($_SESSION[masterActivo] == 1) {
               echo "
-              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' style='padding-bottom:15px;' id='btn_Modificar'>
+              <div class='col-xs-12 col-sm-12 col-lg-12 espacio-boton' id='btn_Modificar'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnModificar'>Modificar</button>
               </div>
               <br/>";
             }
           } else {
-            echo '<div class="col-xs-12 col-sm-12 col-lg-12">
+            echo '<div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton" id="btn_Agregar">
             <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar" id="btn_Agregar">Registrar</button>
           </div>';
           }

@@ -72,14 +72,14 @@
 								}
 									?>
 	 							<li><a href="" data-toggle="modal" data-target="#modalMensajes"><span class='glyphicon glyphicon-envelope' ></span> Enviar mensaje </a></li>
-	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
+	 							<li><a href="sesion/cerrarSesion.php?salir=1">Salir</a></li>
 
 	 							<?php if ($_SESSION['tipoPerfil'] == 0) {
 	 							echo '
 									<li class="divider"></li>
 
-									<li><a href="" data-toggle="modal" data-target="#modalConfirmacion"><span class="glyphicon glyphicon-save " > </span>Exportar BD MySQL</a></li>
-									<li><a href="" data-toggle="modal" data-target="#modalBD"><span class="glyphicon glyphicon-open " > </span>Importar BD MySQL</a></li>';
+									<li><a href="" data-toggle="modal" data-target="#modalConfirmacion"><span class="glyphicon glyphicon-save " > </span> Exportar BD MySQL</a></li>
+									<li><a href="" data-toggle="modal" data-target="#modalBD"><span class="glyphicon glyphicon-open " > </span> Importar BD MySQL</a></li>';
 	 							} ?>
 
  							</ul>
@@ -172,7 +172,7 @@
 						}
 
 					echo '<ul class="dropdown-menu">';
-					if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1) {
+					if ($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1 || $_SESSION['tipoPerfil'] == 2) {
 				    echo '<li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarAgregarProyecto()">Agregar</a></li>
 				          <li><a  href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarModificarProyecto()">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalProyectos" onclick="activarEliminarProyecto()">Eliminar</a></li>
@@ -229,7 +229,8 @@
 			              	}
 			               ?>
 			                <li><a href="reportes/reporteDocente.php" target="_blank">Reporte de docentes</a></li>
-			                <li><a href="#">Reporte de un docente</a></li>
+			                <li><a href="">Reporte de un docente</a></li>
+			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos</a></li>
 			                <li role="separator" class="divider"></li>
 			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
 			                <li><a href="#">Reporte de un proyecto</a></li>

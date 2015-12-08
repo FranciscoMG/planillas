@@ -76,7 +76,7 @@ if (isset($_POST['btnEliminar'])) {
     /////////////////////////////////////////////////////
   } else {
     $_SESSION['alerta'] = 1;
-    $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el docente";
+    $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el docente<br> esto se debe a que el docente se encuentra activo en un proyecto o grupo.";
   }
   header('Location: ../masterPage.php');
   exit();

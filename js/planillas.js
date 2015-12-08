@@ -112,9 +112,9 @@ function activarModificarCursos() {
 
 	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
-	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionCursosEliminar.className="";
 }
 
@@ -130,9 +130,9 @@ function activarEliminarCursos() {
 
 	cursosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	cursosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	cursosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	cursosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	cursosBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionCursosEliminar.className="hide";
 	selectCursos.onchange="";
 }
@@ -155,9 +155,9 @@ function activarAgregarProyecto() {
 
 	proyectoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
 	proyectoAgregar.className="col-xs-12 col-sm-12 col-lg-12";
-	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
 	seccionEliminarProyecto.className="";
 }
 
@@ -171,9 +171,9 @@ function activarModificarProyecto(){
 
 	proyectoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 ";
 	proyectoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
-	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionEliminarProyecto.className="";
 }
 
@@ -189,9 +189,9 @@ function activarEliminarProyecto() {
 
 	proyectosEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	proyectosAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	proyectosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectosBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionEliminarProyecto.className="hide";
 	selectEliminarProyecto.onchange="";
 }
@@ -222,8 +222,8 @@ function activarAgregarProyectoPresupuesto() {
 	var proyectoBtnAgregar = document.getElementById('proyectosBtnAgregar2');
 
 	selectEliminarProyecto2.setAttribute("onchange", "cargarDatosProyectoPresupuestoAgregar(this)");
-	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	proyectoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	proyectoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
 	seccionEliminarProyecto.className="hide";
 }
 
@@ -236,8 +236,8 @@ function activarEliminarProyectoPresupuesto() {
 
 
 	selectEliminarProyecto2.setAttribute("onchange", "cargarDatosProyectoPresupuestoEliminar(this)");
-	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	proyectosBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	proyectosBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionEliminarProyecto.className="hide";
 }
 
@@ -311,6 +311,7 @@ function activarAgregarDocenteConPermisos() {
 	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
 	seccionEliminarDocente.className="";
 }
+
 function activarModificarDocenteConPermisos(){
 	var docenteBtnModificar = document.getElementById('docentesBtnModificar2');
 	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar2');
@@ -463,9 +464,9 @@ function activarAgregarPresupuesto() {
 
 	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
 	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12";
-	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
 	seccionEliminarPresupuesto.className="";
 }
 
@@ -480,9 +481,9 @@ function activarModificarPresupuesto(){
 
 	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 ";
 	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12";
-	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionEliminarPresupuesto.className="";
 }
 
@@ -498,9 +499,9 @@ function activarEliminarPresupuesto() {
 
 	presupuestoEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
 	presupuestoAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
-	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 hide";
-	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ";
-	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	presupuestoBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	presupuestoBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton col-lg-12 ";
+	presupuestoBtnAgregar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
 	seccionEliminarPresupuesto.className="hide";
 	selectEliminarPresupuesto.onchange="";
 }
@@ -543,7 +544,7 @@ $("#btnProfesor").click(function () {
 	idProfesor= cuentaDiv(false, false);
 	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
 		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input id="txtProfesor'+idProfesor+'" name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
-		modificaJornada(false, trim(document.getElementById("txtProfesor"+(idProfesor)).value.split("-")[1]));
+		modificaJornada(false, FraccionToDoble(trim(document.getElementById("txtProfesor"+(idProfesor)).value.split("-")[1])));
 	}
 });
 
@@ -559,7 +560,7 @@ function modificaJornada(esResta, cantidad) {
 		document.getElementById("txtJornada").value=sumTiempos;
 	} else {
 		sumTiempos= Number(document.getElementById("txtJornada").value);
-		sumTiempos+= FraccionToDoble($("#selectTiempoProfesor").val());
+		sumTiempos+= cantidad;
 		document.getElementById("txtJornada").value=sumTiempos;
 	}
 }
@@ -579,7 +580,7 @@ $("#btnHorario").click(function () {
 $("#btnProfesorDoble").click(function () {
 	idProfesor= cuentaDiv(true, false);
 	if (idProfesor < 6 && $("#selectAgregarDocenteDoble option:selected").text() != "") {
-		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input id="txtProfesorDoble'+idProfesor+'" name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesorDoble'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		modificaJornada(false, FraccionToDoble(trim(document.getElementById("txtProfesorDoble"+(idProfesor)).value.split("-")[1])));
 	}
 });
@@ -693,34 +694,3 @@ function FraccionToDoble(fraccion){
 }
 
 ////////////////////////
-
-
-$('#example').DataTable({
-    "language": {
-        "sProcessing":    "Procesando...",
-        "sLengthMenu":    "Mostrar _MENU_ registros",
-        "sZeroRecords":   "No se encontraron resultados",
-        "sEmptyTable":    "Ningún dato disponible en esta tabla",
-        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":   "",
-        "sSearch":        "Buscar:",
-        "sUrl":           "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
-});
-
-
-

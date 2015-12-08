@@ -235,7 +235,7 @@
 			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
 			                <li><a href="#">Reporte de un proyecto</a></li>
 			                <li role="separator" class="divider"></li>
-			                <li><a href="reportes/reportePresupuestos.php" target="_blank">Reporte de presupuestos</a></li>
+			                <li><a href="reportes/reportePresupuesto.phpp" target="_blank">Reporte de presupuestos</a></li>
 			                <li><a href="#">Reporte de un presupuesto</a></li>
 			                <li role="separator" class="divider"></li>
 			                <li><a href="#">Reporte de cursos / grupos</a></li>

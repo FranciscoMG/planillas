@@ -106,6 +106,12 @@ if (empty($id_presupuesto)) {
 		$nombre_presupuesto2 = "";
 		while ($fila4 = mysqli_fetch_assoc($resultado5)) {
 			if($fila4['id_presupuesto'] == $id_presupuesto) {
+				if ($fila4['tiempo_presupuesto'] != $fila4['tiempo_sobrante']) {
+					$_SESSION['alerta'] = 1;
+					$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya tiene tiempos asignados.";
+					header("Location: ../masterPage.php");
+					exit();
+				}
 				$nombre_presupuesto2 = $fila4['nombre_presupuesto'];
 			}
 		}

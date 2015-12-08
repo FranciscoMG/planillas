@@ -79,11 +79,13 @@
                       $resultado = $db->obtenerGrupos(TRUE);
                       while ($fila = mysqli_fetch_assoc($resultado)) {
                         if ($_GET['id_carrera'] == $fila['fk_carrera']) {
-                          echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']." ".$fila['num_grupo_doble']."'>G".$fila['num_grupo']." ";
-                          if ($fila['num_grupo_doble'] != 0) {
-                            echo " y G".$fila['num_grupo_doble']." ";
+                          if ($fila['fk_presupuesto'] == 1) {
+                            echo "<option value='".$fila['fk_curso']." ".$fila['num_grupo']." ".$fila['num_grupo_doble']."'>G".$fila['num_grupo']." ";
+                            if ($fila['num_grupo_doble'] != 0) {
+                              echo " y G".$fila['num_grupo_doble']." ";
+                            }
+                            echo $fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                           }
-                          echo $fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                         }
                       }
                     }

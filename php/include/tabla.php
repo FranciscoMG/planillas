@@ -82,7 +82,7 @@
 					      if ($fila['profesorDoble']) {
 					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
 					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
-									$docentesDoble[$d][2]= $fila['fk_docente'];
+									$docentesDoble[$dD][2]= $fila['fk_docente'];
 					        $dD++;
 					        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
 					        $horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
@@ -178,7 +178,7 @@
 								if ($fila['profesorDoble']) {
 									$docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
 									$docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
-									$docentesDoble[$d][2]= $fila['fk_docente'];
+									$docentesDoble[$dD][2]= $fila['fk_docente'];
 									$dD++;
 									$horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
 									$horarioCursoDoble[$hD][1]= $fila['hora_inicio'];

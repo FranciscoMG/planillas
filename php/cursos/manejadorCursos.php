@@ -115,9 +115,9 @@ if (isset($_GET['id'])) {
 
         				$resultado3 = $db->obtenerCarreras();
         				while ($fila3 = mysqli_fetch_assoc($resultado3)) {
-        					if ($fila3['id_Carrera'] == $fila2['fk_carrera']) {
+        					if ($fila3['id_carrera'] == $fila2['fk_carrera']) {
         						
-        						$nombre_Carrera = $fila3['nombre_Carrera'];
+        						$nombre_Carrera = $fila3['nombre_carrera'];
         					}
         				}
 
@@ -125,7 +125,7 @@ if (isset($_GET['id'])) {
         		}
 
         		$jornada = convertirDobleFraciones($fila['jornada']);
-        		header("Location: ../masterPage.php?modalCursos=1&sigla=".$fila['sigla']."&nombre_curso=".$fila['nombre_curso']."&creditos=".$fila['creditos']."&jornada=".$jornada."&id_Carrera=".$id_Carrera."&nombre_Carrera=".$nombre_Carrera."");
+        		header("Location: ../masterPage.php?modalCursos=1&sigla=".$fila['sigla']."&nombre_curso=".$fila['nombre_curso']."&creditos=".$fila['creditos']."&jornada=".$jornada."&id_carrera=".$id_Carrera."&nombre_carrera=".$nombre_Carrera."");
 				exit();
         	}
         }

@@ -1,5 +1,5 @@
 <?php
-  session_start();
+session_start();
 ?>
 <!-- Modal -->
 <div id="modalConfirmacion" class="modal fade" role="dialog">
@@ -8,29 +8,26 @@
       <!-- Header -->
       <div class="modal-header modal-delete-border">
         <a type="button" class="close" href="masterPage.php">&times;</a>
-        <h4 class="modal-title">Alerta</h4>
+        <h4 class="modal-title">Respaldo base de datos</h4>
       </div>
       <!-- Body -->
       <div class="modal-body text-center">
         <p class="texto-efectos1">
-          <?php 
+          <?php
             echo "¿Desea crear un respaldo de la base de datos?";
-           ?>
+          ?>
         </p>
-      <br>
-
-         <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-              <a href="BD_Backup/obtenerBD.php" class="btn btn-success"> aceptar</a>
-            </div>
-    
-            <div class="btn-group" role="group">
-              <a href="masterPage.php" class="btn btn-warning"> regresar</a>
-            </div>
+        <br/>
+        <!-- Footer -->
+        <div class="modal-footer modal-delete-border">
+          <div class="espacio-boton col-xs-6 col-md-6">
+            <a href="BD_Backup/obtenerBD.php" class="btn btn-success btn-block">Aceptar</a>
+          </div>
+          <div class="espacio-boton col-xs-6 col-md-6">
+            <a href="masterPage.php" class="btn btn-warning btn-block">Regresar</a>
+          </div>
         </div>
-
+      </div>
     </div>
-    </div>
-    
   </div>
 </div>
