@@ -31,10 +31,12 @@
                 echo "<option value='0'></option>";
                 $resultado = $db2->obtenerCarreras();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                  if (isset($_GET['modalGrupos']) && $_GET['id_carrera'] == $fila['id_carrera']) {
-                    echo "<option value='".$fila['id_carrera']."' selected>".$fila['nombre_carrera']."</option>";
-                  } else {
-                    echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
+                  if ($fila['id_carrera'] != 1) {
+                    if (isset($_GET['modalGrupos']) && $_GET['id_carrera'] == $fila['id_carrera']) {
+                      echo "<option value='".$fila['id_carrera']."' selected>".$fila['nombre_carrera']."</option>";
+                    } else {
+                      echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
+                    }
                   }
                 }
               ?>
