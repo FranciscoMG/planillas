@@ -131,7 +131,7 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-lg-10">
               <select id="selectTiempoProfesor" class="form-control" name="cboTiempoProfesor">
-                <option value="0">Ad Hororem</option>
+                <option value="0">Ad honorem</option>
                 <?php
                   $tiempos= array('1/16', '1/8', '1/4', '3/8', '1/2', '5/8', '3/4', '7/8', '1');
                   for ($i=0; $i < count($tiempos); $i++) {
@@ -267,7 +267,7 @@
               </div>
               <div class="col-xs-10 col-sm-10 col-lg-10">
                 <select id="selectTiempoProfesorDoble" class="form-control" name="cboTiempoProfesorDoble">
-                  <option value="0">Ad Hororem</option>
+                  <option value="0">Ad honorem</option>
                   <?php
                     $tiempos= array('1/16', '1/8', '1/4', '3/8', '1/2', '5/8', '3/4', '7/8', '1');
                     for ($i=0; $i < count($tiempos); $i++) {
