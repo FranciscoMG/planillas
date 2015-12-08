@@ -31,10 +31,10 @@
                 echo "<option value='0'></option>";
                 $resultado = $db2->obtenerCarreras();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                  if (isset($_GET['modalGrupos']) && $_GET['id_carrera'] == $fila['id_Carrera']) {
-                    echo "<option value='".$fila['id_Carrera']."' selected>".$fila['nombre_Carrera']."</option>";
+                  if (isset($_GET['modalGrupos']) && $_GET['id_carrera'] == $fila['id_carrera']) {
+                    echo "<option value='".$fila['id_carrera']."' selected>".$fila['nombre_carrera']."</option>";
                   } else {
-                    echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                    echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
                   }
                 }
               ?>
@@ -43,13 +43,13 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboIDCurso">Nombre del curso:</label>
             <select id="selectAgregarCurso" class="form-control" name="cboIDCurso" onchange="cargarDatosGrupo(this)">
+              <option value="0"></option>
               <?php
-                echo "<option value='0'></option>";
                 if (isset($_GET['id_carrera']) && $_GET['modalGrupos'] == 1) {
-                  $resultado = $db2->obtenerCursosCarrera($_GET['id_carrera']);
+                  $resultado = $db2->obtenerCursosCarrera();
                   while ($fila = mysqli_fetch_assoc($resultado)) {
                     if ($_GET['id_carrera'] == $fila['fk_carrera']) {
-                      echo "<option value='".$fila['sigla']."'>".$fila['sigla']." - ".$fila['nombre_curso']."</option>";
+                      echo "<option value='".$fila['fk_curso']."'>".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
                     }
                   }
                 } else {
@@ -129,6 +129,7 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-lg-10">
               <select id="selectTiempoProfesor" class="form-control" name="cboTiempoProfesor">
+                <option value="0">Ad Hororem</option>
 		            <option>1/16</option>
                 <option>1/8</option>
                 <option>1/4</option>
