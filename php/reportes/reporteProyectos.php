@@ -7,12 +7,14 @@ if ($_SESSION[masterActivo] != 1) {
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../conexionBD/proyectosBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
-
 <?php $db = new proyectosBD(); ?>
 <?php $resultado = $db->obtenerProyecto(); ?>
-
 <?php include_once("../conexionBD/docentesBD.php"); ?>
 <?php $dbDocentes = new docentesBD(); ?>
+<?php include_once("../conexionBD/presupuestoBD.php");?>
+<?php $dbPresupuesto = new presupuestoBD(); ?>
+<?php include_once("../conexionBD/presupuestoDocenteBD.php");?>
+<?php $dbDocentesPresupuesto = new presupuestoDocenteBD(); ?>
 
 <?php
 
@@ -63,32 +65,76 @@ $pdf->SetFont('Arial','B',10);
 	$pdf->SetFont('Arial','',9);
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
+
 	if ($fila['nombre_proyecto'] != 1) {
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_proyecto']),1);
+
+	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_proyecto']),1,0,"C");
 
 	if ($fila['tipo_proyecto'] == 0) {
-		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Acción Social"),1);
+
+		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Acción Social"),1,0,"C");
+
 	} else {
-		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Investigación"),1);
+
+		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Investigación"),1,0,"C");
+
 	}
+
+	$sumaTiempos = $sumaTiempos + $fila['jornada_proyecto'];
+
 	$pdf->Cell(20,10,convertirDobleFraciones ($fila['jornada_proyecto']),1,0,"C");
 
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_encargado']);
+
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+
 		if ($fila['fk_encargado'] == $fila2['cedula']) {
-			$pdf->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']),1);
+			$pdf->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']),1,0,"C");
 		}
+
 	}
+
 	$resultado2 = $dbDocentes->obtenerDocentes($fila['fk_ayudante']);
+
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+
 		if ($fila['fk_ayudante'] == $fila2['cedula']) {
-			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']),1);
+			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']),1,0,"C");
+		}
+
+	}
+
+	$resultado4 = $dbDocentesPresupuesto->obtenerlistadoDePresupuestoDocente();
+	while ($fila4 = mysqli_fetch_assoc($resultado4)) {
+		if ($fila4["fk_proyecto"] == $fila["id_proyecto"]) {
+
+			$resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
+			while ($fila3 = mysqli_fetch_assoc($resultado3)) {
+				if ($fila4["fk_id_presupuesto"] == $fila3["id_presupuesto"]) {
+					$pdf->Cell(50,10,$fila3['nombre_presupuesto'],1,0,"C");
+					if($fila4["fk_id_presupuesto"] == ){//Revisar Cuando este vacio 
+						$pdf->Cell(50,10," ",1,0,"C");
+					}
+				}
+			}
 		}
 	}
-	$pdf->Cell(50,10,"NO ",1);
+
 	$pdf->Ln();
 	}
 }
+
+//////////////////////////Totales Presupuesto////////////////////////
+
+$pdf->SetTextColor(255,255,255);
+$pdf->SetFillColor(0, 193 , 0);
+$pdf->Cell(30,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
+$pdf->SetTextColor(0,0,0);
+$pdf->SetX(70);
+$convertidoSuma = convertirDobleFraciones($sumaTiempos);
+$pdf->Cell(20,7,$sumaTiempos,1,0,"C");
+$pdf->SetX(210);
+$pdf->Ln();
 
 $pdf->Output();
 
