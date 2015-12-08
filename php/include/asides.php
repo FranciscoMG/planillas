@@ -47,20 +47,20 @@
 									while ($fila3 = mysqli_fetch_assoc($resultadoMensajes)) {
 										echo "<tr><td>";
 
-										$resultadoUsuarios = $dbUsuarios->obtenerUsuario($fila3['emisor']);
-										while ($fila4 = mysqli_fetch_assoc($resultadoUsuarios)) {
+										
 											if ($contador == 0) {
 												echo "<p style='color:blue;'>";
 											} else {
 												echo "<p>";
 											}
 
-											echo "De: ".$fila4['nombre_usuario']." ";
-											echo $fila4['apellido_usuario']."<br/>";
+											//echo "De: ".$fila4['nombre_usuario']." ";
+											//echo $fila4['apellido_usuario']."<br/>";
+											echo $fila3['emisor']."<br/>";
 											echo "Fecha: ".$fila3['fecha']."<br/>";
 											echo "</p>";
 											$contador =1;
-										}
+										
 										echo $fila3['contenido_mensaje'];
 										echo "<td><tr>";
 									}

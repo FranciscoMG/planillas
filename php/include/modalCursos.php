@@ -5,8 +5,8 @@
 ?>
 
 <div id="modalCursos" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content ">
+	<div class="modal-dialog ">
+		<div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 			<!-- Header -->
       <div class="modal-header modal-delete-border">
 				<a type="button" class="close" href="masterPage.php">&times;</a>

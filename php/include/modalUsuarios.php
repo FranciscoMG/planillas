@@ -46,7 +46,7 @@
                   echo "</select>";
                 }
               } else {
-                echo '<input type="text" class="form-control input-border" name="txtUsuario" placeholder="Usuario" ';
+                echo '<input type="text" class="form-control input-border" maxlength="19" name="txtUsuario" placeholder="Usuario" ';
                     if (!empty($_SESSION['usuario'])) {
                        echo 'value="'.$_SESSION['usuario'].'"';
               }
@@ -57,7 +57,7 @@
   				</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre:</label>
-    				<input required type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" value="<?php
+    				<input required type="text" class="form-control input-border" maxlength="19" name="txtNombre" placeholder="Nombre" value="<?php
             if (isset($_GET['modalUsuarios'])) {
               echo $_GET['nombre_usuario'];
             } else {
@@ -69,7 +69,7 @@
 					</div>
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtApellidos">Apellidos:</label>
-    				<input required type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" value="<?php
+    				<input required type="text" class="form-control input-border" maxlength="39" name="txtApellidos" placeholder="Apellidos" value="<?php
             if (isset($_GET['modalUsuarios'])) {
               echo $_GET['apellido_usuario'];
             } else {
@@ -81,7 +81,7 @@
   				</div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="txtCorreo">Correo electrónico:</label>
-            <input required type="email" class="form-control input-border" name="txtCorreo" placeholder="Correo electrónico" value="<?php
+            <input required type="email" class="form-control input-border" name="txtCorreo" maxlength="39" placeholder="Correo electrónico" value="<?php
             if (isset($_GET['modalUsuarios'])) {
               echo $_GET['correo_usuario'];
             } else {
@@ -93,11 +93,11 @@
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="txtContrasena">Contraseña:</label>
-            <input required type="password" class="form-control input-border" name="txtContrasena" placeholder="Contraseña">
+            <input required type="password" class="form-control input-border" name="txtContrasena" maxlength="16" placeholder="Contraseña">
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="txtConfirmar">Confirmar contraseña:</label>
-            <input required type="password" class="form-control input-border" name="txtConfirmar" placeholder="Confirmar contraseña">
+            <input required type="password" class="form-control input-border" name="txtConfirmar" maxlength="16" placeholder="Confirmar contraseña">
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTipoPerfil">Tipo de perfil:</label>

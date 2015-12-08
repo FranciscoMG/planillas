@@ -97,6 +97,7 @@ main #contenedor-tabla .contenedor-tabla-2 {
 .btn-revision {
 	margin-right: 1%;
 	background-color: #680000;
+	border:#680000 1px solid;
 }
 .btn-margin-left {
 	margin-left: 2%!important;
