@@ -5,7 +5,7 @@
 <?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php $dbGrupos = new gruposBD(); ?>
 
-<?php 
+<?php
 
 /////////////////////// Verifica que un docente no se pase de 1 tiempo ///////////////
 function verificarTiemposDocente($id){
@@ -34,7 +34,7 @@ function verificarTiemposDocente($id){
 	}
 	///////////////////////////
 
-	////// verifica la tabla de presupuestoDocente 
+	////// verifica la tabla de presupuestoDocente
 	$resultado3 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
 	while ($fila3 = mysqli_fetch_assoc($resultado3)) {
 		if ($fila3['fk_docente'] == $cedula) {
@@ -45,6 +45,5 @@ function verificarTiemposDocente($id){
 	//////////////////////////
  	return $totalTiempos;
 } //// Fin de la funcion
-
 
  ?>
