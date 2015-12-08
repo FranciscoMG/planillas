@@ -134,7 +134,7 @@
 									echo "<td>";
 									echo "<div class='docentesDiv'>";
 									for ($i=0; $i < count($docentes) ; $i++) {
-										echo "<a href='?docente=".$docentes[$i][2]."'>".$docentes[$i][0]."</a></br></br>";
+										echo $docentes[$i][0]." "."<a href='?docente=".$docentes[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
 										$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
 									}
 									echo "</div>";
@@ -151,7 +151,7 @@
 									if ($id_presupuesto == 1) {
 										echo "Sin asignar";
 									} else {
-										echo "<a href='?id_presupuesto=".$id_presupuesto."'>".$nombre_presupuesto."</a>";
+										echo $nombre_presupuesto." "."<a href='?id_presupuesto=".$id_presupuesto."'><span class='glyphicon glyphicon-share-alt'></span></a>";
 									}
 									echo "</td>";
 									if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
@@ -232,7 +232,7 @@
 							echo "<div class='docentesDiv'>";
 							for ($i=0; $i < count($docentes) ; $i++) {
 								$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
-								echo "<a href='?docente=".$docentes[$i][2]."'>".$docentes[$i][0]."</a></br></br>";
+								echo $docentes[$i][0]." "."<a href='?docente=".$docentes[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
 							}
 							echo "</div>";
 							if ($num_grupo_doble != 0) {
@@ -248,7 +248,7 @@
 							if ($id_presupuesto == 1) {
 								echo "Sin asignar";
 							} else {
-								echo "<a href='?id_presupuesto=".$id_presupuesto."'>".$nombre_presupuesto."</a>";
+								echo $nombre_presupuesto." "."<a href='?id_presupuesto=".$id_presupuesto."'><span class='glyphicon glyphicon-share-alt'></span></a>";
 							}
 							echo "</td>";
 							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
