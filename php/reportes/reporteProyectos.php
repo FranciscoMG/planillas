@@ -59,7 +59,7 @@ $pdf->SetFont('Arial','B',10);
 	$pdf->Cell(20,10,"Tiempos",1,0,"C");
 	$pdf->Cell(60,10,"Principal/Responsable",1,0,"C");
 	$pdf->Cell(60,10,"Asociado/Colaborador",1,0,"C");
-	$pdf->Cell(50,10,"Presupuesto",1,0,"C");
+	$pdf->Cell(60,10,"Presupuesto",1,0,"C");
 	$pdf->Ln();
 
 	$pdf->SetFont('Arial','',9);
@@ -89,7 +89,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
 
 		if ($fila['fk_encargado'] == $fila2['cedula']) {
-			$pdf->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']),1,0,"C");
+			$pdf->Cell(60,10,iconv("UTF-8", "ISO-8859-1",$fila2['nombre']." ".$fila2['apellidos']),1,0,"C");
 		}
 
 	}
@@ -99,7 +99,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 	while ($fila2 = mysqli_fetch_assoc($resultado2)) {
 
 		if ($fila['fk_ayudante'] == $fila2['cedula']) {
-			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']),1,0,"C");
+			$pdf->Cell(60,10, iconv("UTF-8","ISO-8859-1",$fila2['nombre']." ".$fila2['apellidos']),1,0,"C");
 		}
 
 	}
@@ -111,10 +111,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 			$resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
 			while ($fila3 = mysqli_fetch_assoc($resultado3)) {
 				if ($fila4["fk_id_presupuesto"] == $fila3["id_presupuesto"]) {
-					$pdf->Cell(50,10,$fila3['nombre_presupuesto'],1,0,"C");
-					if($fila4["fk_id_presupuesto"] == ){//Revisar Cuando este vacio 
-						$pdf->Cell(50,10," ",1,0,"C");
-					}
+					$pdf->Cell(60,10,$fila3['nombre_presupuesto'],1,0,"C");
 				}
 			}
 		}
