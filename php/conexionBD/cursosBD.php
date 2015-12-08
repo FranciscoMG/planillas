@@ -1,9 +1,6 @@
 <?php include_once("conexionBD.php"); ?>
 
 <?php
-/**
-*
-*/
 class cursosBD extends conexionBD
 {
 	//---------------------------------------------------
@@ -95,7 +92,7 @@ class cursosBD extends conexionBD
 	////////////////////////////////////////////////////
 	////////////////////////////////////////////////////
 	function obtenerCarreras() {
-		$query = "SELECT * FROM tb_Carrera ORDER BY nombre_Carrera";
+		$query = "SELECT * FROM tb_Carrera ORDER BY nombre_carrera";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{
@@ -153,7 +150,5 @@ class cursosBD extends conexionBD
 		$stmt->close();
 		return true;
 	}
-
-
 }
  ?>
