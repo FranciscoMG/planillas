@@ -131,16 +131,13 @@
             </div>
             <div class="col-xs-10 col-sm-10 col-lg-10">
               <select id="selectTiempoProfesor" class="form-control" name="cboTiempoProfesor">
-                <option value="0">Ad Hororem</option>
-		            <option>1/16</option>
-                <option>1/8</option>
-                <option>1/4</option>
-                <option>3/8</option>
-                <option>1/2</option>
-                <option>5/8</option>
-                <option>3/4</option>
-                <option>7/8</option>
-                <option>1</option>
+                <option value="0">Ad honorem</option>
+                <?php
+                  $tiempos= array('1/16', '1/8', '1/4', '3/8', '1/2', '5/8', '3/4', '7/8', '1');
+                  for ($i=0; $i < count($tiempos); $i++) {
+                    echo "<option>".$tiempos[$i]."</option>";
+                  }
+                ?>
               </select>
             </div>
             <div class="form-group col-xs-2 col-sm-2 col-lg-2">
@@ -151,7 +148,7 @@
                 if (isset($_GET['docentes'])) {
                   $docentesDiv = unserialize($_GET['docentes']);
                   for ($i=0; $i < count($docentesDiv); $i++) {
-                    echo "<div id='divProfesor".$i."' class='form-group'><input name='txtProfesor".$i."' class='input-readonly' type='text' value='".$docentesDiv[$i][0]." - ".$docentesDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divProfesor".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                    echo "<div id='divProfesor".$i."' class='form-group'><input id='txtProfesor".$i."' name='txtProfesor".$i."' class='input-readonly' type='text' value='".$docentesDiv[$i][0]." - ".$docentesDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='eliminarProfesor(document.getElementById(\"txtProfesor".$i."\"))'><span class='glyphicon glyphicon-minus'></span></button></div>";
                   }
                 }
               ?>
@@ -270,15 +267,13 @@
               </div>
               <div class="col-xs-10 col-sm-10 col-lg-10">
                 <select id="selectTiempoProfesorDoble" class="form-control" name="cboTiempoProfesorDoble">
-                  <option>1/16</option>
-                  <option>1/8</option>
-                  <option>1/4</option>
-                  <option>3/8</option>
-                  <option>1/2</option>
-                  <option>5/8</option>
-                  <option>3/4</option>
-                  <option>7/8</option>
-                  <option>1</option>
+                  <option value="0">Ad honorem</option>
+                  <?php
+                    $tiempos= array('1/16', '1/8', '1/4', '3/8', '1/2', '5/8', '3/4', '7/8', '1');
+                    for ($i=0; $i < count($tiempos); $i++) {
+                      echo "<option>".$tiempos[$i]."</option>";
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group col-xs-2 col-sm-2 col-lg-2">
@@ -289,7 +284,7 @@
                   if (isset($_GET['docentesDoble'])) {
                     $docentesDobleDiv = unserialize($_GET['docentesDoble']);
                     for ($i=0; $i < count($docentesDobleDiv); $i++) {
-                      echo "<div id='divProfesorDoble".$i."' class='form-group'><input name='txtProfesorDoble".$i."' class='input-readonly' type='text' value='".$docentesDobleDiv[$i][0]." - ".$docentesDobleDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='document.getElementById(\"divProfesorDoble".$i."\").remove()'><span class='glyphicon glyphicon-minus'></span></button></div>";
+                      echo "<div id='divProfesorDoble".$i."' class='form-group'><input name='txtProfesorDoble".$i."' class='input-readonly' type='text' value='".$docentesDobleDiv[$i][0]." - ".$docentesDobleDiv[$i][1]."' readonly /><button type='button' class='btn btn-danger pull-right btn-xs' onclick='eliminarProfesor(document.getElementById(\"txtProfesorDoble".$i."\"))'><span class='glyphicon glyphicon-minus'></span></button></div>";
                     }
                   }
                 ?>
@@ -358,19 +353,8 @@
               </div>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-              <label for="cboJornada">Jornada:</label>
-              <select class="form-control" name="cboJornada">
-                <?php
-                  $fracciones = array("1/8","1/4","3/8","1/2","5/8","3/4","7/8","1");
-                  for($i=0;$i<count($fracciones);$i++) {
-                    if (isset($_GET['jornada']) && $fracciones[$i] == $_GET['jornada']) {
-                      echo "<option selected>".$fracciones[$i]."</option>";
-                    } else {
-                      echo "<option>".$fracciones[$i]."</option>";
-                    }
-                  }
-                ?>
-              </select>
+              <label for="txtJornada">Jornada:</label>
+              <input id="txtJornada" type="text" class="form-control" name="txtJornada" <?php if(isset($_GET['jornada'])) { echo "value='".$_GET['jornada']."'"; } else { echo "value='0'"; }?> readonly>
             </div>
           </div>
         </div>
@@ -395,7 +379,4 @@
       </form>
     </div>
   </div>
-  <script type="text/javascript">
-
-  </script>
 </div>

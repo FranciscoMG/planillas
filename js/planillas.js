@@ -1,3 +1,5 @@
+sumTiempos= 0;
+idProfesor= 0;
 function cambiarTableHorizontal() {
 	var boton = document.getElementById("boton-tamano-tabla-horizontal");
 	setTimeout(cambiaDivTabla,400);
@@ -540,15 +542,27 @@ function eliminarAsignarPresup() {
 $("#btnProfesor").click(function () {
 	idProfesor= cuentaDiv(false, false);
 	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
-		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
-		$("button").on('click', function() {
-			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
-				$("#"+$(this).parent().attr('id')).remove();
-			}
-		});
-		idProfesor++;
+		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input id="txtProfesor'+idProfesor+'" name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		modificaJornada(false, trim(document.getElementById("txtProfesor"+(idProfesor)).value.split("-")[1]));
 	}
 });
+
+function eliminarProfesor(divProfesor) {
+	modificaJornada(true, FraccionToDoble(trim(divProfesor.value.split("-")[1])));
+	$("#"+$(divProfesor).parent().attr('id')).remove();
+}
+
+function modificaJornada(esResta, cantidad) {
+	if (esResta) {
+		sumTiempos= Number(document.getElementById("txtJornada").value);
+		sumTiempos-= cantidad;
+		document.getElementById("txtJornada").value=sumTiempos;
+	} else {
+		sumTiempos= Number(document.getElementById("txtJornada").value);
+		sumTiempos+= FraccionToDoble($("#selectTiempoProfesor").val());
+		document.getElementById("txtJornada").value=sumTiempos;
+	}
+}
 
 $("#btnHorario").click(function () {
 	idHorario= cuentaDiv(false, true);
@@ -559,20 +573,14 @@ $("#btnHorario").click(function () {
 				$("#"+$(this).parent().attr('id')).remove();
 			}
 		});
-		idHorario++;
 	}
 });
 
 $("#btnProfesorDoble").click(function () {
 	idProfesor= cuentaDiv(true, false);
 	if (idProfesor < 6 && $("#selectAgregarDocenteDoble option:selected").text() != "") {
-		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs"><span class="glyphicon glyphicon-minus"></span></button></div>');
-		$("button").on('click', function() {
-			if ($(this).parent().attr('id') != "grupoBtnAgregar" && $(this).parent().attr('id') != "grupoBtnModificar") {
-				$("#"+$(this).parent().attr('id')).remove();
-			}
-		});
-		idProfesor++;
+		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		modificaJornada(false, FraccionToDoble(trim(document.getElementById("txtProfesorDoble"+(idProfesor)).value.split("-")[1])));
 	}
 });
 
@@ -640,6 +648,11 @@ function cambiaDivTabla() {
 	}
 }
 
+////////////////////////////////////////////////
+function trim(cadena){
+	return cadena.replace(/^\s+|\s+$/g, "");
+}
+
 //////////////// conversor ////////////////////
 function FraccionToDoble(fraccion){
 	var valor = 0.0;
@@ -671,51 +684,13 @@ function FraccionToDoble(fraccion){
 		case '1/16':
 			valor = 0.0625;
 			break;
-			
+
 		default:
 			valor = 0;
 		break;
 	}
 	return valor;
 }
-
-function doubleToFraccion(valorD) {
-	var valor = "";
-	switch (valorD) {
-		case 1:
-			valor = "1";
-			break;
-		case 0.875:
-			valor = "7/8";
-			break;
-		case 0.750:
-			valor = "3/4";
-			break;
-		case 0.625:
-			valor = "5/8";
-			break;
-		case 0.5:
-			valor = "1/2";
-			break;
-		case 0.375:
-			valor = "3/8";
-			break;
-		case 0.250:
-			valor = "1/4";
-			break;
-		case 0.125:
-			valor = "1/8";
-			break;
-		case 0.0625:
-			valor = "1/16";
-			break;
-
-		default:
-			valor = "Ad honorem";
-		break;
-	}
-	return valor;
-} // fin de funcion
 
 ////////////////////////
 

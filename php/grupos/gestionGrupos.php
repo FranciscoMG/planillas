@@ -24,7 +24,7 @@ $carrera= isset($_POST['cboIDCarrera'])?$_POST['cboIDCarrera']:"";
 $curso= isset($_POST['cboIDCurso'])?$_POST['cboIDCurso']:"";
 $num_grupo= isset($_POST['cboGrupo'])?$_POST['cboGrupo']:"";
 $esDoble= isset($_POST['chbGrupoDoble'])?TRUE:FALSE;
-$jornada= isset($_POST['cboJornada'])?convertirFraccionesDoble(trim($_POST['cboJornada'])):"";
+$jornada= isset($_POST['txtJornada'])?convertirFraccionesDoble(trim($_POST['txtJornada']))."":"";
 $docentes= array(
   array(),
 );
@@ -230,6 +230,7 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
       $curso= $fila['fk_curso'];
       $num_grupo= $fila['num_grupo'];
       $num_grupo_doble= $fila['num_grupo_doble'];
+      $id_presupuesto= $fila['fk_presupuesto'];
       if ($fila['profesorDoble']) {
         $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
         $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
@@ -245,8 +246,8 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
         $horarioCurso[$h][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
         $h++;
       }
+      $jornada= $fila['jornada'];
     }
-    $jornada= convertirDobleFraciones($fila['jornada']);
   }
   $docentes= array_values(array_unique($docentes, SORT_REGULAR));
   $horarioCurso= array_values(array_unique($horarioCurso, SORT_REGULAR));
@@ -256,6 +257,12 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
   $horarioCursoDoble= array_values(array_unique($horarioCursoDoble, SORT_REGULAR));
   $docentesDoble= serialize($docentesDoble);
   $horarioCursoDoble= serialize($horarioCursoDoble);
+  if ($id_presupuesto != 1) {
+    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta-contenido'] = "No se puede modificar un grupo que ya tiene un presupuesto";
+    header('Location: ../masterPage.php');
+    exit();
+  }
   header("Location: ../masterPage.php?modalGrupos=2&id_carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&docentes=".$docentes."&docentesDoble=".$docentesDoble."&horarios=".$horarioCurso."&horariosDoble=".$horarioCursoDoble."&jornada=".$jornada);
   exit();
 }

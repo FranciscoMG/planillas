@@ -8,9 +8,13 @@ if ($_SESSION[masterActivo] != 1) {
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../include/conversor.php");?>
 <?php include_once("../conexionBD/gruposBD.php"); ?>
+<?php include_once("../conexionBD/docentesBD.php"); ?>
+<?php $db = new docentesBD(); ?>
+<?php $resultadoDocente = $db->obtenerDocentes(); ?>
 <?php $db = new gruposBD(); ?>
-<?php $resultado = $db->obtenerGrupos(); ?>
-<?php $resultado2 = $db->obtenerGrupos(); ?>
+<?php $resultado2 = $db->obtenerGrupoDocentes(); ?>
+<?php $resultado = $db->llenarTabla(); ?>
+
 
 <?php
 $pdf = new FPDF();
@@ -55,15 +59,15 @@ $pdf->Cell(20,10,"Nombre",1,0,"C");
 $pdf->Cell(30,10,"Apellidos",1,0,"C");
 $pdf->Cell(27,10,"Grado Academico",1,0,"C");
 $pdf->Cell(25,10,"Nombramiento",1,0,"C");
-$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
 $pdf->Cell(27,10,"Jornada Faltante",1,0,"C");
+$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
 
 $pdf->Ln();
 
 $pdf->SetFont('Arial','',8);
 
 
-while ($fila = mysqli_fetch_assoc($resultado)) {
+while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 	$pdf->Cell(25,10,$fila['cedula'],1,0,"C");
 	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
 	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
@@ -99,9 +103,6 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 		}
 	}
 	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$contrato_tipo),1,0,"C");
-	$sumaDocente = $sumaDocente + $fila['tiempo_individual'];
-	$convertidoDocente = convertirDobleFraciones($fila['tiempo_individual']);
-	$pdf->Cell(27,10,$convertidoDocente,1,0,"C");
 	if ($fila['tipo_contrato'] == 1) {
 		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
 	}else{
@@ -109,6 +110,16 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 	}
 	$pdf->Ln();
 }
+
+$pdf->SetY(75);
+while ($fila2 = mysqli_fetch_assoc($resultado2)) {
+	$pdf->SetX(164);
+	$sumaDocente = $sumaDocente + $fila2['tiempo_individual'];
+	$convertidoDocentes = convertirDobleFraciones($fila2['tiempo_individual']);
+	$pdf->Cell(27,10,$convertidoDocentes,1,0,"C");
+	$pdf->Ln();
+}
+
 
 //////////////////////////Totales Docente////////////////////////
 
@@ -118,9 +129,9 @@ $pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetX(137);
 $convertidoSumaDocente = convertirDobleFraciones($sumaDocente);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$convertidoSumaDocente),1,0,"C");
-$pdf->SetX(164);
 $pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$pdf->SetX(164);
+$pdf->Cell(27,7,$sumaDocente,1,0,"C");
 $pdf->Ln();
 
 //////////////Contenido Grupos/////////////
@@ -141,8 +152,8 @@ $pdf->Ln();
 
 $pdf->SetFont('Arial','',8);
 
-while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-	$pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+while ($fila2 = mysqli_fetch_assoc($resultado)) {
+	$pdf->Cell(18,10,$fila2['fk_curso'],1,0,"C");
 	$pdf->Cell(60,10,iconv("UTF-8","ISO-8859-1",$fila2['nombre_curso']),1,0,"C");
 
 	//Día de la Semana
@@ -177,7 +188,8 @@ while ($fila2 = mysqli_fetch_assoc($resultado2)) {
 	$pdf->Cell(12,10,$dia_sem,1,0,"C");
 	$pdf->Cell(18,10,$fila2['hora_inicio'],1,0,"C");
 	$pdf->Cell(18,10,$fila2['hora_fin'],1,0,"C");
-	$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$sumaCredito = $sumaCredito + $fila2['creditos'];
+	$pdf->Cell(27,10,$fila2['creditos'],1,0,"C");
 	$pdf->Cell(13,10,$fila2['num_grupo'],1,0,"C");
 	$suma = $suma + $fila2['jornada'];
 	$convertidoGrupo = convertirDobleFraciones($fila2['jornada']);
@@ -193,10 +205,10 @@ $pdf->SetFillColor(0, 193 , 0);
 $pdf->Cell(18,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetX(136);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","$sumaCredito"),1,0,"C");
 $pdf->SetX(176);
 $convertidoSuma = convertirDobleFraciones($suma);
-$pdf->Cell(22,7,iconv("UTF-8","ISO-8859-1",$convertidoSuma),1,0,"C");
+$pdf->Cell(22,7,iconv("UTF-8","ISO-8859-1",$suma),1,0,"C");//SUMA POR MIENTRAS SE CONSIGUE CONVERTIR
 $pdf->Ln();
 
 $pdf->Output();
