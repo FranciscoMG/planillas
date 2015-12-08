@@ -72,14 +72,14 @@
 								}
 									?>
 	 							<li><a href="" data-toggle="modal" data-target="#modalMensajes"><span class='glyphicon glyphicon-envelope' ></span> Enviar mensaje </a></li>
-	 							<li><a href="sesion/cerrarSesion.php?salir=1">Salir</a></li>
+	 							<li><a href="sesion/cerrarSesion.php">Salir</a></li>
 
 	 							<?php if ($_SESSION['tipoPerfil'] == 0) {
 	 							echo '
 									<li class="divider"></li>
 
-									<li><a href="" data-toggle="modal" data-target="#modalConfirmacion"><span class="glyphicon glyphicon-save " > </span> Exportar BD MySQL</a></li>
-									<li><a href="" data-toggle="modal" data-target="#modalBD"><span class="glyphicon glyphicon-open " > </span> Importar BD MySQL</a></li>';
+									<li><a href="" data-toggle="modal" data-target="#modalConfirmacion"><span class="glyphicon glyphicon-save " > </span>Exportar BD MySQL</a></li>
+									<li><a href="" data-toggle="modal" data-target="#modalBD"><span class="glyphicon glyphicon-open " > </span>Importar BD MySQL</a></li>';
 	 							} ?>
 
  							</ul>

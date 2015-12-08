@@ -23,7 +23,6 @@ if (isset($_POST['btnRegistrar'])) {
 
 	if ($sigla != "") {
 	if ($nombre_curso != "") {
-		# code...
 		$jornada1 = convertirFraccionesDoble($jornada);
 
 		$resultado = $db->agregarCurso($sigla , $nombre_curso , $creditos , $jornada1 , $fk_carrera);
@@ -41,7 +40,7 @@ if (isset($_POST['btnRegistrar'])) {
 		$_SESSION['alerta-contenido'] = "Curso agregado";
 
 
-		$descripcionRegistroActividad="Se agregó el curso: "$sigla." ".$nombre_curso;
+		$descripcionRegistroActividad="Se agregó el curso: ".$sigla." ".$nombre_curso;
 		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 	} else {
 		$_SESSION['alerta-contenido'] = "Debe ingresar el nombre del curso";

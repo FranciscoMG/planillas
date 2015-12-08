@@ -52,13 +52,13 @@
             <select class="form-control" name="cboxtxtCarrera" id="" onchange="">
             <?php 
             if ($_GET['modalCursos'] == 1) {
-              echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
+              echo "<option value='".$_GET['id_carrera']."'>".$_GET['nombre_carrera']."</option>";
              
             } else {
               $resultado = $db->obtenerCarreras();
               while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['id_Carrera'] != 1) {
-                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                if ($fila['id_carrera'] != 1) {
+                  echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
                 }
               }
             }
