@@ -69,7 +69,7 @@ class cursosBD extends conexionBD
 
 	////////////////////////////////////////////////////
 	function obtenerCursosCarrera() {
-		$query = "SELECT fk_carrera, sigla, nombre_curso FROM tb_PlanEstudios, tb_Cursos WHERE fk_curso=sigla ORDER BY fk_carrera;";
+		$query = "SELECT fk_carrera, fk_curso, nombre_curso, id_carrera FROM tb_PlanEstudios, tb_Cursos, tb_Carrera WHERE fk_carrera=id_carrera AND fk_curso=sigla ORDER BY fk_carrera;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0) {
 			return $rs; //Retornamos las tuplas encontradas
