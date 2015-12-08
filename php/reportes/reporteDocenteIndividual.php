@@ -12,7 +12,7 @@ if ($_SESSION[masterActivo] != 1) {
 <?php $db = new docentesBD(); ?>
 <?php $resultadoDocente = $db->obtenerUnDocente(123); //SE INGRESA EL ID (CÉDULA)?>
 <?php $db = new gruposBD(); ?>
-<?php $resultado = $db->obtenerGrupos(); ?>
+<?php $resultado = $db->llenarTabla(); ?>
 
 
 <?php
@@ -98,7 +98,8 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 		}
 	}
 	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$contrato_tipo),1,0,"C");
-	$pdf->Cell(27,10,"No ",1,0,"C");
+	$suma = $suma + $fila['tiempo_individual'];
+	$pdf->Cell(27,10,$suma,1,0,"C");
 	if ($fila['tipo_contrato'] == 1) {
 		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
 	}else{
@@ -107,27 +108,14 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 	$pdf->Ln();
 }
 
-//////////////////////////Totales Docente////////////////////////
-
-$pdf->SetTextColor(255,255,255);
-$pdf->SetFillColor(0, 193 , 0);
-$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetX(87);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
-$pdf->SetX(114);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
-$pdf->Ln();
-
 //////////////Contenido Grupos/////////////
 $pdf->Ln();
 
 $pdf->SetFont('Arial','B',8);
-$pdf->Cell(181,10,"Asignaciones",1,0,"C");
+$pdf->Cell(163,10,"Asignaciones",1,0,"C");
 $pdf->Ln();
 $pdf->Cell(18,10,"Sigla/Curso",1,0,"C");
 $pdf->Cell(60,10,"Nombre/Curso",1,0,"C");
-$pdf->Cell(18,10,"Cupo",1,0,"C");
 $pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","Creditos"),1,0,"C");
 $pdf->Cell(13,10,"Grupo",1,0,"C");
 $pdf->Cell(18,10,"Proyecto",1,0,"C");
@@ -138,10 +126,10 @@ $pdf->Ln();
 $pdf->SetFont('Arial','',8);
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
-	$pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$pdf->Cell(18,10,$fila['fk_curso'],1,0,"C");
 	$pdf->Cell(60,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_curso']),1,0,"C");
-	$pdf->Cell(18,10,"No ",1,0,"C");
-	$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$sumaCredito = $sumaCredito + $fila['creditos'];
+	$pdf->Cell(27,10,$fila['creditos'],1,0,"C");
 	$pdf->Cell(13,10,$fila['num_grupo'],1,0,"C");
   $pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
 	$suma = $suma + $fila['jornada'];
@@ -157,11 +145,11 @@ $pdf->SetTextColor(255,255,255);
 $pdf->SetFillColor(0, 193 , 0);
 $pdf->Cell(18,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
 $pdf->SetTextColor(0,0,0);
-$pdf->SetX(106);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
-$pdf->SetX(164);
+$pdf->SetX(88);
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$sumaCredito),1,0,"C");
+$pdf->SetX(146);
 $convertidoSuma = convertirDobleFraciones($suma);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$convertidoSuma),1,0,"C");
+$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$suma),1,0,"C");//POR MIENTRAS SE CONSIGUE CAMBIAR FRACCIONES
 $pdf->Ln();
 
 $pdf->Output();

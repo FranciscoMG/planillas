@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php include_once("conexionBD/cursosBD.php"); ?>
-<?php 
-  $db = new cursosBD(); 
+<?php
+  $db = new cursosBD();
 ?>
 
 <div id="modalCursos" class="modal fade" role="dialog">
@@ -22,7 +22,7 @@
 
           <div id="cursosEliminarModificar" class="col-xs-12 col-sm-12 col-lg-12">
             <select class="form-control" name="cboxSigla" id="selectCursos" onchange="cargarDatosCursos(this)">
-              <?php 
+              <?php
               if ($_GET['sigla'] != "") {
                 echo " <option value=".$_GET['sigla'].">".$_GET['sigla']."</option>";
               } else {
@@ -34,7 +34,7 @@
                   echo "<option value='".$fila['sigla']."'>".$fila['sigla']." / ".$fila['nombre_curso']."</option>";
                   }
                 }
-              
+
                ?>
             </select>
           </div>
@@ -50,26 +50,26 @@
           </div>
           <div id="" class="col-xs-12 col-sm-12 col-lg-12">
             <select class="form-control" name="cboxtxtCarrera" id="" onchange="">
-            <?php 
+            <?php
             if ($_GET['modalCursos'] == 1) {
-              echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
-             
+              echo "<option value='".$_GET['id_carrera']."'>".$_GET['nombre_carrera']."</option>";
+
             } else {
               $resultado = $db->obtenerCarreras();
               while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['id_Carrera'] != 1) {
-                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                if ($fila['id_carrera'] != 1) {
+                  echo "<option value='".$fila['id_carrera']."'>".$fila['nombre_carrera']."</option>";
                 }
               }
             }
              ?>
             </select>
           </div>
-          
+
 					<div class="form-group col-xs-12 col-sm-12 col-lg-12">
     				<label for="txtNombre">Nombre del curso:</label>
-    				<input 
-            <?php 
+    				<input
+            <?php
               if ($_GET['nombre_curso'] != "") {
                echo "value ='".$_GET['nombre_curso']."'";
               }
@@ -92,7 +92,7 @@
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboTiempo">Jornada:</label>
             <select class="form-control" name="cboTiempoCursos">
-            <?php 
+            <?php
             if ($_GET['jornada'] != "") {
               echo "<option>".$_GET['jornada']."</option>";
             }

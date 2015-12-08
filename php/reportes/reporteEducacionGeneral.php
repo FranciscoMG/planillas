@@ -40,7 +40,7 @@ $pdf->Cell(53,10,iconv("UTF-8","ISO-8859-1","".$tipoPerfil),0,0,"C");
 
 $pdf->Ln(15);
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(10,10,"Reporte de Educación General");
+$pdf->Cell(10,10,iconv("UTF-8","ISO-8859-1","Reporte de Educación General"));
 $pdf->Ln();
 $pdf->Cell(10,4,iconv("UTF-8","ISO-8859-1","Sistema de planillas SIDOP"));
 $pdf->Ln(10);
