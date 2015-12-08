@@ -543,7 +543,7 @@ $("#btnProfesor").click(function () {
 	idProfesor= cuentaDiv(false, false);
 	if (idProfesor < 6 && $("#selectAgregarDocente option:selected").text() != "") {
 		$("#div-profesores").html($("#div-profesores").html()+'<div id="divProfesor'+idProfesor+'" class="form-group"><input id="txtProfesor'+idProfesor+'" name="txtProfesor'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocente option:selected").text()+" - "+$("#selectTiempoProfesor").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
-		modificaJornada(false, trim(document.getElementById("txtProfesor"+(idProfesor)).value.split("-")[1]));
+		modificaJornada(false, FraccionToDoble(trim(document.getElementById("txtProfesor"+(idProfesor)).value.split("-")[1])));
 	}
 });
 
@@ -559,7 +559,7 @@ function modificaJornada(esResta, cantidad) {
 		document.getElementById("txtJornada").value=sumTiempos;
 	} else {
 		sumTiempos= Number(document.getElementById("txtJornada").value);
-		sumTiempos+= FraccionToDoble($("#selectTiempoProfesor").val());
+		sumTiempos+= cantidad;
 		document.getElementById("txtJornada").value=sumTiempos;
 	}
 }
@@ -579,7 +579,7 @@ $("#btnHorario").click(function () {
 $("#btnProfesorDoble").click(function () {
 	idProfesor= cuentaDiv(true, false);
 	if (idProfesor < 6 && $("#selectAgregarDocenteDoble option:selected").text() != "") {
-		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesor'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
+		$("#div-profesoresDoble").html($("#div-profesoresDoble").html()+'<div id="divProfesorDoble'+idProfesor+'" class="form-group"><input id="txtProfesorDoble'+idProfesor+'" name="txtProfesorDoble'+idProfesor+'" class="input-readonly" type="text" value="'+$("#selectAgregarDocenteDoble option:selected").text()+" - "+$("#selectTiempoProfesorDoble").val()+'" readonly /><button type="button" class="btn btn-danger pull-right btn-xs" onclick="eliminarProfesor(document.getElementById(\'txtProfesorDoble'+idProfesor+'\'))"><span class="glyphicon glyphicon-minus"></span></button></div>');
 		modificaJornada(false, FraccionToDoble(trim(document.getElementById("txtProfesorDoble"+(idProfesor)).value.split("-")[1])));
 	}
 });
@@ -693,34 +693,3 @@ function FraccionToDoble(fraccion){
 }
 
 ////////////////////////
-
-
-$('#example').DataTable({
-    "language": {
-        "sProcessing":    "Procesando...",
-        "sLengthMenu":    "Mostrar _MENU_ registros",
-        "sZeroRecords":   "No se encontraron resultados",
-        "sEmptyTable":    "Ningún dato disponible en esta tabla",
-        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":   "",
-        "sSearch":        "Buscar:",
-        "sUrl":           "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
-});
-
-
-
