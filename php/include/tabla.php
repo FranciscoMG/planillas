@@ -31,9 +31,9 @@
 							?>
 							<?php
 							  while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
-									if ($fila['nombre_Carrera'] != $_GET['valorPorCarreraTexto']) {
-								  	echo "<option value='".$fila['id_Carrera']."'>";
-								  	echo $fila['nombre_Carrera'];
+									if ($fila['nombre_carrera'] != $_GET['valorPorCarreraTexto']) {
+								  	echo "<option value='".$fila['id_carrera']."'>";
+								  	echo $fila['nombre_carrera'];
 								  	echo "</option>";
 								  }
 								}
@@ -82,6 +82,7 @@
 					      if ($fila['profesorDoble']) {
 					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
 					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
+									$docentesDoble[$d][2]= $fila['fk_docente'];
 					        $dD++;
 					        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
 					        $horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
@@ -90,6 +91,7 @@
 					      } else {
 					        $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
 					        $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
+									$docentes[$d][2]= $fila['fk_docente'];
 					        $d++;
 					        $horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
 					        $horarioCurso[$h][1]= $fila['hora_inicio'];
@@ -132,31 +134,31 @@
 									echo "<td>";
 									echo "<div class='docentesDiv'>";
 									for ($i=0; $i < count($docentes) ; $i++) {
-										echo $docentes[$i][0]."</br></br>";
+										echo "<a href='?docente=".$docentes[$i][2]."'>".$docentes[$i][0]."</a></br></br>";
 										$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
 									}
 									echo "</div>";
 									if ($num_grupo_doble != 0) {
 										echo "<div class='docentesDiv'>";
 										for ($i=0; $i < count($docentesDoble) ; $i++) {
-											echo $docentesDoble[$i][0]."</br></br>";
+											echo "<a href='?docente=".$docentesDoble[$i][2]."'>".$docentesDoble[$i][0]."</a></br></br>";
 											$sumaTiempos+=convertirFraccionesDoble($docentesDoble[$i][1]);
 										}
 										echo "</div>";
 									}
 									echo "</td>";
 									echo "<td>";
-									if ($id_presupuesto == 0) {
+									if ($id_presupuesto == 1) {
 										echo "Sin asignar";
 									} else {
-										echo $nombre_presupuesto;
+										echo "<a href='?id_presupuesto=".$id_presupuesto."'>".$nombre_presupuesto."</a>";
 									}
 									echo "</td>";
 									if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-										if ($id_presupuesto == 0) {
-											echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
+										if ($id_presupuesto == 1) {
+											echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 										} else {
-											echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+											echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 										}
 									}
 									echo "</tr>";
@@ -173,23 +175,25 @@
 								$creditos= $fila['creditos'];
 					      $num_grupo= $fila['num_grupo'];
 					      $num_grupo_doble= $fila['num_grupo_doble'];
-					      if ($fila['profesorDoble']) {
-					        $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
-					        $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
-					        $dD++;
-					        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
-					        $horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
+								if ($fila['profesorDoble']) {
+									$docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
+									$docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
+									$docentesDoble[$d][2]= $fila['fk_docente'];
+									$dD++;
+									$horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
+									$horarioCursoDoble[$hD][1]= $fila['hora_inicio'];
 									$horarioCursoDoble[$hD][2]= $fila['hora_fin'];
-					        $hD++;
-					      } else {
-					        $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
-					        $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
-					        $d++;
-					        $horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
-					        $horarioCurso[$h][1]= $fila['hora_inicio'];
+									$hD++;
+								} else {
+									$docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
+									$docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
+									$docentes[$d][2]= $fila['fk_docente'];
+									$d++;
+									$horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
+									$horarioCurso[$h][1]= $fila['hora_inicio'];
 									$horarioCurso[$h][2]= $fila['hora_fin'];
-					        $h++;
-					      }
+									$h++;
+								}
 								$jornada= convertirDobleFraciones($fila['jornada']);
 								$id_presupuesto= $fila['fk_presupuesto'];
 								$nombre_presupuesto= $fila['nombre_presupuesto'];
@@ -228,30 +232,30 @@
 							echo "<div class='docentesDiv'>";
 							for ($i=0; $i < count($docentes) ; $i++) {
 								$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
-								echo $docentes[$i][0]."</br></br>";
+								echo "<a href='?docente=".$docentes[$i][2]."'>".$docentes[$i][0]."</a></br></br>";
 							}
 							echo "</div>";
 							if ($num_grupo_doble != 0) {
 								echo "<div class='docentesDiv'>";
 								for ($i=0; $i < count($docentesDoble) ; $i++) {
 									$sumaTiempos+=convertirFraccionesDoble($docentesDoble[$i][1]);
-									echo $docentesDoble[$i][0]."</br></br>";
+									echo "<a href='?docente=".$docentesDoble[$i][2]."'>".$docentesDoble[$i][0]."</a></br></br>";
 								}
 								echo "</div>";
 							}
 							echo "</td>";
 							echo "<td>";
-							if ($id_presupuesto == 0) {
+							if ($id_presupuesto == 1) {
 								echo "Sin asignar";
 							} else {
-								echo $nombre_presupuesto;
+								echo "<a href='?id_presupuesto=".$id_presupuesto."'>".$nombre_presupuesto."</a>";
 							}
 							echo "</td>";
 							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
-								if ($id_presupuesto == 0) {
-									echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
+								if ($id_presupuesto == 1) {
+									echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 								} else {
-									echo "<td><a class='a_click' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+									echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 								}
 							}
 							echo "</tr>";

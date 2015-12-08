@@ -53,16 +53,13 @@
             <?php 
             if ($_GET['modalCursos'] == 1) {
               echo "<option value='".$_GET['id_Carrera']."'>".$_GET['nombre_Carrera']."</option>";
-              $resultado = $db->obtenerCarreras();
-              while ($fila = mysqli_fetch_assoc($resultado)) {
-                if ($fila['id_Carrera'] != $_GET['id_Carrera']) {
-                  echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
-                }
-              }
+             
             } else {
               $resultado = $db->obtenerCarreras();
               while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['id_Carrera'] != 1) {
                   echo "<option value='".$fila['id_Carrera']."'>".$fila['nombre_Carrera']."</option>";
+                }
               }
             }
              ?>

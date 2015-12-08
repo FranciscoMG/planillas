@@ -227,9 +227,9 @@ if (isset($_POST['btnEliminarGrupoPresup'])) {
 		}
 	}
 	if (isset($_GET['carrera']) && isset($_GET['curso']) && isset($_GET['num_grupo']) && isset($_GET['num_grupo_doble']) && isset($_GET['total_tiempos']) && isset($_GET['id_presupuesto'])) {
-		$resultado = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo'], 0);
+		$resultado = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo'], 1);
 		if (!$resultado && $_GET['num_grupo_doble'] != "0") {
-			$resultado2 = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo_doble'], 0);
+			$resultado2 = $dbGrupos->borrarPresupGrupo($_GET['carrera'], $_GET['curso'], $_GET['num_grupo_doble'], 1);
 		}
 		if (!($resultado && $resultado2) || !$resultado) {
 			$tiempo_sobrante= ($tiempo_sobrante + $_GET['total_tiempos']);

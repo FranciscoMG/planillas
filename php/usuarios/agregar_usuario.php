@@ -34,7 +34,7 @@ if (isset($_POST['btnModificar'])) {
     } else {
         $db->modificarUsuario($_POST['cboUsuario'], $contrasena, $nombre_usuario, $apellidos, $tipoPerfil, $correo, 0);
         $_SESSION['alerta'] = 1;
-        $_SESSION['alerta-contenido'] = "Usuario modificado: ";
+        $_SESSION['alerta-contenido'] = "Usuario ".$_POST['cboUsuario']." modificado ";
 
         ///////////// registro de actividad //////////
         $descripcionRegistroActividad="Se modificó al usuario: ".$_POST['cboUsuario'];
@@ -56,12 +56,18 @@ if (isset($_POST['btnModificarHabilitado'])) {
     if ($_POST['isHabilitado'] == "si") {
       $db->habilitarUsuario($id , 1);
 
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Se habilitó el usuario: ".$id;
+
       ///////////// registro de actividad //////////
       $descripcionRegistroActividad="Se habilitó al usuario: ".$id;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
       ////////////////////////////////////////////
 
     } else {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "Se deshabilitó el usuario: ".$id;
+
       ///////////// registro de actividad //////////
       $descripcionRegistroActividad="Se deshabilitó al usuario: ".$id;
       $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);

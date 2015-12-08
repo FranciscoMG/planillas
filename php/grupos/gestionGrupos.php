@@ -1,4 +1,5 @@
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
+<?php include_once("../include/funciones.php"); ?>
 <?php
 $dbRegistroActividad = new registroActividadBD();
 $utc = date('U');
@@ -38,6 +39,12 @@ for ($i=0; $i < 6; $i++) {
     $resultado = $db2->obtenerDocentes();
     while ($fila = mysqli_fetch_assoc($resultado)) {
       if ($nombre == $fila['nombre'] && $apellidos == $fila['apellidos']) {
+        if((verificarTiemposDocente($fila['cedula']) + convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesor'.$i])[1]))) > 1) {
+          $_SESSION['alerta'] = 1;
+          $_SESSION['alerta-contenido'] = "El docente ".$fila['nombre']." ".$fila['apellidos']." se excede de su tiempo";
+          header("Location: ../masterPage.php");
+          exit();
+        }
         $docentes[$i][0]= $fila['cedula'];
         $docentes[$i][1]= convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesor'.$i])[1]));
       }
@@ -75,6 +82,12 @@ for ($i=0; $i < 6; $i++) {
     $resultado = $db2->obtenerDocentes();
     while ($fila = mysqli_fetch_assoc($resultado)) {
       if ($nombre == $fila['nombre'] && $apellidos == $fila['apellidos']) {
+        if((verificarTiemposDocente($fila['cedula']) + convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesorDoble'.$i])[1]))) > 1) {
+          $_SESSION['alerta'] = 1;
+          $_SESSION['alerta-contenido'] = "El docente ".$fila['nombre']." ".$fila['apellidos']." se excede de su tiempo";
+          header("Location: ../masterPage.php");
+          exit();
+        }
         $docentesDoble[$i][0]= $fila['cedula'];
         $docentesDoble[$i][1]= convertirFraccionesDoble(trim(explode("-", $_POST['txtProfesorDoble'.$i])[1]));
       }

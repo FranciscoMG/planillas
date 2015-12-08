@@ -22,7 +22,7 @@
               <?php
                 $resultado = $db->obtenerlistadoDeUsuarios();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                    if ($fila['usuario'] != "admin") {
+                    if ($fila['usuario'] != "admin" && $fila['usuario'] != $_SESSION['usuario']) {
 
                       $tipoPerfilUser = "";
                       if ($fila['perfil'] == 0) {
