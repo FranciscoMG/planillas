@@ -232,14 +232,14 @@
 							echo "<div class='docentesDiv'>";
 							for ($i=0; $i < count($docentes) ; $i++) {
 								$sumaTiempos+=convertirFraccionesDoble($docentes[$i][1]);
-								echo $docentes[$i][0]." - ".$docentes[$i][1]." <a href='?docente=".$docentes[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
+								echo $docentes[$i][0]." - ".$docentes[$i][1]." <a target='_blank' href='reportes/reporteDocenteIndividual.php?docente=".$docentes[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
 							}
 							echo "</div>";
 							if ($num_grupo_doble != 0) {
 								echo "<div class='docentesDiv'>";
 								for ($i=0; $i < count($docentesDoble) ; $i++) {
 									$sumaTiempos+=convertirFraccionesDoble($docentesDoble[$i][1]);
-									echo $docentesDoble[$i][0]." - ".$docentesDoble[$i][1]." <a href='?docente=".$docentesDoble[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
+									echo $docentesDoble[$i][0]." - ".$docentesDoble[$i][1]." <a target='_blank' href='reportes/reporteDocenteIndividual.php?docente=".$docentesDoble[$i][2]."'><span class='glyphicon glyphicon-share-alt'></span></a><br/><br/>";
 								}
 								echo "</div>";
 							}
@@ -248,7 +248,7 @@
 							if ($id_presupuesto == 1) {
 								echo "Sin asignar";
 							} else {
-								echo $nombre_presupuesto." "."<a href='?id_presupuesto=".$id_presupuesto."'><span class='glyphicon glyphicon-share-alt'></span></a>";
+								echo $nombre_presupuesto." "."<a href='reportes/reportePresupuestoIndividual.php?id_presupuesto=".$id_presupuesto."' target='_blank'><span class='glyphicon glyphicon-share-alt'></span></a>";
 							}
 							echo "</td>";
 							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {

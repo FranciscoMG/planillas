@@ -5,6 +5,10 @@ if ($_SESSION[masterActivo] != 1) {
 }
 ?>
 
+<?php 
+$sigalGrupo = $_POST['fk_curso']; /// Los datos para este reporte siempre entran por POST desde el modal selecionar reporte, debe usar la sigla de la tabla gruposDocentes para ectraer la informacion
+ ?>
+
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../include/conversor.php");?>
 <?php include_once("../conexionBD/gruposBD.php"); ?>

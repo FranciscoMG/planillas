@@ -5,11 +5,22 @@ if ($_SESSION[masterActivo] != 1) {
 }
 ?>
 
+<?php 
+if ($_GET['reporteDetallado=1'] != 1) { //////// En caso de que reporte detallado sea igual a uno NO entra en if y se debe mostrar todos los presupuestos de manera detallada.
+	if (!empty($_POST['id_presupuesto'])) { ///////////// Aqui se compara de donde vienen los datos, si es de la tabla es por GET y si vienen de modal selecionar reporte es por POST, esto aplica para mostrar solo un presupuesto de manera detallada
+		$id_presupuesto = $_POST['id_presupuesto'];
+	} else {
+		$id_presupuesto = $_GET['id_presupuesto'];
+	}
+}
+
+ ?>
+
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 <?php $db = new presupuestoBD(); ?>
-<?php $resultado = $db->obtenerPresupuesto(3);//Nesecita los ID ESPECIFICOS CAMBIAR AQUÍ ?>
+<?php $resultado = $db->obtenerPresupuesto($id_presupuesto);//Nesecita los ID ESPECIFICOS CAMBIAR AQUÍ ?>
 
 <?php
 $pdf = new FPDF();
@@ -64,7 +75,7 @@ $pdf->SetFont('Arial','B',10);
 
 			$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1",$fila['codigo']),1,0,"C");
 
-			$convertidoTiempoPresupuesto = convertirDobleFraciones($fila['tiempo_presupuesto']);
+			$convertidoTiempoPresupuesto = $fila['tiempo_presupuesto'];
 
 			$pdf->Cell(30,10,$convertidoTiempoPresupuesto,1,0,"C");
 

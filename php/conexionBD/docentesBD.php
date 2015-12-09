@@ -23,7 +23,7 @@ class docentesBD extends conexionBD {
 	}
 
 	function obtenerDocentes() {
-		$query = "SELECT * FROM tb_Docente WHERE cedula != '1';";
+		$query = "SELECT * FROM tb_Docente WHERE cedula != '1' ORDER BY apellidos asc;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

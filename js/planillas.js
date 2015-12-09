@@ -693,4 +693,48 @@ function FraccionToDoble(fraccion){
 	return valor;
 }
 
-////////////////////////
+//////////////////////// para modal reportes /////////////////////
+function activarModalReportesDocentes(){
+	formReporteDocente = document.getElementById('formReporteDocente');
+	formReporteDocente.className='';
+
+	formReporteProyecto = document.getElementById('formReporteProyecto');
+	formReporteProyecto.className='hide';
+	formReportePresupuesto = document.getElementById('formReportePresupuesto');
+	formReportePresupuesto.className='hide';
+	formReporteGrupo = document.getElementById('formReporteGrupo');
+	formReporteGrupo.className='hide';
+}
+function activarModalReportesProyectos(){
+	formReporteProyecto = document.getElementById('formReporteProyecto');
+	formReporteProyecto.className='';
+
+	formReporteDocente = document.getElementById('formReporteDocente');
+	formReporteDocente.className='hide';
+	formReportePresupuesto = document.getElementById('formReportePresupuesto');
+	formReportePresupuesto.className='hide';
+	formReporteGrupo = document.getElementById('formReporteGrupo');
+	formReporteGrupo.className='hide';
+}
+function activarModalReportesPresupuestos(){
+	formReportePresupuesto = document.getElementById('formReportePresupuesto');
+	formReportePresupuesto.className='';
+
+	formReporteDocente = document.getElementById('formReporteDocente');
+	formReporteDocente.className='hide';
+	formReporteProyecto = document.getElementById('formReporteProyecto');
+	formReporteProyecto.className='hide';
+	formReporteGrupo = document.getElementById('formReporteGrupo');
+	formReporteGrupo.className='hide';
+}
+function activarModalReportesGrupos(){
+	formReporteGrupo = document.getElementById('formReporteGrupo');
+	formReporteGrupo.className='';
+
+	formReporteDocente = document.getElementById('formReporteDocente');
+	formReporteDocente.className='hide';
+	formReporteProyecto = document.getElementById('formReporteProyecto');
+	formReporteProyecto.className='hide';
+	formReportePresupuesto = document.getElementById('formReportePresupuesto');
+	formReportePresupuesto.className='hide';
+}

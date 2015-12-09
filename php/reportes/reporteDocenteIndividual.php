@@ -5,12 +5,16 @@ if ($_SESSION[masterActivo] != 1) {
 }
 ?>
 
+<?php 
+$cedula = $_POST['cedula']; /// // <--- este es la cedula del docente que se manda cuando se selecciona en el modal.
+ ?>
+
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../include/conversor.php");?>
 <?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
 <?php $db = new docentesBD(); ?>
-<?php $resultadoDocente = $db->obtenerUnDocente(123); //SE INGRESA EL ID (CÉDULA)?>
+<?php $resultadoDocente = $db->obtenerUnDocente($cedula); //SE INGRESA EL ID (CÉDULA)?>
 <?php $db = new gruposBD(); ?>
 <?php $resultado = $db->llenarTabla(); ?>
 

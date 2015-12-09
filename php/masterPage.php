@@ -228,18 +228,31 @@
 			                	<li role="separator" class="divider"></li>';
 			              	}
 			               ?>
-			                <li><a href="reportes/reporteDocente.php" target="_blank">Reporte de docentes</a></li>
-			                <li><a href="">Reporte de un docente</a></li>
-			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos</a></li>
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesDocentes();">Reporte individual de docentes</a></li>
+
+			                <li><a href="reportes/reporteDocentes.php" target="_blank">Reporte general de docentes</a></li>
+
+			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos temporales</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
-			                <li><a href="#">Reporte de un proyecto</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesProyectos();">Reporte individual de proyectos</a></li>
+
+			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte general de proyectos</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="reportes/reportePresupuesto.phpp" target="_blank">Reporte de presupuestos</a></li>
-			                <li><a href="#">Reporte de un presupuesto</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesPresupuestos();">Reporte reporte individual de presupuesto</a></li>
+
+							<li><a href="reportes/reportePresupuestoIndividual.php?reporteDetallado=1" target="_blank">Reporte detallado de presupuestos</a></li>
+
+			                <li><a href="reportes/reportePresupuestos.php" target="_blank">Reporte general de presupuestos</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="#">Reporte de cursos / grupos</a></li>
-			                <li><a href="#">Reporte de un curso / grupo</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesGrupos();">Reporte individual de grupos</a></li>
+
+			                <li><a href="reportes/reporteEducacionGeneral.php" target="_blank">Reporte general de grupos</a></li>
 			              </ul>
 
 			            </li>
@@ -347,8 +360,13 @@
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalProyectosPresupuesto.php"); ?>
 
+<!--/////////////////////////////// PARA REPORTES //////////////////////////////////-->
+<!--/////  Modal de Grupo //////////-->
+<?php require("include/modalesReportes/modalSeleccionar.php"); ?>
+
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
+
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
