@@ -34,7 +34,7 @@
             </select>
           </div>
           <div id="cursosAgregar" class="form-group col-xs-12 col-sm-12 col-lg-12 hide">
-            <input type="text" class="form-control col-xs-12 col-sm-12 col-lg-12 input-border" name="txtSigla" placeholder="Sigla" style="margin-bottom: 15px;">
+            <input maxlength="10" type="text" class="form-control col-xs-12 col-sm-12 col-lg-12 input-border" name="txtSigla" placeholder="Sigla" style="margin-bottom: 15px;">
           </div>
           <div id="seccionCursosEliminar">
             <div class="col-xs-12 col-sm-12 col-lg-12">
@@ -65,7 +65,7 @@
                   echo "value ='".$_GET['nombre_curso']."'";
                 }
               ?>
-              type="text" class="form-control input-border" name="txtNombreCurso" placeholder="Nombre">
+              type="text" maxlength="100" class="form-control input-border" name="txtNombreCurso" placeholder="Nombre">
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="cboCreditos">Cantidad de créditos:</label>

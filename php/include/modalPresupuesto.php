@@ -42,14 +42,14 @@
           </div>
         <div id="seccionEliminarPresupuesto">
           <div id="presupuestoAgregar" class="form-group col-xs-12 col-sm-12 col-lg-12 hide">
-            <input class="form-control input-border"  type="text" name="txtNombrePresupuesto" placeholder="Nombre" <?php if (isset($_GET['modalPresupuesto'])) {
+            <input maxlength="80" class="form-control input-border"  type="text" name="txtNombrePresupuesto" placeholder="Nombre" <?php if (isset($_GET['modalPresupuesto'])) {
               echo "value=".$_GET['nombre_presupuesto'];
             } ?>>
           </div>
           <br/><br/><br/><br/>
           <div class="form-group col-xs-12 col-sm-12 col-lg-12">
             <label for="cboPrimario">Código:</label>
-            <input  class="form-control input-border" type="text" name="txtCodigoPresupuesto" placeholder="Código" <?php if (isset($_GET['modalPresupuesto'])) {
+            <input maxlength="10" class="form-control input-border" type="text" name="txtCodigoPresupuesto" placeholder="Código" <?php if (isset($_GET['modalPresupuesto'])) {
               echo "value='".$_GET['codigo']."'";
             } ?>>
           </div>

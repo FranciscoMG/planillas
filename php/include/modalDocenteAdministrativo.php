@@ -1,34 +1,34 @@
-<?php include_once("conexionBD/docentesConPermisosBD.php"); ?>
+<?php include_once("conexionBD/docenteAdministrativoBD.php"); ?>
 <?php include_once("conexionBD/presupuestoBD.php"); ?>
 
-<?php $db = new docentesConPermisoBD(); ?>
+<?php $db = new docenteAdministrativoBD(); ?>
 <?php $dbPresupuesto = new presupuestoBD(); ?>
 
 <?php
 session_start();
 ?>
 
-<div id="modalDocentesConPermisos" class="modal fade" role="dialog">
+<div id="modalDocentesAdministrativo" class="modal fade" role="dialog">
   <div class="modal-dialog ">
     <div class="modal-content col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
       <!-- Header -->
       <div class="modal-header modal-delete-border">
         <a type="button" class="close" href="masterPage.php">&times;</a>
-        <h4 class="modal-title">Registro Docentes con Permisos</h4>
+        <h4 class="modal-title">Registro Docentes Administrativos</h4>
       </div>
       <!-- Body -->
-      <form action="docentes/gestion_docentesConPermiso.php" method="post">
+      <form action="docentes/gestion_docenteAdministrativo.php" method="post">
         <div class="modal-body">
           <div class="col-xs-12 col-sm-12 col-lg-12">
             <label for="txtCedula2">Cédula:</label>
           </div>
-          <div id="docenteEliminarModificar2" class="col-xs-12 col-sm-12 col-lg-12">
-            <select id="selectEliminarDocente2" class="form-control" name="cboxIDDocente2" onchange="cargarDatosDocentesConPermiso(this)">
+          <div id="docenteEliminarModificar3" class="col-xs-12 col-sm-12 col-lg-12">
+            <select id="selectEliminarDocente3" class="form-control" name="cboxIDDocente2" onchange="cargarDatosDocentesAdministrativo(this)">
               <?php
                 echo "<option value='0'></option>";
-                $resultado = $db->obtenerDocentesConPermiso();
+                $resultado = $db->obtenerDocenteAdministrativo();
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-                  if (isset($_GET['modalDocentesConPermisos']) && $_GET['cedula'] == $fila['cedula'] && $fila['cedula'] != 1) {
+                  if (isset($_GET['modalDocenteAdministrativo']) && $_GET['cedula'] == $fila['cedula'] && $fila['cedula'] != 1) {
                     echo "<option value='".$fila['cedula']."' selected>".$fila['cedula']." - ".$fila['nombre']." ".$fila['apellidos']."</option>";
                   } else {
                     if ($fila['cedula'] != 1) {
@@ -40,24 +40,24 @@ session_start();
             </select>
           </div>
           <br/>
-          <div id="seccionEliminarDocente2">
-            <div id="docenteAgregar2" class="col-xs-12 col-sm-12 col-lg-12 hide">
+          <div id="seccionEliminarDocente3">
+            <div id="docenteAgregar3" class="col-xs-12 col-sm-12 col-lg-12 hide">
               <input maxlength="25" type="text" class="form-control input-border" name="txtCedula2" placeholder="Cédula" <?php
-              if (isset($_GET['modalDocentesConPermisos'])) {
+              if (isset($_GET['modalDocenteAdministrativo'])) {
                 echo "value=".$_GET['cedula'];
               } ?>>
             </div><br/><br/><br/>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="txtNombre2">Nombre:</label>
               <input maxlength="20" type="text" class="form-control input-border" name="txtNombre2" placeholder="Nombre" <?php
-              if (isset($_GET['modalDocentesConPermisos'])) {
+              if (isset($_GET['modalDocenteAdministrativo'])) {
                 echo "value=".$_GET['nombre'];
               } ?>>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="txtApellidos2">Apellidos:</label>
-              <input maxlength="40" type="text" class="form-control input-border" name="txtApellidos2" placeholder="Apellidos" <?php
-              if (isset($_GET['modalDocentesConPermisos'])) {
+              <input maxlength="20" type="text" class="form-control input-border" name="txtApellidos2" placeholder="Apellidos" <?php
+              if (isset($_GET['modalDocenteAdministrativo'])) {
                 echo "value=".$_GET['apellidos'];
               } ?>>
             </div>
@@ -67,7 +67,7 @@ session_start();
                 $grados= array("Bachillerato", "Licenciatura", "Maestría", "Doctorado");
                 echo "<select class='form-control' name='cboGrado2'>";
                 for ($i=0; $i < count($grados); $i++) {
-                  if (isset($_GET['modalDocentesConPermisos'])) {
+                  if (isset($_GET['modalDocenteAdministrativo'])) {
                     if ($_GET['grado'] == $i) {
                       echo "<option value='".$i."' selected>".$grados[$i]."</option>";
                     } else {
@@ -87,7 +87,7 @@ session_start();
                 $contrato= array("Interino", "Propiedad", "Sustituto");
                 echo "<select class='form-control' name='cboContrato2'>";
                 for ($i=0; $i < count($contrato); $i++) {
-                  if (isset($_GET['modalDocentesConPermisos'])) {
+                  if (isset($_GET['modalDocenteAdministrativo'])) {
                     if ($_GET['contrato'] == $i) {
                       echo "<option value='".$i."' selected>".$contrato[$i]."</option>";
                     } else {
@@ -149,16 +149,16 @@ session_start();
           <?php
             if ($_SESSION['masterActivo'] == 1) {
               echo "</br>
-              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton' id='docentesBtnModificar2'>
+              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton' id='docentesBtnModificar3'>
                 <button type='submit' class='btn btn-warning btn-block' name='btnModificar2'>Modificar</button>
               </div>
-              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide' id='docentesBtnEliminar2'>
+              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide' id='docentesBtnEliminar3'>
                 <button type='submit' class='btn btn-danger btn-revision btn-block' name='btnEliminar2'>Eliminar</button>
               </div>
               </br>";
             }
           ?>
-          <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide" id='docentesBtnAgregar2'>
+          <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide" id='docentesBtnAgregar3'>
             <button type="submit" class="btn btn-primary btn-block" name="btnRegistrar2">Registrar</button>
           </div>
         </div>

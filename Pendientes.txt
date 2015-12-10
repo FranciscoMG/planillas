@@ -16,3 +16,73 @@ Reportes
 	En el reporte individual de presupuestos se debe mostrar a que grupos, docentes con permiso o proyecto esta relacionado el presupuesto.
 
 
+
+
+
+
+
+
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.2.12deb2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 09-12-2015 a las 23:04:40
+-- Versión del servidor: 5.6.27-0ubuntu0.15.04.1
+-- Versión de PHP: 5.6.4-4ubuntu6.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `SIDOP`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_DocenteAdministrativo`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_DocenteAdministrativo` (
+  `cedula` varchar(25) NOT NULL,
+  `nombre` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `grado_academico` int(11) NOT NULL,
+  `tipo_contrato` int(11) NOT NULL,
+  `fk_presupuesto` int(11) NOT NULL,
+  `jornada_docenteAdministrativo` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tb_DocenteAdministrativo`
+--
+
+INSERT INTO `tb_DocenteAdministrativo` (`cedula`, `nombre`, `apellidos`, `grado_academico`, `tipo_contrato`, `fk_presupuesto`, `jornada_docenteAdministrativo`) VALUES
+('1', '1', '1', 1, 1, 1, 1);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tb_DocenteAdministrativo`
+--
+ALTER TABLE `tb_DocenteAdministrativo`
+ ADD PRIMARY KEY (`cedula`), ADD KEY `fk_presupuesto` (`fk_presupuesto`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `tb_DocenteAdministrativo`
+--
+ALTER TABLE `tb_DocenteAdministrativo`
+ADD CONSTRAINT `tb_DocenteAdministrativo_ibfk_1` FOREIGN KEY (`fk_presupuesto`) REFERENCES `tb_Presupuesto` (`id_presupuesto`);
+
+
+

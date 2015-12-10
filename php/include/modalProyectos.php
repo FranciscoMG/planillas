@@ -41,7 +41,7 @@ session_start();
           </div>
           <div id="seccionEliminarProyecto">
             <div id="proyectoAgregar" class="form-group col-xs-12 col-sm-12 col-lg-12 hide" style="margin-bottom: 15px;">
-              <input type="text" class="form-control input-border" name="txtNombre_proyecto" placeholder="Nombre" <?php if (isset($_GET['modalProyectos'])) {
+              <input maxlength="100" type="text" class="form-control input-border" name="txtNombre_proyecto" placeholder="Nombre" <?php if (isset($_GET['modalProyectos'])) {
                 echo "value=".$_GET['nombre_proyecto'];
               } ?>>
             </div>

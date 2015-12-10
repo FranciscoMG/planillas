@@ -38,10 +38,10 @@
       <div class="modal-footer modal-delete-border">
         <?php
           if ($revisiones == 1 && $_SESSION['tipoPerfil'] == 0) {
-            echo '<div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton"><a class="btn btn-success btn-sm pull-right">Finalizar Proceso</a></div>';
+            echo '<div class=""><a class="btn btn-success btn-sm pull-right">Finalizar Proceso</a></div>';
           } else {
-            echo '<div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton"><a href="estadoDatos/gestorEstadoDatos.php?estadoDatos='.$estado.'&revisiones='.$revisiones.'&tipoPerfil='.$_SESSION['tipoPerfil'].'&enviar=1" class="btn btn-success btn-sm pull-right" class="btn btn-success btn-sm pull-right">Si</a></div>
-            <div class="col-xs-12 col-sm-12 col-lg-12 espacio-boton"><a class="btn btn-danger btn-sm pull-right btn-revision" data-dismiss="modal">No</a></div>';
+            echo '<div class=""><a href="estadoDatos/gestorEstadoDatos.php?estadoDatos='.$estado.'&revisiones='.$revisiones.'&tipoPerfil='.$_SESSION['tipoPerfil'].'&enviar=1" class="btn btn-success btn-sm pull-right" class="btn btn-success btn-sm pull-right">Si</a></div>
+            <div class=""><a class="btn btn-danger btn-sm pull-right btn-revision" data-dismiss="modal">No</a></div>';
           }
         ?>
       </div>

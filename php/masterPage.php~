@@ -103,9 +103,7 @@
 			        </div>
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
-			            <li class="" >
-			              <a class="" href="masterPage.php" >Inicio</a>
-			            </li>
+			            
 
 
 						<li class="dropdown <?php if($_SESSION['tipoPerfil'] != 0){echo "hide";} ?>">
@@ -113,11 +111,12 @@
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
+			                <li role="separator" class="divider"></li>
 			                <li><a class="texto_cambiar" data-toggle="modal" data-target="#modalActivarUsuarios">Activar usuarios</a></li>
 			              </ul>
 			            </li>
 
-					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+					<?php if(true){
 						if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav">
 						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
@@ -129,8 +128,29 @@
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarAgregarDocente()">Agregar</a></li>
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarModificarDocente()">Modificar</a></li>
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarEliminarDocente()">Eliminar</a></li>
-						              </ul>
-						            </li>';}?>
+
+					              <li class="divider"></li>
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">Docente con permiso </a>
+					                <ul class="dropdown-menu">
+					                  <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarAgregarDocenteConPermisos();"> Agregar</a></li>
+					                  <li><a  href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarModificarDocenteConPermisos();"> Modificar</a></li>
+					                  <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarEliminarDocenteConPermisos();">Eliminar</a></li>
+					                </ul>
+					              </li>
+
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">Docente administrativo</a>
+					                <ul class="dropdown-menu">
+					                  <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarAgregarDocenteAdministrativo();"> Agregar</a></li>
+					                  <li><a  href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarModificarDocenteAdministrativo();"> Modificar</a></li>
+					                  <li><a href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarEliminarDocenteAdministrativo();"> Eliminar</a></li>
+					                </ul>
+					              </li>
+
+						    </ul>
+						</li>';
+								}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
 					if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
@@ -206,19 +226,35 @@
 				<?php if(true){
 			 	if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav6">';
-						    echo '<a class="desabilitado_a disabled" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
+						    echo '<a class="desabilitado_a disabled" id="a_nav6" data-toggle="dropdown" href="#">Docente con permiso <span class="caret"></span></a>';
 						} else {
 							echo '<li class="" id="li_nav6">';
-						 	echo '<a class="" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
+						 	echo '<a class="" id="a_nav6" data-toggle="dropdown" href="#">Docente con permiso <span class="caret"></span></a>';
 						}
 					echo '<ul class="dropdown-menu">
 				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarAgregarDocenteConPermisos();">Agregar</a></li>
 				          <li><a  href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarModificarDocenteConPermisos();">Modificar</a></li>
 				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarEliminarDocenteConPermisos();">Eliminar</a></li>
 				        </ul>
-				      </li>';}?>
+				      </li>';}
 
-						<li class="dropdown" id="li_nav6">
+				if(true){
+				if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
+							echo '<li class="desabilitado_li disabled" id="li_nav7">';
+						    echo '<a class="desabilitado_a disabled" id="a_nav7" data-toggle="dropdown" href="#">Docente administrativo <span class="caret"></span></a>';
+						} else {
+							echo '<li class="" id="li_nav7">';
+						 	echo '<a class="" id="a_nav6" data-toggle="dropdown" href="#">Docente administrativo <span class="caret"></span></a>';
+						}
+					echo '<ul class="dropdown-menu">
+				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarAgregarDocenteAdministrativo();">Agregar</a></li>
+				          <li><a  href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarModificarDocenteAdministrativo();">Modificar</a></li>
+				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarEliminarDocenteAdministrativo();">Eliminar</a></li>
+				        </ul>
+				      </li>';}
+				      ?>
+
+						<li class="dropdown" id="">
 			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			              <?php
@@ -228,18 +264,31 @@
 			                	<li role="separator" class="divider"></li>';
 			              	}
 			               ?>
-			                <li><a href="reportes/reporteDocente.php" target="_blank">Reporte de docentes</a></li>
-			                <li><a href="">Reporte de un docente</a></li>
-			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos</a></li>
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesDocentes();">Reporte individual de docentes</a></li>
+
+			                <li><a href="reportes/reporteDocentes.php" target="_blank">Reporte general de docentes</a></li>
+
+			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos temporales</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte de proyectos</a></li>
-			                <li><a href="#">Reporte de un proyecto</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesProyectos();">Reporte individual de proyectos</a></li>
+
+			                <li><a href="reportes/reporteProyectos.php" target="_blank">Reporte general de proyectos</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="reportes/reportePresupuesto.phpp" target="_blank">Reporte de presupuestos</a></li>
-			                <li><a href="#">Reporte de un presupuesto</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesPresupuestos();">Reporte reporte individual de presupuesto</a></li>
+
+							<li><a href="reportes/reportePresupuestoIndividual.php?reporteDetallado=1" target="_blank">Reporte detallado de presupuestos</a></li>
+
+			                <li><a href="reportes/reportePresupuestos.php" target="_blank">Reporte general de presupuestos</a></li>
+
 			                <li role="separator" class="divider"></li>
-			                <li><a href="#">Reporte de cursos / grupos</a></li>
-			                <li><a href="#">Reporte de un curso / grupo</a></li>
+
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesGrupos();">Reporte individual de grupos</a></li>
+
+			                <li><a href="reportes/reporteEducacionGeneral.php" target="_blank">Reporte general de grupos</a></li>
 			              </ul>
 
 			            </li>
@@ -323,6 +372,9 @@
 <!--/////////////////////////////////  Modal de Docentes con Permisos //////////////-->
 	<?php require("include/modalDocentesConPermisos.php"); ?>
 
+<!--/////////////////////////////////  Modal de Docentes Administrativo //////////////-->
+<?php require("include/modalDocenteAdministrativo.php"); ?>
+
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
 	<?php require("include/modalProyectos.php"); ?>
 
@@ -347,8 +399,13 @@
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalProyectosPresupuesto.php"); ?>
 
+<!--/////////////////////////////// PARA REPORTES //////////////////////////////////-->
+<!--/////  Modal de Grupo //////////-->
+<?php require("include/modalesReportes/modalSeleccionar.php"); ?>
+
 <!--/////////////////////////////////  Modal de Presupuestos ///////////////////////-->
 	<?php require("include/modalPresupuesto.php"); ?>
+
 
 </body>
 <script src="../js/jquery-1.11.3.min.js"></script>
@@ -380,6 +437,16 @@
  	if ($_GET['modalDocentesConPermisos'] == 1) {
  		echo "<script>
  		$('#modalDocentesConPermisos').modal('show');
+
+ 		</script>";
+ 	}
+?>
+
+<?php
+ /////////////// MODAL DOCENTES ADMINISTRATIVO /////////////
+ 	if ($_GET['modalDocenteAdministrativo'] == 1) {
+ 		echo "<script>
+ 		$('#modalDocentesAdministrativo').modal('show');
 
  		</script>";
  	}

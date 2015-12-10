@@ -103,21 +103,20 @@
 			        </div>
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
-			            <li class="" >
-			              <a class="" href="masterPage.php" >Inicio</a>
-			            </li>
-
+			            
+						<li><a href="masterPage.php">Inicio</a></li>
 
 						<li class="dropdown <?php if($_SESSION['tipoPerfil'] != 0){echo "hide";} ?>">
 			              <a class="dropdown-toggle " data-toggle="dropdown" href="#">Usuarios <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			                <li><a href="#" data-toggle="modal" data-target="#modalRegistro">Modificar</a></li>
 			                <li><a href="#" data-toggle="modal" data-target="#modalUsuariosBorrar">Eliminar</a></li>
+			                <li role="separator" class="divider"></li>
 			                <li><a class="texto_cambiar" data-toggle="modal" data-target="#modalActivarUsuarios">Activar usuarios</a></li>
 			              </ul>
 			            </li>
 
-					<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
+					<?php if(true){
 						if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
 							echo '<li class="desabilitado_li disabled" id="li_nav">
 						              <a class="desabilitado_a disabled" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
@@ -125,12 +124,33 @@
 						echo '<li class="" id="li_nav">
 						              <a class="" id="a_nav" data-toggle="dropdown" href="#">Docentes <span class="caret"></span></a>';
 						}
+
 			          echo '<ul class="dropdown-menu">
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarAgregarDocente()">Agregar</a></li>
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarModificarDocente()">Modificar</a></li>
-						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarEliminarDocente()">Eliminar</a></li>
-						              </ul>
-						            </li>';}?>
+						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarEliminarDocente()">Eliminar</a></li>';
+				
+						       	echo '
+					              <li class="divider"></li>
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">Docente con permiso </a>
+					                <ul class="dropdown-menu">
+					                  <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarAgregarDocenteConPermisos();"> Agregar</a></li>
+					                  <li><a  href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarModificarDocenteConPermisos();"> Modificar</a></li>
+					                  <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarEliminarDocenteConPermisos();">Eliminar</a></li>
+					                </ul>
+					              </li>
+
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">Docente administrativo</a>
+					                <ul class="dropdown-menu">
+					                  <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarAgregarDocenteAdministrativo();"> Agregar</a></li>
+					                  <li><a  href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarModificarDocenteAdministrativo();"> Modificar</a></li>
+					                  <li><a href="#" data-toggle="modal" data-target="#modalDocentesAdministrativo" onclick="activarEliminarDocenteAdministrativo();"> Eliminar</a></li>
+					                </ul>
+					              </li>
+						    </ul>
+						</li>';}?>
 
 				<?php if($_SESSION['tipoPerfil'] == 0 || $_SESSION['tipoPerfil'] == 1){
 					if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
@@ -203,22 +223,7 @@
 			          </ul>
 			        </li>';}?>
 
-				<?php if(true){
-			 	if ($_SESSION['tipoPerfil'] == 0 || $estado != $_SESSION['tipoPerfil']) {
-							echo '<li class="desabilitado_li disabled" id="li_nav6">';
-						    echo '<a class="desabilitado_a disabled" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
-						} else {
-							echo '<li class="" id="li_nav6">';
-						 	echo '<a class="" id="a_nav6" data-toggle="dropdown" href="#">Docentes con permisos <span class="caret"></span></a>';
-						}
-					echo '<ul class="dropdown-menu">
-				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarAgregarDocenteConPermisos();">Agregar</a></li>
-				          <li><a  href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarModificarDocenteConPermisos();">Modificar</a></li>
-				          <li><a href="#" data-toggle="modal" data-target="#modalDocentesConPermisos" onclick="activarEliminarDocenteConPermisos();">Eliminar</a></li>
-				        </ul>
-				      </li>';}?>
-
-						<li class="dropdown" id="li_nav6">
+						<li class="dropdown" id="">
 			              <a class="dropdown-toggle" data-toggle="dropdown" id="a_nav6" href="#">Reportes <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
 			              <?php
@@ -233,6 +238,8 @@
 			                <li><a href="reportes/reporteDocentes.php" target="_blank">Reporte general de docentes</a></li>
 
 			                <li><a href="reportes/reporteDocentePermiso.php" target="_blank">Reporte de docentes con permisos temporales</a></li>
+
+			                <li><a href="reportes/reporteDocenteAdministrativo.php" target="_blank">Reporte de docentes administrativos</a></li>
 
 			                <li role="separator" class="divider"></li>
 
@@ -281,8 +288,8 @@
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container">
-					<div class="col-sx-12 col-sm-6 text-right  pull-right">
-						<h6>Email: <a href="#">Tel: 6666 66 66 | correo@my.com</a></h6>
+					<div class="col-sx-12 text-right  pull-right">
+						<h6><a href="http://www.srp.ucr.ac.cr/content/direccion_directorio-telef%C3%B3nico" target="_blank">Directorio Telefónico &nbsp; &nbsp;&nbsp;</a>| &nbsp; &nbsp;&nbsp; Recursos Humanos: 2511-7407 &nbsp;&nbsp; &nbsp; | &nbsp;&nbsp; &nbsp; Coordinación de Docencia: 2511-7410 &nbsp;&nbsp; &nbsp; |  &nbsp;&nbsp; &nbsp; Dirección: 2511-7401  </h6>
 					</div>
 				</div>
 			</div>
@@ -335,6 +342,9 @@
 
 <!--/////////////////////////////////  Modal de Docentes con Permisos //////////////-->
 	<?php require("include/modalDocentesConPermisos.php"); ?>
+
+<!--/////////////////////////////////  Modal de Docentes Administrativo //////////////-->
+<?php require("include/modalDocenteAdministrativo.php"); ?>
 
 <!--////////////////////////////////////// Modal de Proyectos ////////////////////////-->
 	<?php require("include/modalProyectos.php"); ?>
@@ -398,6 +408,16 @@
  	if ($_GET['modalDocentesConPermisos'] == 1) {
  		echo "<script>
  		$('#modalDocentesConPermisos').modal('show');
+
+ 		</script>";
+ 	}
+?>
+
+<?php
+ /////////////// MODAL DOCENTES ADMINISTRATIVO /////////////
+ 	if ($_GET['modalDocenteAdministrativo'] == 1) {
+ 		echo "<script>
+ 		$('#modalDocentesAdministrativo').modal('show');
 
  		</script>";
  	}

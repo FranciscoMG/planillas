@@ -4,12 +4,12 @@
 <?php include_once("../conexionBD/presupuestoBD.php"); ?>
 <?php $dbPresupuesto = new presupuestoBD(); ?>
 
-<?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
+<?php include_once("../conexionBD/docenteAdministrativoBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
 
 <?php $dbDocentes = new docentesBD();  ?>
-<?php $db= new docentesConPermisoBD(); ?>
+<?php $db= new docenteAdministrativoBD(); ?>
 
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
 <?php 
@@ -57,7 +57,7 @@ if (isset($_POST['btnModificar2'])) {
     }
     /////////////////////////
     //// Obtener jornada del docente //// 
-    $resultado4 = $db->obtenerDocentesConPermiso();
+    $resultado4 = $db->obtenerDocenteAdministrativo();
     while ($fila4 = mysqli_fetch_assoc($resultado4)) {
       if ($fila4['cedula'] == $cedula) {
           $jornada_docenteConPermiso2 = $fila4['jornada_docenteConPermiso'];
@@ -66,7 +66,7 @@ if (isset($_POST['btnModificar2'])) {
     }
     ////////////////////
 
-    $seRealizo= $db->modificarDocenteConPermiso($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
+    $seRealizo= $db->modificarDocenteAdministrativo($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
 
   } else {
     $_SESSION['alerta'] = 1;
@@ -120,7 +120,7 @@ if (isset($_POST['btnModificar2'])) {
 if (isset($_POST['btnEliminar2'])) {
   if ($cedula != "") {
     //// Obtener jornada del docente //// 
-    $resultado4 = $db->obtenerDocentesConPermiso();
+    $resultado4 = $db->obtenerDocenteAdministrativo();
     while ($fila4 = mysqli_fetch_assoc($resultado4)) {
       if ($fila4['cedula'] == $cedula) {
           $jornada_docenteConPermiso = $fila4['jornada_docenteConPermiso'];
@@ -131,7 +131,7 @@ if (isset($_POST['btnEliminar2'])) {
     }
     ////////////////////
 
-    $seRealizo= $db->borrarDocenteConPermiso($cedula);
+    $seRealizo= $db->borrarDocenteAdministrativo($cedula);
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "No se ha seleccionado ningún docente";
@@ -177,12 +177,13 @@ if (isset($_POST['btnRegistrar2'])) {
       exit();
   }
 
-    if ($cedula == "") {
+  if ($cedula == "") {
       $_SESSION['alerta'] = 1;
       $_SESSION['alerta-contenido'] = "Debe ingresar la cedula.";
       header("Location: ../masterPage.php");
       exit();
     }
+
     if (empty($nombre)) {
       $_SESSION['alerta'] = 1;
       $_SESSION['alerta-contenido'] = "Debe ingresar el nombre.";
@@ -191,7 +192,7 @@ if (isset($_POST['btnRegistrar2'])) {
     }
 
     ///// Verifica que la cedula del docente no exista
-    $resultado = $db->obtenerDocentesConPermiso();
+    $resultado = $db->obtenerDocenteAdministrativo();
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['cedula']==$cedula) {
         $_SESSION['alerta'] = 1;
@@ -239,7 +240,7 @@ if (isset($_POST['btnRegistrar2'])) {
     }
     /////////////////////////
 
-    $seRealizo = $db->agregarDocenteConPermiso($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
+    $seRealizo = $db->agregarDocenteAdministrativo($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato , $fk_presupuesto , $jornada_docenteConPermiso);
 
     if (!$seRealizo) {
 
@@ -276,10 +277,10 @@ if (isset($_POST['btnRegistrar2'])) {
 
 //////////////////// Llenar modal proyectos //////////////
 if (isset($_GET['id'])) {
-	$resultado = $db->obtenerDocentesConPermiso();
+	$resultado = $db->obtenerDocenteAdministrativo();
   while ($fila = mysqli_fetch_assoc($resultado)) {
   	if ($fila['cedula'] == $_GET['id']) {
-      header("Location: ../masterPage.php?modalDocentesConPermisos=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']."&jornada=".$fila['jornada_docenteConPermiso']."&jornada_fraccion=".convertirDobleFraciones($fila['jornada_docenteConPermiso'])."&fk_presupuesto=".$fila['fk_presupuesto']);
+      header("Location: ../masterPage.php?modalDocenteAdministrativo=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']."&jornada=".$fila['jornada_docenteConPermiso']."&jornada_fraccion=".convertirDobleFraciones($fila['jornada_docenteConPermiso'])."&fk_presupuesto=".$fila['fk_presupuesto']);
   		exit();
   	}
   }

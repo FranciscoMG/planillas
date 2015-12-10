@@ -36,21 +36,21 @@ session_start();
           <br/>
           <div id="seccionEliminarDocente">
             <div id="docenteAgregar" class="col-xs-12 col-sm-12 col-lg-12 hide">
-              <input type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula" <?php
+              <input maxlength="25" type="text" class="form-control input-border" name="txtCedula" placeholder="Cédula" <?php
               if (isset($_GET['modalDocentes'])) {
                 echo "value=".$_GET['cedula'];
               } ?>>
             </div><br/><br/><br/>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="txtNombre">Nombre:</label>
-              <input type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" <?php
+              <input maxlength="20" type="text" class="form-control input-border" name="txtNombre" placeholder="Nombre" <?php
               if (isset($_GET['modalDocentes'])) {
                 echo "value=".$_GET['nombre'];
               } ?>>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
               <label for="txtApellidos">Apellidos:</label>
-              <input type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" <?php
+              <input maxlength="40" type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" <?php
               if (isset($_GET['modalDocentes'])) {
                 echo "value=".$_GET['apellidos'];
               } ?>>

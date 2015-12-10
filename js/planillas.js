@@ -58,6 +58,8 @@ function desabilitar_habiltarOpciones(){
 		a_nav5.className="desabilitado_a disabled";
 		li_nav6.className="desabilitado_li disabled";
 		a_nav6.className="desabilitado_a disabled";
+		li_nav7.className="desabilitado_li disabled";
+		a_nav7.className="desabilitado_a disabled";
 
 		habilita.className= "glyphicon glyphicon-ok-circle  hab_opcion";
 	}else{
@@ -73,6 +75,9 @@ function desabilitar_habiltarOpciones(){
 		a_nav5.className="dropdown-toggle";
 		li_nav6.className="dropdown";
 		a_nav6.className="dropdown-toggle";
+		li_nav7.className="dropdown";
+		a_nav7.className="dropdown-toggle";
+
 		habilita.className= "glyphicon glyphicon-ban-circle";
 	}
 }
@@ -366,8 +371,98 @@ function cargarDatosDocentesConPermiso(obj){
 function refrescar(){
 	document.location="masterPage.php";
 }
+///////////////////////////////////////////////
+function activarAgregarDocenteAdministrativo() {
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar3');
+	var docenteAgregar = document.getElementById('docenteAgregar3');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente3');
 
-/////////////////////////////////////////////////////////////////////////
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar3');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar3');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar3');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton";
+	seccionEliminarDocente.className="";
+}
+
+function activarModificarDocenteAdministrativo(){
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar3');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar3');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar3');
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar3');
+	var docenteAgregar = document.getElementById('docenteAgregar3');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente3');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	seccionEliminarDocente.className="";
+
+}
+
+function activarEliminarDocenteAdministrativo() {
+	var docenteEliminarModificar = document.getElementById('docenteEliminarModificar3');
+	var docenteAgregar = document.getElementById('docenteAgregar3');
+	var seccionEliminarDocente = document.getElementById('seccionEliminarDocente3');
+
+	var docenteBtnModificar = document.getElementById('docentesBtnModificar3');
+	var docenteBtnEliminar = document.getElementById('docentesBtnEliminar3');
+	var docenteBtnAgregar = document.getElementById('docentesBtnAgregar3');
+	var selectEliminarDocente = document.getElementById('selectEliminarDocente3');
+
+	docenteEliminarModificar.className="col-xs-12 col-sm-12 col-lg-12";
+	docenteAgregar.className="col-xs-12 col-sm-12 col-lg-12 hide";
+	docenteBtnModificar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton hide";
+	docenteBtnEliminar.className="col-xs-12 col-sm-12 col-md-12 col-lg-12 espacio-boton";
+	docenteBtnAgregar.className="col-xs-12 col-sm-12 col-lg-12 espacio-boton hide";
+	seccionEliminarDocente.className="hide";
+	selectEliminarDocente.onchange="";
+}
+function cargarDatosDocentesAdministrativo(obj){
+	var valorSeleccionado = obj.options[obj.selectedIndex].value;
+	if (valorSeleccionado != "0") {
+	 	document.location="../php/docentes/gestion_docenteAdministrativo.php?id="+valorSeleccionado;
+ }
+}
+//////////////// Refresca la pagina cuando se cierra el modal ///////
+$('#modalDocentesAdministrativo').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalDocentesConPermisos').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalAsignarPresupuesto').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalCursos').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalDocentes').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalGrupos').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalPresupuesto').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalProyectos').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalProyectosPresupuesto').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+$('#modalRegistro').on('hidden.bs.modal', function (e) {
+  refrescar();
+})
+/////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////// 
 
 function activarAgregarGrupos() {
 	var grupoAgregarModificar = document.getElementById('grupoAgregarModificar');
