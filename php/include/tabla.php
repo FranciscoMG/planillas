@@ -31,7 +31,7 @@
 							?>
 							<?php
 							  while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
-									if ($fila['nombre_carrera'] != $_GET['valorPorCarreraTexto']) {
+									if ($fila['nombre_carrera'] != $_GET['valorPorCarreraTexto'] && $fila['id_carrera'] != 1) {
 								  	echo "<option value='".$fila['id_carrera']."'>";
 								  	echo $fila['nombre_carrera'];
 								  	echo "</option>";

@@ -24,7 +24,7 @@ $carrera= isset($_POST['cboIDCarrera'])?$_POST['cboIDCarrera']:"";
 $curso= isset($_POST['cboIDCurso'])?$_POST['cboIDCurso']:"";
 $num_grupo= isset($_POST['cboGrupo'])?$_POST['cboGrupo']:"";
 $esDoble= isset($_POST['chbGrupoDoble'])?TRUE:FALSE;
-$jornada= isset($_POST['txtJornada'])?convertirFraccionesDoble(trim($_POST['txtJornada'])):"";
+$jornada= isset($_POST['txtJornada'])?$_POST['txtJornada']:"";
 $docentes= array(
   array(),
 );
