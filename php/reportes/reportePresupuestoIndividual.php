@@ -79,7 +79,7 @@ $pdf->SetFont('Arial','B',10);
 
 			$pdf->Cell(30,10,$convertidoTiempoPresupuesto,1,0,"C");
 
-			$convertidoTiempoSobrante = convertirDobleFraciones($fila['tiempo_sobrante']);
+			$convertidoTiempoSobrante = $fila['tiempo_sobrante'];
 
 			$pdf->Cell(45,10,$convertidoTiempoSobrante,1,0,"C");
 

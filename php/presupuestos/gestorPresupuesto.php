@@ -6,6 +6,9 @@
 <?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
 <?php $dbDocentesConPermiso = new docentesConPermisoBD(); ?>
 
+<?php include_once("../conexionBD/docenteAdministrativoBD.php"); ?>
+<?php $dbDocenteAdministrativoBD = new docenteAdministrativoBD(); ?>
+
 <?php include_once("../conexionBD/presupuestoDocenteBD.php"); ?>
 <?php $dbPresupuestoDocente = new presupuestoDocenteBD(); ?>
 
@@ -31,41 +34,35 @@ $presupuestoGrupo= $_POST['cboPresupuestoGrupo'];
 
 //////////////// AGREGAR /////////////////////////////////////////////////
 if (isset($_POST['presupuestoBtnAgregar'])) {
+	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	if (!empty($_POST['cboTiemposPresupuesto'])) {
-
 	if(empty($nombre_presupuesto)) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Debe agregar el nombre del presupuesto.";
-		header("Location: ../masterPage.php");
+		$_SESSION['alerta-contenido'] = "Debe agregar el nombre del presupuesto";
 		exit();
 	}
 	$resultado = $db->agregarPresupuesto($nombre_presupuesto , $codigo , $tiempo_presupuesto , $tiempo_sobrante);
 	if ($resultado === FALSE) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto.";
-		header("Location: ../masterPage.php");
+		$_SESSION['alerta-contenido'] = "Error al agregar el presupuesto";
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto agregado.";
-
+		$_SESSION['alerta'] = 2;
+		$_SESSION['alerta-contenido'] = "Presupuesto agregado";
 		///////////// registro de actividad //////////
         $descripcionRegistroActividad="Se agregó el presupuesto: ".$nombre_presupuesto." con ".$_POST['cboTiemposPresupuesto']." tiempos.";
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         /////////////////////////////////////////////
-
-		header("Location: ../masterPage.php");
-		exit();
 	}
 	}
+	exit();
 }
 
 //////////////// ELIMINAR /////////////////////////////////////////////////
 if (isset($_POST['btnEliminarPresupuesto'])) {
-if (empty($id_presupuesto)) {
 	$_SESSION['alerta'] = 1;
-	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
 	header("Location: ../masterPage.php");
+if (empty($id_presupuesto)) {
+	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto";
 	exit();
 }
 	//////// Verifica que el presupuesto no este siendo usado ///
@@ -73,9 +70,7 @@ if (empty($id_presupuesto)) {
 	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
 	while ($fila = mysqli_fetch_assoc($resultado2)) {
 		if ($fila['fk_id_presupuesto'] == $id_presupuesto) {
-			$_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un proyecto.";
-			header("Location: ../masterPage.php");
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un proyecto";
 			exit();
 		}
 	}
@@ -83,9 +78,15 @@ if (empty($id_presupuesto)) {
 	$resultado3 = $dbDocentesConPermiso->obtenerDocentesConPermiso();
 	while ($fila2 = mysqli_fetch_assoc($resultado3)) {
 		if ($fila2['fk_presupuesto'] == $id_presupuesto) {
-			$_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un docente con permiso temporal.";
-			header("Location: ../masterPage.php");
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un docente con permiso temporal";
+			exit();
+		}
+	}
+	//// De docentes administrativo
+	$resultado5 = $dbDocenteAdministrativoBD->obtenerDocenteAdministrativo();
+	while ($fila5 = mysqli_fetch_assoc($resultado5)) {
+		if ($fila5['fk_presupuesto'] == $id_presupuesto) {
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un docente administrativo";
 			exit();
 		}
 	}
@@ -93,9 +94,7 @@ if (empty($id_presupuesto)) {
 	$resultado4 = $dbGrupos->obtenerGrupoDocentes();
 	while ($fila3 = mysqli_fetch_assoc($resultado4)) {
 		if ($fila3['fk_presupuesto'] == $id_presupuesto) {
-			$_SESSION['alerta'] = 1;
-			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un grupo.";
-			header("Location: ../masterPage.php");
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya esta asignado a un grupo";
 			exit();
 		}
 	}
@@ -107,70 +106,59 @@ if (empty($id_presupuesto)) {
 		while ($fila4 = mysqli_fetch_assoc($resultado5)) {
 			if($fila4['id_presupuesto'] == $id_presupuesto) {
 				if ($fila4['tiempo_presupuesto'] != $fila4['tiempo_sobrante']) {
-					$_SESSION['alerta'] = 1;
-					$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya tiene tiempos asignados.";
-					header("Location: ../masterPage.php");
+					$_SESSION['alerta-contenido'] = "No se puede eliminar el presupuesto porque ya tiene tiempos asignados";
 					exit();
 				}
 				$nombre_presupuesto2 = $fila4['nombre_presupuesto'];
 			}
 		}
 	///////////
-
 	$resultado = $db->borrarPresupuesto($id_presupuesto);
-
 	if ($resultado == false) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al eliminar el presupuesto.";
+		$_SESSION['alerta'] = 3;
+		$_SESSION['alerta-contenido'] = "Error al eliminar el presupuesto";
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta'] = 2;
 		$_SESSION['alerta-contenido'] = "Presupuesto eliminado.";
-
 	///////////// registro de actividad //////////
         $descripcionRegistroActividad="Se eliminó el presupuesto ".$nombre_presupuesto2.".";
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
     /////////////////////////////////////////////
-
-		header("Location: ../masterPage.php");
-		exit();
 	}
+	exit();
 }
 
 //////////////////// MODIFICAR ///////////////////////
 if (isset($_POST['btnModificarPresupuesto'])) {
-if (empty($id_presupuesto)) {
 	$_SESSION['alerta'] = 1;
-	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
 	header("Location: ../masterPage.php");
+if (empty($id_presupuesto)) {
+	$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto";
 	exit();
 }
 	$resultado = $db->modificarPresupuesto($id_presupuesto, $nombre_presupuesto , $codigo );
 	if ($resultado == false) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
-		header("Location: ../masterPage.php");
+		$_SESSION['alerta'] = 3;
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto";
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Presupuesto modificado.";
-
+		$_SESSION['alerta'] = 2;
+		$_SESSION['alerta-contenido'] = "Presupuesto modificado";
 		///////////// registro de actividad //////////
         $descripcionRegistroActividad="Se modificó el presupuesto: ".$nombre_presupuesto;
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         /////////////////////////////////////////////
-
-		header("Location: ../masterPage.php");
-		exit();
 	}
+	exit();
 }
 
 if (isset($_POST['btnAsignarGrupoPresup'])) {
+	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	if (empty($presupuestoGrupo)) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto.";
-		header("Location: ../masterPage.php");
+		$_SESSION['alerta-contenido'] = "Se debe seleccionar un presupuesto";
 		exit();
 	}
 	if (isset($_GET['total_tiempos'])) {
@@ -178,9 +166,7 @@ if (isset($_POST['btnAsignarGrupoPresup'])) {
 		while ($fila = mysqli_fetch_assoc($resultado)) {
 			if ($fila['id_presupuesto'] == $presupuestoGrupo) {
 				if ($fila['tiempo_sobrante'] < $_GET['total_tiempos']) {
-					$_SESSION['alerta'] = 1;
-					$_SESSION['alerta-contenido'] = "Este presupuesto solo tiene ".$fila['tiempo_sobrante']." tiempos, no puede agregar los ".$_GET['total_tiempos']." tiempos del grupo.";
-					header("Location: ../masterPage.php");
+					$_SESSION['alerta-contenido'] = "Este presupuesto solo tiene ".$fila['tiempo_sobrante']." tiempos, no puede agregar los ".$_GET['total_tiempos']." tiempos del grupo";
 					exit();
 				} else {
 					$tiempo_sobrante = $fila['tiempo_sobrante'];
@@ -201,13 +187,12 @@ if (isset($_POST['btnAsignarGrupoPresup'])) {
 	}
 
 	if (!$resultado3) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
-		header("Location: ../masterPage.php");
+		$_SESSION['alerta'] = 3;
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto";
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Grupo agregado al presupuesto ".$nombre_presupuesto.".";
+		$_SESSION['alerta'] = 2;
+		$_SESSION['alerta-contenido'] = "Grupo agregado al presupuesto ".$nombre_presupuesto;
 
 		///////////// registro de actividad //////////
 	  $descripcionRegistroActividad="Se agrego el presupuesto ".$nombre_presupuesto." al grupo: ".$_GET['curso']." - G".$_GET['num_grupo'];
@@ -216,10 +201,8 @@ if (isset($_POST['btnAsignarGrupoPresup'])) {
 		}
 		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 	  /////////////////////////////////////////////
-
-		header("Location: ../masterPage.php");
-		exit();
 	}
+	exit();
 }
 
 if (isset($_POST['btnEliminarGrupoPresup'])) {
@@ -244,13 +227,13 @@ if (isset($_POST['btnEliminarGrupoPresup'])) {
 	}
 
 	if (!$resultado3) {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto.";
+		$_SESSION['alerta'] = 3;
+		$_SESSION['alerta-contenido'] = "Error al modificar el presupuesto";
 		header("Location: ../masterPage.php");
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Grupo eliminado del presupuesto ".$nombre_presupuesto.".";
+		$_SESSION['alerta'] = 2;
+		$_SESSION['alerta-contenido'] = "Grupo eliminado del presupuesto ".$nombre_presupuesto;
 
 		///////////// registro de actividad //////////
 		$descripcionRegistroActividad="Se quitó del presupuesto ".$nombre_presupuesto." el grupo: ".$_GET['curso']." - G".$_GET['num_grupo'];

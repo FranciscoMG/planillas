@@ -37,39 +37,19 @@ $fk_presupuesto = $_POST['cboxPresupuesto2'];
 
 /////////////////////////// Eliminar ///////////////////////
 if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
+	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	if ($idProyecto != "") {
-
 	$valorDouble = convertirFraccionesDoble($jornada_proyecto);
-
 	$existe = 0;
-
 	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
-
 	if ($resultado2 != false) {
-
 		while ($fila = mysqli_fetch_assoc($resultado2)) {
 			if($fila['fk_proyecto'] == $idProyecto && $fila['jornada'] < 99) {
-				
-
 				$existe = 1;
-/*
-				if ($valorDouble < 0) {
-					$_SESSION['alerta'] = 1;
-					$_SESSION['alerta-contenido'] = "No puede eliminar esa cantidad de tiempos del docente devido a que el docente solo posee: ".$fila['jornada']." esta cantidad esta asignada en un grupo o otro proyecto".$valorDouble;
-					header("Location: ../masterPage.php");
-					exit();
-				}
-				if ($valorDouble > 01) {
-					$_SESSION['alerta'] = 1;
-					$_SESSION['alerta-contenido'] = "No puede agregar más de un tiempo al docente";
-					header("Location: ../masterPage.php");
-					exit();
-				}
-				*/
 			}
 		}
 	}
-
 	if($existe == 1){
 		//// Se suma al presupuesto ////
 		$resultado3 = $dbPresupuesto->obtenerlistadoDePresupuesto();
@@ -81,86 +61,65 @@ if (isset($_POST['btnEliminarProyectoPresupuesto'])) {
 		}
 		$tiempo_sobrante2 = ($tiempo_sobrante2 + $valorDouble);
 		//////////////////
-
 		$resultado = $dbPresupuestoDocente->borrarPresupuestoDocente($idProyecto);
-
-
 		if ($resultado === FALSE) {
 			$_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "No se ha asignado un presupuesto a este proyecto";	
 		} else {
-			$_SESSION['alerta'] = 1;
+			$_SESSION['alerta'] = 2;
 			$_SESSION['alerta-contenido'] = "Presupuesto ".$nombre_presupuesto." eliminado del proyecto";
-
 			//////// Se quita del presupuesto ///
 			$dbPresupuesto->sumarPresupuesto($fk_presupuesto , $tiempo_sobrante2);
 			////////////////
-				
 			///////////// registro de actividad //////////
 			$descripcionRegistroActividad="Se eliminó el presupuesto ".$nombre_presupuesto." del proyecto";
 	        $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 	        ///////////////////////////////////////////
 		}
-
-
-		header("Location: ../masterPage.php");
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "No se ha asignado un presupuesto a este proyecto";
-		header("Location: ../masterPage.php");
 		exit();
 	}
 	} else {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
-		header("Location: ../masterPage.php");
-		exit();
 	}
+	exit();
 }
 
 
 /////////////////////// Agregar /////////////////////
 if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
+	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	if (empty($fk_presupuesto)) {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Debe crear un presupuesto.";
-		header("Location: ../masterPage.php");
 		exit();
 	}
 	if ($idProyecto != "") {
 	$valorDouble = convertirFraccionesDoble($jornada_proyecto);
-
 	$tiemposAsignados = verificarTiemposDocente($fk_encargado);
-
 	/// Verifica que el docente no tenga mas de 1 tiempo //
 	if ( ($valorDouble + $tiemposAsignados) > 1 ) {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "No se puede asignar un presupuesto porque el encargado <br>ya tiene ".$tiemposAsignados." tiempos asignados y el proyecto <br> tiene un total de ".$valorDouble." tiempos.";
-		header("Location: ../masterPage.php");
 		exit();
 	}
 	///////////////
-
 	$resultado = $dbPresupuesto->obtenerlistadoDePresupuesto();
 	while ($fila2 = mysqli_fetch_assoc($resultado)) {
 		if ($fila2['id_presupuesto'] == $fk_presupuesto) {
 			$tiempo_sobrante = $fila2['tiempo_sobrante']; 
 		}
 	}
-
 	$resultado2 = $dbPresupuestoDocente->obtenerlistadoDePresupuestoDocente();
 	$existe = 0;
 	if ($resultado2 != false) {
 		while ($fila = mysqli_fetch_assoc($resultado2)) {
 			if($fila['idProyecto'] == $idProyecto && $fila['jornada'] < 99) {
 				$valorDouble = ($valorDouble + $fila['jornada']);
-
 				$existe = 1;
 				if ($valorDouble > 1) {
-					$_SESSION['alerta'] = 1;
 					$_SESSION['alerta-contenido'] = "No puede agregar más de un tiempo al docente";
-					header("Location: ../masterPage.php");
 					exit();
 				}
 			}
@@ -169,20 +128,14 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 	////// Se evalua que los tiempos no sean mayores al presupuesto //
 		$tiempo_sobrante = ($tiempo_sobrante - $valorDouble);
 		if ($tiempo_sobrante < 0) {
-			$_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "El presupuesto no posee suficientes tiempos";
-			header("Location: ../masterPage.php");
 			exit();
 		}
 	///////////////// 
-
 	$resultado = $dbPresupuestoDocente->agregarPresupuestoDocente($fk_presupuesto, $fk_encargado , $valorDouble , $idProyecto);
-	
-
 	if ($resultado == 1) {
-		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta'] = 2;
 		$_SESSION['alerta-contenido'] = "Presupuesto asignado al proyecto";
-
 		////// Se resta el presupuesto
 		$dbPresupuesto->restarPresupuesto($fk_presupuesto , $tiempo_sobrante);
 		///////////////////
@@ -191,21 +144,16 @@ if (isset($_POST['proyectosBtnAgregarPresupuesto'])) {
 		$descripcionRegistroActividad="Se ha asignado un presupuesto a un proyecto: ".$nombre_proyecto;
         $dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
         ////////////////////////////////////////////
-
-		header("Location: ../masterPage.php");
 		exit();
 	} else {
-		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta'] = 3;
 		$_SESSION['alerta-contenido'] = "Error, este proyecto ya tiene un presupuesto asignado";
-		header("Location: ../masterPage.php");
 		exit();
 	}
 	} else {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "Debe seleccionar un proyecto";
-		header("Location: ../masterPage.php");
-		exit();
 	}
+	exit();
 }
 
 
@@ -247,11 +195,4 @@ while ($fila2 = mysqli_fetch_assoc($resultado2)) {
         	}
         }
 }
- ?>
-
-<?php 
-echo "string ".$idProyecto." - ".$_POST['proyectosBtnAgregarPresupuesto'];
-
-//header("Location: ../masterPage.php");
-//exit();
  ?>

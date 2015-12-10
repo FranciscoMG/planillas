@@ -1,6 +1,8 @@
 <?php session_start(); ?>
 <?php include_once("../conexionBD/cursosBD.php"); ?>
+<?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php include_once("../include/conversor.php"); ?>
+<?php $dbGrupos = new gruposBD(); ?>
 
 <?php include_once("../conexionBD/registroActividadBD.php"); ?>
 <?php 
@@ -9,12 +11,13 @@ $utc = date('U');
 $fecha = date("Y-m-d H:i:s");
 $usuario = $_SESSION['usuario'];
 $descripcionRegistroActividad = "";
-?>
+?> 
 <?php 
 	$db = new cursosBD();
 ////////////////////////////// AGREGAR /////////////
 if (isset($_POST['btnRegistrar'])) {
 	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	$sigla = $_POST['txtSigla'];
 	$nombre_curso = $_POST['txtNombreCurso'];
 	$creditos = $_POST['cboCreditosCursos'];
@@ -30,14 +33,12 @@ if (isset($_POST['btnRegistrar'])) {
 
 		if ($resultado === FALSE && $resultado2 === FALSE) {
 			//// El curso ya existe
-			$_SESSION['alerta'] = 1;
 			$_SESSION['alerta-contenido'] = "El curso ya existe";
-			header("Location: ../masterPage.php");
 			exit();
 		}
 
-		$_SESSION['alerta'] = 1;
-		$_SESSION['alerta-contenido'] = "Curso agregado";
+		$_SESSION['alerta'] = 2;
+		$_SESSION['alerta-contenido'] = "Curso agregado con éxito";
 
 
 		$descripcionRegistroActividad="Se agregó el curso: ".$sigla." ".$nombre_curso;
@@ -48,29 +49,39 @@ if (isset($_POST['btnRegistrar'])) {
 	} else {
 		$_SESSION['alerta-contenido'] = "Debe ingresar la sigla del curso";
 	}
-	header("Location: ../masterPage.php");
 	exit();
 } // fin de registrar
 
 /////////////////////////// ELIMINAR //////////////
 if (isset($_POST['btnEliminar'])) {
+	$_SESSION['alerta'] = 1;
+	header("Location: ../masterPage.php");
 	$sigla = $_POST['cboxSigla'];
+	if (empty($sigla)) {
+		$_SESSION['alerta-contenido'] = "Debe seleccionar un curso";
+		exit();
+	}
+
+	$resultado3 = $dbGrupos->obtenerGrupoDocentes();
+	while ($fila3 = mysqli_fetch_assoc($resultado3)) {
+		if ($sigla == $fila3['fk_curso']) {
+			$_SESSION['alerta-contenido'] = "No se puede eliminar el curso porque ya esta asignado a un grupo";
+			exit();
+		}
+	}
 
 	$resultado = $db->eliminarCurso($sigla);
 	$resultado2 = $db->eliminarCarreraPlanEstudio($sigla);
 	
 	if ($resultado === FALSE && $resultado2 === FALSE) {
-		$_SESSION['alerta'] = 1;
 		$_SESSION['alerta-contenido'] = "No se pudo eliminar el curso";
 	} else {
 		$descripcionRegistroActividad="Se eliminó el curso: ".$sigla;
 		$dbRegistroActividad->agregarRegistroActividad($utc, $fecha , $usuario , $descripcionRegistroActividad);
 
-		$_SESSION['alerta'] = 1;
+		$_SESSION['alerta'] = 2;
 		$_SESSION['alerta-contenido'] = "Curso eliminado";
 	}
-
-	header("Location: ../masterPage.php");
 	exit();
 } // fin de eliminar
 
@@ -88,6 +99,7 @@ if (isset($_POST['btnModificar'])) {
 		$jornada1 = convertirFraccionesDoble($jornada);
 
 		$db->modificarCurso($sigla , $nombre_curso , $creditos , $jornada1 , $fk_carrera);
+		$_SESSION['alerta'] = 2;
 		$_SESSION['alerta-contenido'] = "Curso modificado";
 
 		$descripcionRegistroActividad="Se modificó el curso: ".$sigla." ".$nombre_curso;

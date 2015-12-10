@@ -3,6 +3,8 @@ Grupos
 
 	Mostrar la jornada asignada del curso / y mostrar la jornada que se le esta asignando
 
+	Cuando se va a eliminar un grupo que pertenece a un curso que tiene más grupos, se debe mostrar todos los grupos de ese curso. / Si hay más de un grupo de un mismo curso se elimina solo uno y se corrompe los datos.
+
 General
 
 	Control, no agregar si no hay sufuciente presupuesto

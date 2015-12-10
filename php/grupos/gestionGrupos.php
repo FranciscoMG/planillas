@@ -121,7 +121,7 @@ if (isset($_POST['btnRegistrar'])) {
     }
     $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $num_grupo_doble, $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
     if (!$seRealizo) {
-      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta'] = 2;
       $_SESSION['alerta-contenido'] = "Grupo agregrado con éxito";
       unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
 
@@ -136,7 +136,7 @@ if (isset($_POST['btnRegistrar'])) {
       header("Location: ../masterPage.php");
       exit();
     } else {
-      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta'] = 3;
       $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el grupo";
       header("Location: ../masterPage.php");
       exit();
@@ -159,7 +159,7 @@ if (isset($_POST['btnModificar'])) {
     }
     $seRealizo = $db->modificarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2], $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
     if ($seRealizo) {
-      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta'] = 2;
       $_SESSION['alerta-contenido'] = "Grupo modificado con éxito";
 
       ///// registro de actividad //////
@@ -173,7 +173,7 @@ if (isset($_POST['btnModificar'])) {
       header("Location: ../masterPage.php");
       exit();
     } else {
-      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta'] = 3;
       $_SESSION['alerta-contenido'] = "Ocurrió un error al modificar el grupo";
       header("Location: ../masterPage.php");
       exit();
@@ -196,7 +196,7 @@ if (isset($_POST['btnEliminar'])) {
     exit();
   }
   if ($seRealizo) {
-    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta'] = 2;
     $_SESSION['alerta-contenido'] = "Grupo borrado con éxito";
 
     ///// registro de actividad //////
@@ -208,7 +208,7 @@ if (isset($_POST['btnEliminar'])) {
     /////////////////////////////////
 
   } else {
-    $_SESSION['alerta'] = 1;
+    $_SESSION['alerta'] = 3;
     $_SESSION['alerta-contenido'] = "Ocurrió un error al eliminar el grupo";
   }
   header('Location: ../masterPage.php');
