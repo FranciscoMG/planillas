@@ -119,6 +119,15 @@ if (isset($_POST['btnRegistrar'])) {
       header("Location: ../masterPage.php");
       exit();
     }
+    $resultado = $db->obtenerGrupos(true);
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+      if ($fila['fk_carrera'] == $carrera && $fila['fk_curso'] == $curso && $fila['num_grupo'] == $num_grupo) {
+        $_SESSION['alerta'] = 1;
+        $_SESSION['alerta-contenido'] = "El grupo que intenta agregar ya existe";
+        header('Location: ../masterPage.php');
+        exit();
+      }
+    }
     $seRealizo = $db->agregarGrupo($carrera, $curso, $num_grupo, $num_grupo_doble, $docentes, $docentesDoble, $horarioCurso, $horarioCursoDoble, $jornada);
     if (!$seRealizo) {
       $_SESSION['alerta'] = 2;
@@ -188,7 +197,14 @@ if (isset($_POST['btnModificar'])) {
 
 if (isset($_POST['btnEliminar'])) {
   if ($carrera != "0" && $curso != "0") {
-    $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2]);
+    if (explode(" ", $curso)[3] == 1) {
+      $seRealizo= $db->borrarGrupo($carrera, explode(" ", $curso)[0], explode(" ", $curso)[1], explode(" ", $curso)[2]);
+    } else {
+      $_SESSION['alerta'] = 1;
+      $_SESSION['alerta-contenido'] = "No se puede eliminar un grupo que ya tiene un presupuesto";
+      header('Location: ../masterPage.php');
+      exit();
+    }
   } else {
     $_SESSION['alerta'] = 1;
     $_SESSION['alerta-contenido'] = "No se ha seleccionado ninguna carrera o grupo";

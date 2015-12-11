@@ -1,7 +1,7 @@
 
 Grupos
 
-	Mostrar la jornada asignada del curso / y mostrar la jornada que se le esta asignando
+	Mostrar la jornada asignada del curso / y mostrar la jornada que se le esta asignando (A que se refire!!!)
 
 	Cuando se va a eliminar un grupo que pertenece a un curso que tiene más grupos, se debe mostrar todos los grupos de ese curso. / Si hay más de un grupo de un mismo curso se elimina solo uno y se corrompe los datos.
 
