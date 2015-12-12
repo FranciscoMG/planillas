@@ -205,22 +205,5 @@ class gruposBD extends conexionBD {
 		$this->cerrar();
 		return false;
 	}
-
-	function obtenerCarrera($id_carrera) {
-		$query= "SELECT * FROM tb_Carrera";
-		if ($id_carrera == "") {
-			$query.= ";";
-		} else {
-			$query.= " WHERE fk_carrera ='".$id_carrera."' ;";
-		}
-
-		$rs= $this->con->query($query);
-		if($rs->num_rows > 0)
-		{
-			return $rs; //Retornamos las tuplas encontradas
-		}
-		$this->cerrar();
-		return false;
-	}
 }
 ?>

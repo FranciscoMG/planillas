@@ -19,7 +19,7 @@
 					<label for="sel1">Carrera:</label>
 						<select class="form-control input-sm" id="sel1" onchange="cargarCboxPorCarrera(this)">
 							<?php
-								$resultadoGrupos = $dbGrupos->obtenerCarrera();
+								$resultadoCarreras = $dbCursos->obtenerCarreras();
 
 								if ($_GET['cargarPorCarrera'] != "") {
 									echo "<option >".$_GET['valorPorCarreraTexto']."</option>";
@@ -30,7 +30,7 @@
 								}
 							?>
 							<?php
-							  while ($fila = mysqli_fetch_assoc($resultadoGrupos)) {
+							  while ($fila = mysqli_fetch_assoc($resultadoCarreras)) {
 									if ($fila['nombre_carrera'] != $_GET['valorPorCarreraTexto'] && $fila['id_carrera'] != 1) {
 								  	echo "<option value='".$fila['id_carrera']."'>";
 								  	echo $fila['nombre_carrera'];

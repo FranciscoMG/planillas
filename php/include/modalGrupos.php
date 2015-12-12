@@ -51,7 +51,11 @@
                   $resultado = $db2->obtenerCursosCarrera();
                   while ($fila = mysqli_fetch_assoc($resultado)) {
                     if ($_GET['id_carrera'] == $fila['fk_carrera']) {
-                      echo "<option value='".$fila['fk_curso']."'>".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                      if (isset($_GET['curso']) && $_GET['curso'] == $fila['fk_curso']) {
+                        echo "<option value='".$fila['fk_curso']."' selected>".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                      } else {
+                        echo "<option value='".$fila['fk_curso']."'>".$fila['fk_curso']." - ".$fila['nombre_curso']."</option>";
+                      }
                     }
                   }
                 } else {
@@ -352,9 +356,25 @@
                 ?>
               </div>
             </div>
-            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-              <label for="txtJornada">Jornada:</label>
+            <div id="jornadaGrupo" class="form-group col-xs-6 col-sm-6 col-lg-6">
+              <label for="txtJornada">Jornada del grupo:</label>
               <input id="txtJornada" type="text" class="form-control" name="txtJornada" <?php if(isset($_GET['jornada'])) { echo "value='".$_GET['jornada']."'"; } else { echo "value='0'"; }?> readonly>
+            </div>
+            <div id="jornadaCurso" class="form-group col-xs-6 col-sm-6 col-lg-6">
+              <label for="txtJornadaCurso">Jornada del curso:</label>
+              <input id="txtJornadaCurso" type="text" class="form-control" name="txtJornadaCurso" value="<?php
+                $contarCeros=0;
+                $resultado = $db2->obtenerCursosCarrera();
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                  if ($_GET['id_carrera'] == $fila['fk_carrera'] && $_GET['curso'] == $fila['fk_curso']) {
+                    echo $fila['jornada'];
+                    $contarCeros++;
+                  }
+                }
+                if ($contarCeros == 0) {
+                  echo '0';
+                }
+              ?>" readonly>
             </div>
           </div>
         </div>
