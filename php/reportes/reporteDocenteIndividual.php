@@ -16,7 +16,7 @@ $cedula = $_POST['cedula']; /// // <--- este es la cedula del docente que se man
 <?php $db = new docentesBD(); ?>
 <?php $resultadoDocente = $db->obtenerUnDocente($cedula); //SE INGRESA EL ID (CÉDULA)?>
 <?php $db = new gruposBD(); ?>
-<?php $resultado = $db->llenarTabla(); ?>
+<?php $resultado = $db->obtenerGrupos(false); ?>
 
 
 <?php
@@ -55,20 +55,19 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',8);
 
 ////////////////// Contenido //////////////////////
-$pdf->Cell(131,10,iconv("UTF-8","ISO-8859-1","Aarón Galagarza Carillo (Cambiar Nombre)"),1,0,"C");///CAMBIAR MÉTODO DEL NOMBRE
+while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
+$pdf->Cell(77,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']." ".$fila['nombre']),1,0,"C");///CAMBIAR MÉTODO DEL NOMBRE
 $pdf->Ln();
 $pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1","Cédula"),1,0,"C");
 $pdf->Cell(27,10,"Grado Academico",1,0,"C");
 $pdf->Cell(25,10,"Nombramiento",1,0,"C");
-$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
-$pdf->Cell(27,10,"Jornada Faltante",1,0,"C");
 
 $pdf->Ln();
 
 $pdf->SetFont('Arial','',8);
 
 
-while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
+
   $pdf->Cell(25,10,$fila['cedula'],1,0,"C");
 
 	//Grado Academico
@@ -102,13 +101,7 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 		}
 	}
 	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$contrato_tipo),1,0,"C");
-	$suma = $suma + $fila['tiempo_individual'];
-	$pdf->Cell(27,10,$suma,1,0,"C");
-	if ($fila['tipo_contrato'] == 1) {
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
-	}else{
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","--"),1,0,"C");
-	}
+	
 	$pdf->Ln();
 }
 
@@ -116,29 +109,30 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 $pdf->Ln();
 
 $pdf->SetFont('Arial','B',8);
-$pdf->Cell(163,10,"Asignaciones",1,0,"C");
+$pdf->Cell(190,10,"Asignaciones",1,0,"C");
 $pdf->Ln();
-$pdf->Cell(18,10,"Sigla/Curso",1,0,"C");
-$pdf->Cell(60,10,"Nombre/Curso",1,0,"C");
-$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","Creditos"),1,0,"C");
-$pdf->Cell(13,10,"Grupo",1,0,"C");
-$pdf->Cell(18,10,"Proyecto",1,0,"C");
-$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
+$pdf->Cell(25,10,"Sigla/Curso",1,0,"C");
+$pdf->Cell(85,10,"Nombre/Curso",1,0,"C");
+$pdf->Cell(15,10,iconv("UTF-8","ISO-8859-1","Créditos"),1,0,"C");
+$pdf->Cell(15,10,"Grupo",1,0,"C");
+$pdf->Cell(35,10,"Presupuesto",1,0,"C");
+$pdf->Cell(15,10,"Jornada",1,0,"C");
 
 $pdf->Ln();
 
 $pdf->SetFont('Arial','',8);
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
-	$pdf->Cell(18,10,$fila['fk_curso'],1,0,"C");
-	$pdf->Cell(60,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_curso']),1,0,"C");
+
+	$pdf->Cell(25,10,$fila['fk_curso'],1,0,"C");
+	$pdf->Cell(85,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_curso']),1,0,"C");
 	$sumaCredito = $sumaCredito + $fila['creditos'];
-	$pdf->Cell(27,10,$fila['creditos'],1,0,"C");
-	$pdf->Cell(13,10,$fila['num_grupo'],1,0,"C");
-  $pdf->Cell(18,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
+	$pdf->Cell(15,10,$fila['creditos'],1,0,"C");
+	$pdf->Cell(15,10,$fila['num_grupo'],1,0,"C");
+  	$pdf->Cell(35,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
 	$suma = $suma + $fila['jornada'];
 	$convertidoGrupo = convertirDobleFraciones($fila['jornada']);
-	$pdf->Cell(27,10,$convertidoGrupo,1,0,"C");
+	$pdf->Cell(15,10,$convertidoGrupo,1,0,"C");
 	$pdf->Ln();
 
 }
@@ -147,13 +141,14 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 
 $pdf->SetTextColor(255,255,255);
 $pdf->SetFillColor(0, 193 , 0);
-$pdf->Cell(18,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
+$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
+$pdf->Cell(85,7,iconv("UTF-8","ISO-8859-1",""),0,0,"C");
 $pdf->SetTextColor(0,0,0);
-$pdf->SetX(88);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$sumaCredito),1,0,"C");
-$pdf->SetX(146);
+$pdf->Cell(15,7,iconv("UTF-8","ISO-8859-1",$sumaCredito),1,0,"C");
+$pdf->Cell(50,7,iconv("UTF-8","ISO-8859-1",""),0,0,"C");
+
 $convertidoSuma = convertirDobleFraciones($suma);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1",$suma),1,0,"C");//POR MIENTRAS SE CONSIGUE CAMBIAR FRACCIONES
+$pdf->Cell(15,7,iconv("UTF-8","ISO-8859-1",$suma),1,0,"C");//POR MIENTRAS SE CONSIGUE CAMBIAR FRACCIONES
 $pdf->Ln();
 
 $pdf->Output();

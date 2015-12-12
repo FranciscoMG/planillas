@@ -23,7 +23,7 @@ class docentesConPermisoBD extends conexionBD {
 	}
 
 	function obtenerDocentesConPermiso() {
-		$query = "SELECT * FROM tb_DocenteConPermiso ORDER BY apellidos asc;";
+		$query = "SELECT * FROM tb_DocenteConPermiso ;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

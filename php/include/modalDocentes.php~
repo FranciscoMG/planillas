@@ -52,7 +52,7 @@ session_start();
               <label for="txtApellidos">Apellidos:</label>
               <input maxlength="40" type="text" class="form-control input-border" name="txtApellidos" placeholder="Apellidos" <?php
               if (isset($_GET['modalDocentes'])) {
-                echo 'value="'.$_GET['apellidos'].'"';
+                echo "value=".$_GET['apellidos'];
               } ?>>
             </div>
             <div class="form-group col-xs-12 col-sm-12 col-lg-12">

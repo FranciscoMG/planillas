@@ -23,7 +23,7 @@ class docenteAdministrativoBD extends conexionBD {
 	}
 
 	function obtenerDocenteAdministrativo() {
-		$query = "SELECT * FROM tb_DocenteAdministrativo ORDER BY apellidos asc;";
+		$query = "SELECT * FROM tb_DocenteAdministrativo ;";
 		$rs= $this->con->query($query);
 		if($rs->num_rows > 0)
 		{

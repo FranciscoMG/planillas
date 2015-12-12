@@ -7,7 +7,7 @@ if ($_SESSION[masterActivo] != 1) {
 
 <?php require('../../fpdf17/fpdf.php'); ?>
 <?php include_once("../include/conversor.php");?>
-<?php include_once("../conexionBD/docentesConPermisosBD.php"); ?>
+<?php include_once("../conexionBD/docentesConPermisosBD.php"); ?> 
 <?php include_once("../conexionBD/presupuestoBD.php");?>
 
 <?php $db = new docentesConPermisoBD(); ?>
@@ -54,8 +54,8 @@ $pdf->SetFont('Arial','B',8);
 
 ////////////////// Contenido //////////////////////
 $pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1","Cédula"),1,0,"C");
-$pdf->Cell(17,10,"Nombre",1,0,"C");
 $pdf->Cell(30,10,"Apellidos",1,0,"C");
+$pdf->Cell(17,10,"Nombre",1,0,"C");
 $pdf->Cell(28,10,"Grado Academico",1,0,"C");
 $pdf->Cell(25,10,"Nombramiento",1,0,"C");
 $pdf->Cell(20,10,"Presupuesto",1,0,"C");
@@ -70,8 +70,8 @@ while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
 	$cedula_docente = $fila['cedula'];
 	if($cedula_docente != 1){
 	$pdf->Cell(20,10,$cedula_docente,1,0,"C");
-	$pdf->Cell(17,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
 	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
+	$pdf->Cell(17,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
 
 	//Grado Academico
 	$grado_ac;

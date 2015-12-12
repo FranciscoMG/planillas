@@ -14,8 +14,6 @@ $descripcionRegistroActividad = "";
 
 <?php $dbDocentesConPermisos = new docentesConPermisoBD(); ?>
 <?php $db= new docentesBD(); ?>
-<?php $db2= new docentesBD(); ?>
-
 <?php $dbGrupos = new gruposBD(); ?>
 <?php
 
@@ -108,10 +106,10 @@ if (isset($_POST['btnRegistrar'])) {
     header("Location: ../masterPage.php");
     exit();
   } else {
-    $resultado = $db2->obtenerDocentes();
+    $resultado = $db->obtenerDocentes();
     while ($fila= mysqli_fetch_assoc($resultado)) {
       if ($fila['cedula']==$cedula) {
-        $_SESSION['alerta-contenido'] = "El docente ya existe";
+  			$_SESSION['alerta-contenido'] = "El docente ya existe";
         exit();
       }
     }
@@ -127,19 +125,20 @@ if (isset($_POST['btnRegistrar'])) {
 
     if (empty($nombre)) {
       $_SESSION['alerta-contenido'] = "Debe ingresar el nombre";
+      header("Location: ../masterPage.php");
       exit();
     }
 
     if (empty($apellidos)) {
-      $_SESSION['alerta-contenido'] = "Debe ingresar los apellidos";
+			$_SESSION['alerta-contenido'] = "Debe ingresar los apellidos";
       exit();
     }
 
     $seRealizo = $db->agregarDocente($cedula, $nombre, $apellidos, $grado_academico, $tipo_contrato);
 
-    if ($seRealizo == 0) { 
+    if (!$seRealizo) {
       $_SESSION['alerta'] = 2;
-      $_SESSION['alerta-contenido'] = "Docente agregrado con éxito";
+			$_SESSION['alerta-contenido'] = "Docente agregrado con éxito";
 
       ////////////////// Registro de actividad /////////////
       $descripcionRegistroActividad="Se agregó el docente ".$nombre." ".$apellidos.", cédula ".$cedula;
@@ -148,7 +147,7 @@ if (isset($_POST['btnRegistrar'])) {
       exit();
     } else {
       $_SESSION['alerta'] = 3;
-      $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el docente".$seRealizo;
+      $_SESSION['alerta-contenido'] = "Ocurrió un error al agregar el docente";
       exit();
     }
   }
@@ -157,12 +156,12 @@ if (isset($_POST['btnRegistrar'])) {
 
 //////////////////// Llenar modal proyectos //////////////
 if (isset($_GET['id'])) {
-  $resultado = $db->obtenerDocentes();
+	$resultado = $db->obtenerDocentes();
   while ($fila = mysqli_fetch_assoc($resultado)) {
-    if ($fila['cedula'] == $_GET['id']) {
+  	if ($fila['cedula'] == $_GET['id']) {
       header("Location: ../masterPage.php?modalDocentes=1&cedula=".$fila['cedula']."&nombre=".$fila['nombre']."&apellidos=".$fila['apellidos']."&grado=".$fila['grado_academico']."&contrato=".$fila['tipo_contrato']);
-      exit();
-    }
+  		exit();
+  	}
   }
 }
 
