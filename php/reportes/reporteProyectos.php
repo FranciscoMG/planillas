@@ -71,17 +71,11 @@ $pdf->SetFont('Arial','B',10);
 while ($fila = mysqli_fetch_assoc($resultado)) {
 
 	if ($fila['nombre_proyecto'] != 1) {
-
 	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['nombre_proyecto']),1,0,"C");
-
 	if ($fila['tipo_proyecto'] == 0) {
-
 		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Acción Social"),1,0,"C");
-
 	} else {
-
 		$pdf->Cell(30,10,iconv("UTF-8", "ISO-8859-1", "Investigación"),1,0,"C");
-
 	}
 
 	$pdf->Cell(20,10,convertirDobleFraciones ($fila['jornada_proyecto']),1,0,"C");

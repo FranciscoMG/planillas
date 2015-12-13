@@ -20,13 +20,13 @@
           <?php
             if ($revisiones == 0) {
               if ($_SESSION['tipoPerfil'] == 0) {
-                echo '<p class="texto-efectos2">¿Desea Aprobar los datos y enviarlos a la oficina de <u>Recursos Humanos</u> para que se asignen los presupuestos?</p>';
+                echo '<p class="texto-efectos2">¿Desea aprobar los datos y enviarlos a la oficina de <u>Recursos Humanos</u> para que se asignen los presupuestos?</p>';
               } else {
                 echo '<p class="texto-efectos2">¿Desea enviar la información a la oficina de <u>Dirección</u> para su aprobación?</p>';
               }
             } else {
               if ($_SESSION['tipoPerfil'] == 0) {
-                echo '<p class="texto-efectos2">¿Desea finalizar todo el proceso? Recuerde que una vez finalizado ya no podrá hacer más cambios y todos los datos se congelarán</p>';
+                echo '<p class="texto-efectos2">¿Desea <u>finalizar</u> todo el proceso? Recuerde que una vez finalizado ya no podrá hacer más cambios y todos los datos se congelarán</p>';
               } else {
                 echo '<p class="texto-efectos2">¿Desea enviar la información a la oficina de <u>Dirección</u> para su aprobación?</u></p>';
               }

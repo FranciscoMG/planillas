@@ -103,7 +103,7 @@
 			        </div>
 			        <div class="collapse navbar-collapse" id="menuPagina">
 			          <ul class="nav navbar-nav">
-			            
+
 						<li><a href="masterPage.php">Inicio</a></li>
 
 						<li class="dropdown <?php if($_SESSION['tipoPerfil'] != 0){echo "hide";} ?>">
@@ -129,7 +129,7 @@
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarAgregarDocente()">Agregar</a></li>
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarModificarDocente()">Modificar</a></li>
 						          <li><a href="#" data-toggle="modal" data-target="#modalDocentes" onclick="activarEliminarDocente()">Eliminar</a></li>';
-				
+
 						       	echo '
 					              <li class="divider"></li>
 					              <li class="dropdown-submenu">
@@ -249,9 +249,7 @@
 
 			                <li role="separator" class="divider"></li>
 
-			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesPresupuestos();">Reporte reporte individual de presupuesto</a></li>
-
-							<li><a href="reportes/reportePresupuestoIndividual.php?reporteDetallado=1" target="_blank">Reporte detallado de presupuestos</a></li>
+			                <li><a href="" data-toggle="modal" data-target="#modalReporteSeleccionar" onclick="activarModalReportesPresupuestos();">Reporte individual de presupuesto</a></li>
 
 			                <li><a href="reportes/reportePresupuestos.php" target="_blank">Reporte general de presupuestos</a></li>
 

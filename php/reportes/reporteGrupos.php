@@ -5,7 +5,7 @@ if ($_SESSION[masterActivo] != 1) {
 }
 ?>
 
-<?php 
+<?php
 $sigalGrupo = $_POST['fk_curso']; /// Los datos para este reporte siempre entran por POST desde el modal selecionar reporte, debe usar la sigla de la tabla gruposDocentes para ectraer la informacion
  ?>
 
@@ -13,15 +13,13 @@ $sigalGrupo = $_POST['fk_curso']; /// Los datos para este reporte siempre entran
 <?php include_once("../include/conversor.php");?>
 <?php include_once("../conexionBD/gruposBD.php"); ?>
 <?php include_once("../conexionBD/docentesBD.php"); ?>
-<?php $db = new docentesBD(); ?>
-<?php $resultadoDocente = $db->obtenerDocentes(); ?>
 <?php $db = new gruposBD(); ?>
-<?php $resultado2 = $db->obtenerGrupoDocentes(); ?>
-<?php $resultado = $db->llenarTabla(); ?>
+
+
 
 
 <?php
-$pdf = new FPDF();
+$pdf = new FPDF('L','mm','A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 
@@ -56,164 +54,71 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',8);
 
 ////////////////// Contenido //////////////////////
-$pdf->Cell(181,10,iconv("UTF-8","ISO-8859-1","Bachillerato en informatica empresarial"),1,0,"C");
-$pdf->Ln();
-$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1","Cédula"),1,0,"C");
-$pdf->Cell(20,10,"Nombre",1,0,"C");
-$pdf->Cell(30,10,"Apellidos",1,0,"C");
-$pdf->Cell(27,10,"Grado Academico",1,0,"C");
-$pdf->Cell(25,10,"Nombramiento",1,0,"C");
-$pdf->Cell(27,10,"Jornada Faltante",1,0,"C");
-$pdf->Cell(27,10,"Jornada Asignada",1,0,"C");
-
-$pdf->Ln();
-
-$pdf->SetFont('Arial','',8);
 
 
-while ($fila = mysqli_fetch_assoc($resultadoDocente)) {
-	$pdf->Cell(25,10,$fila['cedula'],1,0,"C");
-	$pdf->Cell(20,10,iconv("UTF-8","ISO-8859-1",$fila['nombre']),1,0,"C");
-	$pdf->Cell(30,10,iconv("UTF-8","ISO-8859-1",$fila['apellidos']),1,0,"C");
+    $pdf->SetFont('Arial','B',8);
 
-	//Grado Academico
-	$grado_ac;
+    $pdf->Cell(20,10,"Sigla",1,0,"C");
+    $pdf->Cell(70,10,"Nombre",1,0,"C");
+    $pdf->Cell(15,10,"Jornada",1,0,"C");
+    $pdf->Cell(15,10,iconv("UTF-8","ISO-8859-1","Créditos"),1,0,"C");
+    $pdf->Cell(15,10,"Grupo",1,0,"C");
+    $pdf->Cell(15,10,iconv("UTF-8","ISO-8859-1","Día"),1,0,"C");
+    $pdf->Cell(25,10,"Hora Inicio",1,0,"C");
+    $pdf->Cell(25,10,"Hora Fin",1,0,"C");
+    $pdf->Cell(50,10,"Nombre/Docente",1,0,"C");
+    $pdf->Cell(25,10,"Presupuesto",1,0,"C");
+    $pdf->Ln();
 
-	if ($fila['grado_academico'] == 0) {
-		$grado_ac = "Bachillerato";
-	} else {
-		if ($fila['grado_academico'] == 1) {
-			$grado_ac = "Licenciatura";
-		} else {
-			if ($fila['grado_academico'] == 2) {
-				$grado_ac = "Maestría";
-			} else {
-				$grado_ac = "Doctorado";
-			}
-		}
-	}
-	$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1",$grado_ac),1,0,"C");
+    $resultado1 = $db->llenarTabla();
+    while ($fila1 = mysqli_fetch_assoc($resultado1)) {
+    if ($fila1['fk_curso'] == $sigalGrupo) {
+      $existe = 1;
+      $pdf->SetFont('Arial','',8);
+        $pdf->Cell(20,7,$fila1['fk_curso'],1,0,"C");
+        $pdf->Cell(70,7,iconv("UTF-8","ISO-8859-1",$fila1['nombre_curso']),1,0,"C");
+        $pdf->Cell(15,7,$fila1['jornada'],1,0,"C");
+        $pdf->Cell(15,7,$fila1['creditos'],1,0,"C");
+        //// si es doble
+        if ($fila1['profesorDoble'] == 1) {
+          $pdf->Cell(15,7,$fila1['num_grupo_doble'],1,0,"C");
+        } else {
+          $pdf->Cell(15,7,$fila1['num_grupo'],1,0,"C");
+        }
+        ////
+        $diaS = "";
+        $dia = $fila1['dia_semana'];
+        if ($dia == 0) {
+          $diaS = "L";
+        } elseif ($dia == 1) {
+          $diaS = "K";
+        } elseif ($dia == 2) {
+          $diaS = "M";
+        }elseif ($dia == 3) {
+          $diaS = "J";
+        } elseif ($dia == 4) {
+          $diaS = "v";
+        }elseif ($dia == 5) {
+          $diaS = "S";
+        }
+        $pdf->Cell(15,7,$diaS,1,0,"C");
+        $pdf->Cell(25,7,$fila1['hora_inicio'],1,0,"C");
+        $pdf->Cell(25,7,$fila1['hora_fin'],1,0,"C");
+        $pdf->Cell(50,7,iconv("UTF-8","ISO-8859-1",$fila1['apellidos']." ".$fila1['nombre']),1,0,"C");
+        if ($fila1['nombre_presupuesto'] == "1") {
+        	$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","No asignado"),1,0,"C");
+        } else {
+        	$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1",$fila1['nombre_presupuesto']),1,0,"C");
+    	}
+        $pdf->Ln();
 
-	//Nombramiento
-	$contrato_tipo;
-
-	if ($fila['tipo_contrato'] == 0) {
-		$contrato_tipo = "Interino";
-	} else {
-		if ($fila['tipo_contrato'] == 1) {
-			$contrato_tipo = "Propiedad";
-		} else {
-			$contrato_tipo = "Sustituto";
-		}
-	}
-	$pdf->Cell(25,10,iconv("UTF-8","ISO-8859-1",$contrato_tipo),1,0,"C");
-	if ($fila['tipo_contrato'] == 1) {
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","No "),1,0,"C");
-	}else{
-		$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","--"),1,0,"C");
-	}
-	$pdf->Ln();
-}
-
-$pdf->SetY(75);
-while ($fila2 = mysqli_fetch_assoc($resultado2)) {
-	$pdf->SetX(164);
-	$sumaDocente = $sumaDocente + $fila2['tiempo_individual'];
-	$convertidoDocentes = convertirDobleFraciones($fila2['tiempo_individual']);
-	$pdf->Cell(27,10,$convertidoDocentes,1,0,"C");
-	$pdf->Ln();
-}
-
-
-//////////////////////////Totales Docente////////////////////////
-
-$pdf->SetTextColor(255,255,255);
-$pdf->SetFillColor(0, 193 , 0);
-$pdf->Cell(25,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetX(137);
-$convertidoSumaDocente = convertirDobleFraciones($sumaDocente);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","número"),1,0,"C");
-$pdf->SetX(164);
-$pdf->Cell(27,7,$sumaDocente,1,0,"C");
-$pdf->Ln();
-
-//////////////Contenido Grupos/////////////
-$pdf->Ln();
-
-$pdf->SetFont('Arial','B',8);
-
-$pdf->Cell(18,10,"Sigla/Curso",1,0,"C");
-$pdf->Cell(60,10,"Nombre/Curso",1,0,"C");
-$pdf->Cell(12,10,iconv("UTF-8","ISO-8859-1","Día"),1,0,"C");
-$pdf->Cell(18,10,"Hora Inicio",1,0,"C");
-$pdf->Cell(18,10,"Hora Fin",1,0,"C");
-$pdf->Cell(27,10,iconv("UTF-8","ISO-8859-1","Creditos"),1,0,"C");
-$pdf->Cell(13,10,"Grupo",1,0,"C");
-$pdf->Cell(22,10,"Jornada/Grupo",1,0,"C");
-
-$pdf->Ln();
-
-$pdf->SetFont('Arial','',8);
-
-while ($fila2 = mysqli_fetch_assoc($resultado)) {
-	$pdf->Cell(18,10,$fila2['fk_curso'],1,0,"C");
-	$pdf->Cell(60,10,iconv("UTF-8","ISO-8859-1",$fila2['nombre_curso']),1,0,"C");
-
-	//Día de la Semana
-	$dia_sem;
-
-	if ($fila2['dia_semana'] == 0) {
-		$dia_sem = "L";
-	} else {
-		if ($fila2['dia_semana'] == 1) {
-			$dia_sem = "K";
-		} else {
-			if ($fila2['dia_semana'] == 2) {
-				$dia_sem = "M";
-			} else {
-				if ($fila2['dia_semana'] == 3) {
-					$dia_sem = "J";
-				} else {
-					if ($fila2['dia_semana'] == 4) {
-						$dia_sem = "V";
-					} else {
-						if ($fila2['dia_semana'] == 5) {
-							$dia_sem = "S";
-						} else {
-							$dia_sem = "D";
-						}
-					}
-				}
-			}
-		}
-	}
-
-	$pdf->Cell(12,10,$dia_sem,1,0,"C");
-	$pdf->Cell(18,10,$fila2['hora_inicio'],1,0,"C");
-	$pdf->Cell(18,10,$fila2['hora_fin'],1,0,"C");
-	$sumaCredito = $sumaCredito + $fila2['creditos'];
-	$pdf->Cell(27,10,$fila2['creditos'],1,0,"C");
-	$pdf->Cell(13,10,$fila2['num_grupo'],1,0,"C");
-	$suma = $suma + $fila2['jornada'];
-	$convertidoGrupo = convertirDobleFraciones($fila2['jornada']);
-	$pdf->Cell(22,10,$convertidoGrupo,1,0,"C");
-	$pdf->Ln();
-
-}
-
-//////////////////////////Totales Grupo////////////////////////
-
-$pdf->SetTextColor(255,255,255);
-$pdf->SetFillColor(0, 193 , 0);
-$pdf->Cell(18,7,iconv("UTF-8","ISO-8859-1","totales"),1,0,"C",true);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetX(136);
-$pdf->Cell(27,7,iconv("UTF-8","ISO-8859-1","$sumaCredito"),1,0,"C");
-$pdf->SetX(176);
-$convertidoSuma = convertirDobleFraciones($suma);
-$pdf->Cell(22,7,iconv("UTF-8","ISO-8859-1",$suma),1,0,"C");//SUMA POR MIENTRAS SE CONSIGUE CONVERTIR
-$pdf->Ln();
+      }
+    }
+    if ($existe == 0) {
+        $pdf->Cell(275,7,iconv("UTF-8","ISO-8859-1","No se han ingresado grupos a esta carrera"),1,0,"C");
+    }
+    $pdf->Ln();
+    $pdf->Ln();
 
 $pdf->Output();
 ?>

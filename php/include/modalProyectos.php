@@ -87,14 +87,14 @@ session_start();
                     $resultado2 = $dbDocentes->obtenerUnDocente($_GET['fk_encargado']);
                     while ($fila = mysqli_fetch_assoc($resultado2)) {
                       if ($fila['nombre'] != "1") {
-                        echo "<option value='".$_GET['fk_encargado']."'>".$fila['nombre']."</option>";
+                        echo "<option value='".$_GET['fk_encargado']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
                       }
                     }
                   }
                   $resultado = $dbDocentes->obtenerDocentes();
                   while ($fila = mysqli_fetch_assoc($resultado)) {
                     if ($fila['nombre'] != "1") {
-                      echo "<option value='".$fila['cedula']."'>".$fila['nombre']."</option>";
+                      echo "<option value='".$fila['cedula']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
                     }
                   }
                 ?>
@@ -108,14 +108,14 @@ session_start();
                     $resultado2 = $dbDocentes->obtenerUnDocente($_GET['fk_ayudante']);
                     while ($fila = mysqli_fetch_assoc($resultado2)) {
                       if ($fila['nombre'] != "1") {
-                        echo "<option value='".$_GET['fk_ayudante']."'>".$fila['nombre']."</option>";
+                        echo "<option value='".$_GET['fk_ayudante']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
                       }
                     }
                   }
                   $resultado = $dbDocentes->obtenerDocentes();
                   while ($fila = mysqli_fetch_assoc($resultado)) {
                     if ($fila['nombre'] != "1") {
-                      echo "<option value='".$fila['cedula']."'>".$fila['nombre']."</option>";
+                      echo "<option value='".$fila['cedula']."'>".$fila['nombre']." ".$fila['apellidos']."</option>";
                     }
                   }
                 ?>

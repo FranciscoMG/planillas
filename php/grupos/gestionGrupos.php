@@ -57,12 +57,7 @@ $horarioCurso= array(
 for ($i=0; $i < 6; $i++) {
 	if (isset($_POST['txtHorario'.$i])) {
 		$tmp= explode(" ", $_POST['txtHorario'.$i]);
-    $diaSemana = array("L","K","M","J","V","S");
-    for($dS=0;$dS< count($diaSemana);$dS++) {
-      if(trim($tmp[0]) == $diaSemana[$dS]) {
-        $horarioCurso[$i][0]= $dS;
-      }
-    }
+    $horarioCurso[$i][0]= convertirDiaSemanaInt(trim($tmp[0]));
     $horarioCurso[$i][1]= trim($tmp[1]);
     $horarioCurso[$i][2]= trim($tmp[3]);
 	}
@@ -100,12 +95,7 @@ $horarioCursoDoble= array(
 for ($i=0; $i < 6; $i++) {
 	if (isset($_POST['txtHorarioDoble'.$i])) {
 		$tmp= explode(" ", $_POST['txtHorarioDoble'.$i]);
-    $diaSemana = array("L","K","M","J","V","S");
-    for($dS=0;$dS< count($diaSemana);$dS++) {
-      if(trim($tmp[0]) == $diaSemana[$dS]) {
-        $horarioCursoDoble[$i][0]= $dS;
-      }
-    }
+    $horarioCursoDoble[$i][0]= convertirDiaSemanaInt(trim($tmp[0]));
     $horarioCursoDoble[$i][1]= trim($tmp[1]);
     $horarioCursoDoble[$i][2]= trim($tmp[3]);
 	}
@@ -238,7 +228,6 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
   $dD= 0;
   $hD= 0;
   unset($docentes, $horarioCurso, $docentesDoble, $horarioCursoDoble);
-  $diaSemana = array("L","K","M","J","V","S");
   $resultado = $db->obtenerGrupos(FALSE);
   while ($fila = mysqli_fetch_assoc($resultado)) {
     if ($fila['fk_carrera'] == $_GET['id_carrera'] && $fila['fk_curso'] == $_GET['curso'] && $fila['num_grupo'] == $_GET['num_grupo'] && $fila['num_grupo_doble'] == $_GET['num_grupo_doble']) {
@@ -251,14 +240,14 @@ if (isset($_GET['id_carrera']) && isset($_GET['curso']) && isset($_GET['num_grup
         $docentesDoble[$dD][0]= $fila['nombre']." ".$fila['apellidos'];
         $docentesDoble[$dD][1]= convertirDobleFraciones($fila['tiempo_individual']);
         $dD++;
-        $horarioCursoDoble[$hD][0]= $diaSemana[$fila['dia_semana']];
+        $horarioCursoDoble[$hD][0]= convertirIntDiaSemana($fila['dia_semana']);
         $horarioCursoDoble[$hD][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
         $hD++;
       } else {
         $docentes[$d][0]= $fila['nombre']." ".$fila['apellidos'];
         $docentes[$d][1]= convertirDobleFraciones($fila['tiempo_individual']);
         $d++;
-        $horarioCurso[$h][0]= $diaSemana[$fila['dia_semana']];
+        $horarioCurso[$h][0]= convertirIntDiaSemana($fila['dia_semana']);
         $horarioCurso[$h][1]= $fila['hora_inicio']." - ".$fila['hora_fin'];
         $h++;
       }

@@ -74,6 +74,16 @@ function convertirDobleFraciones ($fdouble) {
 	}
 	return $valor;
 } // fin de funcion
+////////////////////////////////////////////////////
+function convertirDiaSemanaInt($letraDiaSemana) {
+	$diaSemana = array("L","K","M","J","V","S");
+	for($dS=0;$dS< count($diaSemana);$dS++) {
+		if($letraDiaSemana == $diaSemana[$dS]) {
+			return $dS;
+		}
+	}
+	return -1;
+}
 
 function convertirIntDiaSemana($intDS) {
 	$diaSemana = array("L","K","M","J","V","S");
@@ -123,7 +133,7 @@ function fraccionADecimalPresupuesto($fraccion) {
 	if($tamano == 5) {
 		$double = (double) substr($fraccion, 0, 1);
 		$fraccion = substr($fraccion, 2, 3);;
-		
+
 		switch ($fraccion) {
 			case '1':
 				$valor = 1.000;
