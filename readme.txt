@@ -1,47 +1,22 @@
-Repositorio de trabajo para el proyecto de planillas UCR sede Arnoldo Ferreto Segura
+Sistema de Planillas de Docentes SIDOP
+
+Universidad de Costa Rica sede Arnoldo Ferreto Segura
 
 
+REQUERIMIENTOS DEL SERVIDOR 
+	Sistema operativo Linux (base Debian).
+	Apache 2.4.7
+	PHP 5.5.9
+	MySQL 5.0.11
+	Se debe instalar “mysqlnt” (para conexión mysqli)
+	Se recomienda usar el navegador Google Chrome o Firefox.
 
 
+PROCESO DE INSTALACIÓN
+	Crear manualmente una base de datos vacía con el nombre de “SIDOP”
+	Importar el archivo SIDOP.sql  dentro de la base de datos (Este archivo crea todas las tablas necesarias para que el sistema funcione correctamente).
+	Crear un usuario para la base de datos “admin_db” con la contraseña “SIDOP_key”.
 
 
-
-Comandos 
-
-
-git init
-git status
-git add nombreDelArchivo
-git add '*.txt'
-git commit -m 'mensaje'
-git log
-git remote add nombre url
-git push -u nombreRepositorio(origin) localBranch(master)
-git pull nombreRepositorio(origin) localBranch(master)
-git diff HEAD  -----> para ver los cambios realizados
-git add nombreDelDirectorio/nombreDelArchivo
-git diff --staged  -----> para ver lo que se ha agregado a stage
-git reset nombreDelDirectorio/nombreDelArchivo  ----> quitar archivo de stage
-git checkout --nombreDelArchivo  -----> para quitar archivo del proyecto
-git branch nombreDelBranch  -----> crea un nuevo branch
-git checkout nombreDelBranch  -----> para cambiarse a esa Branch
-git rm '*.txt'  -----> remover los archivos
-git commit -m 'mensaje'
-git checkout master
-git merge nombreDelBranch
-git branch -d nombreDelBranch
-
-git commit -a -m 'mensaje'
-git clone url
-git revert HEAD
-git reset --hard numeroDelCommit
-
-tipico-----
-
-git pull
-git rebase master
-git rebase --abort
-git merge master
-git push origin master
-
-
+COMO IMPORTAR O EXPORTAR LA BASE DE DATOS DESDE EL SISTEMA
+	Se debe modificar los archivos que se encuentran en la ruta /php/BD_Backup y agrégales un usuario de base de datos con permisos suficientes para exportar o importar base de datos.

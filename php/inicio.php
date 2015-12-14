@@ -28,7 +28,7 @@
 		</div>
 		<div  id="perfil-nav" class="row ">
 			<div class="container">
-				<img src="../img/logo-planillas.png" class="img img-responsive center-block"alt="">
+				<img src="../img/logo-planillas.png" class="img img-responsive center-block" alt="">
 			</div>
 		</div>
 	</header>
