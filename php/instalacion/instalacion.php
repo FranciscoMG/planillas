@@ -33,12 +33,12 @@
   mysql_query("INSERT INTO tb_Carrera (id_carrera, nombre_carrera) VALUES
   ('1', '1'),
   ('110000', 'Sistema de Estudios Generales'),
-  ('320208', 'EnseÃ±anza del InglÃ©s'),
-  ('330102', 'DirecciÃ³n de Empresas'),
-  ('330208', 'AdministraciÃ³n Aduanera y Comercio Exterior'),
-  ('420201', 'IngenierÃ­a ElÃ©ctrica'),
-  ('600002', 'InformÃ¡tica Empresarial'),
-  ('600502', 'InformÃ¡tica y TecnologÃ­a Multimedia');") or die ("Error al crear las carreras: ".mysql_error());
+  ('320208', 'Enseñanza del Inglés'),
+  ('330102', 'Dirección de Empresas'),
+  ('330208', 'Administración Aduanera y Comercio Exterior'),
+  ('420201', 'Ingeniería Eléctrica'),
+  ('600002', 'Informática Empresarial'),
+  ('600502', 'Informática y Tecnología Multimedia');") or die ("Error al crear las carreras: ".mysql_error());
 
   mysql_query("CREATE TABLE IF NOT EXISTS tb_Cursos (
   sigla varchar(10) NOT NULL,
