@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `tb_estadoDatos` (
 --
 
 INSERT INTO `tb_estadoDatos` (`id_estadoDatos`, `estado`, `revisiones`, `periodo`) VALUES
-(0, 0, 0, 0);
+(0, 1, 0, 0);
 
 -- --------------------------------------------------------
 

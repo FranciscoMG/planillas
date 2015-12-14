@@ -102,7 +102,7 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;") or die ("Error al crear una tabla de la base de datos: ".mysql_error());
 
   mysql_query("INSERT INTO tb_estadoDatos (id_estadoDatos, estado, revisiones, periodo) VALUES
-(0, 0, 0, 0);") or die ("Error al llenar una tabla de la base de datos: ".mysql_error());
+(0, 1, 0, 0);") or die ("Error al llenar una tabla de la base de datos: ".mysql_error());
 
   mysql_query("CREATE TABLE IF NOT EXISTS tb_Grupos (
   fk_carrera varchar(8) NOT NULL,
