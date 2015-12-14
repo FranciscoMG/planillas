@@ -1,8 +1,8 @@
 <?php include_once("conexionBD.php"); ?>
 
-<?php 
+<?php
 /**
-* 
+*
 */
 class proyectosBD extends conexionBD
 {
@@ -13,16 +13,16 @@ class proyectosBD extends conexionBD
 	}
 
 	/////////////////////////////////////////////////////
-	function agregarProyecto ($nombre_proyecto , $tipo_proyecto , $jornada_proyecto, $fk_encargado, $fk_ayudante) 
+	function agregarProyecto ($nombre_proyecto , $tipo_proyecto , $jornada_proyecto, $fk_encargado, $fk_ayudante)
 	{
 		$stmt = $this->con->prepare("INSERT INTO `tb_Proyectos` (`nombre_proyecto`, `tipo_proyecto`, `jornada_proyecto`, `fk_encargado`, `fk_ayudante`) VALUES (?, ?, ?, ?, ?);");
 		if ($stmt === FALSE) {
 			die("prepare fail");
 		}
-		
+
 		$stmt->bind_param("sidss" , $nombre_proyecto , $tipo_proyecto , $jornada_proyecto, $fk_encargado, $fk_ayudante);
 		return $stmt->execute();
-		
+
 
 		//Asignación Ternaria;
 	}
@@ -65,7 +65,7 @@ class proyectosBD extends conexionBD
 	}
 
 	////////////////////////////////////////////////////
-	function modificarProyecto ($id_proyecto , $nombre_proyecto , $tipo_proyecto  , $fk_ayudante) 
+	function modificarProyecto ($id_proyecto , $nombre_proyecto , $tipo_proyecto  , $fk_ayudante)
 	{
 		$stmt = $this->con->prepare("UPDATE `tb_Proyectos` SET `nombre_proyecto` = ?, `tipo_proyecto` = ? , `fk_ayudante` = ? WHERE `tb_Proyectos`.`id_proyecto` = ?;");
 		if ($stmt === FALSE) {

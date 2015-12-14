@@ -40,12 +40,13 @@ class gruposBD extends conexionBD {
 	}
 
 	function agregarGrupoDocentes($carrera, $curso, $num_grupo, $docente, $tiempo_individual) {
-		$stmt = $this->con->prepare("INSERT INTO tb_GruposDocentes VALUES (?, ?, ?, ?, ?, 1);");
+		$tmp= 1;
+		$stmt = $this->con->prepare("INSERT INTO tb_GruposDocentes VALUES (?, ?, ?, ?, ?, ?);");
 		if ( $stmt === FALSE ) {
 		  die('prepare() failed: '. $this->con->error);
 		}
 
-		$stmt->bind_param('ssisd', $carrera, $curso, $num_grupo, $docente, $tiempo_individual);
+		$stmt->bind_param('ssisdi', $carrera, $curso, $num_grupo, $docente, $tiempo_individual, $tmp);
 		$stmt->execute();
 		$newId = $stmt->insert_id;
 		$stmt->close();
