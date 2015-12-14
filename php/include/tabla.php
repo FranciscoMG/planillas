@@ -156,9 +156,17 @@
 									echo "</td>";
 									if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
 										if ($id_presupuesto == 1) {
-											echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
+											echo "<td><a class='btn btn-default";
+											if(!($estado == $_SESSION['tipoPerfil'])) {
+												echo " disabled";
+											}
+											echo "' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 										} else {
-											echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+											echo "<td><a class='btn btn-default";
+											if(!($estado == $_SESSION['tipoPerfil'])) {
+												echo " disabled";
+											}
+											echo "' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 										}
 									}
 									echo "</tr>";
@@ -253,9 +261,17 @@
 							echo "</td>";
 							if ($_SESSION['tipoPerfil'] == 2 || $_SESSION['tipoPerfil'] == 0) {
 								if ($id_presupuesto == 1) {
-									echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
+									echo "<td><a class='btn btn-default";
+									if(!($estado == $_SESSION['tipoPerfil'])) {
+										echo " disabled";
+									}
+									echo "' href='masterPage.php?modalAsignarPresup=1&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."'>Agregar presup...</a></td>";
 								} else {
-									echo "<td><a class='btn btn-default' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
+									echo "<td><a class='btn btn-default";
+									if(!($estado == $_SESSION['tipoPerfil'])) {
+										echo " disabled";
+									}
+									echo "' href='masterPage.php?modalAsignarPresup=2&carrera=".$carrera."&curso=".$curso."&num_grupo=".$num_grupo."&num_grupo_doble=".$num_grupo_doble."&total_tiempos=".$sumaTiempos."&id_presupuesto=".$id_presupuesto."'>Eliminar presup...</a></td>";
 								}
 							}
 							echo "</tr>";

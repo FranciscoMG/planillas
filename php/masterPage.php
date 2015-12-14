@@ -286,7 +286,7 @@
 		<div class="container-fluid">
 			<div class="row row1">
 				<div class="container-fluid">
-					<div class="col-sx-12 text-right  pull-right">
+					<div class="col-sx-12 text-right pull-right">
 						<h6><a href="http://www.srp.ucr.ac.cr/content/direccion_directorio-telef%C3%B3nico" target="_blank"><span class="glyphicon glyphicon-list-alt"></span> Directorio Telefónico  &nbsp; &nbsp;&nbsp;</a>| &nbsp; &nbsp;&nbsp; Recursos Humanos: 2511-7407 &nbsp;&nbsp; &nbsp; | &nbsp;&nbsp; &nbsp; Coordinación de Docencia: 2511-7410 &nbsp;&nbsp; &nbsp; |  &nbsp;&nbsp; &nbsp; Dirección: 2511-7401  </h6>
 					</div>
 				</div>

@@ -43,7 +43,7 @@
 					<br>
 					<br>
 					<br>
-			
+
 					<h3>Bienvenido al Sistema de Planillas SIDOP <br> </h3>
 
 					<br>
@@ -57,20 +57,17 @@
 		</div>
 			<div class="clearfix"></div>
 	</main>
-	<footer class="footer " >
+	<footer class="footer">
 		<div class="container-fluid">
 			<div class="row row1">
-				<div class="container">
-					<div class="col-sx-12 col-sm-6">
-						<h6>Tel: 6666 66 66</h6>
-					</div>
-					<div class="col-sx-12 col-sm-6">
-						<h6>Email: <a href="#">corre@my.com</a></h6>
+				<div class="container-fluid">
+					<div class="col-sx-12 text-right pull-right">
+						<h6><a href="http://www.srp.ucr.ac.cr/content/direccion_directorio-telef%C3%B3nico" target="_blank"><span class="glyphicon glyphicon-list-alt"></span> Directorio Telefónico  &nbsp; &nbsp;&nbsp;</a>| &nbsp; &nbsp;&nbsp; Recursos Humanos: 2511-7407 &nbsp;&nbsp; &nbsp; | &nbsp;&nbsp; &nbsp; Coordinación de Docencia: 2511-7410 &nbsp;&nbsp; &nbsp; |  &nbsp;&nbsp; &nbsp; Dirección: 2511-7401  </h6>
 					</div>
 				</div>
 			</div>
 			<div class="row row2">
-				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="">
+				<img src="../img/logo-ucr-footer.png" class="img-responsive pull-right"alt="75 aniversario UCR">
 			</div>
 		</div>
 	</footer>
