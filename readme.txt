@@ -1,6 +1,6 @@
 Sistema de Planillas de Docentes SIDOP
 
-Universidad de Costa Rica sede Arnoldo Ferreto Segura
+Proyecto de Desarrollo de Aplicaciones Interactivas I - Universidad de Costa Rica, sede Arnoldo Ferreto Segura
 
 
 REQUERIMIENTOS DEL SERVIDOR 
@@ -9,7 +9,7 @@ REQUERIMIENTOS DEL SERVIDOR
 	PHP 5.5.9
 	MySQL 5.0.11
 	Se debe instalar “mysqlnt” (para conexión mysqli)
-	Se recomienda usar el navegador Google Chrome o Firefox.
+	Se recomienda usar el navegador Firefox o Google Chrome.
 
 
 PROCESO DE INSTALACIÓN
